@@ -8,4 +8,6 @@ public class SessionCalendar {
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private List<Session> sessions;
+	
+	
 }
