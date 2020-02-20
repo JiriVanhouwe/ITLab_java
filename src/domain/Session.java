@@ -1,6 +1,5 @@
 package domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,8 +9,8 @@ public class Session {
 	private String description;
 	private String nameGuest;
 	private String classRoom;
-	private LocalDate startDate;
-	private LocalDate endDate;
+	private LocalDateTime startDate;
+	private LocalDateTime endDate;
 	private int maxAttendee;
 	private boolean opened;
 	private List<String> media;
@@ -63,19 +62,19 @@ public class Session {
 		this.classRoom = classRoom;
 	}
 
-	public LocalDate getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	private void setStartDate(LocalDate startDate) {
+	private void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	private void setEndDate(LocalDate endDate) {
+	private void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 

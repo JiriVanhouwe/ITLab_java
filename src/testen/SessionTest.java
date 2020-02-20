@@ -3,18 +3,28 @@ package testen;
 import java.time.LocalDateTime;
 import java.util.stream.Stream;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import domain.DomainController;
 import domain.Session;
 
 class SessionTest {
 
+	private DomainController dc;
+	
+	@Before
+	public void before() {
+		this.dc = new DomainController();
+	}
+	
 	@ParameterizedTest
 	@MethodSource("newSessionValidParameters")
 	public void createSession_CreatesNewSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+		//TODO: Dit moet nog veranderd worden naar dc.createSession() denk ik. Best eens bespreken
 		Session s = new Session(title, classroom, startDate, endDate, maxAttendee);
 		Assertions.assertEquals(title, s.getTitle());
 		Assertions.assertEquals(classroom, s.getClassRoom());
@@ -32,20 +42,21 @@ class SessionTest {
 	
 	@ParameterizedTest
 	@MethodSource("newSessionInvalidParameters")
-	public void createSession_ThrowsError(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> new Session(title, classroom, startDate, endDate, maxAttendee));
+	public void createSession_ThrowsError(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String guestspeaker) {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> dc.createSession(title, startDate, endDate, classroom, maxAttendee, guestspeaker));
 	}
 	
 	private static Stream<Arguments> newSessionInvalidParameters() {
-		return Stream.of(Arguments.of(null, "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2)), //Invalid title
-						Arguments.of("  ", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2)), //Invalid title
-						Arguments.of("A new session on an interesting topic", null, LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2)), //Invalid classroom
-						Arguments.of("A new session on an interesting topic", "  ", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2)), //Invalid classroom
-						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusMinutes(29)), //Invalid enddate (duration too short)
-						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).minusMinutes(10)), //Invalid enddate (negative duration)s
-						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30).plusHours(2), LocalDateTime.now().plusDays(30)), //Invalid startdate (after enddate)
-						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().minusHours(2), LocalDateTime.now()), //Invalid startdate (in the past)
-						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusHours(12), LocalDateTime.now().plusHours(14))); //Invalid startdate (less than 1 day in advance)
+		//TODO: Cases toevoegen voor guestspeaker, bestaan geen DR over
+		return Stream.of(Arguments.of(null, "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "guestspeaker"), //Invalid title
+						Arguments.of("  ", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "guestspeaker"), //Invalid title
+						Arguments.of("A new session on an interesting topic", null, LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "guestspeaker"), //Invalid classroom
+						Arguments.of("A new session on an interesting topic", "  ", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "guestspeaker"), //Invalid classroom
+						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusMinutes(29), "guestspeaker"), //Invalid enddate (duration too short)
+						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).minusMinutes(10), "guestspeaker"), //Invalid enddate (negative duration)s
+						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusDays(30).plusHours(2), LocalDateTime.now().plusDays(30), "guestspeaker"), //Invalid startdate (after enddate)
+						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().minusHours(2), LocalDateTime.now(), "guestspeaker"), //Invalid startdate (in the past)
+						Arguments.of("A new session on an interesting topic", "B1234", LocalDateTime.now().plusHours(12), LocalDateTime.now().plusHours(14), "guestspeaker")); //Invalid startdate (less than 1 day in advance)
 	}
 
 }
