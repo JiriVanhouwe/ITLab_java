@@ -1,13 +1,14 @@
 package domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Session {
 	
 	private String title;
-	private String discription;
-	private String nameGeust;
+	private String description;
+	private String nameGuest;
 	private String classRoom;
 	private LocalDate startDate;
 	private LocalDate endDate;
@@ -23,9 +24,14 @@ public class Session {
 	public Session() {
 		
 	}
+
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	//getters and setters
 
-	private String getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
@@ -33,23 +39,23 @@ public class Session {
 		this.title = title;
 	}
 
-	private String getDiscription() {
-		return discription;
+	public String getDescription() {
+		return description;
 	}
 
-	private void setDiscription(String discription) {
-		this.discription = discription;
+	private void setDescription(String description) {
+		this.description = description;
 	}
 
-	private String getNameGeust() {
-		return nameGeust;
+	private String getNameGuest() {
+		return nameGuest;
 	}
 
-	private void setNameGeust(String nameGeust) {
-		this.nameGeust = nameGeust;
+	private void setNameGuest(String nameGuest) {
+		this.nameGuest = nameGuest;
 	}
 
-	private String getClassRoom() {
+	public String getClassRoom() {
 		return classRoom;
 	}
 
@@ -57,7 +63,7 @@ public class Session {
 		this.classRoom = classRoom;
 	}
 
-	private LocalDate getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
@@ -65,7 +71,7 @@ public class Session {
 		this.startDate = startDate;
 	}
 
-	private LocalDate getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
@@ -73,7 +79,7 @@ public class Session {
 		this.endDate = endDate;
 	}
 
-	private int getMaxAttendee() {
+	public int getMaxAttendee() {
 		return maxAttendee;
 	}
 

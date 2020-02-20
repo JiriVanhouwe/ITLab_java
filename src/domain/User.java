@@ -1,22 +1,22 @@
 package domain;
 
 public class User {
-	private String firtsName;
+	private String firstName;
 	private String lastName;
 	private String userName;
 	
-	public User(String firtsName, String lastName, String userName) {
-		this.firtsName = firtsName;
+	public User(String firstName, String lastName, String userName) {
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.userName = userName;
 	}
 	
 	//getters and setters 
-	private String getFirtsName() {
-		return firtsName;
+	private String getFirstName() {
+		return firstName;
 	}
-	private void setFirtsName(String firtsName) {
-		this.firtsName = firtsName;
+	private void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	private String getLastName() {
 		return lastName;
