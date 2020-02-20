@@ -3,12 +3,17 @@ package domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import persistence.PersistenceController;
+
 public class DomainController {
 	private ITlab itlab;
+	private PersistenceController persistenceController;
 	
-	public DomainController() {
+	public DomainController(PersistenceController pc) {
 		this.itlab = new ITlab();
+		this.persistenceController = pc;
 	}
+	
 	//methodes
 	public List<Session> giveSessions(){
 		return itlab.giveSessions();

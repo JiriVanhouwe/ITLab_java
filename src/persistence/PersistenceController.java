@@ -1,16 +1,16 @@
-package domain;
+package persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class PersistentieController {
+public class PersistenceController {
 
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_Database"; 
 	    private EntityManager em;
 	    private EntityManagerFactory emf;
 	    
-	    public PersistentieController() {
+	    public PersistenceController() {
 	    	initializePersistentie();
 	    }
 	    

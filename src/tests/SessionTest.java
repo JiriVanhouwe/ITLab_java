@@ -1,30 +1,57 @@
-package testen;
+package tests;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import domain.DomainController;
 import domain.Session;
+import persistence.PersistenceController;
 
+@ExtendWith(MockitoExtension.class)
 class SessionTest {
 
+	@InjectMocks
 	private DomainController dc;
 	
-	@Before
+	@Mock
+	private PersistenceController pcDummy;
+	
+	/*@Before
 	public void before() {
 		this.dc = new DomainController();
+	}*/
+	
+	//---UseCase: Beheren sessie ---
+	
+	@ParameterizedTest
+	@CsvSource("")
+	public void giveSession_GivesSessions() {
+		//Mockito.when(pcDummy.)
+		
+		//List<Session> sessions = dc.giveSessions();
+		
 	}
+	
+	//---UseCase: Aanmaken sessie ---
 	
 	@ParameterizedTest
 	@MethodSource("newSessionValidParameters")
 	public void createSession_CreatesNewSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
-		//TODO: Dit moet nog veranderd worden naar dc.createSession() denk ik. Best eens bespreken
+		//TODO: Dit moet nog veranderd worden naar dc.createSession() denk ik. Best eens bespreken. (Moeilijk om te controleren, aangezien de methode in de dc niets retourneert)
 		Session s = new Session(title, classroom, startDate, endDate, maxAttendee);
 		Assertions.assertEquals(title, s.getTitle());
 		Assertions.assertEquals(classroom, s.getClassRoom());

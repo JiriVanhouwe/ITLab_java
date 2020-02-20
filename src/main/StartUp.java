@@ -1,12 +1,12 @@
 package main;
 
-import domain.PersistentieController;
+import persistence.PersistenceController;
 
 public class StartUp {
 
 	public static void main(String[] args) {
 
-		new PersistentieController();
+		new PersistenceController();
 		System.out.println("---Database created.---");
 
 	}
