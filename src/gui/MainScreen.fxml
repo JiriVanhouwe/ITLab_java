@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane dividerPositions="0.23667711598746083" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane fx:id="sidebar" minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="147.0">
+         <children>
+            <Pane prefHeight="92.0" prefWidth="150.0">
+               <children>
+                  <Text fx:id="firstname_txt" layoutX="7.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voornaam" wrappingWidth="135.9999633789064">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="lastname_txt" layoutX="7.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achternaam" wrappingWidth="135.9999633789064">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fx:id="name_arrow" layoutX="107.0" layoutY="51.0">
+                     <image>
+                        <Image url="@../resources/baseline_arrow_drop_down_black_18dp.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="profilepicture_img" layoutX="14.0" layoutY="14.0">
+                     <image>
+                        <Image url="@../resources/baseline_account_circle_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutY="92.0" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <VBox layoutY="7.0" prefHeight="126.0" prefWidth="148.0">
+                     <children>
+                        <HBox fx:id="dashboard_box" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0">
+                           <children>
+                              <ImageView scaleX="0.7" scaleY="0.7">
+                                 <image>
+                                    <Image url="@../resources/baseline_dashboard_black_18dp.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="CENTER" wrappingWidth="67.79296875">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="calendar_box" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0">
+                           <children>
+                              <ImageView scaleX="0.7" scaleY="0.7">
+                                 <image>
+                                    <Image url="@../resources/baseline_calendar_today_black_18dp.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Kalender" textAlignment="CENTER" wrappingWidth="67.79296875">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="responsibles_box" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="200.0">
+                           <children>
+                              <ImageView scaleX="0.7" scaleY="0.7">
+                                 <image>
+                                    <Image url="@../resources/baseline_supervisor_account_black_18dp.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets right="-8.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Verantwoordelijken" wrappingWidth="118.19293212890625">
+                                 <font>
+                                    <Font name="Calibri Bold" size="14.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></Pane>
+            <Pane layoutY="292.0" prefHeight="66.0" prefWidth="150.0">
+               <children>
+                  <HBox fx:id="settings_box" alignment="CENTER_LEFT" layoutY="24.0" prefHeight="42.0" prefWidth="154.0">
+                     <children>
+                        <ImageView scaleX="0.7" scaleY="0.7">
+                           <image>
+                              <Image url="@../resources/baseline_settings_black_18dp.png" />
+                           </image>
+                        </ImageView>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Instellingen" wrappingWidth="118.19293212890625">
+                           <font>
+                              <Font name="Calibri Bold" size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <VBox layoutX="14.0" layoutY="13.0" prefHeight="332.0" prefWidth="433.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

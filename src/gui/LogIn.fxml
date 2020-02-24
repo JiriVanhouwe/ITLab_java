@@ -11,12 +11,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #353341;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="720.0" fitWidth="508.0" layoutX="120.0" layoutY="-189.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/BackBlue.jpg" />
+            <Image url="@../resources/BackBlue.jpg" />
          </image>
       </ImageView>
       <AnchorPane layoutX="-12.0" layoutY="-46.0" />
@@ -51,7 +50,7 @@
       </AnchorPane>
       <ImageView fitHeight="58.0" fitWidth="76.0" layoutX="662.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/HogentPng.png" />
+            <Image url="@../resources/HogentPng.png" />
          </image>
       </ImageView>
       <Label layoutX="13.0" layoutY="181.0" text="Welkom bij het IT-Lab" textFill="WHITE">
