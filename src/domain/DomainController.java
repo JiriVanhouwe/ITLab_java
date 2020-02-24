@@ -6,11 +6,11 @@ import java.util.List;
 import persistence.PersistenceController;
 
 public class DomainController {
-	private ITlab itlab;
+	private ITLab itlab;
 	private PersistenceController persistenceController;
 	
 	public DomainController(PersistenceController pc) {
-		this.itlab = new ITlab();
+		this.itlab = new ITLab();
 		this.persistenceController = pc;
 	}
 	
