@@ -7,9 +7,17 @@ import persistence.PersistenceController;
 
 public class ITLabSingleton {
 	
+	private static ITLab ITLAB;
 	
-	public ITLabSingleton(PersistenceController pc) {
-		
+
+
+	private ITLabSingleton() {
+	}
+	
+	public static ITLab getITLabInstance() {
+		if(ITLAB == null)
+			ITLAB = new ITLab();
+		return ITLAB;
 	}
 	
 	//methodes

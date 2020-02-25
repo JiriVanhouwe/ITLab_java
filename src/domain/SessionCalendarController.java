@@ -16,18 +16,18 @@ public class SessionCalendarController {
 	//methodes
 
 	public SessionCalendar giveSessionCalendar(int year){
-		return sessionCalendarRepository.getSessionsCalendars();
+		return sessionCalendarRepository.getSessionsCalendar(year);
 	}
 	
 	public void changeSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
-		sessionCalendarRepository.changeSessionCalendar(startDate, endDate);
+		ITLabSingleton.getITLabInstance().changeSessionCurrentCalendar(startDate, endDate);
 	}
 	
 	public void createSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
-		throw new UnsupportedOperationException();
+		sessionCalendarRepository.createSessionCalendar(startDate, endDate);
 	}
 	
 	public void  removeSessionCalendar() {
-		throw new UnsupportedOperationException();
+		sessionCalendarRepository.removeSessionCalendar();
 	}
 }

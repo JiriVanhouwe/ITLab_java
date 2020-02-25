@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ITLab {
@@ -9,7 +10,7 @@ public class ITLab {
 	private User loggedInUser;
 	
 	public ITLab() {
-		getData();
+		
 	}
 	//getters and setters 
 	
@@ -31,11 +32,14 @@ public class ITLab {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	private void getData() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+
+
+
+	public void changeSessionCurrentCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+		currentSessioncalendar.ChangeDates(startDate,endDate);
+		
 	}
+	
 
 	
 	
