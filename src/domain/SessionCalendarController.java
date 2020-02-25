@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -22,15 +23,15 @@ public class SessionCalendarController {
 		return Collections.unmodifiableList(sessionCalendarRepository.getSessionCalendars());
 	}
 	
-	public void changeSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+	public void changeSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		ITLabSingleton.getITLabInstance().changeSessionCurrentCalendar(startDate, endDate);
 	}
 	
-	public void createSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+	public void createSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		sessionCalendarRepository.createSessionCalendar(startDate, endDate);
 	}
 	
-	public void removeSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		sessionCalendarRepository.removeSessionCalendar(startDate,endDate);
 	}
 }

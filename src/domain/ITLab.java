@@ -1,6 +1,6 @@
 package domain;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ITLab {
@@ -31,7 +31,7 @@ public class ITLab {
 		return currentSessioncalendar.getSessions();
 	}
 	
-	public void changeSessionCurrentCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
 		currentSessioncalendar.ChangeDates(startDate,endDate);
 		
 	}

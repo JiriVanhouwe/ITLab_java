@@ -1,29 +1,36 @@
 package domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SessionCalendar {
 
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private List<Session> sessions;
+	private int id;
+	
+	private static int idCounter = 0;
 	
 
-	public SessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+	public SessionCalendar(LocalDate startDate, LocalDate endDate) {
 		
-		if( startDate.isBefore(LocalDateTime.now()) || endDate.isBefore(startDate))
+		if( startDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate))
 				throw new IllegalArgumentException("De tijden zijn niet correct");
 		
 		setStartDate(startDate);
 		setEndDate(endDate);
+		this.id = idCounter;
+		
+		idCounter++;
 		
 		this.sessions = new ArrayList<>();
 	}
 
 	//methodes
-	public void ChangeDates(LocalDateTime newStartDate, LocalDateTime newEndDate) {
+	public void ChangeDates(LocalDate newStartDate, LocalDate newEndDate) {
 		if(this.startDate != newStartDate) {
 			setStartDate(newStartDate);
 		}
@@ -33,24 +40,28 @@ public class SessionCalendar {
 	}
 	
 	//setters and getters
-	private void setEndDate(LocalDateTime endDate) {
+	private void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
-	private void setStartDate(LocalDateTime startDate) {
+	private void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDateTime getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public LocalDateTime getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
 	public List<Session> getSessions() {
 		return sessions;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 
 	
