@@ -5,8 +5,6 @@ import java.util.List;
 public class ITLab {
 
 	//nodig?
-	private List<User> users;
-	private List<SessionCalendar> sessionCalendars;
 	private SessionCalendar currentSessioncalendar;
 	private User loggedInUser;
 	
@@ -15,21 +13,7 @@ public class ITLab {
 	}
 	//getters and setters 
 	
-	private List<User> getUsers() {
-		return users;
-	}
 
-	private void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	private List<SessionCalendar> getSessionCalendars() {
-		return sessionCalendars;
-	}
-
-	private void setSessionCalendars(List<SessionCalendar> sessionCalendars) {
-		this.sessionCalendars = sessionCalendars;
-	}
 
 	private SessionCalendar getCurrentSessioncalendar() {
 		return currentSessioncalendar;
