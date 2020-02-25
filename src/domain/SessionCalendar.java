@@ -16,15 +16,6 @@ public class SessionCalendar {
 		setEndDate(endDate);
 	}
 
-	//setters and getters
-	private void setEndDate(LocalDateTime endDate) {
-		this.endDate = endDate;
-	}
-
-	private void setStartDate(LocalDateTime startDate) {
-		this.startDate = startDate;
-	}
-
 	//methodes
 	public void ChangeDates(LocalDateTime newStartDate, LocalDateTime newEndDate) {
 		if(this.startDate != newStartDate) {
@@ -34,7 +25,23 @@ public class SessionCalendar {
 			setEndDate(newEndDate);
 		}
 	}
+	
+	//setters and getters
+	private void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	private void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
 
 	
-
 }

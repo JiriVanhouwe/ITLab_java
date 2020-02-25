@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import domain.Session;
 import domain.SessionCalendar;
 
 public class PersistenceController {
@@ -33,6 +34,14 @@ public class PersistenceController {
 	    }
 
 		public List<SessionCalendar> getSessionCalenders() {
+			throw new UnsupportedOperationException();
+		}
+		
+		public List<Session> giveSessions() {
+	    	throw new UnsupportedOperationException();
+	    }
+
+		public Session giveSession(int sessionID) {
 			throw new UnsupportedOperationException();
 		}
 }

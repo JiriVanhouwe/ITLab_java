@@ -28,6 +28,10 @@ public class Session {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Session(String title, LocalDateTime startDate, LocalDateTime endDate, String classroom, int maxAttendee) {
+		// TODO Auto-generated constructor stub
+	}
+	
 	//getters and setters
 
 	public String getTitle() {
