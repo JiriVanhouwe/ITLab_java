@@ -10,6 +10,7 @@ public class SessionCalendar {
 	private LocalDateTime endDate;
 	private List<Session> sessions;
 	
+
 	public SessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
 		setStartDate(startDate);
 		setEndDate(endDate);
@@ -33,5 +34,7 @@ public class SessionCalendar {
 			setEndDate(newEndDate);
 		}
 	}
+
+	
 
 }
