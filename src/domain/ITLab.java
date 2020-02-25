@@ -2,7 +2,7 @@ package domain;
 
 import java.util.List;
 
-public class ITlab {
+public class ITLab {
 
 	//nodig?
 	private List<User> users;
@@ -10,7 +10,7 @@ public class ITlab {
 	private SessionCalendar currentSessioncalendar;
 	private User loggedInUser;
 	
-	public ITlab() {
+	public ITLab() {
 		getData();
 	}
 	//getters and setters 
