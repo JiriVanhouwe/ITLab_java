@@ -1,6 +1,7 @@
 package main;
 
-import gui.LogInController;
+import gui.BeherenSessiekalenderController;
+import gui.MainScreenController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,7 +11,7 @@ public class StartUpGui extends Application {
 
 	@Override
 	public void start(Stage stage) {
-	        Scene scene = new Scene(new LogInController());
+	        Scene scene = new Scene(new MainScreenController(new BeherenSessiekalenderController()));
 	        stage.setTitle("Log in");
 	        stage.setScene(scene);
 
