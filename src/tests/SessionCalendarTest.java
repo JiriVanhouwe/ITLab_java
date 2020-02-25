@@ -35,7 +35,7 @@ class SessionCalendarTest {
 	
 	private static Stream<Arguments> invalidSessionCalendarParameters(){
 		//TODO: Testen of sessiekalender uniek is voor dit academiejaar, geen idee hoe dit precies moet
-		return Stream.of(Arguments.of(LocalDateTime.now().minusDays(-1), LocalDateTime.now().plusDays(250)), //Started in the past
+		return Stream.of(Arguments.of(LocalDateTime.now().minusDays(1), LocalDateTime.now().plusDays(250)), //Started in the past
 						Arguments.of(LocalDateTime.now().minusDays(20), LocalDateTime.now().plusDays(200))); //Started in the past
 	}
 	
