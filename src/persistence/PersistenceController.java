@@ -44,4 +44,9 @@ public class PersistenceController {
 		public Session giveSession(int sessionID) {
 			throw new UnsupportedOperationException();
 		}
+
+		public void updateSessionCalanders(List<SessionCalendar> collect) {
+			throw new UnsupportedOperationException();
+			
+		}
 }

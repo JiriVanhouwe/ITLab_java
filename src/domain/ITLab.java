@@ -13,15 +13,14 @@ public class ITLab {
 		
 	}
 	//getters and setters 
-	
 
-
-	private SessionCalendar getCurrentSessioncalendar() {
-		return currentSessioncalendar;
+	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
+		this.currentSessioncalendar = sessionCalendar;
 	}
 
-	private void setCurrentSessioncalendar(SessionCalendar currentSessioncalendar) {
-		this.currentSessioncalendar = currentSessioncalendar;
+
+	public SessionCalendar getCurrentSessioncalendar() {
+		return currentSessioncalendar;
 	}
 
 	//methodes
@@ -29,20 +28,12 @@ public class ITLab {
 		throw new UnsupportedOperationException();
 	}
 	public List<Session> giveSessions() {
-		// TODO Auto-generated method stub
-		return null;
+		return currentSessioncalendar.getSessions();
 	}
-
-
-
+	
 	public void changeSessionCurrentCalendar(LocalDateTime startDate, LocalDateTime endDate) {
 		currentSessioncalendar.ChangeDates(startDate,endDate);
 		
 	}
-	
-
-	
-	
-	
 	
 }

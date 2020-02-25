@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionCalendar {
@@ -11,8 +12,14 @@ public class SessionCalendar {
 	
 
 	public SessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+		
+		if( startDate.isBefore(LocalDateTime.now()) || endDate.isBefore(startDate))
+				throw new IllegalArgumentException("De tijden zijn niet correct");
+		
 		setStartDate(startDate);
 		setEndDate(endDate);
+		
+		this.sessions = new ArrayList<>();
 	}
 
 	//methodes
@@ -40,6 +47,10 @@ public class SessionCalendar {
 
 	public LocalDateTime getEndDate() {
 		return endDate;
+	}
+
+	public List<Session> getSessions() {
+		return sessions;
 	}
 
 	

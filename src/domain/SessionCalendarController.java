@@ -1,8 +1,8 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
-
 
 public class SessionCalendarController {
 	
@@ -14,9 +14,12 @@ public class SessionCalendarController {
 	
 	
 	//methodes
-
-	public SessionCalendar giveSessionCalendar(int year){
-		return sessionCalendarRepository.getSessionsCalendar(year);
+	public SessionCalendar giveSessionCalendar(){
+		return ITLabSingleton.getITLabInstance().getCurrentSessioncalendar();
+	}
+	
+	public List<SessionCalendar> giveSessionCalendars(){
+		return Collections.unmodifiableList(sessionCalendarRepository.getSessionCalendars());
 	}
 	
 	public void changeSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
@@ -27,7 +30,7 @@ public class SessionCalendarController {
 		sessionCalendarRepository.createSessionCalendar(startDate, endDate);
 	}
 	
-	public void  removeSessionCalendar() {
-		sessionCalendarRepository.removeSessionCalendar();
+	public void removeSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+		sessionCalendarRepository.removeSessionCalendar(startDate,endDate);
 	}
 }
