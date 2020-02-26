@@ -72,6 +72,8 @@ public class CalendarApp extends Application {
                 primaryStage.setHeight(1000);
                 primaryStage.centerOnScreen();
                 primaryStage.show();
+                
+                primaryStage.setMaximized(true);
         }
 
         public static void main(String[] args) {
