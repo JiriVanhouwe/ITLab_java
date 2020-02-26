@@ -11,23 +11,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root dividerPositions="0.23667711598746083" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="640.0" type="SplitPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root dividerPositions="0.23667711598746083" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" type="SplitPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
-    <AnchorPane fx:id="sidebar" minHeight="0.0" minWidth="0.0" prefHeight="358.0" prefWidth="147.0">
+    <AnchorPane fx:id="sidebar" maxWidth="300.0" minHeight="0.0" minWidth="0.0" prefHeight="1078.0" prefWidth="300.0">
          <children>
-            <Pane prefHeight="92.0" prefWidth="150.0">
+            <Pane prefHeight="81.0" prefWidth="272.0">
                <children>
                   <Text fx:id="firstname_txt" layoutX="7.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voornaam" wrappingWidth="135.9999633789064">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Text>
-                  <Text fx:id="lastname_txt" layoutX="7.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achternaam" wrappingWidth="135.9999633789064">
+                  <Text fx:id="lastname_txt" layoutX="75.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achternaam" wrappingWidth="135.9999633789064">
                      <font>
                         <Font name="Calibri Bold" size="14.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="name_arrow" layoutX="107.0" layoutY="51.0">
+                  <ImageView fx:id="name_arrow" layoutX="229.0" layoutY="46.0">
                      <image>
                         <Image url="@../resources/baseline_arrow_drop_down_black_18dp.png" />
                      </image>
@@ -39,7 +39,7 @@
                   </ImageView>
                </children>
             </Pane>
-            <Pane layoutY="92.0" prefHeight="200.0" prefWidth="150.0">
+            <Pane layoutY="92.0" prefHeight="157.0" prefWidth="150.0">
                <children>
                   <VBox layoutY="7.0" prefHeight="126.0" prefWidth="148.0">
                      <children>
@@ -91,7 +91,7 @@
                      </children>
                   </VBox>
                </children></Pane>
-            <Pane layoutY="292.0" prefHeight="66.0" prefWidth="150.0">
+            <Pane layoutX="7.0" layoutY="243.0" prefHeight="66.0" prefWidth="150.0">
                <children>
                   <HBox fx:id="settings_box" alignment="CENTER_LEFT" layoutY="24.0" prefHeight="42.0" prefWidth="154.0">
                      <children>
@@ -110,9 +110,6 @@
                </children>
             </Pane>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-         <children>
-            <VBox layoutX="14.0" layoutY="13.0" prefHeight="332.0" prefWidth="433.0" />
-         </children></AnchorPane>
+    <AnchorPane fx:id="mainSection" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
   </items>
 </fx:root>

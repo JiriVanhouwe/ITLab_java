@@ -39,14 +39,14 @@ public class MainScreenController extends SplitPane {
 
     @FXML
     private HBox settings_box;
+
+    @FXML
+    private AnchorPane mainSection;
     
     public MainScreenController(Node node) {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
     	loader.setController(this);
     	loader.setRoot(this);
-    	
-    	//this.sidebar.getChildren().add(node);
-    	
     	
     	try{
     	      loader.load();
@@ -54,6 +54,9 @@ public class MainScreenController extends SplitPane {
     	catch (IOException ex){
     	      throw new RuntimeException(ex);
     	}
+    	
+    	this.mainSection.getChildren().add(node);
+    	
 
     }
 }
