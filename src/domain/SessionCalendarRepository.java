@@ -13,8 +13,8 @@ public class SessionCalendarRepository {
 	private List<SessionCalendar> sessionCalendars;
 	private final PersistenceController persistenceController;
 	
-	public SessionCalendarRepository() {
-		this.persistenceController = new PersistenceController();
+	public SessionCalendarRepository(PersistenceController persistenceController) {
+		this.persistenceController = persistenceController;
 		setSessionCalendars(persistenceController.getSessionCalenders());
 	}
 	
@@ -30,15 +30,13 @@ public class SessionCalendarRepository {
 	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		//hier filter stream uit remove halen voor controlep null?
 		sessionCalendars.remove(sessionCalendars.stream().filter(e -> e.getStartDate().equals(startDate) && e.getEndDate().equals(endDate)).findFirst().get());
-		update();
 	}
 	
 	public void createSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		sessionCalendars.add(new SessionCalendar(startDate, endDate));
-		update();
 	}
 
-	private void update() {
+	public void update() {
 		persistenceController.updateSessionCalanders(sessionCalendars.stream().sorted(Comparator.comparing(SessionCalendar::getStartDate).thenComparing(SessionCalendar::getEndDate)).collect(Collectors.toList()));
 		setSessionCalendars(persistenceController.getSessionCalenders());
 	}

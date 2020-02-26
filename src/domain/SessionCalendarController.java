@@ -25,13 +25,16 @@ public class SessionCalendarController {
 	
 	public void changeSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		ITLabSingleton.getITLabInstance().changeSessionCurrentCalendar(startDate, endDate);
+		sessionCalendarRepository.update();
 	}
 	
 	public void createSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		sessionCalendarRepository.createSessionCalendar(startDate, endDate);
+		sessionCalendarRepository.update();
 	}
 	
 	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {
 		sessionCalendarRepository.removeSessionCalendar(startDate,endDate);
+		sessionCalendarRepository.update();
 	}
 }
