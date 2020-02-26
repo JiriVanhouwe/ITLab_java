@@ -24,9 +24,7 @@ public class ITLab {
 	}
 
 	//methodes
-	public Session giveSession(int sessionID){
-		throw new UnsupportedOperationException();
-	}
+	
 	public List<Session> giveSessions() {
 		return currentSessioncalendar.getSessions();
 	}

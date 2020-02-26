@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
 
 public class SessionRepository {
@@ -25,6 +26,14 @@ public class SessionRepository {
 	
 	public void createSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
 		throw new UnsupportedOperationException();	
+	}
+
+	public Session getSessionByID(int sessionID) {
+		return sessions.stream().filter(e -> e.getSessionID() == sessionID).findAny().get();
+	}
+
+	public List<Session> getSessions() {
+		return Collections.unmodifiableList(sessions);
 	}
 	
 	

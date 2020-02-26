@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Session {
 	
+	private int sessionID;
 	private String title;
 	private String description;
 	private String nameGuest;
@@ -144,6 +145,11 @@ public class Session {
 
 	private void setFeedbackList(List<Feedback> feedbackList) {
 		this.feedbackList = feedbackList;
+	}
+
+	public int getSessionID() {
+		// TODO Auto-generated method stub
+		return this.sessionID;
 	}
 	
 	

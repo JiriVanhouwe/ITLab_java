@@ -12,11 +12,15 @@ public class SessionController {
 	}
 	
 	public Session giveSession(int sessionID) {
-		throw new UnsupportedOperationException();
+		return sessionRepository.getSessionByID(sessionID);
 	}
 	
-	public List<Session> giveSessions(){
-		throw new UnsupportedOperationException();
+	public List<Session> giveAllSessions(){
+		return sessionRepository.getSessions();
+	}
+	
+	public List<Session> giveSessionsCurrentCalendar(){
+		return ITLabSingleton.getITLabInstance().giveSessions();
 	}
 	
 	public void changeSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {

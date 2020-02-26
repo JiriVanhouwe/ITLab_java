@@ -47,7 +47,7 @@ class SessionTest {
 	@MethodSource("giveSessionsParameters")
 	public void testGiveSessions_GivesSessions(List<Session> sessions) {
 		Mockito.when(srDummy.giveSessions()).thenReturn(sessions);
-		List<Session> returnedSessions = sc.giveSessions();
+		List<Session> returnedSessions = sc.giveAllSessions();
 		Assertions.assertEquals(sessions, returnedSessions);
 		Mockito.verify(srDummy).giveSessions();
 	}
