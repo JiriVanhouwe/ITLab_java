@@ -2,6 +2,8 @@ package gui;
 
 import java.io.IOException;
 
+import domain.User;
+import domain.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,10 +19,7 @@ public class MainScreenController extends SplitPane {
     private AnchorPane sidebar;
 
     @FXML
-    private Text firstname_txt;
-
-    @FXML
-    private Text lastname_txt;
+    private Text name_txt;
 
     @FXML
     private ImageView name_arrow;
@@ -43,7 +42,11 @@ public class MainScreenController extends SplitPane {
     @FXML
     private AnchorPane mainSection;
     
-    public MainScreenController(Node node) {
+    private UserController usercontroller;
+    
+    public MainScreenController(Node node, UserController usercontroller) {
+    	this.usercontroller = usercontroller;
+    	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
     	loader.setController(this);
     	loader.setRoot(this);
@@ -57,6 +60,11 @@ public class MainScreenController extends SplitPane {
     	
     	this.mainSection.getChildren().add(node);
     	
-
+    	initializeScreen();
     }
+
+	private void initializeScreen() {
+		User user = usercontroller.getLoggedInUser();
+		name_txt.setText(user.getFirstName() + " " + user.getLastName());
+	}
 }

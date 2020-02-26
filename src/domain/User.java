@@ -12,19 +12,19 @@ public class User {
 	}
 	
 	//getters and setters 
-	private String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 	private void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	private String getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 	private void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	private String getUserName() {
+	public String getUserName() {
 		return userName;
 	}
 	private void setUserName(String userName) {
