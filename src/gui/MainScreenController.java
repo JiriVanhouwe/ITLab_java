@@ -5,7 +5,6 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -42,11 +41,11 @@ public class MainScreenController extends SplitPane {
     private HBox settings_box;
     
     public MainScreenController(Node node) {
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("WelkomScherm.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
     	loader.setController(this);
     	loader.setRoot(this);
     	
-    	this.sidebar.getChildren().add(node);
+    	//this.sidebar.getChildren().add(node);
     	
     	
     	try{

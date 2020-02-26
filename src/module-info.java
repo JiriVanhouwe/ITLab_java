@@ -1,4 +1,4 @@
-module ITLab {
+open module ITLab {
 	exports tests;
 	exports domain;
 	exports persistence;

@@ -21,6 +21,7 @@ public class StartUpGui extends Application {
 	            stage.setMinHeight(stage.getHeight());
 	        });
 	        stage.show();
+	        stage.setMaximized(true);
 	}
 
 	public static void main(String[] args) {
