@@ -17,4 +17,5 @@ open module ITLab {
 	requires mockito.junit.jupiter;
 	requires org.mockito;
 	requires org.junit.jupiter.params;
+	requires com.calendarfx.view;
 }
