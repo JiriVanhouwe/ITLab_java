@@ -16,7 +16,7 @@ public class SessionController {
 	}
 	
 	public List<Session> giveAllSessions(){
-		return sessionRepository.getSessions();
+		return sessionRepository.giveSessions();
 	}
 	
 	public List<Session> giveSessionsCurrentCalendar(){
@@ -24,10 +24,12 @@ public class SessionController {
 	}
 	
 	public void changeSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
-		throw new UnsupportedOperationException();	
+		sessionRepository.changeSession(title, startDate, endDate, classRoom, maxAttendees, guestSpeaker);	
+		sessionRepository.update();
 	}
 	
 	public void createSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
-		throw new UnsupportedOperationException();	
+		sessionRepository.createSession(title, startDate, endDate, classRoom, maxAttendees);	
+		sessionRepository.update();
 	}
 }

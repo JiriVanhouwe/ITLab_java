@@ -71,10 +71,10 @@ class SessionTest {
 	}
 	
 	private static Stream<Arguments> giveSessionParameters(){
-		return Stream.of(Arguments.of("001", new Session("A new session", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "B0001", 50)),
-						Arguments.of("002", new Session("A new session", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "B0001", 50)),
-						Arguments.of("003", new Session("A new session", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "B0001", 50)),
-						Arguments.of("1234", new Session("A new session", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), "B0001", 50)));
+		return Stream.of(Arguments.of("001", new Session("A new session", "B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
+						Arguments.of("002", new Session("A new session","B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
+						Arguments.of("003", new Session("A new session","B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
+						Arguments.of("1234", new Session("A new session","B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2),  50)));
 	}
 	
 	//---UseCase: Aanmaken sessie ---
@@ -94,6 +94,7 @@ class SessionTest {
 		Assertions.assertTrue(false);
 	}
 	
+
 	private static Stream<Arguments> newSessionValidParameters() {
 		return Stream.of(Arguments.of("A new session", "B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 10, "guestspeaker"),
 						Arguments.of("A session about ...", "B1234", LocalDateTime.now().plusDays(50), LocalDateTime.now().plusDays(50).plusMinutes(30), 20, "guestspeaker"), //Minimal duration for a session is 30 minutes

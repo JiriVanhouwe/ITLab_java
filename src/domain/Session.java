@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Session {
@@ -21,20 +22,44 @@ public class Session {
 	private SessionReminder reminder;
 	private List<Feedback> feedbackList;
 	
-	public Session() {
-		
-	}
+	
 
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
-		// TODO Auto-generated constructor stub
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,String classRoom, String nameGuest) {
+		this(title, classRoom ,startDate,endDate,maxAttendee);
+		setDescription(description);
+		setNameGuest(nameGuest);
 	}
 	
-	public Session(String title, LocalDateTime startDate, LocalDateTime endDate, String classroom, int maxAttendee) {
-		// TODO Auto-generated constructor stub
-	}
+	public Session(String title, String classRoom , LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+			setHost(ITLabSingleton.getITLabInstance().getLoggedInUser());
+			
+			if(title == null||title.isBlank())
+				throw new IllegalArgumentException("title moet ingevuld zijn");
+			setTitle(title);
+			
+			if(classRoom  == null||classRoom.isBlank())
+				throw new IllegalArgumentException("lokaal moet ingevuld zijn");
+			setClassRoom(classRoom);
+			
+			if(endDate.minusMinutes(30).isBefore(startDate) || startDate.isBefore(LocalDateTime.now().plusDays(1))) 
+				throw new IllegalArgumentException("eind uur moet minmaal 30 min achter start uur liggen");
+			setStartDate(startDate);
+			setEndDate(endDate);
+			
+			if(maxAttendee <= 0)
+				throw new IllegalArgumentException("maxaanwezigen moeten groter dan nul zijn");
+			setMaxAttendee(maxAttendee);
+			
+			setOpened(false);
+			
+			feedbackList = new ArrayList<>();
+			registeredUsers  = new ArrayList<>();
+			attendees = new ArrayList<>();
+			media = new ArrayList<>();
+			
+		}
 	
 	//getters and setters
-
 	public String getTitle() {
 		return title;
 	}
@@ -51,9 +76,6 @@ public class Session {
 		this.description = description;
 	}
 
-	private String getNameGuest() {
-		return nameGuest;
-	}
 
 	private void setNameGuest(String nameGuest) {
 		this.nameGuest = nameGuest;
@@ -72,6 +94,8 @@ public class Session {
 	}
 
 	private void setStartDate(LocalDateTime startDate) {
+		if(LocalDateTime.now().isAfter(startDate))
+			throw new IllegalArgumentException("startdatum moet in de toekomst liggen");
 		this.startDate = startDate;
 	}
 
@@ -80,6 +104,8 @@ public class Session {
 	}
 
 	private void setEndDate(LocalDateTime endDate) {
+		if(LocalDateTime.now().isAfter(endDate))
+			throw new IllegalArgumentException("einddatum moet in de toekomst liggen");
 		this.endDate = endDate;
 	}
 

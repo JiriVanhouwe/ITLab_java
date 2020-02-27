@@ -49,4 +49,10 @@ public class PersistenceController {
 			throw new UnsupportedOperationException();
 			
 		}
+
+		public void updateSession(List<Session> collect) {
+			throw new UnsupportedOperationException();
+		}
+
+		
 }

@@ -20,7 +20,11 @@ public class ITLab {
 
 
 	public SessionCalendar getCurrentSessioncalendar() {
-		return currentSessioncalendar;
+		return this.currentSessioncalendar;
+	}
+	
+	public User getLoggedInUser(){
+		return this.loggedInUser;
 	}
 
 	//methodes
