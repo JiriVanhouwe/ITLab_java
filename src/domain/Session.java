@@ -31,7 +31,7 @@ public class Session {
 	}
 	
 	public Session(String title, String classRoom , LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
-			setHost(ITLabSingleton.getITLabInstance().getLoggedInUser());
+			
 			
 			if(title == null||title.isBlank())
 				throw new IllegalArgumentException("title moet ingevuld zijn");

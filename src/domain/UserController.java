@@ -1,23 +1,17 @@
 package domain;
 
-public class UserController {
+public class UserController extends Controller {
 	
-	private UserRepository userRepository;
-	public User loggedInUser;
-	
-	public UserController(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public UserController(ITLab itLab) {
+		super(itLab);
 	}
 	
 	public boolean isUserPassComboValid(String username, char[] password) {
-		if(userRepository.isUserPassComboValid(username, password)) {
-			loggedInUser = userRepository.getUser(username);
+		if(super.getItLab().isUserPassComboValid(username, password)) {
 			return true;
 		}
 		return false;
 	}
 
-	public User getLoggedInUser() {
-		return loggedInUser;
-	}
+	
 }

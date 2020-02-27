@@ -6,17 +6,21 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import domain.ITLab;
 import domain.Session;
 import domain.SessionCalendar;
 
 public class PersistenceController {
 
+	//ik denk dat deze jpa delen in de ITLAB zoals vb garagebeheerder
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_Database"; 
 	    private EntityManager em;
 	    private EntityManagerFactory emf;
 	    
-	    public PersistenceController() {
-	    	initializePersistentie();
+	    private ITLab itLab;
+	    
+	    public PersistenceController(ITLab itLab) {
+	    	this.itLab = itLab;
 	    }
 	    
 	    private void initializePersistentie() {
@@ -53,6 +57,11 @@ public class PersistenceController {
 		public void updateSession(List<Session> collect) {
 			throw new UnsupportedOperationException();
 		}
+
+		public void populeerData() {
+			throw new UnsupportedOperationException();
+		}
+		
 
 		
 }

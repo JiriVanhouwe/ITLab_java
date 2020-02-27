@@ -3,33 +3,29 @@ package domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class SessionController {
+public class SessionController extends Controller {
 	
-	private SessionRepository sessionRepository;
-	
-	public SessionController(SessionRepository sessionRepository) {
-		this.sessionRepository = sessionRepository;
+	public SessionController(ITLab itlab) {
+		super(itlab);
 	}
 	
 	public Session giveSession(int sessionID) {
-		return sessionRepository.getSessionByID(sessionID);
+		throw new UnsupportedOperationException();
 	}
 	
 	public List<Session> giveAllSessions(){
-		return sessionRepository.giveSessions();
+		throw new UnsupportedOperationException();
 	}
 	
 	public List<Session> giveSessionsCurrentCalendar(){
-		return ITLabSingleton.getITLabInstance().giveSessions();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void changeSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
-		sessionRepository.changeSession(title, startDate, endDate, classRoom, maxAttendees, guestSpeaker);	
-		sessionRepository.update();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void createSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
-		sessionRepository.createSession(title, startDate, endDate, classRoom, maxAttendees);	
-		sessionRepository.update();
+		throw new UnsupportedOperationException();
 	}
 }

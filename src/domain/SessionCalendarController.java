@@ -6,35 +6,29 @@ import java.util.Collections;
 import java.util.List;
 
 public class SessionCalendarController {
-	
-	private SessionCalendarRepository sessionCalendarRepository;
-	
-	public SessionCalendarController(SessionCalendarRepository sessionCalendarRepository) {
-		this.sessionCalendarRepository = sessionCalendarRepository;
+
+	public SessionCalendarController(ITLab itLab) {
+		super();
 	}
-	
 	
 	//methodes
 	public SessionCalendar giveSessionCalendar(){
-		return ITLabSingleton.getITLabInstance().getCurrentSessioncalendar();
+		throw new UnsupportedOperationException();
 	}
 	
 	public List<SessionCalendar> giveSessionCalendars(){
-		return Collections.unmodifiableList(sessionCalendarRepository.getSessionCalendars());
+		throw new UnsupportedOperationException();
 	}
 	
 	public void changeSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		ITLabSingleton.getITLabInstance().changeSessionCurrentCalendar(startDate, endDate);
-		sessionCalendarRepository.update();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void createSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		sessionCalendarRepository.createSessionCalendar(startDate, endDate);
-		sessionCalendarRepository.update();
+		throw new UnsupportedOperationException();
 	}
 	
 	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		sessionCalendarRepository.removeSessionCalendar(startDate,endDate);
-		sessionCalendarRepository.update();
+		throw new UnsupportedOperationException();
 	}
 }
