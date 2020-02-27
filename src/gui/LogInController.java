@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import org.controlsfx.control.PopOver;
+
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.view.CalendarView;
 
+import domain.ITLab;
 import domain.UserController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -26,6 +31,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import main.CalendarApp;
 
 public class LogInController extends AnchorPane {
 
@@ -81,8 +87,12 @@ public class LogInController extends AnchorPane {
             Calendar calendar1 = new Calendar("Kalender 1"); 
             Calendar calendar2 = new Calendar("Kalender 2");
             
+            
+            
             calendar1.setStyle(Style.STYLE1); 
             calendar2.setStyle(Style.STYLE2);
+            
+            calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController());
 
             CalendarSource myCalendarSource = new CalendarSource("My Calendars"); 
             myCalendarSource.getCalendars().addAll(calendar1, calendar2);
