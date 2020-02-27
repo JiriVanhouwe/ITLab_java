@@ -23,6 +23,8 @@ public class CalendarApp extends Application {
 
                 Calendar calendar1 = new Calendar("Kalender 1"); 
                 Calendar calendar2 = new Calendar("Kalender 2");
+                
+                
 
                 calendar1.setStyle(Style.STYLE1); 
                 calendar2.setStyle(Style.STYLE2);

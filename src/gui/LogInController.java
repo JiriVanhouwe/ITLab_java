@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -64,13 +65,18 @@ public class LogInController extends AnchorPane {
 	void loginBtnPressed(ActionEvent event) throws IOException {
         CalendarView calendarView = new CalendarView(); 
         
+//        GridPane gridPane = new GridPane();	
+//        ColumnConstraints col1 = new ColumnConstraints ();
+//        //col1.setPercentWidth(80);
+//        //col1.setFillWidth(true);
+//        gridPane.getColumnConstraints().add(col1);
+//        gridPane.add(calendarView, 0, 0);
+        
 		if(usercontroller.isUserPassComboValid(tfUser.getText(), pwUser.getText().toCharArray())) {
 	        Scene scene = new Scene(new MainScreenController(calendarView, usercontroller));
 	        
 	        
 	        // ------ START CALENDARFX ------
-	        
-	        //calendarView.setPrefWidth(calendarView.getParent().maxWidth(arg0));
 
             Calendar calendar1 = new Calendar("Kalender 1"); 
             Calendar calendar2 = new Calendar("Kalender 2");
