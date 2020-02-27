@@ -18,7 +18,7 @@ public class ITLab {
 	private EntityManagerFactory emf;
 
 	public ITLab() {
-		initializePersistentie();
+		//initializePersistentie();
 	}
 
 	public User setLoggedInUser(User loggedInUser) {

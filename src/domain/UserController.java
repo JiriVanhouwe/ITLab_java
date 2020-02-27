@@ -8,6 +8,7 @@ public class UserController extends Controller {
 	
 	public boolean isUserPassComboValid(String username, char[] password) {
 		if(super.getItLab().isUserPassComboValid(username, password)) {
+			itLab.setLoggedInUser(new User("Mister", "Adminman", "admin"));
 			return true;
 		}
 		return false;
