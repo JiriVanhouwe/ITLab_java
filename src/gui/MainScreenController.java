@@ -66,7 +66,7 @@ public class MainScreenController extends SplitPane {
     }
 
 	private void initializeScreen() {
-		User user = usercontroller.getLoggedInUser();
+		User user = usercontroller.giveLoggedInUser();
 		name_txt.setText(user.getFirstName() + " " + user.getLastName());
 	}
 }

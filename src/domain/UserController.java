@@ -13,5 +13,8 @@ public class UserController extends Controller {
 		return false;
 	}
 
+	public User giveLoggedInUser() {
+		return itLab.getLoggedInUser();
+	}
 	
 }

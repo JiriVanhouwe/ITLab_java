@@ -2,8 +2,14 @@ package domain;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class SessionReminder {
 	
+	@Temporal(TemporalType.DATE)
 	private LocalDate sendDate;
 	private String description;
 	

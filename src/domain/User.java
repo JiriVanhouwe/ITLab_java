@@ -1,9 +1,14 @@
 package domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+	@Id
+	private String userName;
 	private String firstName;
 	private String lastName;
-	private String userName;
 	
 	public User(String firstName, String lastName, String userName) {
 		this.firstName = firstName;

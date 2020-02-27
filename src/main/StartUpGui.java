@@ -1,10 +1,8 @@
 package main;
 
+import domain.ITLab;
 import domain.UserController;
-import domain.UserRepository;
-import gui.BeherenSessiekalenderController;
 import gui.LogInController;
-import gui.MainScreenController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,7 +12,8 @@ public class StartUpGui extends Application {
 
 	@Override
 	public void start(Stage stage) {
-		UserController usercontroller = new UserController(new UserRepository());
+		ITLab itlab = new ITLab();
+		UserController usercontroller = new UserController(itlab);
 		Scene scene = new Scene(new LogInController(usercontroller));
 		stage.setTitle("Log in");
 		stage.setScene(scene);

@@ -1,7 +1,7 @@
 package domain;
 
 public abstract class Controller {
-	private ITLab itLab;
+	protected ITLab itLab;
 	
 	public Controller(ITLab itLab) {
 		setItLab(itLab);

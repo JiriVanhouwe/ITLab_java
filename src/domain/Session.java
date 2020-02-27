@@ -4,22 +4,43 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+@Entity
 public class Session {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sessionID;
 	private String title;
 	private String description;
 	private String nameGuest;
 	private String classRoom;
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime startDate;
+	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime endDate;
 	private int maxAttendee;
 	private boolean opened;
+	@ElementCollection
 	private List<String> media;
+	@ManyToMany
 	private List<User> registeredUsers;
+	@ManyToMany
 	private List<User> attendees;
+	@OneToOne
 	private User host;
 	private SessionReminder reminder;
+	@OneToMany
 	private List<Feedback> feedbackList;
 	
 	

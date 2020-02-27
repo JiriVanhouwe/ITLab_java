@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 import domain.ITLab;
 import domain.Session;
@@ -38,27 +39,29 @@ public class PersistenceController {
 	    }
 
 		public List<SessionCalendar> getSessionCalenders() {
-			throw new UnsupportedOperationException();
+			Query q = em.createQuery("SELECT c FROM SessionCalendar");
+			return (List<SessionCalendar>) q.getResultList();
 		}
 		
 		public List<Session> giveSessions() {
-	    	throw new UnsupportedOperationException();
+			Query q = em.createQuery("SELECT c FROM Session");
+			return (List<Session>) q.getResultList();
 	    }
 
 		public Session giveSession(int sessionID) {
-			throw new UnsupportedOperationException();
+			Query q = em.createQuery("SELECT c FROM SessionCalendar WHERE sessionId = " + sessionID);
+			return (Session) q.getSingleResult();
 		}
 
 		public void updateSessionCalanders(List<SessionCalendar> collect) {
 			throw new UnsupportedOperationException();
-			
 		}
 
 		public void updateSession(List<Session> collect) {
 			throw new UnsupportedOperationException();
 		}
 
-		public void populeerData() {
+		public void populateData() {
 			throw new UnsupportedOperationException();
 		}
 		
