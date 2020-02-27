@@ -12,6 +12,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MainScreenController extends SplitPane {
@@ -41,7 +43,7 @@ public class MainScreenController extends SplitPane {
     private HBox settings_box;
 
     @FXML
-    private AnchorPane mainSection;
+    private HBox mainSection;
     
     private UserController usercontroller;
     
@@ -59,6 +61,7 @@ public class MainScreenController extends SplitPane {
     	      throw new RuntimeException(ex);
     	}
     	
+    	HBox.setHgrow(node, Priority.ALWAYS);
     	this.mainSection.getChildren().add(node);
     	
     	
