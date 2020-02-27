@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -59,6 +60,7 @@ public class MainScreenController extends SplitPane {
     	}
     	
     	this.mainSection.getChildren().add(node);
+    	
     	
     	initializeScreen();
     }
