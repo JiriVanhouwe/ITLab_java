@@ -116,11 +116,14 @@ public class Session {
 	}
 
 	private void setStartDate(LocalDateTime startDate) {
-		if (endDate.minusMinutes(30).isBefore(startDate))
-			throw new IllegalArgumentException("einduur moet minimaal 30 minuten na het startuur liggen");
+		if(endDate != null) {
+			if (endDate.minusMinutes(30).isBefore(startDate))
+				throw new IllegalArgumentException("einduur moet minimaal 30 minuten na het startuur liggen");
 
-		if (LocalDateTime.now().isAfter(startDate))
-			throw new IllegalArgumentException("startdatum moet in de toekomst liggen");
+			if (LocalDateTime.now().isAfter(startDate))
+				throw new IllegalArgumentException("startdatum moet in de toekomst liggen");			
+		}
+
 		this.startDate = startDate;
 	}
 

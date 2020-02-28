@@ -1,6 +1,10 @@
 package main;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import domain.ITLab;
+import domain.Session;
 import domain.UserController;
 import gui.LogInController;
 import javafx.application.Application;
@@ -24,6 +28,12 @@ public class StartUpGui extends Application {
 			stage.setMinWidth(stage.getWidth());
 			stage.setMinHeight(stage.getHeight());
 		});
+		
+		Session session = new Session("title", "classroom", LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
+		Session session2 = new Session("title", "classroom", LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
+		System.out.println(session.getSessionID());
+		System.out.println(session2.getSessionID());
+		
 		// stage.initStyle(StageStyle.UNDECORATED); heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
 		stage.show();
 	}
