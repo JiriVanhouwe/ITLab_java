@@ -19,4 +19,5 @@ open module ITLab {
 	requires org.junit.jupiter.params;
 	requires com.calendarfx.view;
 	requires org.controlsfx.controls;
+	requires com.jfoenix;
 }
