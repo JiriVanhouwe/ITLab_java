@@ -69,13 +69,9 @@ public class LogInController extends AnchorPane {
 
 	@FXML
 	void loginBtnPressed(ActionEvent event) throws IOException {
-        //CalendarView calendarView = new CalendarView(); 
         
 		if(usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
 	        Scene scene = new Scene(new MainScreenController(usercontroller));
-	        
-	        
-	        //generateCalendar(calendarView);
 	        
 	        
 	        getCurrentStage().setTitle("ITLab");

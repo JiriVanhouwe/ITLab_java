@@ -5,10 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
-import com.calendarfx.model.Calendar.Style;
 
 import domain.User;
 import domain.UserController;
@@ -19,10 +19,8 @@ import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class MainScreenController extends SplitPane {
@@ -78,6 +76,7 @@ public class MainScreenController extends SplitPane {
     	if(mainSection.getChildren().size() > 0)
     		mainSection.getChildren().remove(0);
     	
+    	HBox.setHgrow(node, Priority.ALWAYS);
     	mainSection.getChildren().add(node);
     }
 
@@ -119,7 +118,6 @@ public class MainScreenController extends SplitPane {
                                 } catch (InterruptedException e) {
                                         e.printStackTrace();
                                 }
-
                         }
                 };
         };
@@ -135,7 +133,7 @@ public class MainScreenController extends SplitPane {
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
         
-    	HBox.setHgrow(calendarView, Priority.ALWAYS);
+
     	
     	changeMainSection(calendarView);
 	}
