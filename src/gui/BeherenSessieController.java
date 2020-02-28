@@ -2,6 +2,8 @@ package gui;
 
 import java.io.IOException;
 
+import com.calendarfx.model.Entry;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -33,7 +35,7 @@ public class BeherenSessieController extends VBox{
     @FXML
     private Button cancel_btn;
     
-    public BeherenSessieController() {
+    public BeherenSessieController(Entry entry) {
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("BeherenSessie.fxml"));
     	loader.setController(this);
@@ -45,6 +47,8 @@ public class BeherenSessieController extends VBox{
     	catch (IOException ex){
     	      throw new RuntimeException(ex);
     	}
+    	
+    	this.titel_txtfld.setText(entry.getTitle());
     	
     }
 
