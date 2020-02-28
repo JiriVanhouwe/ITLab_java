@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class Session {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int sessionID;
@@ -42,50 +42,50 @@ public class Session {
 	private SessionReminder reminder;
 	@OneToMany
 	private List<Feedback> feedbackList;
-	
-	
 
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,String classRoom, String nameGuest) {
-		this(title, classRoom ,startDate,endDate,maxAttendee);
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
+			String classRoom, String nameGuest) {
+		this(title, classRoom, startDate, endDate, maxAttendee);
 		setDescription(description);
 		setNameGuest(nameGuest);
 	}
-	
-	public Session(String title, String classRoom , LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
-			
-			
-			if(title == null||title.isBlank())
-				throw new IllegalArgumentException("title moet ingevuld zijn");
-			setTitle(title);
-			
-			if(classRoom  == null||classRoom.isBlank())
-				throw new IllegalArgumentException("lokaal moet ingevuld zijn");
-			setClassRoom(classRoom);
-			
-			if(endDate.minusMinutes(30).isBefore(startDate) || startDate.isBefore(LocalDateTime.now().plusDays(1))) 
-				throw new IllegalArgumentException("eind uur moet minmaal 30 min achter start uur liggen");
-			setStartDate(startDate);
-			setEndDate(endDate);
-			
-			if(maxAttendee <= 0)
-				throw new IllegalArgumentException("maxaanwezigen moeten groter dan nul zijn");
-			setMaxAttendee(maxAttendee);
-			
-			setOpened(false);
-			
-			feedbackList = new ArrayList<>();
-			registeredUsers  = new ArrayList<>();
-			attendees = new ArrayList<>();
-			media = new ArrayList<>();
-			
-		}
-	
-	//getters and setters
+
+	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+		setTitle(title);
+		setDescription(description);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setMaxAttendee(maxAttendee);
+		setClassRoom(classRoom);
+		setNameGuest(nameGuest);
+		setOpened(false);
+
+		feedbackList = new ArrayList<>();
+		registeredUsers = new ArrayList<>();
+		attendees = new ArrayList<>();
+		media = new ArrayList<>();
+	}
+
+	// methoden
+	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
+			int maxAttendee, String classRoom, String nameGuest) {
+		setTitle(title);
+		setDescription(description);
+		setStartDate(startDate);
+		setEndDate(endDate);
+		setMaxAttendee(maxAttendee);
+		setClassRoom(classRoom);
+		setNameGuest(nameGuest);
+	}
+
+	// getters and setters
 	public String getTitle() {
 		return title;
 	}
 
 	private void setTitle(String title) {
+		if (title == null || title.isBlank())
+			throw new IllegalArgumentException("titel moet ingevuld zijn");
 		this.title = title;
 	}
 
@@ -97,7 +97,6 @@ public class Session {
 		this.description = description;
 	}
 
-
 	private void setNameGuest(String nameGuest) {
 		this.nameGuest = nameGuest;
 	}
@@ -107,6 +106,8 @@ public class Session {
 	}
 
 	private void setClassRoom(String classRoom) {
+		if (classRoom == null || classRoom.isBlank())
+			throw new IllegalArgumentException("lokaal moet ingevuld zijn");
 		this.classRoom = classRoom;
 	}
 
@@ -115,7 +116,10 @@ public class Session {
 	}
 
 	private void setStartDate(LocalDateTime startDate) {
-		if(LocalDateTime.now().isAfter(startDate))
+		if (endDate.minusMinutes(30).isBefore(startDate))
+			throw new IllegalArgumentException("einduur moet minimaal 30 minuten na het startuur liggen");
+
+		if (LocalDateTime.now().isAfter(startDate))
 			throw new IllegalArgumentException("startdatum moet in de toekomst liggen");
 		this.startDate = startDate;
 	}
@@ -125,7 +129,7 @@ public class Session {
 	}
 
 	private void setEndDate(LocalDateTime endDate) {
-		if(LocalDateTime.now().isAfter(endDate))
+		if (LocalDateTime.now().isAfter(endDate))
 			throw new IllegalArgumentException("einddatum moet in de toekomst liggen");
 		this.endDate = endDate;
 	}
@@ -135,6 +139,8 @@ public class Session {
 	}
 
 	private void setMaxAttendee(int maxAttendee) {
+		if (maxAttendee <= 0)
+			throw new IllegalArgumentException("maxaanwezigen moeten groter dan nul zijn");
 		this.maxAttendee = maxAttendee;
 	}
 
@@ -198,8 +204,5 @@ public class Session {
 		// TODO Auto-generated method stub
 		return this.sessionID;
 	}
-	
-	
-	
 
 }

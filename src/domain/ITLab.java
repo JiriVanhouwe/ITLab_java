@@ -1,6 +1,7 @@
 package domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import persistence.PersistenceController;
 public class ITLab {
 
 	private SessionCalendar currentSessioncalendar;
+	private Session currentSession;
 	private User loggedInUser;
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
 	private EntityManager em;
@@ -28,6 +30,14 @@ public class ITLab {
 	// getters and setters
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
+	}
+	
+	public Session getSession() {
+		return this.currentSession;
+	}
+	
+	private void setCurrentSession(Session session) {
+		this.currentSession = session;
 	}
 
 	public SessionCalendar getCurrentSessioncalendar() {
@@ -70,5 +80,10 @@ public class ITLab {
 
 		return true;
 	}
-
+	
+	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
+			int maxAttendee, String classRoom, String nameGuest){
+		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest);
+		
+	}
 }
