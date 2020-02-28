@@ -30,6 +30,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class LogInController extends AnchorPane {
 
@@ -62,18 +63,13 @@ public class LogInController extends AnchorPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+		
+		
 	}
 
 	@FXML
 	void loginBtnPressed(ActionEvent event) throws IOException {
         CalendarView calendarView = new CalendarView(); 
-        
-//        GridPane gridPane = new GridPane();	
-//        ColumnConstraints col1 = new ColumnConstraints ();
-//        //col1.setPercentWidth(80);
-//        //col1.setFillWidth(true);
-//        gridPane.getColumnConstraints().add(col1);
-//        gridPane.add(calendarView, 0, 0);
         
 		if(usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
 	        Scene scene = new Scene(new MainScreenController(calendarView, usercontroller));
@@ -85,6 +81,7 @@ public class LogInController extends AnchorPane {
 	        getCurrentStage().setTitle("ITLab");
 	        getCurrentStage().setMaximized(true);
 	        getCurrentStage().setScene(scene);
+	        //getCurrentStage().initStyle(StageStyle.DECORATED);
 		}else {
 			txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
 		}

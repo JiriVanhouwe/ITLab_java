@@ -6,6 +6,7 @@ import gui.LogInController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class StartUpGui extends Application {
@@ -23,8 +24,8 @@ public class StartUpGui extends Application {
 			stage.setMinWidth(stage.getWidth());
 			stage.setMinHeight(stage.getHeight());
 		});
+		// stage.initStyle(StageStyle.UNDECORATED); heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
 		stage.show();
-		//stage.setMaximized(true);
 	}
 
 	public static void main(String[] args) {
