@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXProgressBar?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -57,6 +58,7 @@
          </font>
       </Text>
       <DatePicker fx:id="datepicker" />
+      <JFXProgressBar />
       <HBox alignment="CENTER" prefHeight="56.0" prefWidth="528.0">
          <children>
             <Button fx:id="edit_btn" mnemonicParsing="false" text="Bewerken">
