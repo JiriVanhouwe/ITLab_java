@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -43,6 +44,7 @@ public class LogInController extends AnchorPane {
 
     @FXML
     private Label lblPasswordLost;
+
 
     @FXML
     private JFXPasswordField tfPassword;
@@ -63,9 +65,13 @@ public class LogInController extends AnchorPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
-		
-		
 	}
+	
+    
+    @FXML
+    void forgetPasswordClick(MouseEvent event) {
+
+    }
 
 	@FXML
 	void loginBtnPressed(ActionEvent event) throws IOException {
@@ -86,9 +92,4 @@ public class LogInController extends AnchorPane {
          return (Stage) tfUser.getScene().getWindow();
     }
 	
-
-    @FXML
-    void dragOver(DragEvent event) {
-
-    }
 }
