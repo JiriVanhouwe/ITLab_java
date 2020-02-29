@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #353341;" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -60,11 +59,6 @@
             <Font name="Ebrima Bold" size="32.0" />
          </font>
       </Label>
-      <Text fx:id="txt_error" layoutX="453.0" layoutY="369.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="223.20000000000005">
-         <font>
-            <Font name="Ebrima" size="12.0" />
-         </font>
-      </Text>
       <Button fx:id="btnLogIn" defaultButton="true" layoutX="453.0" layoutY="292.0" minHeight="16.0" mnemonicParsing="false" onAction="#loginBtnPressed" prefHeight="38.0" prefWidth="223.0" text="Log in" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="13.0" />
@@ -73,5 +67,10 @@
             <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" saturation="-0.04" />
          </effect>
       </Button>
+      <Label fx:id="txt_error" layoutX="457.0" layoutY="337.0" prefHeight="50.0" prefWidth="215.0" textFill="#ff9900">
+         <font>
+            <Font name="Ebrima Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>

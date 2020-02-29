@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Optional;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
@@ -24,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,7 +52,7 @@ public class LogInController extends AnchorPane {
     private JFXPasswordField tfPassword;
 
     @FXML
-    private Text txt_error;
+    private Label txt_error;
     
     
 	private UserController usercontroller;
@@ -70,7 +72,20 @@ public class LogInController extends AnchorPane {
     
     @FXML
     void forgetPasswordClick(MouseEvent event) {
-
+    	TextInputDialog input = new TextInputDialog();
+    	input.setTitle("Wachtwoord vergeten");
+    	input.setHeaderText("Geef jouw e-mailadres in:");
+    	input.setContentText("E-mailadres:");
+    	
+    	Optional<String> result = input.showAndWait();
+    	String emailadres = result.get();
+    	//TODO
+    	//als het emailadres gekend is: "Je kan een nieuw wachtwoord instellen via jouw e-mail".
+    	//als het emailadres niet gekend is: "Dit e-mailadres is ongekend." 	
+    	if(!emailadres.isBlank())
+    		txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
+    	else
+    		txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
     }
 
 	@FXML
