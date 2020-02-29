@@ -3,6 +3,7 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,7 +33,7 @@ public class ITLab {
 		this.currentSessioncalendar = sessionCalendar;
 	}
 	
-	public Session getSession() {
+	public Session getCurrentSession() {
 		return this.currentSession;
 	}
 	
@@ -73,7 +74,6 @@ public class ITLab {
 
 	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
-
 	}
 
 	public boolean isUserPassComboValid(String username, char[] password) {
@@ -81,9 +81,13 @@ public class ITLab {
 		return true;
 	}
 	
-	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
-			int maxAttendee, String classRoom, String nameGuest){
-		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest);
+	public void changeSession(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate,
+			int maxAttendee, String description, String nameGuest){
+		currentSession.changeSession(title, classRoom, startDate, endDate, maxAttendee, description, nameGuest);
 		
+	}
+	
+	public void switchCurrentSession(int sessionID) {
+		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst().orElse(null));
 	}
 }

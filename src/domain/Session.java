@@ -43,8 +43,8 @@ public class Session {
 	@OneToMany
 	private List<Feedback> feedbackList;
 
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
-			String classRoom, String nameGuest) {
+	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
+			String description, String nameGuest) {
 		this(title, classRoom, startDate, endDate, maxAttendee);
 		setDescription(description);
 		setNameGuest(nameGuest);

@@ -57,7 +57,5 @@ public class BeherenSessieController extends VBox{
     	this.datepicker.setValue(entry.getStartDate());
     	//this.timepicker.setValue(entry.getStartTime());
     	System.out.println(entry.getId());
-    	
-    	
     }
 }
