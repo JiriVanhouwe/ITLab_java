@@ -10,7 +10,11 @@ public class SessionController extends Controller {
 	}
 	
 	public Session giveSession(int sessionID) {
-		return this.itLab.getSession();
+		return this.itLab.getCurrentSession();
+	}
+	
+	public void changeCurrentSession(int sessionID) {
+		this.itLab.switchCurrentSession(sessionID);
 	}
 	
 	public List<Session> giveAllSessions(){
@@ -21,9 +25,9 @@ public class SessionController extends Controller {
 		throw new UnsupportedOperationException();
 	}
 	
-	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
-			int maxAttendee, String classRoom, String nameGuest) {
-		this.itLab.changeSession(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest);
+	public void changeSession(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate,
+			int maxAttendee, String Description, String nameGuest) {
+		this.itLab.changeSession(title, classRoom, startDate, endDate, maxAttendee, classRoom, nameGuest);
 	}
 	
 	public void createSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
