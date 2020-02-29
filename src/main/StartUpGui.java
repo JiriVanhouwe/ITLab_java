@@ -1,6 +1,5 @@
 package main;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import domain.ITLab;
@@ -19,6 +18,7 @@ public class StartUpGui extends Application {
 	public void start(Stage stage) {
 		ITLab itlab = new ITLab();
 		UserController usercontroller = new UserController(itlab);
+		
 		Scene scene = new Scene(new LogInController(usercontroller));
 		stage.setTitle("Log in");
 		stage.setScene(scene);

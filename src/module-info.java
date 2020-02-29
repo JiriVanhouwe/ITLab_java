@@ -20,4 +20,5 @@ open module ITLab {
 	requires com.calendarfx.view;
 	requires org.controlsfx.controls;
 	requires com.jfoenix;
+	requires java.desktop;
 }

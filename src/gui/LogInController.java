@@ -73,7 +73,6 @@ public class LogInController extends AnchorPane {
 		if(usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
 	        Scene scene = new Scene(new DashboardController(usercontroller));
 	        
-	        
 	        getCurrentStage().setTitle("ITLab");
 	        getCurrentStage().setMaximized(true);
 	        getCurrentStage().setScene(scene);
