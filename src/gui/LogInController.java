@@ -71,7 +71,7 @@ public class LogInController extends AnchorPane {
 	void loginBtnPressed(ActionEvent event) throws IOException {
         
 		if(usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
-	        Scene scene = new Scene(new MainScreenController(usercontroller));
+	        Scene scene = new Scene(new DashboardController(usercontroller));
 	        
 	        
 	        getCurrentStage().setTitle("ITLab");
