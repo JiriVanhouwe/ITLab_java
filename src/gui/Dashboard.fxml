@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,7 +15,13 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1086.0" layoutX="-7.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1926.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0081c5" height="1083.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="350.0" />
+      <ImageView fitHeight="243.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/IT%20lab%20logo.jpg" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="1086.0" layoutX="351.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" width="1568.0">
          <fill>
             <LinearGradient endX="0.9160306508304509" endY="0.2480916030534351" startX="0.1603052980117216" startY="0.8129770810367497">
                <stops>
@@ -26,16 +33,11 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <VBox layoutY="-2.0" prefHeight="1080.0" prefWidth="350.0">
+      <VBox layoutY="200.0" prefHeight="878.0" prefWidth="350.0">
          <children>
-            <ImageView fitHeight="221.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/IT%20lab%20logo.jpg" />
-               </image>
-            </ImageView>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" text="Kalender">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fx:id="img_calendar" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -53,7 +55,7 @@
             </Button>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" style="-fx-border-radius: 40;" text="Sessies">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -71,7 +73,7 @@
             </Button>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" style="-fx-border-radius: 40;" text="Statistieken">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -86,7 +88,7 @@
             </Button>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" style="-fx-border-radius: 40;" text="Gebruikers">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -101,7 +103,7 @@
             </Button>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" style="-fx-border-radius: 40;" text="Instellingen">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -116,7 +118,7 @@
             </Button>
             <Button alignment="CENTER" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="147.0" prefWidth="350.0" style="-fx-border-radius: 40;" text="Uitloggen">
                <font>
-                  <Font name="Ebrima Bold" size="22.0" />
+                  <Font name="Ebrima Bold" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
@@ -131,6 +133,20 @@
             </Button>
          </children>
       </VBox>
-      <HBox fx:id="hbox_mainSection" layoutX="349.0" layoutY="-2.0" prefHeight="1085.0" prefWidth="1574.0" />
+      <HBox fx:id="hbox_mainSection" layoutX="351.0" layoutY="-3.0" prefHeight="1086.0" prefWidth="1554.0" />
+      <HBox prefHeight="32.0" prefWidth="350.0" />
+      <Label alignment="BASELINE_RIGHT" layoutY="145.0" prefHeight="36.0" prefWidth="214.0" text="Welkom terug, " textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblUserName" alignment="BASELINE_LEFT" layoutX="215.0" layoutY="145.0" onMouseClicked="#userNameClick" prefHeight="35.0" prefWidth="135.0" textFill="#feeb09">
+         <font>
+            <Font name="Ebrima Bold" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
    </children>
 </fx:root>

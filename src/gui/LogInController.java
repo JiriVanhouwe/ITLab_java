@@ -80,8 +80,8 @@ public class LogInController extends AnchorPane {
     	Optional<String> result = input.showAndWait();
     	String emailadres = result.get();
     	//TODO
-    	//als het emailadres gekend is: "Je kan een nieuw wachtwoord instellen via jouw e-mail".
-    	//als het emailadres niet gekend is: "Dit e-mailadres is ongekend." 	
+    	//als het emailadres gekend is in de DB: "Je kan een nieuw wachtwoord instellen via jouw e-mail".
+    	//als het emailadres niet gekend is in de DB: "Dit e-mailadres is ongekend." 	
     	if(!emailadres.isBlank())
     		txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
     	else
@@ -101,6 +101,8 @@ public class LogInController extends AnchorPane {
 			txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
 		}
 	}
+	
+
 	
 	private Stage getCurrentStage(){
         //Met deze methode kunnen we de huidige stage (het scherm) terug krijgen zodat we het gemakkelijk kunnen aanpassen

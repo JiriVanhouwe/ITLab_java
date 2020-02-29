@@ -16,7 +16,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -29,6 +31,9 @@ public class DashboardController extends AnchorPane{
     
     @FXML
     private HBox hbox_mainSection;
+    
+    @FXML
+    private Label lblUserName;
 
     private UserController usercontroller;
     
@@ -45,7 +50,10 @@ public class DashboardController extends AnchorPane{
     	catch (IOException ex){
     	      throw new RuntimeException(ex);
     	}  	
-    	
+    	//TODO
+    	//deze regel hieronder mag weg zodra er users zijn
+    	lblUserName.setText("Jiri!");
+    	//lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
     	initializeScreen();
     	initializeCalendar();
 
@@ -116,6 +124,13 @@ public class DashboardController extends AnchorPane{
 		User user = usercontroller.giveLoggedInUser();
 		//name_txt.setText(user.getFirstName() + " " + user.getLastName());
 	}
+	
+    @FXML
+    void userNameClick(MouseEvent event) {
+    	
+    	//TODO
+    	//wanneer men hier op klikt, kom je ook bij instellingen terecht.
+    }
   
 
 }
