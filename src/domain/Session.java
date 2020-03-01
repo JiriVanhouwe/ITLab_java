@@ -30,7 +30,6 @@ public class Session {
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime endDate;
 	private int maxAttendee;
-	private boolean opened;
 	@ElementCollection
 	private List<String> media;
 	@ManyToMany
@@ -42,12 +41,15 @@ public class Session {
 	private SessionReminder reminder;
 	@OneToMany
 	private List<Feedback> feedbackList;
+	
+	private SessionState state;
 
 	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
 			String description, String nameGuest) {
 		this(title, classRoom, startDate, endDate, maxAttendee);
 		setDescription(description);
 		setNameGuest(nameGuest);
+		setState(new OpenState());
 	}
 
 	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
@@ -58,7 +60,7 @@ public class Session {
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
-		setOpened(false);
+		setState(new OpenState());
 
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
@@ -76,6 +78,22 @@ public class Session {
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
+	}
+	
+	public void registerAttendee(User user) {
+		this.registeredUsers.add(user);
+	}
+	
+	public void addAttendee(User user) {
+		this.attendees.add(user);
+	}
+	
+	public void closenSession() {
+		setState(new ClosedState());
+	}
+	
+	public void finishSession() {
+		setState(new FinishedState());
 	}
 
 	// getters and setters
@@ -147,14 +165,6 @@ public class Session {
 		this.maxAttendee = maxAttendee;
 	}
 
-	private boolean isOpened() {
-		return opened;
-	}
-
-	private void setOpened(boolean opened) {
-		this.opened = opened;
-	}
-
 	private List<String> getMedia() {
 		return media;
 	}
@@ -207,5 +217,15 @@ public class Session {
 		// TODO Auto-generated method stub
 		return this.sessionID;
 	}
+
+	public SessionState getState() {
+		return state;
+	}
+
+	public void setState(SessionState state) {
+		this.state = state;
+	}
+	
+	
 
 }
