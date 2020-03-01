@@ -33,4 +33,8 @@ public class SessionController extends Controller {
 	public void createSession(String title, LocalDateTime startDate, LocalDateTime endDate,String classRoom ,int maxAttendees , String guestSpeaker ) {
 		throw new UnsupportedOperationException();
 	}
+	
+	public List<Classroom> giveAllClassrooms(){
+		return itLab.
+	}
 }

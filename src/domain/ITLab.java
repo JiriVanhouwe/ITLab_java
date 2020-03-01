@@ -29,6 +29,8 @@ public class ITLab {
 	}
 
 	// getters and setters
+	
+	
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
 	}
@@ -81,12 +83,16 @@ public class ITLab {
 		return true;
 	}
 	
-	public void changeSession(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate,
+	public void changeSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate,
 			int maxAttendee, String description, String nameGuest){
-		currentSession.changeSession(title, classRoom, startDate, endDate, maxAttendee, description, nameGuest);
+		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom), nameGuest);
 		
 	}
 	
+	private Classroom giveClassRoom(String classroom) {
+		return persistence.PersistenceController.giveclassRoom(classroom);
+	}
+
 	public void switchCurrentSession(int sessionID) {
 		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst().orElse(null));
 	}

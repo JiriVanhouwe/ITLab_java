@@ -1,0 +1,11 @@
+package domain;
+
+public enum ClassRoomCategory {
+	AUDITORIUM,
+	CLASSROOM,
+	PCCLASSROOM,
+	ITLAB,
+	MEETINGROOM,
+	TECHCLASSROOM,
+	LANGUAGELAB
+}

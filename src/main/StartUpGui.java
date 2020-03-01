@@ -1,7 +1,11 @@
 package main;
 
 import java.time.LocalDateTime;
+import java.util.Locale.Category;
 
+import domain.Campus;
+import domain.ClassRoomCategory;
+import domain.Classroom;
 import domain.ITLab;
 import domain.Session;
 import domain.UserController;
@@ -29,8 +33,10 @@ public class StartUpGui extends Application {
 			stage.setMinHeight(stage.getHeight());
 		});
 		
-		Session session = new Session("title", "classroom", LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
-		Session session2 = new Session("title", "classroom", LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
+		Classroom cr = new Classroom("ITLAB", Campus.GENT, 30, ClassRoomCategory.ITLAB);
+		
+		Session session = new Session("title", cr, LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
+		Session session2 = new Session("title", cr, LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
 		System.out.println(session.getSessionID());
 		System.out.println(session2.getSessionID());
 		

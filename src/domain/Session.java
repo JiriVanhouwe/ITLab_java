@@ -24,7 +24,7 @@ public class Session {
 	private String title;
 	private String description;
 	private String nameGuest;
-	private String classRoom;
+	private Classroom classRoom;
 	@Temporal(TemporalType.TIMESTAMP)
 	private LocalDateTime startDate;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -43,8 +43,12 @@ public class Session {
 	private List<Feedback> feedbackList;
 	
 	private SessionState state;
-
-	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
+	
+	protected Session() {
+		super();
+	}
+	
+	public Session(String title,  Classroom classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
 			String description, String nameGuest) {
 		this(title, classRoom, startDate, endDate, maxAttendee);
 		setDescription(description);
@@ -52,7 +56,7 @@ public class Session {
 		setState(new OpenState());
 	}
 
-	public Session(String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+	public Session(String title, Classroom classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
 		setTitle(title);
 		setDescription(description);
 		setStartDate(startDate);
@@ -70,7 +74,7 @@ public class Session {
 
 	// methoden
 	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
-			int maxAttendee, String classRoom, String nameGuest) {
+			int maxAttendee,  Classroom classRoom, String nameGuest) {
 		setTitle(title);
 		setDescription(description);
 		setStartDate(startDate);
@@ -119,13 +123,11 @@ public class Session {
 		this.nameGuest = nameGuest;
 	}
 
-	public String getClassRoom() {
+	public Classroom getClassRoom() {
 		return classRoom;
 	}
 
-	private void setClassRoom(String classRoom) {
-		if (classRoom == null || classRoom.isBlank())
-			throw new IllegalArgumentException("lokaal moet ingevuld zijn");
+	private void setClassRoom(Classroom classRoom) {
 		this.classRoom = classRoom;
 	}
 

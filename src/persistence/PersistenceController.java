@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import domain.Classroom;
 import domain.ITLab;
 import domain.Session;
 import domain.SessionCalendar;
@@ -62,6 +63,10 @@ public class PersistenceController {
 		}
 
 		public void populateData() {
+			throw new UnsupportedOperationException();
+		}
+
+		public static Classroom giveclassRoom(String classroom) {
 			throw new UnsupportedOperationException();
 		}
 		

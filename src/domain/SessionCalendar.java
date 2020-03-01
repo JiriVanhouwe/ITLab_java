@@ -29,6 +29,10 @@ public class SessionCalendar {
 	//private static int idCounter = 0;
 	
 
+	protected SessionCalendar() {
+		super();
+	}
+	
 	public SessionCalendar(LocalDate startDate, LocalDate endDate) {
 		
 		if( startDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate))

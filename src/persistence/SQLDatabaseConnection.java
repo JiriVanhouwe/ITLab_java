@@ -23,7 +23,9 @@ public class SQLDatabaseConnection {
                         + "encrypt=false;"
                         + "trustServerCertificate=false;"
                         + "loginTimeout=30;";
-
+        
+        System.out.println(connectionUrl);
+        
         ResultSet resultSet = null;
 
         try (Connection connection = DriverManager.getConnection(connectionUrl);
