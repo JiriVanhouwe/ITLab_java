@@ -4,16 +4,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.calendarfx.model.Entry;
 
@@ -26,24 +29,28 @@ public class Session{
 	private String title;
 	private String description;
 	private String nameGuest;
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Classroom classRoom;
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private LocalDateTime startDate;
-	@Temporal(TemporalType.TIMESTAMP)
+	
 	private LocalDateTime endDate;
 	private int maxAttendee;
 	@ElementCollection
 	private List<String> media;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> registeredUsers;
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> attendees;
-	@OneToOne
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private User host;
+	
+	@Transient
 	private SessionReminder reminder;
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Feedback> feedbackList;
 	
+	@Transient
 	private SessionState state;
 	
 	protected Session() {

@@ -20,7 +20,11 @@ public class ITLab {
 	private EntityManagerFactory emf;
 
 	public ITLab() {
-		//initializePersistentie();
+
+		User u = new User("U1", "Artuur", "Everaert");
+		setLoggedInUser(u);
+		initializePersistentie();
+
 	}
 
 	public User setLoggedInUser(User loggedInUser) {
@@ -116,8 +120,8 @@ public class ITLab {
 				this.currentSessioncalendar = sessionCalendar;
 				Classroom cr = new Classroom("ITLAB", Campus.GENT, 30, ClassRoomCategory.ITLAB);
 				
-				Session session = new Session("title", cr, LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(2).plusHours(1), 5);
-				Session session2 = new Session("title", cr, LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(5).plusHours(1), 5);
+				Session session = new Session("Api's met Jiri", cr, LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(2).plusHours(1), 5);
+				Session session2 = new Session("Databasen met Arend", cr, LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(5).plusHours(1), 5);
 				
 				addSession(session2);
 				addSession(session);

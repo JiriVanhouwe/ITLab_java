@@ -35,6 +35,8 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Classroom> giveAllClassrooms(){
-		return null;
+
+		throw new UnsupportedOperationException();
+
 	}
 }

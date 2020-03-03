@@ -16,6 +16,10 @@ public class User {
 		this.userName = userName;
 	}
 	
+	protected User() {
+		
+	}
+	
 	//getters and setters 
 	public String getFirstName() {
 		return firstName;

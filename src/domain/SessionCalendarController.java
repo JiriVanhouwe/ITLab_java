@@ -13,7 +13,7 @@ public class SessionCalendarController extends Controller {
 	
 	//methodes
 	public SessionCalendar giveSessionCalendar(){
-		throw new UnsupportedOperationException();
+		return super.itLab.getCurrentSessioncalendar();
 	}
 	
 	public List<SessionCalendar> giveSessionCalendars(){
