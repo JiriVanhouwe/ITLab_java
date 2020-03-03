@@ -23,6 +23,8 @@ public class ITLab {
 	private EntityManagerFactory emf;
 
 	public ITLab() {
+		User u = new User("U1", "Artuur", "Everaert");
+		setLoggedInUser(u);
 		initializePersistentie();
 	}
 

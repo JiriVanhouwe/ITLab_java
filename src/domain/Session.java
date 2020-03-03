@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -26,6 +27,7 @@ public class Session {
 	private String title;
 	private String description;
 	private String nameGuest;
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Classroom classRoom;
 	
 	private LocalDateTime startDate;
@@ -46,6 +48,7 @@ public class Session {
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Feedback> feedbackList;
 	
+	@Transient
 	private SessionState state;
 	
 	protected Session() {
