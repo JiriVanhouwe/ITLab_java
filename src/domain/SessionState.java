@@ -1,6 +1,8 @@
 package domain;
 
-public abstract class SessionState {
+import java.io.Serializable;
+
+public abstract class SessionState implements Serializable {
 	
 	protected Session session;
 
