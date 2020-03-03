@@ -27,6 +27,7 @@ public class StartUpGui extends Application {
 		stage.setTitle("Log in");
 		stage.setScene(scene);
 
+		
 		// The stage will not get smaller than its preferred (initial) size.
 		stage.setOnShown((WindowEvent t) -> {
 			stage.setMinWidth(stage.getWidth());
