@@ -41,7 +41,7 @@ public class StartUpGui extends Application {
 		System.out.println(session.getSessionID());
 		System.out.println(session2.getSessionID());
 		
-		//stage.initStyle(StageStyle.UNDECORATED); // heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
+		stage.initStyle(StageStyle.UNDECORATED); // heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
 		stage.show();
 	}
 

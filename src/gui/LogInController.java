@@ -34,27 +34,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class LogInController extends AnchorPane {
 
+	@FXML
+	private JFXTextField tfUser;
 
-    @FXML
-    private JFXTextField tfUser;
+	@FXML
+	private Button btnLogIn;
 
-    @FXML
-    private Button btnLogIn;
+	@FXML
+	private Label lblPasswordLost;
 
-    @FXML
-    private Label lblPasswordLost;
+	@FXML
+	private JFXPasswordField tfPassword;
 
+	@FXML
+	private Label txt_error;
 
-    @FXML
-    private JFXPasswordField tfPassword;
-
-    @FXML
-    private Label txt_error;
-    
-    
 	private UserController usercontroller;
 
 	public LogInController(UserController usercontroller) {
@@ -68,46 +66,52 @@ public class LogInController extends AnchorPane {
 			throw new RuntimeException(ex);
 		}
 	}
-	
-    
-    @FXML
-    void forgetPasswordClick(MouseEvent event) {
-    	TextInputDialog input = new TextInputDialog();
-    	input.setTitle("Wachtwoord vergeten");
-    	input.setHeaderText("Geef jouw e-mailadres in:");
-    	input.setContentText("E-mailadres:");
-    	
-    	Optional<String> result = input.showAndWait();
-    	String emailadres = result.get();
-    	//TODO
-    	//als het emailadres gekend is in de DB: "Je kan een nieuw wachtwoord instellen via jouw e-mail".
-    	//als het emailadres niet gekend is in de DB: "Dit e-mailadres is ongekend." 	
-    	if(!emailadres.isBlank())
-    		txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
-    	else
-    		txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
-    }
+
+	@FXML
+	void forgetPasswordClick(MouseEvent event) {
+		TextInputDialog input = new TextInputDialog();
+		input.setTitle("Wachtwoord vergeten");
+		input.setHeaderText("Geef jouw e-mailadres in:");
+		input.setContentText("E-mailadres:");
+
+		Optional<String> result = input.showAndWait();
+		String emailadres = result.get();
+		// TODO
+		// als het emailadres gekend is in de DB: "Je kan een nieuw wachtwoord instellen
+		// via jouw e-mail".
+		// als het emailadres niet gekend is in de DB: "Dit e-mailadres is ongekend."
+		if (!emailadres.isBlank())
+			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
+		else
+			txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
+	}
 
 	@FXML
 	void loginBtnPressed(ActionEvent event) throws IOException {
-        
-		if(usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
-	        //Scene scene = new Scene(new DashboardController(usercontroller));
-	        Scene scene = new Scene(new MainScreenController(usercontroller));
-	        getCurrentStage().setTitle("ITLab");
-	        getCurrentStage().setHeight(1080);
-	        getCurrentStage().setMaximized(true);
-	        getCurrentStage().setScene(scene);
+
+		if (usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
+			//Sluit huidig scherm
+			Stage curStage = (Stage) tfUser.getScene().getWindow();
+			curStage.close();
+			
+			//Open nieuw scherm
+			Scene scene = new Scene(new MainScreenController(usercontroller));
+
+			Parent root = scene.getRoot();
+			Stage stage = new Stage();
+			stage.setOnShown((WindowEvent t) -> {
+				stage.setMinWidth(700);
+				stage.setMinHeight(700);
+			});
+
+			stage.setTitle("ITLab");
+			stage.setHeight(1080);
+			stage.setMaximized(true);
+			stage.setScene(scene);
+			stage.show();
 		} else {
 			txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
 		}
 	}
-	
 
-	
-	private Stage getCurrentStage(){
-        //Met deze methode kunnen we de huidige stage (het scherm) terug krijgen zodat we het gemakkelijk kunnen aanpassen
-         return (Stage) tfUser.getScene().getWindow();
-    }
-	
 }
