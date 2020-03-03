@@ -60,6 +60,7 @@ public class MainScreenController extends SplitPane {
     
     private void initializeCalendar() {
 		CalendarView calendarView = new CalendarView();
+		calendarView.setShowPrintButton(false); // make the printing option invisible
 		
 		Calendar calendar1 = new Calendar("Kalender 1"); 
         Calendar calendar2 = new Calendar("Kalender 2");
