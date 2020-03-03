@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
-public class SessionCalendarController {
+public class SessionCalendarController extends Controller {
 
 	public SessionCalendarController(ITLab itLab) {
-		super();
+		super(itLab);
 	}
 	
 	//methodes

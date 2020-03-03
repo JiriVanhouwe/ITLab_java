@@ -81,5 +81,10 @@ public class SessionCalendar {
 		return this.id;
 	}
 
+	public void addSession(Session session) {
+		sessions.add(session);
+		
+	}
+
 	
 }

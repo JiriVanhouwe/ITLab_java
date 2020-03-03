@@ -62,14 +62,13 @@ public class PersistenceController {
 			throw new UnsupportedOperationException();
 		}
 
-		public void populateData() {
-			throw new UnsupportedOperationException();
-		}
+		
 
 		public static Classroom giveclassRoom(String classroom) {
 			throw new UnsupportedOperationException();
 		}
 		
-
+		
+		
 		
 }
