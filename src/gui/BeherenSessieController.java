@@ -2,16 +2,18 @@ package gui;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+
+import org.controlsfx.control.PopOver;
 
 import com.calendarfx.model.Entry;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTimePicker;
 
 import domain.Classroom;
+import domain.ITLab;
+import domain.SessionController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class BeherenSessieController extends VBox{
 
@@ -46,6 +49,12 @@ public class BeherenSessieController extends VBox{
     @FXML
     private JFXButton image_btn;
     
+    private ITLab iTLab;
+    
+    private Entry entry;
+    
+    private SessionController sessionController;
+    
     
     public BeherenSessieController(Entry entry) {
     	
@@ -65,17 +74,22 @@ public class BeherenSessieController extends VBox{
     	//this.start_time.setValue(entry.getStartTime());
     	//this.end_time.setValue(entry.getEndTime());
     	//this.clasroom_dropdown.getItems().add(new Classroom("B1234", Campus.GENT, 200, ClassRoomCategory.CLASSROOM));
-    	System.out.println(entry.getId());
+    	
+    	sessionController = new SessionController(new ITLab()); //TODO met singleton uitwerken
+    	this.entry = entry;
     }
     
     @FXML
     void pressedCancelBtn(ActionEvent event) {
-    	
+    	this.close();
     }
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
-
+    	this.entry.setTitle(this.title_txt.getText());
+    	int id = sessionController.changeSession(Integer.parseInt(entry.getId()), this.title_txt.getText(), "", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
+    	this.entry.setId(Integer.toString(id));
+    	this.close();
     }
     
     @FXML
@@ -89,5 +103,10 @@ public class BeherenSessieController extends VBox{
     	File selectedFile = fileChooser.showOpenDialog(image_btn.getScene().getWindow());
     	
     	//Dit bestand moeten we nu ergens opslaan
+    }
+    
+    private void close() {
+    	PopOver popover = (PopOver)cancelbtn.getScene().getWindow();
+    	popover.hide();
     }
 }

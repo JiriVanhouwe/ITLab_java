@@ -26,8 +26,6 @@ public class SessionCalendar {
 	private LocalDate endDate;
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private List<Session> sessions;
-	//We laten JPA best een id genereren denk ik
-	//private static int idCounter = 0;
 	
 
 	protected SessionCalendar() {
@@ -41,8 +39,6 @@ public class SessionCalendar {
 		
 		setStartDate(startDate);
 		setEndDate(endDate);
-		/*this.id = idCounter;
-		idCounter++;*/
 		
 		this.sessions = new ArrayList<>();
 	}
@@ -84,7 +80,6 @@ public class SessionCalendar {
 
 	public void addSession(Session session) {
 		sessions.add(session);
-		
 	}
 
 	

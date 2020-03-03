@@ -65,6 +65,7 @@ public class MainScreenController extends SplitPane {
         calendar2.setStyle(Style.STYLE2);
 
         calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController(param.getEntry()));
+        
 
         CalendarSource myCalendarSource = new CalendarSource("My Calendars"); 
         myCalendarSource.getCalendars().addAll(calendar1, calendar2);

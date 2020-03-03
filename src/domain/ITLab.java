@@ -24,6 +24,7 @@ public class ITLab {
 		User u = new User("U1", "Artuur", "Everaert");
 		setLoggedInUser(u);
 		initializePersistentie();
+		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO temporary solution
 
 	}
 
@@ -58,7 +59,7 @@ public class ITLab {
 	private void initializePersistentie() {
 		openPersistentie();
 		//PersistenceController persistenceController = new PersistenceController(this);
-		populateData();
+		//populateData();
 	}
 
 	private void openPersistentie() {
@@ -100,6 +101,11 @@ public class ITLab {
 		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst().orElse(null));
 	}
 	
+	public boolean doesSessionExist(int sessionID, String title) {
+		//return currentSessioncalendar.getSessions().stream().filter(session -> session.getSessionID() == sessionID && session.getTitle().equals(title)) != null;
+		return false;
+	}
+	
 	//data methodes
 			public void addSessionCalendar(SessionCalendar sessionCalendar) {
 				em.getTransaction().begin();
@@ -125,6 +131,9 @@ public class ITLab {
 				
 				addSession(session2);
 				addSession(session);
+				
+				System.out.println("session: " + session.getSessionID());
+				System.out.println("session2: " + session2.getSessionID());
 			}
 
 }
