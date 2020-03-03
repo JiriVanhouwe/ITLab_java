@@ -27,7 +27,7 @@ public class Session {
 	private String title;
 	private String description;
 	private String nameGuest;
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Classroom classRoom;
 	
 	private LocalDateTime startDate;
