@@ -227,6 +227,8 @@ public class Session {
 	public void setState(SessionState state) {
 		this.state = state;
 	}
+
+	
 	
 	
 
