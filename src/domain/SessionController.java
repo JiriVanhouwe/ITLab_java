@@ -35,6 +35,10 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Classroom> giveAllClassrooms(){
+<<<<<<< HEAD
 		throw new UnsupportedOperationException();
+=======
+		return null;
+>>>>>>> branch 'master' of https://github.com/HoGentProjectenII/java-g010.git
 	}
 }

@@ -16,42 +16,24 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 
 public class MainScreenController extends SplitPane {
 
-    @FXML
-    private AnchorPane sidebar;
+	@FXML
+    private Label lblUserName;
 
     @FXML
-    private Text name_txt;
+    private HBox hbox_mainSection;
 
-    @FXML
-    private ImageView name_arrow;
-
-    @FXML
-    private ImageView profilepicture_img;
-
-    @FXML
-    private HBox dashboard_box;
-
-    @FXML
-    private HBox calendar_box;
-
-    @FXML
-    private HBox responsibles_box;
-
-    @FXML
-    private HBox settings_box;
-
-    @FXML
-    private HBox mainSection;
-    
     private UserController usercontroller;
     
     public MainScreenController(UserController usercontroller) {
@@ -67,26 +49,18 @@ public class MainScreenController extends SplitPane {
     	catch (IOException ex){
     	      throw new RuntimeException(ex);
     	}  	
-    	
+    	//TODO
+    	//deze regel hieronder mag weg zodra er users zijn
+    	lblUserName.setText("Jiri!");
+    	//lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
     	initializeScreen();
     	initializeCalendar();
+
     }
     
-    private void changeMainSection(Node node) {
-    	if(mainSection.getChildren().size() > 0)
-    		mainSection.getChildren().remove(0);
-    	
-    	HBox.setHgrow(node, Priority.ALWAYS);
-    	mainSection.getChildren().add(node);
-    }
-
-	private void initializeScreen() {
-		User user = usercontroller.giveLoggedInUser();
-		name_txt.setText(user.getFirstName() + " " + user.getLastName());
-	}
-	
-	private void initializeCalendar() {
+    private void initializeCalendar() {
 		CalendarView calendarView = new CalendarView();
+		calendarView.setShowPrintButton(false); // make the printing option invisible
 		
 		Calendar calendar1 = new Calendar("Kalender 1"); 
         Calendar calendar2 = new Calendar("Kalender 2");
@@ -137,4 +111,24 @@ public class MainScreenController extends SplitPane {
     	
     	changeMainSection(calendarView);
 	}
+    
+    private void changeMainSection(Node node) {
+    	if(hbox_mainSection.getChildren().size() > 0)
+    		hbox_mainSection.getChildren().remove(0);
+    	
+    	HBox.setHgrow(node, Priority.ALWAYS);
+    	hbox_mainSection.getChildren().add(node);
+    }
+
+	private void initializeScreen() {
+		User user = usercontroller.giveLoggedInUser();
+		//name_txt.setText(user.getFirstName() + " " + user.getLastName());
+	}
+	
+    @FXML
+    void userNameClick(MouseEvent event) {
+    	
+    	//TODO
+    	//wanneer men hier op klikt, kom je ook bij instellingen terecht.
+    }
 }
