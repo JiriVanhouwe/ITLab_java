@@ -49,6 +49,9 @@ public class BeherenSessieController extends VBox{
     @FXML
     private JFXButton image_btn;
     
+    @FXML
+    private JFXTextField classroom_txt; // TODO dit later vervangen door de combobox op te vullen met de mogelijke classrooms
+    
     private ITLab iTLab;
     
     private Entry entry;
@@ -86,8 +89,9 @@ public class BeherenSessieController extends VBox{
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
+    	int id = sessionController.changeSession(Integer.parseInt(entry.getId()), this.title_txt.getText(), this.classroom_txt.getText(), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
+    	
     	this.entry.setTitle(this.title_txt.getText());
-    	int id = sessionController.changeSession(Integer.parseInt(entry.getId()), this.title_txt.getText(), "", LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
     	this.entry.setId(Integer.toString(id));
     	this.close();
     }

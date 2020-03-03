@@ -36,7 +36,7 @@ public class SessionController extends Controller {
 	}
 	
 	public int createSession(String title, LocalDateTime startDate, LocalDateTime endDate, String classRoom, int maxAttendee, String description, String nameGuest ) {
-		Session session = new Session(title, new Classroom("ITLAB", Campus.GENT, 30, ClassRoomCategory.ITLAB), startDate, endDate, maxAttendee, description, nameGuest);
+		Session session = new Session(title, new Classroom(classRoom, Campus.GENT, 30, ClassRoomCategory.ITLAB), startDate, endDate, maxAttendee, description, nameGuest);
 		itLab.addSession(session);
 		return session.getSessionID();
 	}
