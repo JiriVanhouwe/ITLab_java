@@ -3,13 +3,10 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import persistence.PersistenceController;
 
 public class ITLab {
 
@@ -23,7 +20,7 @@ public class ITLab {
 	private EntityManagerFactory emf;
 
 	public ITLab() {
-		initializePersistentie();
+		//initializePersistentie();
 	}
 
 	public User setLoggedInUser(User loggedInUser) {

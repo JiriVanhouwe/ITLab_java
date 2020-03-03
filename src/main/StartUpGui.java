@@ -1,7 +1,6 @@
 package main;
 
 import java.time.LocalDateTime;
-import java.util.Locale.Category;
 
 import domain.Campus;
 import domain.ClassRoomCategory;

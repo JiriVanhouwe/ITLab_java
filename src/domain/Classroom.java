@@ -16,7 +16,7 @@ public class Classroom {
 	@Enumerated(EnumType.STRING)
 	private ClassRoomCategory roomCategory;
 	
-	protected Classroom() {
+	private Classroom() {
 		super();
 	}
 

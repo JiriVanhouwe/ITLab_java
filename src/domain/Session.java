@@ -15,8 +15,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.calendarfx.model.Entry;
+
 @Entity
-public class Session {
+public class Session{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

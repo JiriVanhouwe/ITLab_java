@@ -1,43 +1,50 @@
 package gui;
 
+import java.io.File;
 import java.io.IOException;
 
 import com.calendarfx.model.Entry;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 
-import javafx.application.Platform;
+import domain.Classroom;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.stage.FileChooser;
 
 public class BeherenSessieController extends VBox{
 
-    @FXML
-    private TextField titel_txtfld;
+	@FXML
+    private JFXTextField title_txt;
 
     @FXML
-    private TextArea description_txtfld;
+    private JFXTextField speaker_txt;
 
     @FXML
-    private TextField image_txtfld;
+    private ComboBox<Classroom> clasroom_dropdown;
 
     @FXML
-    private Button filechooser_btn;
+    private JFXTextArea description_txt;
 
     @FXML
-    private DatePicker datepicker;
+    private DatePicker start_date;
 
     @FXML
-    private Button edit_btn;
+    private JFXButton savebtn;
 
     @FXML
-    private Button cancel_btn;
+    private JFXButton cancelbtn;
+    
+    @FXML
+    private JFXButton image_btn;
     
     
     public BeherenSessieController(Entry entry) {
@@ -53,9 +60,34 @@ public class BeherenSessieController extends VBox{
     	      throw new RuntimeException(ex);
     	}
     	
-    	this.titel_txtfld.setText(entry.getTitle());
-    	this.datepicker.setValue(entry.getStartDate());
-    	//this.timepicker.setValue(entry.getStartTime());
+    	this.title_txt.setText(entry.getTitle());
+    	this.start_date.setValue(entry.getStartDate());
+    	//this.start_time.setValue(entry.getStartTime());
+    	//this.end_time.setValue(entry.getEndTime());
+    	//this.clasroom_dropdown.getItems().add(new Classroom("B1234", Campus.GENT, 200, ClassRoomCategory.CLASSROOM));
     	System.out.println(entry.getId());
+    }
+    
+    @FXML
+    void pressedCancelBtn(ActionEvent event) {
+    	
+    }
+
+    @FXML
+    void pressedSaveBtn(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void pressedImageBtn(ActionEvent event) {
+    	//De filechooser opent om bestanden te kiezen
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.getExtensionFilters().addAll(
+    		     new FileChooser.ExtensionFilter("PNG images", "*.png")
+    		    ,new FileChooser.ExtensionFilter("JPEG images", "*.jpeg")
+    		);
+    	File selectedFile = fileChooser.showOpenDialog(image_btn.getScene().getWindow());
+    	
+    	//Dit bestand moeten we nu ergens opslaan
     }
 }
