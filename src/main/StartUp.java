@@ -17,7 +17,7 @@ public class StartUp {
 		SessionCalendarController scc = new SessionCalendarController(itlab);
 		SessionController sc = new SessionController(itlab);
 		
-		System.out.println(scc.giveSessionCalendar().getEndDate().toString());
+		scc.giveSessionCalendar().getSessions().forEach(e ->System.out.printf("%s %s %s %s %n",e.getSessionID(),e.getTitle(),e.getStartDate(),e.getEndDate()));
 		
 		//new PersistenceController(new ITLab());
 		//System.out.println("---Database created.---");
