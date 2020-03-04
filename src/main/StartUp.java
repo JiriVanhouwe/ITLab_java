@@ -17,6 +17,8 @@ public class StartUp {
 		SessionCalendarController scc = new SessionCalendarController();
 		SessionController sc = new SessionController();
 		
+		//sc.giveSessionsCurrentCalendar().stream().forEach(e -> System.out.println(e.toString()));
+		//scc.giveSessionCalendar().toString();
 		sc.giveAllClassrooms().stream().forEach(e -> System.out.println("klasse: "+ e.toString()));
 		
 		//new PersistenceController(new ITLab());

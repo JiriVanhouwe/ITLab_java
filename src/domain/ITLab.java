@@ -21,11 +21,10 @@ public class ITLab {
 
 	public ITLab() {
 
-		User u = new User("U1", "Artuur", "Everaert");
-		setLoggedInUser(u);
 		initializePersistentie();
-		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO temporary solution
-
+		//setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		//setCurrentSession(currentSessioncalendar.getSessions());
+		
 	}
 
 	public User setLoggedInUser(User loggedInUser) {

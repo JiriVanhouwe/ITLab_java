@@ -22,7 +22,7 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Session> giveSessionsCurrentCalendar(){
-		throw new UnsupportedOperationException();
+		return itLab.giveSessions();
 	}
 	
 	public int changeSession(int sessionID, String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
@@ -42,6 +42,7 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Classroom> giveAllClassrooms(){
+		
 		return itLab.getEntityManager().createNamedQuery("Classroom.findAll",Classroom.class).getResultList();
 
 	}
