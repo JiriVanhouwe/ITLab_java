@@ -5,8 +5,8 @@ import java.util.List;
 
 public class SessionController extends Controller {
 	
-	public SessionController(ITLab itlab) {
-		super(itlab);
+	public SessionController() {
+		super();
 	}
 	
 	public Session giveSession(int sessionID) {
@@ -22,7 +22,7 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Session> giveSessionsCurrentCalendar(){
-		throw new UnsupportedOperationException();
+		return itLab.giveSessions();
 	}
 	
 	public int changeSession(int sessionID, String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
@@ -42,8 +42,8 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Classroom> giveAllClassrooms(){
-
-		throw new UnsupportedOperationException();
+		
+		return itLab.getEntityManager().createNamedQuery("Classroom.findAll",Classroom.class).getResultList();
 
 	}
 }

@@ -21,7 +21,7 @@ public class StartUpGui extends Application {
 	@Override
 	public void start(Stage stage) {
 		ITLab itlab = new ITLab();
-		UserController usercontroller = new UserController(itlab);
+		UserController usercontroller = new UserController();
 		
 		Scene scene = new Scene(new LogInController(usercontroller));
 		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
@@ -35,12 +35,6 @@ public class StartUpGui extends Application {
 			stage.setMinHeight(stage.getHeight());
 		});
 		
-		Classroom cr = new Classroom("ITLAB", Campus.GENT, 30, ClassRoomCategory.ITLAB);
-		
-		Session session = new Session("title", cr, LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
-		Session session2 = new Session("title", cr, LocalDateTime.now(), LocalDateTime.now().plusDays(2), 5);
-		System.out.println(session.getSessionID());
-		System.out.println(session2.getSessionID());
 		
 		stage.initStyle(StageStyle.UNDECORATED); // heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
 		stage.show();

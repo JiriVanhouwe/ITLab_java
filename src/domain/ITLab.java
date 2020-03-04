@@ -26,6 +26,28 @@ public class ITLab {
 		loadUsers();
 	}
 
+	public User setLoggedInUser(User loggedInUser) {
+		return this.loggedInUser = loggedInUser;
+	}
+	
+
+	// jpa methodes
+	private void initializePersistentie() {
+		openPersistentie();
+		//PersistenceController persistenceController = new PersistenceController(this);
+		//populateData();
+	}
+
+	private void openPersistentie() {
+		this.emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		this.em = emf.createEntityManager();
+	}
+
+	public void closePersistentie() {
+		em.close();
+		emf.close();
+	}
+
 	// methodes
 
 	public List<Session> giveSessions() {
@@ -124,6 +146,14 @@ public class ITLab {
 		public User setLoggedInUser(User loggedInUser) {
 			return this.loggedInUser = loggedInUser;
 		}
+	
+	public EntityManager getEntityManager() {
+		return em;
+	}
+
+	private EntityManagerFactory getEntityManagerFactory() {
+		return emf;
+	}
 
 		// jpa methodes
 		private void initializePersistentie() {

@@ -7,8 +7,8 @@ import java.util.List;
 
 public class SessionCalendarController extends Controller {
 
-	public SessionCalendarController(ITLab itLab) {
-		super(itLab);
+	public SessionCalendarController() {
+		super();
 	}
 	
 	//methodes

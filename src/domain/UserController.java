@@ -2,8 +2,8 @@ package domain;
 
 public class UserController extends Controller {
 	
-	public UserController(ITLab itLab) {
-		super(itLab);
+	public UserController() {
+		super();
 	}
 	
 	public boolean isUserPassComboValid(String username, char[] password) {

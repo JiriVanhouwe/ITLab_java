@@ -3,8 +3,8 @@ package domain;
 public abstract class Controller {
 	protected ITLab itLab;
 	
-	public Controller(ITLab itLab) {
-		setItLab(itLab);
+	public Controller() {
+		setItLab(ITLabSingleton.getITLabInstance());
 	}
 
 	public ITLab getItLab() {

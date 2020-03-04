@@ -3,10 +3,13 @@ package domain;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "Classroom.findAll", query = "SELECT c from Classroom c")
+})
 public class Classroom {
 	
 	@Id
-	private String classroomCode;
+	private String classid;
 	
 	@Enumerated(EnumType.STRING)
 	private Campus campus;
@@ -20,12 +23,18 @@ public class Classroom {
 		super();
 	}
 
-	public Classroom(String classroomCode, Campus campus, int maxSeats, ClassRoomCategory roomCategory) {
+	public Classroom(String classid, Campus campus, int maxSeats, ClassRoomCategory roomCategory) {
 		this();
-		this.classroomCode = classroomCode;
+		this.classid = classid;
 		this.campus = campus;
 		this.maxSeats = maxSeats;
 		this.roomCategory = roomCategory;
+	}
+
+	@Override
+	public String toString() {
+		return "Classroom [id=" + classid + ", campus=" + campus + ", maxSeats=" + maxSeats + ", roomCategory="
+				+ roomCategory + "]";
 	}
 	
 	

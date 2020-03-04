@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -21,6 +23,12 @@ import javax.persistence.Transient;
 import com.calendarfx.model.Entry;
 
 @Entity
+@NamedQueries({
+	//@NamedQuery(name = "Session.findAllCurCal", 
+	//		query = "SELECT s from Session s left join s.SESSIONCALENDAR_SESSION  scs"
+	//				+ " on s.sessionid = scs.sessions_sessionid"
+	//				+ " where scs.sessionCalendar_id = :scid ")
+})
 public class Session{
 
 	@Id
