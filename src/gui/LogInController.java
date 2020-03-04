@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -88,6 +89,7 @@ public class LogInController extends AnchorPane {
 				stage.setMinHeight(700);
 			});
 
+			stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 			stage.setTitle("ITLab");
 			stage.setHeight(1080);
 			stage.setMaximized(true);

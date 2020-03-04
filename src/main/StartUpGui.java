@@ -11,6 +11,7 @@ import domain.UserController;
 import gui.LogInController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -23,6 +24,7 @@ public class StartUpGui extends Application {
 		UserController usercontroller = new UserController(itlab);
 		
 		Scene scene = new Scene(new LogInController(usercontroller));
+		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 		stage.setTitle("Log in");
 		stage.setScene(scene);
 

@@ -44,11 +44,9 @@ public class MainScreenController extends SplitPane {
     	} 
     	catch (IOException ex){
     	      throw new RuntimeException(ex);
-    	}  	
-    	//TODO
-    	//deze regel hieronder mag weg zodra er users zijn
-    	lblUserName.setText("Jiri!");
-    	//lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
+    	}  
+    	
+    	lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
     	initializeScreen();
     	initializeCalendar();
 
