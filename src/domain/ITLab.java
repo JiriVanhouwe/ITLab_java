@@ -44,8 +44,11 @@ public class ITLab {
 
 	public boolean isUserPassComboValid(String username, char[] password) {
 		for(User u : users) {
-			if(Arrays.equals(u.getPassword().toCharArray(), password)) {
-				return true;
+			if(u.getPassword() != null) {
+				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+					setLoggedInUser(u);
+					return true;
+				}
 			}
 		}
 		return false;
@@ -125,7 +128,7 @@ public class ITLab {
 		return this.loggedInUser;
 	}
 
-	public User setLoggedInUser(User loggedInUser) {
+	private User setLoggedInUser(User loggedInUser) {
 		return this.loggedInUser = loggedInUser;
 	}
 

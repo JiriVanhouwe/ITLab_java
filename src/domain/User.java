@@ -11,6 +11,7 @@ public class User {
 	private String userName;
 	private String firstName;
 	private String lastName;
+	private String password;
 	
 	public User(String firstName, String lastName, String userName) {
 		this.firstName = firstName;
@@ -40,5 +41,9 @@ public class User {
 	}
 	private void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
 	}
 }
