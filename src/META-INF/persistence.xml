@@ -16,7 +16,6 @@
            	<property name="eclipselink.cache.shared.default" value="false"/>
            	<property name="javax.persistence.jdbc.user" value="artuur.everaert"/>
         	<property name="javax.persistence.jdbc.password" value="1D5a34_36fF8"/>
-        	<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>

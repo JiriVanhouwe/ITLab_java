@@ -42,8 +42,7 @@ public class SessionController extends Controller {
 	}
 	
 	public List<Classroom> giveAllClassrooms(){
-
-		throw new UnsupportedOperationException();
+		return itLab.getEntityManager().createNamedQuery("Classroom.findAll",Classroom.class).getResultList();
 
 	}
 }

@@ -54,12 +54,22 @@ public class ITLab {
 	public User getLoggedInUser() {
 		return this.loggedInUser;
 	}
+	
+	public EntityManager getEntityManager() {
+		return em;
+	}
+
+	private EntityManagerFactory getEntityManagerFactory() {
+		return emf;
+	}
+
+	
 
 	// jpa methodes
 	private void initializePersistentie() {
 		openPersistentie();
 		//PersistenceController persistenceController = new PersistenceController(this);
-		populateData();
+		//populateData();
 	}
 
 	private void openPersistentie() {
