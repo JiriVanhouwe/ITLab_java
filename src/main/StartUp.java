@@ -14,8 +14,8 @@ public class StartUp {
 		
 		ITLab itlab = new ITLab();
 		
-		SessionCalendarController scc = new SessionCalendarController(itlab);
-		SessionController sc = new SessionController(itlab);
+		SessionCalendarController scc = new SessionCalendarController();
+		SessionController sc = new SessionController();
 		
 		scc.giveSessionCalendar().getSessions().forEach(e ->System.out.printf("%s %s %s %s %n",e.getSessionID(),e.getTitle(),e.getStartDate(),e.getEndDate()));
 		

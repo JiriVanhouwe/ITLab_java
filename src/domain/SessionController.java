@@ -5,8 +5,8 @@ import java.util.List;
 
 public class SessionController extends Controller {
 	
-	public SessionController(ITLab itlab) {
-		super(itlab);
+	public SessionController() {
+		super();
 	}
 	
 	public Session giveSession(int sessionID) {

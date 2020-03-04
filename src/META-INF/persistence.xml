@@ -10,7 +10,6 @@
     	<class>domain.User</class>
     	<class>domain.Feedback</class>
     	
- 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://51.137.57.86:1433;database=ITLab_db;encrypt=false;trustServerCertificate=false;loginTimeout=30;" />

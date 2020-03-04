@@ -78,7 +78,7 @@ public class BeherenSessieController extends VBox{
     	//this.end_time.setValue(entry.getEndTime());
     	//this.clasroom_dropdown.getItems().add(new Classroom("B1234", Campus.GENT, 200, ClassRoomCategory.CLASSROOM));
     	
-    	sessionController = new SessionController(new ITLab()); //TODO met singleton uitwerken
+    	sessionController = new SessionController(); 
     	this.entry = entry;
     }
     

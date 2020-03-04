@@ -59,7 +59,7 @@ public class ITLab {
 	private void initializePersistentie() {
 		openPersistentie();
 		//PersistenceController persistenceController = new PersistenceController(this);
-		//populateData();
+		populateData();
 	}
 
 	private void openPersistentie() {
