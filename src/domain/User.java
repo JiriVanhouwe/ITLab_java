@@ -2,8 +2,10 @@ package domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ITLab_USER")
 public class User {
 	@Id
 	private String userName;
