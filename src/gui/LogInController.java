@@ -5,10 +5,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+import org.controlsfx.control.PopOver;
+
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import domain.UserController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +42,9 @@ public class LogInController extends AnchorPane {
 
 	@FXML
 	private Label txt_error;
+	
+    @FXML
+    private Label lblClose;
 
 	private UserController usercontroller;
 
@@ -119,5 +125,11 @@ public class LogInController extends AnchorPane {
 			txt_error.setText("Verkeerde gebruikersnaam \nof wachtwoord.");
 		}
 	}
+	
+
+    @FXML
+    void close(MouseEvent event) {
+    	Platform.exit();
+    }
 
 }
