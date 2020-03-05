@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 import com.jfoenix.controls.JFXPasswordField;
@@ -73,8 +75,26 @@ public class LogInController extends AnchorPane {
 
 	@FXML
 	void loginBtnPressed(ActionEvent event) throws IOException {
-
-		if (usercontroller.isUserPassComboValid(tfUser.getText(), tfPassword.getText().toCharArray())) {
+		
+		//Wachtwoord hashen
+		String generatedPassword;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(tfPassword.getText().getBytes());
+			byte[] bytes = md.digest();
+			StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+		}catch(NoSuchAlgorithmException e) {
+			throw new RuntimeException();
+		}
+		//Een wachtwoord geven we best door in een char[] i.p.v. een string
+		char[] hashedPW = generatedPassword.toCharArray();
+		
+		if (usercontroller.isUserPassComboValid(tfUser.getText(), hashedPW)) {
 			//Sluit huidig scherm
 			Stage curStage = (Stage) tfUser.getScene().getWindow();
 			curStage.close();

@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
@@ -10,6 +11,8 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 
+import domain.Session;
+import domain.SessionController;
 import domain.User;
 import domain.UserController;
 import javafx.application.Platform;
@@ -32,8 +35,11 @@ public class MainScreenController extends SplitPane {
 
     private UserController usercontroller;
     
+    private SessionController sessionController;
+    
     public MainScreenController(UserController usercontroller) {
     	this.usercontroller = usercontroller;
+    	sessionController = new SessionController();
     	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("MainScreen.fxml"));
     	loader.setController(this);
@@ -54,19 +60,19 @@ public class MainScreenController extends SplitPane {
     
     private void initializeCalendar() {
 		CalendarView calendarView = new CalendarView();
+		calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
 		calendarView.setShowPrintButton(false); // make the printing option invisible
 		
-		Calendar calendar1 = new Calendar("Kalender 1"); 
-        Calendar calendar2 = new Calendar("Kalender 2");
+		Calendar calendar1 = new Calendar("Sessies"); 
 
-        calendar1.setStyle(Style.STYLE1); 
-        calendar2.setStyle(Style.STYLE2);
+        calendar1.setStyle(Style.STYLE1);
+        linkSessionsToEntries(calendar1);
 
         calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController(param.getEntry()));
         
 
         CalendarSource myCalendarSource = new CalendarSource("My Calendars"); 
-        myCalendarSource.getCalendars().addAll(calendar1, calendar2);
+        myCalendarSource.getCalendars().add(calendar1);
 
         calendarView.getCalendarSources().addAll(myCalendarSource); 
 
@@ -106,6 +112,18 @@ public class MainScreenController extends SplitPane {
     	
     	changeMainSection(calendarView);
 	}
+    
+    private void linkSessionsToEntries(Calendar calendar) {
+    	List<Session> sessions = this.sessionController.giveSessionsCurrentCalendar();
+    	
+    	sessions.stream().forEach(session -> {
+    		Entry entry = new Entry();
+    		entry.setId(Integer.toString(session.getSessionID()));
+    		entry.setTitle(session.getTitle());
+    		entry.setInterval(session.getStartDate(), session.getEndDate());
+    		calendar.addEntry(entry);
+    	});
+    }
     
     private void changeMainSection(Node node) {
     	if(hbox_mainSection.getChildren().size() > 0)

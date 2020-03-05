@@ -17,8 +17,12 @@ public class User {
 	private String userName;
 	private String firstName;
 	private String lastName;
+
 	private UserType userType;
 	private UserStatus userStatus;
+
+	private String password;
+
 	
 	public User(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
 		setFirstName(firstName);
@@ -55,6 +59,7 @@ public class User {
 		this.userName = userName;
 	}
 
+
 	public UserType getUserType() {
 		return userType;
 	}
@@ -72,4 +77,9 @@ public class User {
 	}
 	
 	
+
+	public String getPassword() {
+		return password;
+	}
+
 }
