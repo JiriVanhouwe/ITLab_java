@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-	//@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
+	@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
 	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName ")
 })
 @Table(name="ItlabUser")
@@ -77,7 +77,7 @@ public class User {
 			throw new IllegalArgumentException("Gebruikersnaam moet ingevuld zijn.");
 		if(!userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "student.hogent.com") && !userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "hogent.com"))
 			throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
-		this.userName = userName.toLowerCase().trim();
+		this.userName = userName.trim();
 	}
 
 	public UserType getUserType() {

@@ -21,7 +21,7 @@ public class UserController extends Controller {
 	}
 	
 	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
-		itLab.createUser(firstName, lastName, userName, userType, userStatus);	
+			itLab.createUser(firstName, lastName, userName, userType, userStatus);	
 	}
 
 	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
@@ -31,7 +31,6 @@ public class UserController extends Controller {
 	public void deleteUser(String userName) {
 		itLab.deleteUser(userName);
 	}
-	
 	
 	
 }
