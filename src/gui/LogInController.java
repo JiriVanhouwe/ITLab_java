@@ -116,7 +116,7 @@ public class LogInController extends AnchorPane {
 			stage.setScene(scene);
 			stage.show();
 		} else {
-			txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
+			txt_error.setText("Verkeerde gebruikersnaam \nof wachtwoord.");
 		}
 	}
 

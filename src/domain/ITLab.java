@@ -93,12 +93,52 @@ public class ITLab {
 		em.getTransaction().commit();
 	}
 
+	//alles met users -begin-
+	public boolean isUserPassComboValid(String username, char[] password) {
+		for(User u : giveUsers()) {
+			if(u.getPassword() != null) {
+				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+					setLoggedInUser(u);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	private List<User> giveUsers() {
 		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
 	}
+	
+	public User getUserByUserName(String userName) {
+		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
+	}
+	
+	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+		User user = getUserByUserName(userName);
+		user.changeUser(firstName, lastName, userName, userType, userStatus);
+		em.getTransaction().begin();
+		em.persist(user);
+		em.getTransaction().commit();
+	}
+	
+	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+		User user = new User(firstName, lastName, userName, userType, userStatus);
+		em.getTransaction().begin();
+		em.persist(user);
+		em.getTransaction().commit();
+	}
+	
+	public void deleteUser(String userName) {
+		User user = getUserByUserName(userName);
+		em.getTransaction().begin();
+		em.remove(user);
+		em.getTransaction().commit();
+	}
+	//alles met users -einde-
+
 
 	// getters and setters
-
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
 	}
@@ -133,7 +173,7 @@ public class ITLab {
 
 	public User getUserByUsername(String userName) {
 		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
-	}
+  }
 
 	// jpa methodes
 	private void initializePersistentie() {

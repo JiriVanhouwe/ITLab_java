@@ -17,15 +17,19 @@ public class UserController extends Controller {
 	}
 	
 	public User giveUser(String userName) {
-		return itLab.getUserByUsername(userName);
+		return itLab.getUserByUserName(userName);
 	}
 	
 	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
-		//TODO
+		itLab.createUser(firstName, lastName, userName, userType, userStatus);	
+	}
+
+	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+		itLab.changeUser(firstName, lastName, userName, userType, userStatus);
 	}
 	
 	public void deleteUser(String userName) {
-		//TODO
+		itLab.deleteUser(userName);
 	}
 	
 	
