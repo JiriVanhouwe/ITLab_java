@@ -25,6 +25,8 @@ public class ITLab {
 		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
+		//setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		//setCurrentSession(currentSessioncalendar.getSessions());
 	}
 	
 
@@ -120,10 +122,6 @@ public class ITLab {
 
 	public User setLoggedInUser(User loggedInUser) {
 		return this.loggedInUser = loggedInUser;
-	}
-
-	public List<User> getUsers() {
-		return users;
 	}
 	
 	public User getUserByUsername(String userName) {

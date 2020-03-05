@@ -1,6 +1,8 @@
 package domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -11,14 +13,15 @@ import javax.persistence.Table;
 	@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
 	@NamedQuery(name="User.getUserByUserName", query="SELECT u FROM User u WHERE :userName = u.userName")
 })
-@Table(name="ITLab_USER")
+@Table(name="ItlabUser")
 public class User {
 	@Id
 	private String userName;
 	private String firstName;
 	private String lastName;
-
+	@Enumerated(EnumType.STRING)
 	private UserType userType;
+	@Enumerated(EnumType.STRING)
 	private UserStatus userStatus;
 
 	private String password;

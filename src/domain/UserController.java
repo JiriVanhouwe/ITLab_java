@@ -16,10 +16,6 @@ public class UserController extends Controller {
 		return itLab.getLoggedInUser();
 	}
 	
-	public List<User> giveAllUsers(){
-		return itLab.getUsers();
-	}
-	
 	public User giveUser(String userName) {
 		return itLab.getUserByUsername(userName);
 	}

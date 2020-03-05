@@ -6,6 +6,7 @@ import javax.persistence.*;
 @NamedQueries({
 	@NamedQuery(name = "Classroom.findAll", query = "SELECT c from Classroom c")
 })
+@Table(name="Classroom")
 public class Classroom {
 	
 	@Id

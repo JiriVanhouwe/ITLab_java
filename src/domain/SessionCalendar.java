@@ -15,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,6 +25,7 @@ import javax.persistence.TemporalType;
 			query = "Select sc from SessionCalendar sc"
 					+ " where sc.id = :id")
 })
+@Table(name="SessionCalendar")
 public class SessionCalendar {
 
 	@Id
