@@ -93,18 +93,6 @@ public class ITLab {
 		em.getTransaction().commit();
 	}
 
-	//alles met users -begin-
-	public boolean isUserPassComboValid(String username, char[] password) {
-		for(User u : giveUsers()) {
-			if(u.getPassword() != null) {
-				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
-					setLoggedInUser(u);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 	
 	private List<User> giveUsers() {
 		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
