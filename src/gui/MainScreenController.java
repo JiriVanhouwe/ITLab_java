@@ -19,6 +19,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
@@ -32,6 +33,9 @@ public class MainScreenController extends SplitPane {
 
     @FXML
     private HBox hbox_mainSection;
+    
+    @FXML
+    private Button btnUsers;
 
     private UserController usercontroller;
     
@@ -135,7 +139,6 @@ public class MainScreenController extends SplitPane {
 
 	private void initializeScreen() {
 		User user = usercontroller.giveLoggedInUser();
-		//name_txt.setText(user.getFirstName() + " " + user.getLastName());
 	}
 	
     @FXML
@@ -143,5 +146,11 @@ public class MainScreenController extends SplitPane {
     	
     	//TODO
     	//wanneer men hier op klikt, kom je ook bij instellingen terecht.
+    }
+    
+    @FXML
+    void clickBtnUsers(MouseEvent event) {
+    	UsersController uc = new UsersController(usercontroller);
+    	changeMainSection(uc);
     }
 }
