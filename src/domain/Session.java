@@ -10,12 +10,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -29,6 +31,7 @@ import com.calendarfx.model.Entry;
 	//				+ " on s.sessionid = scs.sessions_sessionid"
 	//				+ " where scs.sessionCalendar_id = :scid ")
 })
+@Table(name="Session")
 public class Session{
 
 	@Id
@@ -45,8 +48,10 @@ public class Session{
 	private LocalDateTime endDate;
 	private int maxAttendee;
 	@ElementCollection
+	@JoinTable(name = "Session_Media")
 	private List<String> media;
 	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "Session_User")
 	private List<User> registeredUsers;
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> attendees;
@@ -56,6 +61,7 @@ public class Session{
 	@Transient
 	private SessionReminder reminder;
 	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "Session_Feedback")
 	private List<Feedback> feedbackList;
 	
 	@Transient

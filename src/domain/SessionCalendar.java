@@ -36,8 +36,8 @@ public class SessionCalendar {
 	//@Temporal(TemporalType.DATE)
 	private LocalDate endDate;
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(name = "SESSIONCALENDAR_SESSION")
-	@JoinColumn(name = "sessionCalander_id")
+	@JoinTable(name = "SessionCalendar_Session")
+	@JoinColumn(name = "sessionCalendar_id")
 	private List<Session> sessions;
 	
 
