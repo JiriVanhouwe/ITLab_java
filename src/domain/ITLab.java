@@ -104,13 +104,7 @@ public class ITLab {
 		return this.currentSessioncalendar;
 	}
 
-	public User getLoggedInUser() {
-		return this.loggedInUser;
-	}
 
-	private User setLoggedInUser(User loggedInUser) {
-		return this.loggedInUser = loggedInUser;
-	}
 
 	public EntityManager getEntityManager() {
 		return em;
@@ -119,6 +113,23 @@ public class ITLab {
 	private EntityManagerFactory getEntityManagerFactory() {
 		return emf;
 	}
+	
+	public User getLoggedInUser() {
+		return this.loggedInUser;
+	}
+
+	public User setLoggedInUser(User loggedInUser) {
+		return this.loggedInUser = loggedInUser;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+	
+	public User getUserByUsername(String userName) {
+		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
+	}
+
 
 	// jpa methodes
 	private void initializePersistentie() {
