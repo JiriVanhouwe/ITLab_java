@@ -22,13 +22,12 @@ public class ITLab {
 
 	public ITLab() {
 		initializePersistentie();
-		//this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
+		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
-		//setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
-		//setCurrentSession(currentSessioncalendar.getSessions());
+		// setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		// setCurrentSession(currentSessioncalendar.getSessions());
 	}
-	
 
 	// methodes
 
@@ -41,19 +40,27 @@ public class ITLab {
 	}
 
 	public boolean isUserPassComboValid(String username, char[] password) {
-		User u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
-			if(u.getPassword() != null || u == null || u.getUserType() != UserType.HEAD) {
-				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+		User u;
+		try {
+			u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
+
+			if (u.getPassword() != null || u == null || u.getUserType() != UserType.HEAD) {
+				if (Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
 					setLoggedInUser(u);
 					return true;
 				}
-			
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	public void changeSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
-		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom), nameGuest);
+		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom),
+				nameGuest);
 
 	}
 
@@ -62,7 +69,8 @@ public class ITLab {
 	}
 
 	public void switchCurrentSession(int sessionID) {
-		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst().orElse(null));
+		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
+				.orElse(null));
 	}
 
 	public boolean doesSessionExist(int sessionID, String title) {
@@ -106,8 +114,6 @@ public class ITLab {
 		return this.currentSessioncalendar;
 	}
 
-
-
 	public EntityManager getEntityManager() {
 		return em;
 	}
@@ -115,7 +121,7 @@ public class ITLab {
 	private EntityManagerFactory getEntityManagerFactory() {
 		return emf;
 	}
-	
+
 	public User getLoggedInUser() {
 		return this.loggedInUser;
 	}
@@ -123,11 +129,10 @@ public class ITLab {
 	public User setLoggedInUser(User loggedInUser) {
 		return this.loggedInUser = loggedInUser;
 	}
-	
+
 	public User getUserByUsername(String userName) {
 		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
 	}
-
 
 	// jpa methodes
 	private void initializePersistentie() {
