@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
+import org.controlsfx.control.PopOver;
+
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
@@ -41,6 +43,10 @@ public class LogInController extends AnchorPane {
 	private Label txt_error;
 
 	private UserController usercontroller;
+	
+    @FXML
+    private Label lblClose;
+
 
 	public LogInController(UserController usercontroller) {
 		this.usercontroller = usercontroller;
@@ -119,5 +125,12 @@ public class LogInController extends AnchorPane {
 			txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
 		}
 	}
+	
+
+    @FXML
+    void close(MouseEvent event) {
+    	Stage stage = (Stage)lblClose.getScene().getWindow();
+    	stage.close();
+    }
 
 }
