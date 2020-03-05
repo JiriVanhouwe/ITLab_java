@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 public class ITLab {
@@ -52,9 +53,8 @@ public class ITLab {
 					}
 				}
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (NoResultException e) {
+			System.out.println("No user found with this name");
 		}
 		return false;
 	}
