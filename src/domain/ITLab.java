@@ -44,12 +44,13 @@ public class ITLab {
 		try {
 			u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
 
-			if (u.getPassword() != null || u == null || u.getUserType() != UserType.HEAD) {
-				if (Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
-					setLoggedInUser(u);
-					return true;
+			if (u != null && (u.getUserType() == UserType.HEAD || u.getUserType() == UserType.RESPONSIBLE)) {
+				if(u.getPassword() != null) {
+					if (Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+						setLoggedInUser(u);
+						return true;
+					}
 				}
-
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
