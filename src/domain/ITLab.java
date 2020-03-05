@@ -22,7 +22,7 @@ public class ITLab {
 
 	public ITLab() {
 		initializePersistentie();
-		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
+		//this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
 		//setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
@@ -41,13 +41,13 @@ public class ITLab {
 	}
 
 	public boolean isUserPassComboValid(String username, char[] password) {
-		for(User u : giveUsers()) {
-			if(u.getPassword() != null) {
+		User u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
+			if(u.getPassword() != null || u == null || u.getUserType() != UserType.HEAD) {
 				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
 					setLoggedInUser(u);
 					return true;
 				}
-			}
+			
 		}
 		return false;
 	}

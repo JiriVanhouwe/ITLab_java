@@ -19,8 +19,8 @@ public class StartUp {
 		
 		//sc.giveSessionsCurrentCalendar().stream().forEach(e -> System.out.println(e.toString()));
 		//scc.giveSessionCalendar().toString();
-		sc.giveAllClassrooms().stream().forEach(e -> System.out.println("klasse: "+ e.toString()));
-		
+		//sc.giveAllClassrooms().stream().forEach(e -> System.out.println("klasse: "+ e.toString()));
+		System.out.println("test");
 		//new PersistenceController(new ITLab());
 		//System.out.println("---Database created.---");
 

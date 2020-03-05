@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,9 +36,9 @@ public class SessionCalendar {
 	private LocalDate startDate;
 	//@Temporal(TemporalType.DATE)
 	private LocalDate endDate;
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinTable(name = "SessionCalendar_Session")
-	@JoinColumn(name = "sessionCalendar_id")
+	 @OneToMany(targetEntity=Session.class,cascade = CascadeType.ALL, 
+             fetch = FetchType.LAZY, orphanRemoval = true)
+	 @JoinColumn(name = "SessionCalendarId", referencedColumnName = "id")
 	private List<Session> sessions;
 	
 
