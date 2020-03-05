@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
-	@NamedQuery(name="User.getUserByUserName", query="SELECT u FROM User u WHERE :userName = u.userName")
+	//@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
+	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName ")
 })
 @Table(name="ItlabUser")
 public class User {
@@ -25,6 +25,7 @@ public class User {
 	private UserStatus userStatus;
 
 	private String password;
+	
 	
 	public User(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
 		setFirstName(firstName);

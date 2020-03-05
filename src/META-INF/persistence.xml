@@ -9,6 +9,7 @@
     	<class>domain.Classroom</class>
     	<class>domain.User</class>
     	<class>domain.Feedback</class>
+    	<class>domain.SessionReminder</class>
     	
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />

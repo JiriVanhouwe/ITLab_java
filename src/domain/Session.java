@@ -7,15 +7,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -24,11 +27,12 @@ import com.calendarfx.model.Entry;
 
 @Entity
 @NamedQueries({
-	//@NamedQuery(name = "Session.findAllCurCal", 
-	//		query = "SELECT s from Session s left join s.SESSIONCALENDAR_SESSION  scs"
-	//				+ " on s.sessionid = scs.sessions_sessionid"
-	//				+ " where scs.sessionCalendar_id = :scid ")
+//	@NamedQuery(name = "Session.findAllCurCal", 
+//			query = "SELECT s from Session s left join s.SESSIONCALENDAR_SESSION  scs"
+//					+ " on s.sessionid = scs.sessions_sessionid"
+//					+ " where scs.sessionCalendar_id = :scid ")
 })
+@Table(name="Session")
 public class Session{
 
 	@Id
@@ -37,7 +41,7 @@ public class Session{
 	private String title;
 	private String description;
 	private String nameGuest;
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	private Classroom classRoom;
 	
 	private LocalDateTime startDate;
@@ -45,6 +49,7 @@ public class Session{
 	private LocalDateTime endDate;
 	private int maxAttendee;
 	@ElementCollection
+	@JoinTable(name = "Session_Media")
 	private List<String> media;
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> registeredUsers;
@@ -56,6 +61,7 @@ public class Session{
 	@Transient
 	private SessionReminder reminder;
 	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(name = "Session_Feedback")
 	private List<Feedback> feedbackList;
 	
 	@Transient
@@ -125,7 +131,7 @@ public class Session{
 	private void setTitle(String title) {
 		if (title == null || title.isBlank())
 			throw new IllegalArgumentException("titel moet ingevuld zijn");
-		this.title = title;
+		this.title = title; 
 	}
 
 	public String getDescription() {

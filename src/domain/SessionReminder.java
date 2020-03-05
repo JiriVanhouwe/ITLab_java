@@ -3,6 +3,9 @@ package domain;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -10,8 +13,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="SessionReminder")
 public class SessionReminder {
-	
-	@Temporal(TemporalType.DATE)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 	private LocalDate sendDate;
 	private String description;
 	
@@ -19,6 +23,11 @@ public class SessionReminder {
 		this.sendDate = sendDate;
 		this.description = description;
 	}
+	
+	protected SessionReminder() {
+		
+	}
+	
 	//getters and setters
 
 	private LocalDate getSendDate() {

@@ -2,5 +2,5 @@ package domain;
 
 public enum UserStatus {
 
-	ACTIEF,GEBLOKKEERD,NIETACTIEF
+	ACTIVE,BLOCKED,NONACTIVE
 }

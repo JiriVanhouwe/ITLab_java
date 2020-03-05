@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 public class ITLab {
@@ -25,10 +26,9 @@ public class ITLab {
 		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
-		//setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
-		//setCurrentSession(currentSessioncalendar.getSessions());
+		// setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		// setCurrentSession(currentSessioncalendar.getSessions());
 	}
-	
 
 	// methodes
 
@@ -40,10 +40,28 @@ public class ITLab {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
 	}
 
+	public boolean isUserPassComboValid(String username, char[] password) {
+		User u;
+		try {
+			u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
 
+			if (u != null && (u.getUserType() == UserType.HEAD || u.getUserType() == UserType.RESPONSIBLE)) {
+				if(u.getPassword() != null) {
+					if (Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+						setLoggedInUser(u);
+						return true;
+					}
+				}
+			}
+		} catch (NoResultException e) {
+			System.out.println("No user found with this name");
+		}
+		return false;
+	}
 
 	public void changeSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
-		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom), nameGuest);
+		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom),
+				nameGuest);
 
 	}
 
@@ -52,7 +70,8 @@ public class ITLab {
 	}
 
 	public void switchCurrentSession(int sessionID) {
-		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst().orElse(null));
+		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
+				.orElse(null));
 	}
 
 	public boolean doesSessionExist(int sessionID, String title) {
@@ -143,15 +162,18 @@ public class ITLab {
 	private EntityManagerFactory getEntityManagerFactory() {
 		return emf;
 	}
-	
+
 	public User getLoggedInUser() {
 		return this.loggedInUser;
 	}
 
-	public void setLoggedInUser(User loggedInUser) {
-		this.loggedInUser = loggedInUser;
+	public User setLoggedInUser(User loggedInUser) {
+		return this.loggedInUser = loggedInUser;
 	}
 
+	public User getUserByUsername(String userName) {
+		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
+  }
 
 	// jpa methodes
 	private void initializePersistentie() {
