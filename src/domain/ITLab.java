@@ -84,7 +84,7 @@ public class ITLab {
 	}
 
 	private void loadUsers() {
-		this.users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+		this.users = em.createQuery("User.getAllUsers", User.class).getResultList();
 	}
 
 	public void populateData() {
@@ -121,13 +121,6 @@ public class ITLab {
 		return this.currentSessioncalendar;
 	}
 
-	public User getLoggedInUser() {
-		return this.loggedInUser;
-	}
-
-	public User setLoggedInUser(User loggedInUser) {
-		return this.loggedInUser = loggedInUser;
-	}
 
 	public EntityManager getEntityManager() {
 		return em;
@@ -136,6 +129,23 @@ public class ITLab {
 	private EntityManagerFactory getEntityManagerFactory() {
 		return emf;
 	}
+	
+	public User getLoggedInUser() {
+		return this.loggedInUser;
+	}
+
+	public User setLoggedInUser(User loggedInUser) {
+		return this.loggedInUser = loggedInUser;
+	}
+
+	public List<User> getUsers() {
+		return users;
+	}
+	
+	public User getUserByUsername(String userName) {
+		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
+	}
+
 
 	// jpa methodes
 	private void initializePersistentie() {

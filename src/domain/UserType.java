@@ -1,0 +1,6 @@
+package domain;
+
+public enum UserType {
+
+	GEBRUIKER,VERANTWOORDELIJKE,HOOFDVERANTWOORDELIJKE
+}
