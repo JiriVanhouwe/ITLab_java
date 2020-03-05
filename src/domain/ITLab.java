@@ -1,7 +1,5 @@
 package domain;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -16,7 +14,6 @@ public class ITLab {
 	private SessionCalendar currentSessioncalendar;
 	private Session currentSession;
 	private User loggedInUser;
-	private List<User> users;
 
 	// data
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
@@ -28,7 +25,6 @@ public class ITLab {
 		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
-		loadUsers();
 	}
 	
 
@@ -43,7 +39,7 @@ public class ITLab {
 	}
 
 	public boolean isUserPassComboValid(String username, char[] password) {
-		for(User u : users) {
+		for(User u : giveUsers()) {
 			if(u.getPassword() != null) {
 				if(Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
 					setLoggedInUser(u);
@@ -86,24 +82,8 @@ public class ITLab {
 		em.getTransaction().commit();
 	}
 
-	private void loadUsers() {
-		this.users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
-	}
-
-	public void populateData() {
-		SessionCalendar sessionCalendar = new SessionCalendar(LocalDate.now(), LocalDate.now().plusDays(60));
-		addSessionCalendar(sessionCalendar);
-		this.currentSessioncalendar = sessionCalendar;
-		Classroom cr = new Classroom("ITLAB", Campus.GENT, 30, ClassRoomCategory.ITLAB);
-
-		Session session = new Session("Api's met Jiri", cr, LocalDateTime.now().plusDays(2), LocalDateTime.now().plusDays(2).plusHours(1), 5);
-		Session session2 = new Session("Databasen met Arend", cr, LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(5).plusHours(1), 5);
-
-		addSession(session2);
-		addSession(session);
-
-		System.out.println("session: " + session.getSessionID());
-		System.out.println("session2: " + session2.getSessionID());
+	private List<User> giveUsers() {
+		return em.createQuery("SELECT u FROM User u", User.class).getResultList();
 	}
 
 	// getters and setters
@@ -144,7 +124,6 @@ public class ITLab {
 	private void initializePersistentie() {
 		openPersistentie();
 		// PersistenceController persistenceController = new PersistenceController(this);
-		// populateData();
 	}
 
 	private void openPersistentie() {
