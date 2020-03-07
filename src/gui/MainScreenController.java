@@ -19,12 +19,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Stage;
 
 public class MainScreenController extends SplitPane {
 
@@ -33,6 +36,9 @@ public class MainScreenController extends SplitPane {
 
     @FXML
     private HBox hbox_mainSection;
+    
+    @FXML
+    private SplitPane rootPane;
     
     @FXML
     private Button btnUsers;
@@ -150,7 +156,17 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     void clickBtnUsers(MouseEvent event) {
-    	UsersController uc = new UsersController(usercontroller);
-    	changeMainSection(uc);
+    	/*try {
+			Parent parent = FXMLLoader.load(getClass().getResource("Users.fxml"));
+			Scene sceneUsers = new Scene(parent);
+			
+			Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
+			window.setScene(sceneUsers);
+			window.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}*/
+    	hbox_mainSection.getChildren().setAll(new UsersController(usercontroller));
+
     }
 }

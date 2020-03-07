@@ -30,6 +30,8 @@ public class UsersController extends AnchorPane{
 	
 	public UsersController(UserController usercontroller) {
 		this.usercontroller = usercontroller;
+		
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Users.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
