@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
@@ -72,6 +73,7 @@ public class MainScreenController extends SplitPane {
 		CalendarView calendarView = new CalendarView();
 		calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
 		calendarView.setShowPrintButton(false); // make the printing option invisible
+	
 		
 		Calendar calendar1 = new Calendar("Sessies"); 
 
@@ -156,17 +158,10 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     void clickBtnUsers(MouseEvent event) {
-    	/*try {
-			Parent parent = FXMLLoader.load(getClass().getResource("Users.fxml"));
-			Scene sceneUsers = new Scene(parent);
-			
-			Stage window = (Stage)((Node) event.getSource()).getScene().getWindow();
-			window.setScene(sceneUsers);
-			window.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}*/
-    	hbox_mainSection.getChildren().setAll(new UsersController(usercontroller));
+    	System.out.println("gebruikers");
+    	
+		UsersController uc = new UsersController(this,this.usercontroller);
+		changeMainSection(uc);
 
     }
 }

@@ -28,12 +28,11 @@ public class UsersController extends AnchorPane{
 	
 	private UserController usercontroller;
 	
-	public UsersController(UserController usercontroller) {
+	public UsersController(MainScreenController mainScreenController ,UserController usercontroller) {
 		this.usercontroller = usercontroller;
 		
-		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Users.fxml"));
-		loader.setRoot(this);
+		loader.setRoot(mainScreenController);
 		loader.setController(this);
 		try {
 			loader.load();
