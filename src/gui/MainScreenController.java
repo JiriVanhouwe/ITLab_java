@@ -124,7 +124,7 @@ public class MainScreenController extends SplitPane {
     		Entry entry = new Entry();
     		entry.setId(Integer.toString(session.getSessionID()));
     		entry.setTitle(session.getTitle());
-    		entry.setInterval(session.getStartDate(), session.getEndDate());
+    		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
     		calendar.addEntry(entry);
     	});
     }

@@ -44,5 +44,9 @@ public class SessionController extends Controller {
 		
 		return itLab.getEntityManager().createNamedQuery("Classroom.findAll",Classroom.class).getResultList();
 
+	}
+
+	public Classroom giveClassroom(String text) {
+		return itLab.getEntityManager().createNamedQuery("Classroom.findById",Classroom.class).setParameter("classid", text).getSingleResult();
 	} 
 }
