@@ -25,19 +25,18 @@ public class SessionController extends Controller {
 		return itLab.giveSessions();
 	}
 	
-	public int changeSession(int sessionID, String title, String classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+	public int changeSession(int sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
 		if(itLab.doesSessionExist(sessionID, title)) {
-			this.itLab.changeSession(title, classRoom, startDate, endDate, maxAttendee, classRoom, nameGuest);
+			this.itLab.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
 			return sessionID;
 		} else {
-			return this.createSession(title, startDate, endDate, classRoom, maxAttendee, description, nameGuest);
+			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest);
 		}
 		
 	}
-	
-	public int createSession(String title, LocalDateTime startDate, LocalDateTime endDate, String classRoom, int maxAttendee, String description, String nameGuest ) {
-		Session session = new Session(title, new Classroom(classRoom, Campus.GENT, 30, ClassRoomCategory.ITLAB), startDate, endDate, maxAttendee, description, nameGuest);
-		itLab.addSession(session);
+	// waarom hier id terug geven
+	public int createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classRoom, int maxAttendee, String description, String nameGuest ) {
+		Session session = new Session(title, description, startDate, endDate, maxAttendee, classRoom,  nameGuest);
 		return session.getSessionID();
 	}
 	

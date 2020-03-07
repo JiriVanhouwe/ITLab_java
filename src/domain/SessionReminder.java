@@ -1,7 +1,9 @@
 package domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +18,11 @@ public class SessionReminder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private LocalDate sendDate;
+	@Column(columnDefinition = "TIMESTAMP")
+	private LocalDateTime sendDate;
 	private String description;
 	
-	public SessionReminder(LocalDate sendDate, String description) {
+	public SessionReminder(LocalDateTime sendDate, String description) {
 		this.sendDate = sendDate;
 		this.description = description;
 	}
@@ -30,11 +33,11 @@ public class SessionReminder {
 	
 	//getters and setters
 
-	private LocalDate getSendDate() {
+	private LocalDateTime getSendDate() {
 		return sendDate;
 	}
 
-	private void setSendDate(LocalDate sendDate) {
+	private void setSendDate(LocalDateTime sendDate) {
 		this.sendDate = sendDate;
 	}
 

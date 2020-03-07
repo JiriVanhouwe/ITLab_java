@@ -17,9 +17,10 @@ public class StartUp {
 		SessionCalendarController scc = new SessionCalendarController();
 		SessionController sc = new SessionController();
 		
-		//sc.giveSessionsCurrentCalendar().stream().forEach(e -> System.out.println(e.toString()));
-		//scc.giveSessionCalendar().toString();
-		//sc.giveAllClassrooms().stream().forEach(e -> System.out.println("klasse: "+ e.toString()));
+		
+		System.out.println(scc.giveSessionCalendar().toString());
+		sc.giveSessionsCurrentCalendar().stream().forEach(e -> System.out.println(e.toString()));
+		sc.giveAllClassrooms().stream().forEach(e -> System.out.println("klasse: "+ e.toString()));
 		System.out.println("test");
 		//new PersistenceController(new ITLab());
 		//System.out.println("---Database created.---");

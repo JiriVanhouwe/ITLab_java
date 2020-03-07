@@ -1,11 +1,13 @@
 package domain;
 
+
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,9 +34,9 @@ public class SessionCalendar {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	//@Temporal(TemporalType.DATE)
+	@Column(columnDefinition = "DATE")
 	private LocalDate startDate;
-	//@Temporal(TemporalType.DATE)
+	@Column(columnDefinition = "DATE")
 	private LocalDate endDate;
 	 @OneToMany(targetEntity=Session.class,cascade = CascadeType.ALL, 
              fetch = FetchType.LAZY, orphanRemoval = true)
@@ -54,7 +56,7 @@ public class SessionCalendar {
 		setStartDate(startDate);
 		setEndDate(endDate);
 		
-		this.sessions = new ArrayList<>();
+		
 	}
 
 	//methodes
@@ -95,6 +97,8 @@ public class SessionCalendar {
 	public void addSession(Session session) {
 		sessions.add(session);
 	}
+
+	
 
 	
 }

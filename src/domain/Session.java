@@ -1,10 +1,13 @@
 package domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,9 +47,15 @@ public class Session{
 	@ManyToOne(cascade = CascadeType.DETACH)
 	private Classroom classRoom;
 	
-	private LocalDateTime startDate;
+	@Column(columnDefinition = "DATE")
+	private LocalDate eventDate;
 	
-	private LocalDateTime endDate;
+	@Column(columnDefinition = "TIME")
+	private LocalTime startHour;
+	
+	@Column(columnDefinition = "TIME")
+	private LocalTime endHour;
+	
 	private int maxAttendee;
 	@ElementCollection
 	@JoinTable(name = "Session_Media")
@@ -71,23 +80,17 @@ public class Session{
 		super();
 	}
 	
-	public Session(String title,  Classroom classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,
-			String description, String nameGuest) {
-		this(title, classRoom, startDate, endDate, maxAttendee);
-		setDescription(description);
-		setNameGuest(nameGuest);
-		setState(new OpenState());
-	}
-
-	public Session(String title, Classroom classRoom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee) {
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
+			int maxAttendee,  Classroom classRoom, String nameGuest) {
 		setTitle(title);
 		setDescription(description);
-		setStartDate(startDate);
-		setEndDate(endDate);
+		setDate(startDate.toLocalDate());
+		setStartHour(startDate.toLocalTime());
+		setEndHour(endDate.toLocalTime());
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
-		setState(new OpenState());
+		
 
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
@@ -95,16 +98,20 @@ public class Session{
 		media = new ArrayList<>();
 	}
 
+	
+	
 	// methoden
 	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
 			int maxAttendee,  Classroom classRoom, String nameGuest) {
 		setTitle(title);
 		setDescription(description);
-		setStartDate(startDate);
-		setEndDate(endDate);
+		setDate(startDate.toLocalDate());
+		setStartHour(startDate.toLocalTime());
+		setEndHour(endDate.toLocalTime());
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
+		
 	}
 	
 	public void registerAttendee(User user) {
@@ -154,30 +161,29 @@ public class Session{
 		this.classRoom = classRoom;
 	}
 
-	public LocalDateTime getStartDate() {
-		return startDate;
+
+	public LocalTime getEndHour() {
+		return endHour;
 	}
 
-	private void setStartDate(LocalDateTime startDate) {
-		if(endDate != null) {
-			if (endDate.minusMinutes(30).isBefore(startDate))
-				throw new IllegalArgumentException("einduur moet minimaal 30 minuten na het startuur liggen");
-
-			if (LocalDateTime.now().isAfter(startDate))
-				throw new IllegalArgumentException("startdatum moet in de toekomst liggen");			
-		}
-
-		this.startDate = startDate;
+	public void setEndHour(LocalTime endHour) {
+		this.endHour = endHour;
 	}
 
-	public LocalDateTime getEndDate() {
-		return endDate;
+	public LocalTime getStartHour() {
+		return startHour;
 	}
 
-	private void setEndDate(LocalDateTime endDate) {
-		if (LocalDateTime.now().isAfter(endDate))
-			throw new IllegalArgumentException("einddatum moet in de toekomst liggen");
-		this.endDate = endDate;
+	public void setStartHour(LocalTime startHour) {
+		this.startHour = startHour;
+	}
+
+	public LocalDate getDate() {
+		return eventDate;
+	}
+
+	public void setDate(LocalDate date) {
+		this.eventDate = date;
 	}
 
 	public int getMaxAttendee() {
