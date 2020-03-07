@@ -158,10 +158,8 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     void clickBtnUsers(MouseEvent event) {
-    	System.out.println("gebruikers");
-    	
-		UsersController uc = new UsersController(this,this.usercontroller);
-		changeMainSection(uc);
-
+    	hbox_mainSection.getChildren().clear();
+    	UsersController uc = new UsersController(this.usercontroller);
+    	hbox_mainSection.getChildren().add(uc);
     }
 }

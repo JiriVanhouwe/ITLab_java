@@ -8,37 +8,43 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root dividerPositions="0.16416040100250626" orientation="VERTICAL" prefHeight="800.0" prefWidth="1250.0" type="SplitPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-         <children>
-            <JFXTextField layoutX="253.0" layoutY="52.0" prefHeight="26.0" prefWidth="251.0" promptText="zoeken">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </JFXTextField>
-            <JFXButton defaultButton="true" layoutX="550.0" layoutY="52.0" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: grey;" text="Wijzig">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </JFXButton>
-            <JFXButton defaultButton="true" layoutX="778.0" layoutY="52.0" style="-fx-background-color: grey;" text="Verwijder">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </JFXButton>
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-         <children>
-            <TableView layoutX="524.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
-              <columns>
-                <TableColumn prefWidth="323.199951171875" text="Gebruikersnaam" />
-                <TableColumn minWidth="0.0" prefWidth="173.86679077148438" text="Voornaam" />
-                  <TableColumn minWidth="0.0" prefWidth="201.333251953125" text="Familienaam" />
-                  <TableColumn prefWidth="212.2666015625" text="Type" />
-                  <TableColumn prefWidth="239.73330688476562" text="Status" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-  </items>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.16416040100250626" orientation="VERTICAL" prefHeight="800.0" prefWidth="1250.0">
+        <items>
+          <AnchorPane prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <JFXTextField layoutX="253.0" layoutY="52.0" prefHeight="26.0" prefWidth="251.0" promptText="zoeken">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXButton defaultButton="true" layoutX="550.0" layoutY="52.0" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: grey;" text="Wijzig">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton defaultButton="true" layoutX="778.0" layoutY="52.0" style="-fx-background-color: grey;" text="Verwijder">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView layoutX="524.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn prefWidth="323.199951171875" text="Gebruikersnaam" />
+                      <TableColumn minWidth="0.0" prefWidth="173.86679077148438" text="Voornaam" />
+                        <TableColumn minWidth="0.0" prefWidth="201.333251953125" text="Familienaam" />
+                        <TableColumn prefWidth="212.2666015625" text="Type" />
+                        <TableColumn prefWidth="239.73330688476562" text="Status" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
 </fx:root>
