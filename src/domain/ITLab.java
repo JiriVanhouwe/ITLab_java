@@ -23,11 +23,11 @@ public class ITLab {
 
 	public ITLab() {
 		initializePersistentie();
-		this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
+		//this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
 																											// temporary
 																											// solution
-		// setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
-		// setCurrentSession(currentSessioncalendar.getSessions());
+		setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		
 	}
 
 	// methodes
@@ -59,16 +59,13 @@ public class ITLab {
 		return false;
 	}
 
-	public void changeSession(String title, String classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
-		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, giveClassRoom(classroom),
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, classroom,
 				nameGuest);
 
 	}
 
-	private Classroom giveClassRoom(String classroom) {
-		return persistence.PersistenceController.giveclassRoom(classroom);
-	}
-
+	
 	public void switchCurrentSession(int sessionID) {
 		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
 				.orElse(null));
