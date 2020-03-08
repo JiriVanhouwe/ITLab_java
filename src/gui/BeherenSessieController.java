@@ -78,6 +78,8 @@ public class BeherenSessieController extends VBox{
     	//this.end_time.setValue(entry.getEndTime());
     	//this.clasroom_dropdown.getItems().add(new Classroom("B1234", Campus.GENT, 200, ClassRoomCategory.CLASSROOM));
     	
+    	System.out.println(entry.getId());
+    	
     	sessionController = new SessionController(); 
     	this.entry = entry;
     }
@@ -89,10 +91,10 @@ public class BeherenSessieController extends VBox{
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
-    	int id = sessionController.changeSession(Integer.parseInt(entry.getId()), this.title_txt.getText(), sessionController.giveClassroom(this.classroom_txt.getText()), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
+    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), sessionController.giveClassroom(this.classroom_txt.getText()), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
     	
     	this.entry.setTitle(this.title_txt.getText());
-    	this.entry.setId(Integer.toString(id));
+    	this.entry.setId(id);
     	this.close();
     }
     

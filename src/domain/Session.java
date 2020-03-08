@@ -45,7 +45,7 @@ public class Session{
 	private String description;
 	private String nameGuest;
 	@ManyToOne(cascade = CascadeType.DETACH)
-	private Classroom classRoom;
+	private Classroom classroom;
 	
 	@Column(columnDefinition = "DATE")
 	private LocalDate eventDate;
@@ -80,8 +80,7 @@ public class Session{
 		super();
 	}
 	
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
-			int maxAttendee,  Classroom classRoom, String nameGuest) {
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -101,15 +100,14 @@ public class Session{
 	
 	
 	// methoden
-	public void changeSession(String title, String description, LocalDateTime startDate, LocalDateTime endDate,
-			int maxAttendee,  Classroom classRoom, String nameGuest) {
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
 		setStartHour(startDate.toLocalTime());
 		setEndHour(endDate.toLocalTime());
 		setMaxAttendee(maxAttendee);
-		setClassRoom(classRoom);
+		setClassRoom(classroom);
 		setNameGuest(nameGuest);
 		
 	}
@@ -153,12 +151,12 @@ public class Session{
 		this.nameGuest = nameGuest;
 	}
 
-	public Classroom getClassRoom() {
-		return classRoom;
+	public Classroom getClassroom() {
+		return classroom;
 	}
 
-	private void setClassRoom(Classroom classRoom) {
-		this.classRoom = classRoom;
+	private void setClassRoom(Classroom classroom) {
+		this.classroom = classroom;
 	}
 
 

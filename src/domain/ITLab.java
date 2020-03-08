@@ -61,22 +61,25 @@ public class ITLab {
 		return false;
 	}
 
-	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
-		currentSession.changeSession(title, description, startDate, endDate, maxAttendee, classroom,
-				nameGuest);
-
+	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+		Session session = currentSessioncalendar.giveSession(id);
+		em.getTransaction().begin();
+		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
+		currentSessioncalendar.addSession(session);
+		em.persist(session);
+		em.getTransaction().commit();
 	}
 
 	
-	public void switchCurrentSession(int sessionID) {
-		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
-				.orElse(null));
-	}
+//	public void switchCurrentSession(int sessionID) {
+//		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
+//				.orElse(null));
+//	}
 
-	public boolean doesSessionExist(int sessionID, String title) {
-		// return currentSessioncalendar.getSessions().stream().filter(session -> session.getSessionID() == sessionID && session.getTitle().equals(title)) != null;
-		return false;
-	}
+//	public boolean doesSessionExist(int sessionID, String title) {
+//		// return currentSessioncalendar.getSessions().stream().filter(session -> session.getSessionID() == sessionID && session.getTitle().equals(title)) != null;
+//		return false;
+//	}
 
 	// data methodes
 	public void addSessionCalendar(SessionCalendar sessionCalendar) {

@@ -13,9 +13,9 @@ public class SessionController extends Controller {
 		return this.itLab.getCurrentSession();
 	}
 	
-	public void changeCurrentSession(int sessionID) {
-		this.itLab.switchCurrentSession(sessionID);
-	}
+//	public void changeCurrentSession(int sessionID) {
+//		this.itLab.switchCurrentSession(sessionID);
+//	}
 	
 	public List<Session> giveAllSessions(){
 		return this.itLab.giveSessions();
@@ -25,19 +25,22 @@ public class SessionController extends Controller {
 		return itLab.giveSessions();
 	}
 	
-	public int changeSession(int sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
-		if(itLab.doesSessionExist(sessionID, title)) {
-			this.itLab.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+		if(sessionID.endsWith("#")) {
+			int id = Integer.parseInt(sessionID.substring(0, sessionID.length()-1));
+			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
 			return sessionID;
 		} else {
 			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest);
 		}
 		
 	}
-	// waarom hier id terug geven
-	public int createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classRoom, int maxAttendee, String description, String nameGuest ) {
+	
+	// waarom hier id terug geven -> het entryid moet onmiddelijk aangepast orden naar het juiste sessionid, want een entry neemt anders zijn eigen nummering aan die niet gelijk zal lopen met sessions
+	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classRoom, int maxAttendee, String description, String nameGuest ) {
 		Session session = new Session(title, description, startDate, endDate, maxAttendee, classRoom,  nameGuest);
-		return session.getSessionID();
+		itLab.addSession(session);
+		return String.format("%d#", session.getSessionID());
 	}
 	
 	public List<Classroom> giveAllClassrooms(){

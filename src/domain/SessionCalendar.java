@@ -59,16 +59,6 @@ public class SessionCalendar {
 		
 	}
 
-	//methodes
-	public void ChangeDates(LocalDate newStartDate, LocalDate newEndDate) {
-		if(this.startDate != newStartDate) {
-			setStartDate(newStartDate);
-		}
-		if(this.endDate != newEndDate) {
-			setEndDate(newEndDate);
-		}
-	}
-	
 	//setters and getters
 	private void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
@@ -98,7 +88,19 @@ public class SessionCalendar {
 		sessions.add(session);
 	}
 
+	//methodes
+	public void ChangeDates(LocalDate newStartDate, LocalDate newEndDate) {
+		if(this.startDate != newStartDate) {
+			setStartDate(newStartDate);
+		}
+		if(this.endDate != newEndDate) {
+			setEndDate(newEndDate);
+		}
+	}
 	
+	public Session giveSession(int id) {
+		return sessions.stream().filter(session -> session.getSessionID() == id).findFirst().orElse(null);
+	}
 
 	
 }
