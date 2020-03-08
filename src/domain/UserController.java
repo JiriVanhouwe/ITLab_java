@@ -2,6 +2,9 @@ package domain;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class UserController extends Controller {
 	
 	public UserController() {
@@ -18,6 +21,10 @@ public class UserController extends Controller {
 	
 	public User giveUser(String userName) {
 		return itLab.getUserByUserName(userName);
+	}
+	public ObservableList<User> giveAllUsers(){
+		ObservableList<User> users = FXCollections.observableArrayList(itLab.giveUsers());
+		return FXCollections.unmodifiableObservableList(users);
 	}
 	
 	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {

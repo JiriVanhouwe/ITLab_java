@@ -8,6 +8,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 @Entity
 @NamedQueries({
 	@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
@@ -102,6 +105,26 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public StringProperty firstNameProperty() {
+		return new SimpleStringProperty(firstName);
+	}
+	
+	public StringProperty userNameProperty() {
+		return new SimpleStringProperty(userName);
+	}
+	
+	public StringProperty lastNameProperty() {
+		return new SimpleStringProperty(lastName);
+	}
+	
+	public StringProperty userTypeProperty() {
+		return new SimpleStringProperty(userType.toString());
+	}
+	
+	public StringProperty userStatusProperty() {
+		return new SimpleStringProperty(userStatus.toString());
 	}
 
 }

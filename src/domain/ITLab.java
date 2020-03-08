@@ -3,7 +3,9 @@ package domain;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -100,15 +102,11 @@ public class ITLab {
 		 this.loggedInUser = loggedInUser;
 	}
 
-	public User getUserByUsername(String userName) {
+	public User getUserByUserName(String userName) {
 		return em.createQuery("User.getUserByUserName", User.class).setParameter("userName", userName).getSingleResult();
   }
-	private List<User> giveUsers() {
-		return em.createQuery("User.getAllUsers", User.class).getResultList();
-	}
-	
-	public User getUserByUserName(String userName) {
-		return em.createQuery("User.getUserByUserName", User.class).getSingleResult();
+	public List<User> giveUsers() {
+		return em.createQuery("User.getAllUsers", User.class).getResultList().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
 	}
 	
 	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
@@ -165,7 +163,6 @@ public class ITLab {
 	// jpa methodes
 	private void initializePersistentie() {
 		openPersistentie();
-		// PersistenceController persistenceController = new PersistenceController(this);
 	}
 
 	private void openPersistentie() {

@@ -14,17 +14,22 @@
         <items>
           <AnchorPane prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <JFXTextField layoutX="253.0" layoutY="52.0" prefHeight="26.0" prefWidth="251.0" promptText="zoeken">
+                  <JFXTextField fx:id="txfSearch" layoutX="139.0" layoutY="52.0" prefHeight="44.0" prefWidth="365.0" promptText="zoeken">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton defaultButton="true" layoutX="550.0" layoutY="52.0" prefHeight="26.0" prefWidth="101.0" style="-fx-background-color: grey;" text="Wijzig">
+                  <JFXButton fx:id="btnNewUser" defaultButton="true" layoutX="550.0" layoutY="52.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Nieuw">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton defaultButton="true" layoutX="778.0" layoutY="52.0" style="-fx-background-color: grey;" text="Verwijder">
+                  <JFXButton fx:id="btnChangeUser" defaultButton="true" layoutX="801.0" layoutY="52.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Wijzig">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnDeleteUser" defaultButton="true" layoutX="1025.0" layoutY="51.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Verwijder">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -33,13 +38,13 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <TableView layoutX="524.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="tableViewUsers" layoutX="524.0" layoutY="217.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="323.199951171875" text="Gebruikersnaam" />
-                      <TableColumn minWidth="0.0" prefWidth="173.86679077148438" text="Voornaam" />
-                        <TableColumn minWidth="0.0" prefWidth="201.333251953125" text="Familienaam" />
-                        <TableColumn prefWidth="212.2666015625" text="Type" />
-                        <TableColumn prefWidth="239.73330688476562" text="Status" />
+                      <TableColumn fx:id="userNameColumn" prefWidth="323.199951171875" text="Gebruikersnaam" />
+                      <TableColumn fx:id="firstNameColumn" minWidth="0.0" prefWidth="173.86679077148438" text="Voornaam" />
+                        <TableColumn fx:id="lastNameColumn" minWidth="0.0" prefWidth="201.333251953125" text="Familienaam" />
+                        <TableColumn fx:id="typeColumn" prefWidth="212.2666015625" text="Type" />
+                        <TableColumn fx:id="statusColumn" prefWidth="239.73330688476562" text="Status" />
                     </columns>
                   </TableView>
                </children>
