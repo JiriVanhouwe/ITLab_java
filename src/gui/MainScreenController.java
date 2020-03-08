@@ -78,7 +78,6 @@ public class MainScreenController extends SplitPane {
 		Calendar calendar1 = new Calendar("Sessies"); 
 
         calendar1.setStyle(Style.STYLE2);
-        linkSessionsToEntries(calendar1);
 
         calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController(param.getEntry()));
         
@@ -108,6 +107,8 @@ public class MainScreenController extends SplitPane {
                         }
                 };
         };
+        
+        linkSessionsToEntries(calendar1);
 
         Entry<String> session1 = new Entry<>("Sessie 1");
         session1.changeStartDate(LocalDate.now().plusDays(1));
@@ -130,7 +131,7 @@ public class MainScreenController extends SplitPane {
     	
     	sessions.stream().forEach(session -> {
     		Entry entry = new Entry();
-    		entry.setId(Integer.toString(session.getSessionID()));
+    		entry.setId(Integer.toString(session.getSessionID()) + "#");
     		entry.setTitle(session.getTitle());
     		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
     		calendar.addEntry(entry);
