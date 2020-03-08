@@ -13,7 +13,7 @@ import javafx.beans.property.StringProperty;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="User.getAllUsers", query="SELECT u FROM User u"), 
+	@NamedQuery(name="User.getAllUsers", query=" SELECT u FROM User u "), 
 	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName ")
 })
 @Table(name="ItlabUser")

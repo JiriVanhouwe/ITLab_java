@@ -6,17 +6,16 @@ import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.User;
 import domain.UserController;
-import persistence.PersistenceController;
 
 public class StartUp {
 
 	public static void main(String[] args) {
 		
-		ITLab itlab = new ITLab();
-		
+	
 		SessionCalendarController scc = new SessionCalendarController();
 		SessionController sc = new SessionController();
-		
+		UserController uc = new UserController();
+		uc.giveAllUsers().forEach(e -> System.out.println(e.getUserName()));
 		
 System.out.println(scc.giveSessionCalendar().toString());
 //		sc.giveSessionsCurrentCalendar().stream().forEach(e -> System.out.println(e.toString()));

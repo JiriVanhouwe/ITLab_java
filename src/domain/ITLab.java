@@ -101,45 +101,8 @@ public class ITLab {
 	}
 
 
-	//alles met users -begin-
-	public User getLoggedInUser() {
-		return this.loggedInUser;
-	}
-
-	public void setLoggedInUser(User loggedInUser) {
-		 this.loggedInUser = loggedInUser;
-	}
-
-	public User getUserByUserName(String userName) {
-		return em.createQuery("User.getUserByUserName", User.class).setParameter("userName", userName).getSingleResult();
-  }
-	public List<User> giveUsers() {
-		return em.createQuery("User.getAllUsers", User.class).getResultList().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
-	}
 	
-	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
-		User user = getUserByUserName(userName);
-		user.changeUser(firstName, lastName, userName, userType, userStatus);
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
-	}
 	
-	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
-		//TODO checken of de user al bestaat adhv userName, mag dat hier?			
-		User user = new User(firstName, lastName, userName, userType, userStatus);
-		em.getTransaction().begin();
-		em.persist(user);
-		em.getTransaction().commit();
-	}
-	
-	public void deleteUser(String userName) {
-		User user = getUserByUserName(userName);
-		em.getTransaction().begin();
-		em.remove(user);
-		em.getTransaction().commit();
-	}
-	//alles met users -einde-
 
 
 	// getters and setters
@@ -167,6 +130,15 @@ public class ITLab {
 		return emf;
 	}
 
+	public User getLoggedInUser() {
+		return this.loggedInUser;
+	}
+
+	public void setLoggedInUser(User loggedInUser) {
+		 this.loggedInUser = loggedInUser;
+	}
+
+	
 
 	// jpa methodes
 	private void initializePersistentie() {
