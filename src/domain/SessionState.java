@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public abstract class SessionState implements Serializable {
 	
+	
 	protected Session session;
 
 	public abstract void addAttendee(User user);

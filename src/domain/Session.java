@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -30,10 +31,7 @@ import com.calendarfx.model.Entry;
 
 @Entity
 @NamedQueries({
-//	@NamedQuery(name = "Session.findAllCurCal", 
-//			query = "SELECT s from Session s left join s.SESSIONCALENDAR_SESSION  scs"
-//					+ " on s.sessionid = scs.sessions_sessionid"
-//					+ " where scs.sessionCalendar_id = :scid ")
+
 })
 @Table(name="Session")
 public class Session{
@@ -60,24 +58,29 @@ public class Session{
 	@ElementCollection
 	@JoinTable(name = "Session_Media")
 	private List<String> media;
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> registeredUsers;
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> attendees;
-	@OneToOne(cascade = CascadeType.PERSIST)
+	
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private User host;
 	
-	@Transient
+	@OneToOne(cascade = CascadeType.REMOVE)
 	private SessionReminder reminder;
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "Session_Feedback")
+	
+	@OneToMany(targetEntity=Feedback.class,cascade = CascadeType.ALL, 
+            fetch = FetchType.LAZY, orphanRemoval = true)
+	@JoinColumn(name = "SessionId", referencedColumnName = "sessionID")
 	private List<Feedback> feedbackList;
 	
 	@Transient
 	private SessionState state;
 	
 	protected Session() {
-		super();
+		
 	}
 	
 	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest) {
