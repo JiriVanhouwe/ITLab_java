@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -43,10 +44,27 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     private Button btnUsers;
+    
+    @FXML
+    private Button btnSettings;
+
+    @FXML
+    private Button btnSignOut;
+    
+    @FXML
+    private Button btnCalendar;
+
+    @FXML
+    private Button btnSessions;
+
+    @FXML
+    private Button btnStatistics;
 
     private UserController usercontroller;
     
     private SessionController sessionController;
+    
+    private Button _selectedButton;
     
     public MainScreenController(UserController usercontroller) {
     	this.usercontroller = usercontroller;
@@ -63,10 +81,11 @@ public class MainScreenController extends SplitPane {
     	      throw new RuntimeException(ex);
     	}  
     	
+    	
+    	
     	lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
     	initializeScreen();
     	initializeCalendar();
-
     }
     
     private void initializeCalendar() {
@@ -122,7 +141,7 @@ public class MainScreenController extends SplitPane {
         updateTimeThread.start();
         
 
-    	
+    	_selectedButton = btnCalendar;
     	changeMainSection(calendarView);
 	}
     
@@ -159,6 +178,11 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     void clickBtnUsers(MouseEvent event) {
+    	
+    	_selectedButton.getStyleClass().remove("selected");
+    	btnUsers.getStyleClass().add("selected");
+    	_selectedButton = btnUsers;
+    	
     	hbox_mainSection.getChildren().clear();
     	UsersController uc = new UsersController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
