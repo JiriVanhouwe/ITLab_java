@@ -30,12 +30,13 @@ public class User {
 	private String password;
 	
 	
-	public User(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+	public User(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUserName(userName);
 		setUserType(userType);
 		setUserStatus(userStatus);
+		setPassword(password);
 	}
 	
 	protected User() {
@@ -43,12 +44,13 @@ public class User {
 	}
 	
 	//methoden
-	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
 		setFirstName(firstName);
 		setLastName(lastName);
 		setUserName(userName);
 		setUserType(userType);
 		setUserStatus(userStatus);
+		setPassword(password);
 	}
 	
 	public String giveUserType() {
@@ -115,6 +117,10 @@ public class User {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public StringProperty firstNameProperty() {

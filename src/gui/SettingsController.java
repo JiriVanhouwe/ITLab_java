@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 
@@ -34,7 +35,7 @@ public class SettingsController extends AnchorPane{
     private Label lblMessage;
 
     @FXML
-    private JFXPasswordField txfCurrentPassword;
+    private JFXPasswordField lblPassword;
 
     @FXML
     private JFXPasswordField txfNewPassword;
@@ -58,8 +59,7 @@ public class SettingsController extends AnchorPane{
 			throw new RuntimeException(ex);
 		}
 		setUserSettings();
-		setTooltips();
-		
+		setTooltips();	
 	}
 	
     private void setUserSettings() {
@@ -68,6 +68,8 @@ public class SettingsController extends AnchorPane{
     	lblLastName.setText(user.getLastName());
     	lblUserName.setText(user.getUserName());
     	lblType.setText(user.giveUserType());
+    	lblPassword.setText(new String(user.getPassword())); 
+    	//TODO het passwoord hierboven is de hashcode, dit moet het echte passwoord worden!
 	}
 
 	private void setTooltips() { 
@@ -80,7 +82,22 @@ public class SettingsController extends AnchorPane{
 
 	@FXML
     void clickSave(MouseEvent event) {
-		lblMessage.setText("Goed geklikt, er is echter nog niks gebeurd.");
+		if(txfNewPassword == null || txfConfirmPassword == null || txfNewPassword.getText().isBlank() || txfConfirmPassword.getText().isBlank())
+			lblMessage.setText("Gelieve beide wachtwoordvelden in te vullen.");
+		else 
+			passwordValidation();			
     }
+	
+	private boolean passwordValidation() {
+		if(txfNewPassword.getText().equals(txfConfirmPassword.getText())) {
+			userController.changePassword(lblUserName.getText(), txfConfirmPassword.getText());
+			lblMessage.setText("Je wachtwoord werd gewijzigd.");
+			return true;
+		}
+		else {
+			lblMessage.setText("De nieuwe wachtwoorden komen niet overeen.");
+			return false;
+		}
+	}
 
 }

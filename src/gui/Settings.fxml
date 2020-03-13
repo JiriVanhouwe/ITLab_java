@@ -10,8 +10,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<fx:root prefHeight="800.0" prefWidth="1250.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="800.0" prefWidth="1310.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9900" height="559.0" layoutX="674.0" layoutY="132.0" opacity="0.54" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="677.0" />
       <Pane prefHeight="800.0" prefWidth="674.0" style="-fx-background-color: #0081C5;">
          <children>
             <Label layoutX="58.0" layoutY="39.0" prefHeight="65.0" prefWidth="297.0" text="Instellingen" textFill="WHITE">
@@ -19,7 +20,7 @@
                   <Font name="Ebrima Bold" size="45.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6fb7dd" height="559.0" layoutX="1.0" layoutY="132.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1252.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6fb7dd" height="559.0" layoutX="1.0" layoutY="132.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="674.0" />
             <JFXButton fx:id="btnSave" layoutX="748.0" layoutY="603.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" text="Opslaan">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
@@ -29,18 +30,13 @@
                </cursor>
             </JFXButton>
             <Line endX="-391.60003662109375" endY="357.86663818359375" layoutX="870.0" layoutY="276.0" startX="-391.60003662109375" startY="-107.19999694824219" stroke="WHITE" strokeWidth="2.0" />
-            <Label fx:id="lblMessage" layoutX="715.0" layoutY="652.0" prefHeight="20.0" prefWidth="415.0">
+            <Label fx:id="lblMessage" layoutX="715.0" layoutY="652.0" prefHeight="20.0" prefWidth="415.0" textFill="#0081c5">
                <font>
-                  <Font name="Ebrima" size="14.0" />
+                  <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <JFXPasswordField fx:id="txfCurrentPassword" editable="false" layoutX="709.0" layoutY="428.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord">
-         <font>
-            <Font name="Ebrima" size="15.0" />
-         </font>
-      </JFXPasswordField>
       <JFXPasswordField fx:id="txfNewPassword" layoutX="709.0" layoutY="484.0" prefHeight="0.0" prefWidth="220.0">
          <font>
             <Font name="Ebrima" size="14.0" />
@@ -106,5 +102,6 @@
             <Font name="Ebrima" size="15.0" />
          </font>
       </Label>
+      <JFXPasswordField fx:id="lblPassword" editable="false" layoutX="709.0" layoutY="428.0" prefHeight="26.0" prefWidth="220.0" />
    </children>
 </fx:root>

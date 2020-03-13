@@ -7,10 +7,8 @@ import javafx.collections.ObservableList;
 
 public class UserController extends Controller {
 	
-	
 	public UserController() {
 		super();
-
 	}
 	
 	public boolean isUserPassComboValid(String username, char[] password) {
@@ -33,21 +31,30 @@ public class UserController extends Controller {
 		return FXCollections.unmodifiableObservableList(users).sorted(Comparator.comparing(User::getFirstName));
 	}
 	
-	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
 		User user = giveUser(userName);
-		user.changeUser(firstName, lastName, userName, userType, userStatus);
+		user.changeUser(firstName, lastName, userName, userType, userStatus, password); //dit gebeurt in klasse User.
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
 	
-	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
 		//TODO checken of de user al bestaat adhv userName, mag dat hier?			
-		User user = new User(firstName, lastName, userName, userType, userStatus);
+		User user = new User(firstName, lastName, userName, userType, userStatus, password);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
+	
+	public void changePassword(String userName, String password) {
+		User user = giveUser(userName);
+		user.setPassword(password);
+		itLab.getEntityManager().getTransaction().begin();
+		itLab.getEntityManager().persist(user);
+		itLab.getEntityManager().getTransaction().commit();
+	}
+
 	
 	public void deleteUser(String userName) {
 		User user = giveUser(userName);
@@ -55,7 +62,4 @@ public class UserController extends Controller {
 		itLab.getEntityManager().remove(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
-	
-	
-	
 }
