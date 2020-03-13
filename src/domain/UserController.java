@@ -1,16 +1,16 @@
 package domain;
 
 import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class UserController extends Controller {
 	
+	
 	public UserController() {
 		super();
+
 	}
 	
 	public boolean isUserPassComboValid(String username, char[] password) {
@@ -19,6 +19,10 @@ public class UserController extends Controller {
 
 	public User giveLoggedInUser() {
 		return itLab.getLoggedInUser();
+	}
+	
+	public boolean isUserHeadOrResponsible() { //head = true responsible = false
+		return itLab.isUserHeadOrResponsible();
 	}
 	
 	public User giveUser(String userName) {
@@ -48,7 +52,7 @@ public class UserController extends Controller {
 	public void deleteUser(String userName) {
 		User user = giveUser(userName);
 		itLab.getEntityManager().getTransaction().begin();
-		itLab.getEntityManager().persist(user);
+		itLab.getEntityManager().remove(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
 	

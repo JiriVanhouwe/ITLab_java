@@ -64,6 +64,8 @@ public class MainScreenController extends SplitPane {
     
     private SessionController sessionController;
     
+    private UsersController uc;
+    
     private Button _selectedButton;
     
     public MainScreenController(UserController usercontroller) {
@@ -185,7 +187,7 @@ public class MainScreenController extends SplitPane {
     	_selectedButton = btnUsers;
     	
     	hbox_mainSection.getChildren().clear();
-    	UsersController uc = new UsersController(this.usercontroller);
+    	uc = new UsersController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
     }
 }

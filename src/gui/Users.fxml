@@ -19,17 +19,17 @@
                         <Font size="20.0" />
                      </font>
                   </JFXTextField>
-                  <JFXButton fx:id="btnNewUser" defaultButton="true" layoutX="550.0" layoutY="52.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Nieuw">
+                  <JFXButton fx:id="btnNewUser" defaultButton="true" layoutX="550.0" layoutY="52.0" onMouseClicked="#btnNewUserClick" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Nieuw">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnChangeUser" defaultButton="true" layoutX="801.0" layoutY="52.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Wijzig">
+                  <JFXButton fx:id="btnChangeUser" defaultButton="true" layoutX="801.0" layoutY="52.0" onMouseClicked="#btnChangeUserClick" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Wijzig">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnDeleteUser" defaultButton="true" layoutX="1025.0" layoutY="51.0" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Verwijder">
+                  <JFXButton fx:id="btnDeleteUser" defaultButton="true" layoutX="1025.0" layoutY="51.0" onMouseClicked="#btnDeleteUserClick" prefHeight="26.0" prefWidth="115.0" style="-fx-background-color: grey;" text="Verwijder">
                      <font>
                         <Font size="20.0" />
                      </font>

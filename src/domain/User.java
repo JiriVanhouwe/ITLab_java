@@ -50,6 +50,16 @@ public class User {
 		setUserType(userType);
 		setUserStatus(userStatus);
 	}
+	
+	public String giveUserType() {
+		String res = "";
+		switch(this.userType.toString()) { 
+		case "HEAD" : res = "Hoofdverantwoordelijke"; break;
+		case "USERITLAB" : res = "Gebruiker"; break;
+		case "RESPONSIBLE" : res = "Verantwoordelijke"; break;
+		}
+		return res;
+	}
 
 	//getters and setters 
 	public String getFirstName() {

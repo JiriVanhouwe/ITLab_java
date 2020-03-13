@@ -132,7 +132,12 @@ public class ITLab {
 	public void setLoggedInUser(User loggedInUser) {
 		 this.loggedInUser = loggedInUser;
 	}
-
+	
+	public boolean isUserHeadOrResponsible() { //head = true responsible = false
+		if(loggedInUser.getUserType() == UserType.HEAD)
+			return true;
+		else return false;
+	}
 	
 
 	// jpa methodes

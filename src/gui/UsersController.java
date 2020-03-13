@@ -1,5 +1,7 @@
 package gui;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +19,7 @@ import domain.UserController;
 import domain.UserStatus;
 import domain.UserType;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -33,6 +36,7 @@ import javafx.scene.text.Text;
 public class UsersController extends AnchorPane{ 
 	
 	private UserController userController;
+	private String selectedUser;
 	
     @FXML
     private JFXTextField txfSearch;
@@ -88,10 +92,36 @@ public class UsersController extends AnchorPane{
 	        .selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
 	        	//check of item geselecteerd wordt
 	        	if(newValue != null) {
-	        		System.out.println(newValue);
+	        		System.out.println(newValue.getUserName());
+	        		selectedUser = newValue.getUserName();
 	        	}
 	        });
 	}
+	
+	
+    @FXML
+    void btnChangeUserClick(MouseEvent event) {
+    	if(selectedUser != null || !selectedUser.isBlank()) {
+    		
+    	}
+
+    }
+
+    @FXML
+    void btnDeleteUserClick(MouseEvent event) {
+    	if(selectedUser != null || !selectedUser.isBlank()) {
+    		userController.deleteUser(selectedUser);
+    	}
+    }
+
+    @FXML
+    void btnNewUserClick(MouseEvent event) {
+
+    }
+
+
+
+
 	
 
 }
