@@ -178,6 +178,10 @@ public class MainScreenController extends SplitPane {
     	SettingsController uc = new SettingsController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
     }
+    @FXML
+    void clickBtnSettings(MouseEvent event) {
+    	userNameClick(event);
+    }
     
     @FXML
     void clickBtnUsers(MouseEvent event) {
@@ -190,4 +194,7 @@ public class MainScreenController extends SplitPane {
     	uc = new UsersController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
     }
+    
+
+
 }
