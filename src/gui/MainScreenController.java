@@ -171,9 +171,10 @@ public class MainScreenController extends SplitPane {
 	
     @FXML
     void userNameClick(MouseEvent event) {
-    	
-    	//TODO
-    	//wanneer men hier op klikt, kom je ook bij instellingen terecht.
+
+    	hbox_mainSection.getChildren().clear();
+    	SettingsController uc = new SettingsController(this.usercontroller);
+    	hbox_mainSection.getChildren().add(uc);
     }
     
     @FXML

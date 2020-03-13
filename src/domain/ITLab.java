@@ -100,11 +100,6 @@ public class ITLab {
 		em.getTransaction().commit();
 	}
 
-
-	
-	
-
-
 	// getters and setters
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
