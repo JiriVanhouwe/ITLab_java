@@ -116,7 +116,8 @@ public class BeherenSessieController extends VBox{
     
     private void close() {
     	PopOver popover = (PopOver)cancelbtn.getScene().getWindow();
-    	entry.removeFromCalendar();
+    	if(!entry.getId().endsWith("#"))
+    		entry.removeFromCalendar();
     	popover.hide();
     }
 }
