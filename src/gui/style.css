@@ -13,3 +13,22 @@
 .selected {
   -fx-background-color: rgba(227, 227, 227, 0.3);
 }
+
+.loginButton{
+	-fx-background-color: rgba(0, 129, 197);
+}
+
+.loginButton:hover {
+	 -fx-background-color: rgba(255, 153, 0);
+}
+
+.settingsButton{
+	-fx-background-color: rgba(0, 129, 197);
+	-fx-scale-y: 1.2;
+ 	 -fx-scale-x: 1.2;
+ 	 -fx-background-radius: 15px;
+}
+
+.settingsButton:hover {
+  -fx-background-color: rgba(170, 213, 235);
+}

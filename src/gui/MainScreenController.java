@@ -176,7 +176,6 @@ public class MainScreenController extends SplitPane {
 	
     @FXML
     void userNameClick(MouseEvent event) {
-
     	hbox_mainSection.getChildren().clear();
     	SettingsController uc = new SettingsController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
@@ -187,8 +186,7 @@ public class MainScreenController extends SplitPane {
     }
     
     @FXML
-    void clickBtnUsers(MouseEvent event) {
-    	
+    void clickBtnUsers(MouseEvent event) {  	
     	_selectedButton.getStyleClass().remove("selected");
     	btnUsers.getStyleClass().add("selected");
     	_selectedButton = btnUsers;

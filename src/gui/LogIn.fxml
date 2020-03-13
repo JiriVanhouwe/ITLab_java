@@ -31,7 +31,7 @@
             <Font name="Ebrima" size="14.0" />
          </font>
       </JFXTextField>
-      <Label fx:id="lblPasswordLost" layoutX="565.0" layoutY="251.0" onMouseClicked="#forgetPasswordClick" text="Wachtwoord vergeten?" textFill="#042a49">
+      <Label fx:id="lblPasswordLost" layoutX="565.0" layoutY="251.0" onMouseClicked="#forgetPasswordClick" styleClass="loginForgetPassword" stylesheets="@style.css" text="Wachtwoord vergeten?" textFill="#042a49">
          <font>
             <Font name="Ebrima Bold" size="10.0" />
          </font>
@@ -59,7 +59,7 @@
             <Font name="Ebrima Bold" size="32.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogIn" defaultButton="true" layoutX="453.0" layoutY="292.0" minHeight="16.0" mnemonicParsing="false" onAction="#loginBtnPressed" prefHeight="38.0" prefWidth="223.0" text="Log in" textFill="WHITE">
+      <Button fx:id="btnLogIn" defaultButton="true" layoutX="453.0" layoutY="292.0" minHeight="16.0" mnemonicParsing="false" onAction="#loginBtnPressed" opacity="0.74" prefHeight="38.0" prefWidth="223.0" styleClass="loginButton" stylesheets="@style.css" text="Log in" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="13.0" />
          </font>
