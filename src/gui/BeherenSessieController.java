@@ -58,9 +58,7 @@ public class BeherenSessieController extends VBox{
     
     private SessionController sessionController;
     
-    
     public BeherenSessieController(Entry entry) {
-    	
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("BeherenSessie.fxml"));
     	loader.setController(this);
     	loader.setRoot(this);
@@ -118,6 +116,8 @@ public class BeherenSessieController extends VBox{
     
     private void close() {
     	PopOver popover = (PopOver)cancelbtn.getScene().getWindow();
+    	if(!entry.getId().endsWith("#"))
+    		entry.removeFromCalendar();
     	popover.hide();
     }
 }
