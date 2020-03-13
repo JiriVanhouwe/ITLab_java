@@ -68,8 +68,6 @@ public class SettingsController extends AnchorPane{
     	lblLastName.setText(user.getLastName());
     	lblUserName.setText(user.getUserName());
     	lblType.setText(user.giveUserType());
-    	lblPassword.setText(new String(user.getPassword())); 
-    	//TODO het passwoord hierboven is de hashcode, dit moet het echte passwoord worden!
 	}
 
 	private void setTooltips() { 

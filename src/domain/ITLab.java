@@ -19,6 +19,7 @@ public class ITLab {
 	private SessionCalendar currentSessioncalendar;
 	private Session currentSession;
 	private User loggedInUser;
+	private List<Classroom> classrooms;
 
 	// data
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
@@ -31,9 +32,11 @@ public class ITLab {
 																											// temporary
 		try {																								// solution
 			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+			loadClassrooms();
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
 		}
+		
 		
 	}
 
@@ -47,14 +50,14 @@ public class ITLab {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
 	}
 
-	public boolean isUserPassComboValid(String username, char[] password) {
+	public boolean isUserPassComboValid(String username, String password) {
 		User u;
 		try {
 			u = em.createQuery(" SELECT u FROM User u WHERE :userName = u.userName ", User.class).setParameter("userName", username).getSingleResult();
 
 			if (u != null && (u.getUserType() == UserType.HEAD || u.getUserType() == UserType.RESPONSIBLE)) {
 				if(u.getPassword() != null) {
-					if (Arrays.equals(u.getPassword().toCharArray(), password) && username.equals(u.getUserName())) {
+					if (u.getPassword().equals(password) && username.equals(u.getUserName())) {
 						setLoggedInUser(u);
 						return true;
 					}
@@ -75,6 +78,9 @@ public class ITLab {
 		em.getTransaction().commit();
 	}
 
+	private void loadClassrooms() {
+		this.classrooms = em.createNamedQuery("Classroom.findAll", Classroom.class).getResultList();
+	}
 	
 //	public void switchCurrentSession(int sessionID) {
 //		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
@@ -133,6 +139,10 @@ public class ITLab {
 		 this.loggedInUser = loggedInUser;
 	}
 	
+	public List<Classroom> getClassrooms() {
+		return classrooms;
+	}
+
 	public boolean isUserHeadOrResponsible() { //head = true responsible = false
 		if(loggedInUser.getUserType() == UserType.HEAD)
 			return true;

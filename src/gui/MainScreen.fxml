@@ -147,7 +147,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" maxHeight="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Uitloggen" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#clickSignOut" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Uitloggen" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
                </font>

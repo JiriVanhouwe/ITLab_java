@@ -25,11 +25,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 public class MainScreenController extends SplitPane {
 
@@ -195,6 +198,34 @@ public class MainScreenController extends SplitPane {
     	hbox_mainSection.getChildren().add(uc);
     }
     
+    @FXML
+    void clickSignOut(MouseEvent event) {
+    	//Toon het login scherm
+    	//Sluit huidig scherm
+		Stage curStage = (Stage) btnSignOut.getScene().getWindow();
+		curStage.close();
+		
+		//Open nieuw scherm
+		Scene scene = new Scene(new LogInController(usercontroller));
 
+		Parent root = scene.getRoot();
+		Stage stage = new Stage();
+		UserController usercontroller = new UserController();
+
+		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
+		stage.setTitle("Log in");
+		stage.setScene(scene);
+
+		
+		// The stage will not get smaller than its preferred (initial) size.
+		stage.setOnShown((WindowEvent t) -> {
+			stage.setMinWidth(stage.getWidth());
+			stage.setMinHeight(stage.getHeight());
+		});
+		
+		
+		stage.initStyle(StageStyle.UNDECORATED); // heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
+		stage.show();
+    }
 
 }

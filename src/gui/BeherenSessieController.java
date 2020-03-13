@@ -13,7 +13,10 @@ import com.jfoenix.controls.JFXTextField;
 
 import domain.Classroom;
 import domain.ITLab;
+import domain.ITLabSingleton;
 import domain.SessionController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,9 +52,6 @@ public class BeherenSessieController extends VBox{
     @FXML
     private JFXButton image_btn;
     
-    @FXML
-    private JFXTextField classroom_txt; // TODO dit later vervangen door de combobox op te vullen met de mogelijke classrooms
-    
     private ITLab iTLab;
     
     private Entry entry;
@@ -76,22 +76,27 @@ public class BeherenSessieController extends VBox{
     	this.start_date.setValue(entry.getStartDate());
     	//this.start_time.setValue(entry.getStartTime());
     	//this.end_time.setValue(entry.getEndTime());
-    	//this.clasroom_dropdown.getItems().add(new Classroom("B1234", Campus.GENT, 200, ClassRoomCategory.CLASSROOM));
+    	//this.clasroom_dropdown.getSelectionModel().select(entry);
     	
-    	System.out.println(entry.getId());
+    	fillClassrooms();
     	
     	sessionController = new SessionController(); 
     	this.entry = entry;
     }
     
-    @FXML
+    private void fillClassrooms() {
+		ObservableList<Classroom> classrooms = FXCollections.observableArrayList(ITLabSingleton.getITLabInstance().getClassrooms());
+		clasroom_dropdown.getItems().addAll(classrooms);
+	}
+
+	@FXML
     void pressedCancelBtn(ActionEvent event) {
     	this.close();
     }
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
-    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), sessionController.giveClassroom(this.classroom_txt.getText()), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
+    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), clasroom_dropdown.getValue(), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
     	
     	this.entry.setTitle(this.title_txt.getText());
     	this.entry.setId(id);

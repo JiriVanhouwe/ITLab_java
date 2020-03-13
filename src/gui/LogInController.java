@@ -97,10 +97,8 @@ public class LogInController extends AnchorPane {
 		}catch(NoSuchAlgorithmException e) {
 			throw new RuntimeException();
 		}
-		//Een wachtwoord geven we best door in een char[] i.p.v. een string
-		char[] hashedPW = generatedPassword.toCharArray();
 		
-		if (usercontroller.isUserPassComboValid(tfUser.getText(), hashedPW)) {
+		if (usercontroller.isUserPassComboValid(tfUser.getText(), generatedPassword)) {
 			//Sluit huidig scherm
 			Stage curStage = (Stage) tfUser.getScene().getWindow();
 			curStage.close();

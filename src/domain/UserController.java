@@ -1,5 +1,7 @@
 package domain;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 
 import javafx.collections.FXCollections;
@@ -11,7 +13,7 @@ public class UserController extends Controller {
 		super();
 	}
 	
-	public boolean isUserPassComboValid(String username, char[] password) {
+	public boolean isUserPassComboValid(String username, String password) {
 		return getItLab().isUserPassComboValid(username, password);
 	}
 
@@ -48,8 +50,24 @@ public class UserController extends Controller {
 	}
 	
 	public void changePassword(String userName, String password) {
+		//Password hashing
+		String hashedPassword;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] bytes = md.digest();
+			StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            hashedPassword = sb.toString();
+		}catch(NoSuchAlgorithmException e) {
+			throw new RuntimeException();
+		}
+		
 		User user = giveUser(userName);
-		user.setPassword(password);
+		user.setPassword(hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();

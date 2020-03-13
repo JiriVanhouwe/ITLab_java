@@ -35,18 +35,28 @@
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
+            <JFXPasswordField fx:id="txfNewPassword" layoutX="708.0" layoutY="412.0" prefHeight="0.0" prefWidth="220.0">
+               <font>
+                  <Font name="Ebrima" size="14.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXPasswordField fx:id="txfConfirmPassword" layoutX="708.0" layoutY="466.0" prefHeight="0.0" prefWidth="220.0">
+               <font>
+                  <Font name="Ebrima" size="14.0" />
+               </font>
+            </JFXPasswordField>
+            <Label layoutX="502.0" layoutY="420.0" text="Wijzig wachtwoord" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="502.0" layoutY="478.0" text="Bevestig wachtwoord" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <JFXPasswordField fx:id="txfNewPassword" layoutX="709.0" layoutY="484.0" prefHeight="0.0" prefWidth="220.0">
-         <font>
-            <Font name="Ebrima" size="14.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXPasswordField fx:id="txfConfirmPassword" layoutX="709.0" layoutY="538.0" prefHeight="0.0" prefWidth="220.0">
-         <font>
-            <Font name="Ebrima" size="14.0" />
-         </font>
-      </JFXPasswordField>
       <Label layoutX="506.0" layoutY="196.0" text="Gebruikersnaam" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
@@ -63,21 +73,6 @@
          </font>
       </Label>
       <Label layoutX="506.0" layoutY="368.0" text="Type" textFill="WHITE">
-         <font>
-            <Font name="Ebrima Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="506.0" layoutY="431.0" text="Wachtwoord" textFill="WHITE">
-         <font>
-            <Font name="Ebrima Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="503.0" layoutY="492.0" text="Wijzig wachtwoord" textFill="WHITE">
-         <font>
-            <Font name="Ebrima Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="503.0" layoutY="550.0" text="Bevestig wachtwoord" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font>
@@ -102,6 +97,5 @@
             <Font name="Ebrima" size="15.0" />
          </font>
       </Label>
-      <JFXPasswordField fx:id="lblPassword" editable="false" layoutX="709.0" layoutY="428.0" prefHeight="26.0" prefWidth="220.0" />
    </children>
 </fx:root>
