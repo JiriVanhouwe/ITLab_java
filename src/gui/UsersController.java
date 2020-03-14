@@ -9,8 +9,10 @@ import domain.User;
 import domain.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -30,6 +32,9 @@ public class UsersController extends AnchorPane{
 
     @FXML
     private JFXButton btnDeleteUser;
+    
+    @FXML
+    private Label lblMessage;
     
     @FXML
     private TableView<User> tableViewUsers;
@@ -92,7 +97,11 @@ public class UsersController extends AnchorPane{
     void btnDeleteUserClick(MouseEvent event) {
     	if(selectedUser != null || !selectedUser.isBlank()) {
     		userController.deleteUser(selectedUser);
+    	} else {
+    		//TODO hier loopt iets mis. Hij onthoudt de laatst geselecteerde. Ook al lijkt de selectie leeg te zijn.
+    		lblMessage.setText("Gelieve eerst een gebruiker te selecteren.");
     	}
+    	tableViewUsers.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -100,7 +109,11 @@ public class UsersController extends AnchorPane{
 
     }
 
-
+    @FXML
+    void searchFilter(KeyEvent event) {
+    	String newValue = txfSearch.getText();
+    	userController.changeFilter(newValue);	
+    }
 
 
 	

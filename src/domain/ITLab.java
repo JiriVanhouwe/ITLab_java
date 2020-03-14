@@ -13,6 +13,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+
 
 public class ITLab {
 
@@ -20,6 +24,8 @@ public class ITLab {
 	private Session currentSession;
 	private User loggedInUser;
 	private List<Classroom> classrooms;
+	private ObservableList<User> allUsers;
+	private FilteredList<User> filteredUserList;
 
 	// data
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
@@ -33,11 +39,11 @@ public class ITLab {
 		try {																								// solution
 			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
 			loadClassrooms();
+			loadAllUsers();
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
-		}
-		
-		
+		}	
+		filteredUserList = new FilteredList<>(allUsers, u -> true);
 	}
 
 	// methodes
@@ -131,16 +137,21 @@ public class ITLab {
 		return emf;
 	}
 
+	//begin: alles met users
 	public User getLoggedInUser() {
 		return this.loggedInUser;
+	}
+	
+	public void loadAllUsers() {
+		allUsers = FXCollections.observableArrayList(getEntityManager().createNamedQuery("User.getAllUsers", User.class).getResultList());
+	}
+	
+	public ObservableList<User> getAllUsers(){
+		return filteredUserList;
 	}
 
 	public void setLoggedInUser(User loggedInUser) {
 		 this.loggedInUser = loggedInUser;
-	}
-	
-	public List<Classroom> getClassrooms() {
-		return classrooms;
 	}
 
 	public boolean isUserHeadOrResponsible() { //head = true responsible = false
@@ -149,6 +160,25 @@ public class ITLab {
 		else return false;
 	}
 	
+	public void changeFilter(String filter) {
+		filteredUserList.setPredicate(user -> 
+		{
+			if(filter == null || filter.isBlank())
+				return true;
+			
+			String lowerCaseFilter = filter.toLowerCase();
+			return user.getFirstName().toLowerCase().contains(lowerCaseFilter) 
+					|| user.getLastName().toLowerCase().contains(lowerCaseFilter)
+					|| user.getUserName().toLowerCase().contains(lowerCaseFilter)
+					|| user.giveUserStatus().toLowerCase().contains(lowerCaseFilter)
+					|| user.giveUserType().toLowerCase().contains(lowerCaseFilter);
+		});
+	}
+	//eind: alles met users
+	
+	public List<Classroom> getClassrooms() {
+		return classrooms;
+	}
 
 	// jpa methodes
 	private void initializePersistentie() {

@@ -29,8 +29,7 @@ public class UserController extends Controller {
 		return  itLab.getEntityManager().createNamedQuery("User.getUserByUserName", User.class).setParameter("userName", userName).getSingleResult();
 	}
 	public ObservableList<User> giveAllUsers(){
-		ObservableList<User> users = FXCollections.observableArrayList(itLab.getEntityManager().createNamedQuery("User.getAllUsers", User.class).getResultList());
-		return FXCollections.unmodifiableObservableList(users).sorted(Comparator.comparing(User::getFirstName));
+		return itLab.getAllUsers().sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName));
 	}
 	
 	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
@@ -79,5 +78,9 @@ public class UserController extends Controller {
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().remove(user);
 		itLab.getEntityManager().getTransaction().commit();
+	}
+	
+	public void changeFilter(String filter) {
+		itLab.changeFilter(filter);
 	}
 }

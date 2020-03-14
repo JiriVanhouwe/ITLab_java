@@ -62,6 +62,15 @@ public class User {
 		}
 		return res;
 	}
+	public String giveUserStatus() { 
+		String res = "";
+		switch(this.userStatus.toString()) { 
+		case "ACIVE" : res = "Actief"; break;
+		case "BLOCKED" : res = "Geblokkeerd"; break;
+		case "NONACTIVE" : res = "Niet-actief"; break;
+		}
+		return res;
+	}
 
 	//getters and setters 
 	public String getFirstName() {
@@ -136,11 +145,11 @@ public class User {
 	}
 	
 	public StringProperty userTypeProperty() {
-		return new SimpleStringProperty(userType.toString());
+		return new SimpleStringProperty(giveUserType());
 	}
 	
 	public StringProperty userStatusProperty() {
-		return new SimpleStringProperty(userStatus.toString());
+		return new SimpleStringProperty(giveUserStatus());
 	}
 
 }
