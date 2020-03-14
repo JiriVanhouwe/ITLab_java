@@ -81,20 +81,23 @@ public class BeherenSessieController extends VBox{
     	
     	sessionController = new SessionController(); 
     	this.entry = entry;
+    	fillClassrooms();
     	
     	Session clickedSession = sessionController.giveSession(entry.getId());
     	this.title_txt.setText(entry.getTitle());
     	this.start_date.setValue(entry.getStartDate());
-    	this.description_txt.setText(clickedSession.getDescription());
-    	this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
-    	this.speaker_txt.setText(clickedSession.getNameGuest());
+    	if(clickedSession != null || entry.getId().charAt(entry.getId().length() - 1) == '#') {
+    		this.description_txt.setText(clickedSession.getDescription());
+        	this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
+        	this.speaker_txt.setText(clickedSession.getNameGuest());
+    	}
     	
     	//Formatting for the time
     	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
     	this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
     	this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
     	
-    	fillClassrooms();
+    	
     }
     
     private void fillClassrooms() {
@@ -109,8 +112,8 @@ public class BeherenSessieController extends VBox{
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
-    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), clasroom_dropdown.getValue(), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), this.speaker_txt.getText());
-    	
+    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(), clasroom_dropdown.getValue().getMaxSeats(), this.description_txt.getText(), this.speaker_txt.getText());
+    	this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(), entry.getEndTime());
     	this.entry.setTitle(this.title_txt.getText());
     	this.entry.setId(id);
     	this.close();
