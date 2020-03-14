@@ -246,7 +246,6 @@ public class Session{
 	}
 
 	public int getSessionID() {
-		// TODO Auto-generated method stub
 		return this.sessionID;
 	}
 
@@ -258,8 +257,8 @@ public class Session{
 		this.state = state;
 	}
 
-	
-	
-	
+	public String getNameGuest() {
+		return nameGuest;
+	}
 
 }

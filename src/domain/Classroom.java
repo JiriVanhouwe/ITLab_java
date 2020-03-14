@@ -35,7 +35,7 @@ public class Classroom {
 
 	@Override
 	public String toString() {
-		return classid + ", campus=" + campus + ", maxSeats=" + maxSeats + ", roomCategory="
+		return classid + ", Campus = " + campus + ", Seats = " + maxSeats + ", Category = "
 				+ roomCategory;
 	}
 	
