@@ -12,8 +12,8 @@
 
 <fx:root prefHeight="800.0" prefWidth="1310.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9900" height="559.0" layoutX="677.0" layoutY="133.0" opacity="0.54" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="691.0" />
-      <Pane prefHeight="800.0" prefWidth="677.0" style="-fx-background-color: #0081C5;">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9900" height="559.0" layoutX="677.0" layoutY="133.0" opacity="0.54" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="691.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="133.0" />
+      <Pane prefHeight="800.0" prefWidth="679.0" style="-fx-background-color: #0081C5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="631.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="58.0" layoutY="39.0" prefHeight="65.0" prefWidth="297.0" text="Instellingen" textFill="WHITE">
                <font>
