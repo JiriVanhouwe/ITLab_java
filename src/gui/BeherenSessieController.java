@@ -3,6 +3,7 @@ package gui;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.controlsfx.control.PopOver;
 
@@ -14,6 +15,7 @@ import com.jfoenix.controls.JFXTextField;
 import domain.Classroom;
 import domain.ITLab;
 import domain.ITLabSingleton;
+import domain.Session;
 import domain.SessionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -42,6 +45,12 @@ public class BeherenSessieController extends VBox{
 
     @FXML
     private DatePicker start_date;
+    
+    @FXML
+    private Label fromHour_txt;
+
+    @FXML
+    private Label toHour_txt;
 
     @FXML
     private JFXButton savebtn;
@@ -70,16 +79,22 @@ public class BeherenSessieController extends VBox{
     	      throw new RuntimeException(ex);
     	}
     	
-    	this.title_txt.setText(entry.getTitle());
-    	this.start_date.setValue(entry.getStartDate());
-    	//this.start_time.setValue(entry.getStartTime());
-    	//this.end_time.setValue(entry.getEndTime());
-    	//this.clasroom_dropdown.getSelectionModel().select(entry);
-    	
-    	fillClassrooms();
-    	
     	sessionController = new SessionController(); 
     	this.entry = entry;
+    	
+    	Session clickedSession = sessionController.giveSession(entry.getId());
+    	this.title_txt.setText(entry.getTitle());
+    	this.start_date.setValue(entry.getStartDate());
+    	this.description_txt.setText(clickedSession.getDescription());
+    	this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
+    	this.speaker_txt.setText(clickedSession.getNameGuest());
+    	
+    	//Formatting for the time
+    	DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    	this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
+    	this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
+    	
+    	fillClassrooms();
     }
     
     private void fillClassrooms() {
@@ -94,7 +109,7 @@ public class BeherenSessieController extends VBox{
 
     @FXML
     void pressedSaveBtn(ActionEvent event) {
-    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), clasroom_dropdown.getValue(), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), "");
+    	String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(), clasroom_dropdown.getValue(), LocalDateTime.now(), LocalDateTime.now().plusHours(1), 10, this.description_txt.getText(), this.speaker_txt.getText());
     	
     	this.entry.setTitle(this.title_txt.getText());
     	this.entry.setId(id);

@@ -257,8 +257,8 @@ public class Session{
 		this.state = state;
 	}
 
-	
-	
-	
+	public String getNameGuest() {
+		return nameGuest;
+	}
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
+import com.calendarfx.model.CalendarEvent;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
@@ -14,6 +15,7 @@ import com.calendarfx.view.CalendarView;
 import domain.Session;
 import domain.SessionController;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -96,9 +98,12 @@ public class CalendarController extends HBox{
     	HBox.setHgrow(calendarView, Priority.ALWAYS);
     	
     	this.getChildren().add(calendarView);
+    	
+    	EventHandler<CalendarEvent> handler = evt -> calendarEntryChanged(evt);
+    	calendar1.addEventHandler(handler);
 	}
-    
-    private void linkSessionsToEntries(Calendar calendar) {
+
+	private void linkSessionsToEntries(Calendar calendar) {
     	List<Session> sessions = this.sessionController.giveSessionsCurrentCalendar();
     	
     	sessions.stream().forEach(session -> {
@@ -109,4 +114,12 @@ public class CalendarController extends HBox{
     		calendar.addEntry(entry);
     	});
     }
+	
+    private void calendarEntryChanged(CalendarEvent evt) {
+		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
+			Session session = sessionController.giveSession(evt.getEntry().getId());
+			System.out.println(session.getSessionID());
+			sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest());
+		}
+	}
 }
