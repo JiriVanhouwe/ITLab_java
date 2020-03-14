@@ -62,6 +62,7 @@ public class User {
 		}
 		return res;
 	}
+	
 	public String giveUserStatus() { 
 		String res = "";
 		switch(this.userStatus.toString()) { 

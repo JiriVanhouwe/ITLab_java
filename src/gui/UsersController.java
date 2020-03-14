@@ -9,17 +9,22 @@ import domain.User;
 import domain.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class UsersController extends AnchorPane{ 
 	
 	private UserController userController;
-	private String selectedUser;
+	private String selectedUser = "";
 	
     @FXML
     private JFXTextField txfSearch;
@@ -106,7 +111,21 @@ public class UsersController extends AnchorPane{
 
     @FXML
     void btnNewUserClick(MouseEvent event) {
+		//Open nieuw scherm
+		Scene scene = new Scene(new MakeUserController(userController));
+		
+		Stage stage = new Stage();
+		stage.setOnShown((WindowEvent t) -> {
+			stage.setMinWidth(700);
+			stage.setMinHeight(700);
+		});
 
+		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
+		stage.setTitle("ITLab");
+		stage.setHeight(1080);
+		stage.setMaximized(true);
+		stage.setScene(scene);
+		stage.show();
     }
 
     @FXML
