@@ -38,6 +38,10 @@ public class Classroom {
 		return classid + ", Campus = " + campus + ", Seats = " + maxSeats + ", Category = "
 				+ roomCategory;
 	}
+
+	public int getMaxSeats() {
+		return maxSeats;
+	}
 	
 	
 	
