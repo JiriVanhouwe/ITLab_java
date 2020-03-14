@@ -246,7 +246,6 @@ public class Session{
 	}
 
 	public int getSessionID() {
-		// TODO Auto-generated method stub
 		return this.sessionID;
 	}
 

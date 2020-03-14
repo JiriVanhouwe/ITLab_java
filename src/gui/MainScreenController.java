@@ -193,6 +193,7 @@ public class MainScreenController extends SplitPane {
     	btnUsers.getStyleClass().add("selected");
     	_selectedButton = btnUsers;
     	
+    	
     	hbox_mainSection.getChildren().clear();
     	uc = new UsersController(this.usercontroller);
     	hbox_mainSection.getChildren().add(uc);
