@@ -119,6 +119,7 @@ public class LogInController extends AnchorPane {
 			stage.setMaximized(true);
 			stage.setScene(scene);
 			stage.show();
+			
 		} else {
 			txt_error.setText("Verkeerde gebruikersnaam \nof wachtwoord.");
 		}

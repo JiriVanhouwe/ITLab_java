@@ -30,9 +30,6 @@ import javax.persistence.Transient;
 import com.calendarfx.model.Entry;
 
 @Entity
-@NamedQueries({
-
-})
 @Table(name="Session")
 public class Session{
 
@@ -57,7 +54,7 @@ public class Session{
 	private int maxAttendee;
 	@ElementCollection
 	@JoinTable(name = "Session_Media")
-	private List<String> media;
+	private List<Integer> media;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> registeredUsers;
@@ -83,7 +80,7 @@ public class Session{
 		
 	}
 	
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest) {
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -92,18 +89,17 @@ public class Session{
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
-		
+		setMedia(media);
 
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
 		attendees = new ArrayList<>();
-		media = new ArrayList<>();
 	}
 
 	
 	
 	// methoden
-	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest) {
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -112,7 +108,7 @@ public class Session{
 		setMaxAttendee(maxAttendee);
 		setClassRoom(classroom);
 		setNameGuest(nameGuest);
-		
+		setMedia(media);
 	}
 	
 	public void registerAttendee(User user) {
@@ -197,11 +193,11 @@ public class Session{
 		this.maxAttendee = maxAttendee;
 	}
 
-	private List<String> getMedia() {
+	public List<Integer> getMedia() {
 		return media;
 	}
 
-	private void setMedia(List<String> media) {
+	private void setMedia(List<Integer> media) {
 		this.media = media;
 	}
 
@@ -260,5 +256,4 @@ public class Session{
 	public String getNameGuest() {
 		return nameGuest;
 	}
-
 }

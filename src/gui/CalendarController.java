@@ -119,7 +119,7 @@ public class CalendarController extends HBox{
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
 			System.out.println(session.getSessionID());
-			sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest());
+			sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia());
 		}
 	}
 }

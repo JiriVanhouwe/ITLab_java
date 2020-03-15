@@ -37,7 +37,7 @@ public class SessionTest {
 	@MethodSource("newSessionValidParameters")
 	public void testChangeSession_ChangesSessionValid(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classroom, String nameGuest) {
 		Session s = new Session("A new session", "some text", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 
-										10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker");
+										10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker", null);
 		
 		s.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
 		

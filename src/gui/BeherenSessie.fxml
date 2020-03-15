@@ -7,12 +7,13 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="443.0" spacing="10.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="443.0" spacing="10.0" style="-fx-border-color: #0081c5; -fx-border-width: 10;" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Manage session">
          <font>
@@ -29,7 +30,7 @@
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="title_txt" prefHeight="26.0" prefWidth="364.0">
+            <JFXTextField fx:id="title_txt" prefHeight="26.0" prefWidth="352.0">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -43,7 +44,7 @@
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="speaker_txt" prefHeight="26.0" prefWidth="326.0">
+            <JFXTextField fx:id="speaker_txt" prefHeight="26.0" prefWidth="313.0">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -71,7 +72,7 @@
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
             </Label>
-            <JFXTextArea fx:id="description_txt" prefHeight="150.0" prefWidth="310.0" style="-fx-background-color: #e8e8e8;">
+            <JFXTextArea fx:id="description_txt" prefHeight="141.0" prefWidth="287.0" style="-fx-background-color: #e8e8e8;">
                <font>
                   <Font name="SansSerif Regular" size="12.0" />
                </font>
@@ -81,21 +82,47 @@
             </JFXTextArea>
          </children>
       </HBox>
-      <HBox prefHeight="38.0" prefWidth="423.0">
+      <VBox prefHeight="176.0" prefWidth="402.0">
          <children>
-            <Label text="Image">
+            <HBox prefHeight="38.0" prefWidth="423.0">
+               <children>
+                  <Label text="Add Image">
+                     <font>
+                        <Font name="SansSerif Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="image_txt" prefHeight="26.0" prefWidth="198.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXButton fx:id="image_btn" buttonType="RAISED" onAction="#pressedImageBtn" prefHeight="28.0" prefWidth="31.0" style="-fx-background-color: #e8e8e8;" text="...">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="addimage_btn" buttonType="RAISED" layoutX="320.0" layoutY="10.0" onAction="#pressedAddImageBtn" prefHeight="28.0" prefWidth="39.0" style="-fx-background-color: #e8e8e8;" text="Add">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Label text="Images">
                <font>
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
             </Label>
-            <JFXTextField fx:id="image_txt" prefHeight="26.0" prefWidth="290.0">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </JFXTextField>
-            <JFXButton fx:id="image_btn" buttonType="RAISED" onAction="#pressedImageBtn" prefHeight="28.0" prefWidth="24.0" style="-fx-background-color: #e8e8e8;" text="..." />
+            <ScrollPane hbarPolicy="NEVER" prefHeight="108.0" prefWidth="402.0" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="image_scrollpane" prefHeight="104.0" prefWidth="382.0" />
+               </content>
+            </ScrollPane>
          </children>
-      </HBox>
+      </VBox>
       <HBox prefHeight="38.0" prefWidth="423.0">
          <children>
             <Label text="Date">
@@ -133,7 +160,7 @@
             <Insets bottom="20.0" />
          </VBox.margin>
          <children>
-            <JFXButton fx:id="savebtn" buttonType="RAISED" defaultButton="true" onAction="#pressedSaveBtn" prefHeight="26.0" prefWidth="65.0" ripplerFill="WHITE" style="-fx-background-color: #e8e8e8;" text="Save" underline="true" />
+            <JFXButton fx:id="savebtn" buttonType="RAISED" defaultButton="true" onAction="#pressedSaveBtn" prefHeight="26.0" prefWidth="65.0" ripplerFill="#0081c5" style="-fx-background-color: #e8e8e8;" text="Save" underline="true" />
             <JFXButton fx:id="cancelbtn" buttonType="RAISED" cancelButton="true" onAction="#pressedCancelBtn" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: #e8e8e8;" text="Cancel" underline="true">
                <HBox.margin>
                   <Insets left="100.0" />

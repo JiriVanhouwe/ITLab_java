@@ -1,7 +1,19 @@
 package domain;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectOutputStream;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
+
+import javafx.scene.image.Image;
 
 public class SessionController extends Controller {
 
@@ -37,13 +49,13 @@ public class SessionController extends Controller {
 		return itLab.giveSessions();
 	}
 
-	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) {
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
-			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
+			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media);
 			return sessionID;
 		} else {
-			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest);
+			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media);
 		}
 
 	}
@@ -52,8 +64,8 @@ public class SessionController extends Controller {
 	// naar het juiste sessionid, want een entry neemt anders zijn eigen nummering
 	// aan die niet gelijk zal lopen met sessions
 	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classRoom,
-			int maxAttendee, String description, String nameGuest) {
-		Session session = new Session(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest);
+			int maxAttendee, String description, String nameGuest, List<Integer> media) {
+		Session session = new Session(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest, media);
 		itLab.addSession(session);
 		return String.format("%d#", session.getSessionID());
 	}
@@ -67,5 +79,46 @@ public class SessionController extends Controller {
 	public Classroom giveClassroom(String text) {
 		return itLab.getEntityManager().createNamedQuery("Classroom.findById", Classroom.class)
 				.setParameter("classid", text).getSingleResult();
+	}
+	
+	public Image giveImage(int id) {
+		//We have to get the image from the db and return it
+		try {
+			//Specify where the file has to be temporarily saved, inside the project folder
+			FileOutputStream  fo = new FileOutputStream("images\\TempImage.png");
+			//Execute the query and read the result to the outputstream
+			fo.write( (byte[]) itLab.getEntityManager().createNativeQuery("SELECT image FROM IMAGE WHERE IMAGEKEY = '" + id + "'").getSingleResult());
+			fo.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new Image("file:images\\TempImage.png");
+	}
+	
+	public Integer saveImage(Image image) {
+		
+		//Save the image to the Image table
+		itLab.getEntityManager().getTransaction().begin();
+		FileInputStream in;
+		try {
+			//Transform URL to URI
+			in = new FileInputStream(image.getUrl().replaceAll("file:", ""));
+			itLab.getEntityManager().createNativeQuery("INSERT INTO Image VALUES(?)")
+			.setParameter(1, in.readAllBytes())
+			.executeUpdate();
+			in.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		itLab.getEntityManager().getTransaction().commit();
+		
+		//Return the id that has been generated
+		return ((BigDecimal) itLab.getEntityManager().createNativeQuery("SELECT IDENT_CURRENT('Image')").getSingleResult()).intValue();
 	}
 }

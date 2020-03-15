@@ -1,5 +1,8 @@
 package domain;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -16,6 +19,7 @@ import javax.persistence.Persistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.image.Image;
 
 
 public class ITLab {
@@ -75,10 +79,10 @@ public class ITLab {
 		return false;
 	}
 
-	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest) {
+	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) {
 		Session session = currentSessioncalendar.giveSession(id);
 		em.getTransaction().begin();
-		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
+		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media);
 		currentSessioncalendar.addSession(session);
 		em.persist(session);
 		em.getTransaction().commit();
@@ -179,6 +183,7 @@ public class ITLab {
 	public List<Classroom> getClassrooms() {
 		return classrooms;
 	}
+	
 
 	// jpa methodes
 	private void initializePersistentie() {
