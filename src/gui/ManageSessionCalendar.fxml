@@ -8,36 +8,54 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root prefHeight="741.0" prefWidth="878.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="555.0" prefWidth="341.0">
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="878.0">
          <children>
-            <Label layoutX="32.0" layoutY="168.0" text="Academiejaar" />
-            <JFXTextField fx:id="txtAcademicYear" layoutX="124.0" layoutY="156.0" />
-            <JFXDatePicker fx:id="txtStartDate" defaultColor="#337ab7" layoutX="124.0" layoutY="202.0" />
-            <Label layoutX="32.0" layoutY="216.0" text="Startdatum" />
-            <Label layoutX="32.0" layoutY="261.0" text="Einddatum" />
-            <JFXDatePicker fx:id="txtEndDate" defaultColor="#337ab7" layoutX="124.0" layoutY="256.0" />
-            <Text fill="#337ab7" layoutX="36.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer sessiekalender">
-               <font>
-                  <Font name="Roboto Bold" size="25.0" />
-               </font>
-            </Text>
-            <Button fx:id="btnConfirm" layoutX="157.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #337ab7;" text="Bevestig" textFill="WHITE" />
+            <AnchorPane prefHeight="555.0" prefWidth="341.0">
+               <children>
+                  <Label layoutX="32.0" layoutY="168.0" text="Academiejaar" />
+                  <JFXTextField fx:id="txtAcademicYear" layoutX="124.0" layoutY="156.0" />
+                  <JFXDatePicker fx:id="txtStartDate" defaultColor="#337ab7" layoutX="124.0" layoutY="202.0" />
+                  <Label layoutX="32.0" layoutY="216.0" text="Startdatum" />
+                  <Label layoutX="32.0" layoutY="261.0" text="Einddatum" />
+                  <JFXDatePicker fx:id="txtEndDate" defaultColor="#337ab7" layoutX="124.0" layoutY="256.0" />
+                  <Text fill="#337ab7" layoutX="36.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Beheer sessiekalender">
+                     <font>
+                        <Font name="Roboto Bold" size="25.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="btnConfirm" layoutX="157.0" layoutY="327.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #337ab7;" text="Bevestig" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tblSessionCalendars" prefHeight="447.0" prefWidth="537.0">
+                    <columns>
+                      <TableColumn fx:id="colAcademicYear" prefWidth="198.0" text="Academiejaar" />
+                      <TableColumn fx:id="colStartEndDate" prefWidth="338.0" text="Begin- en einddatum" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      </HBox>
+      <AnchorPane prefHeight="294.0" prefWidth="878.0">
          <children>
-            <TableView fx:id="tblSessionCalendars" prefHeight="447.0" prefWidth="537.0">
+            <TableView fx:id="calSessions" prefHeight="294.0" prefWidth="878.0">
               <columns>
-                <TableColumn fx:id="colAcademicYear" prefWidth="198.0" text="Academiejaar" />
-                <TableColumn fx:id="colStartEndDate" prefWidth="338.0" text="Begin- en einddatum" />
+                <TableColumn fx:id="colSessionTitle" prefWidth="448.0" text="Titel" />
+                <TableColumn fx:id="colSessionDate" prefWidth="200.0" text="Datum" />
+                  <TableColumn fx:id="colSessionStart" prefWidth="125.0" text="Startuur" />
+                  <TableColumn fx:id="colSessionEnd" prefWidth="125.0" text="Einduur" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
    </children>
-</HBox>
+</fx:root>
