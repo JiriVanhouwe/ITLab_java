@@ -100,7 +100,7 @@ public class User {
 	public void setUserName(String userName) {
 		if (userName == null || userName.isBlank())
 			throw new IllegalArgumentException("Gebruikersnaam moet ingevuld zijn.");
-		if(!userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "student.hogent.com") && !userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "hogent.com"))
+		if(!userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "student.hogent.be") && !userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "hogent.be"))
 			throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
 		this.userName = userName.trim();
 	}

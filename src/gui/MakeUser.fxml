@@ -23,7 +23,7 @@
                </font>
             </Label>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6fb7dd" height="559.0" layoutY="122.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="679.0" />
-            <JFXButton fx:id="btnSave" layoutX="748.0" layoutY="603.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan">
+            <JFXButton fx:id="btnSave" layoutX="735.0" layoutY="603.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
@@ -37,12 +37,12 @@
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txfPassword" layoutX="708.0" layoutY="484.0" prefHeight="0.0" prefWidth="220.0">
+            <JFXPasswordField fx:id="txfPassword" layoutX="708.0" layoutY="484.0" prefHeight="30.0" prefWidth="351.0">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXPasswordField fx:id="txfConfirmPassword" layoutX="708.0" layoutY="541.0" prefHeight="0.0" prefWidth="220.0">
+            <JFXPasswordField fx:id="txfConfirmPassword" layoutX="708.0" layoutY="541.0" prefHeight="30.0" prefWidth="350.0">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
@@ -84,24 +84,32 @@
             <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txfUserName" layoutX="710.0" layoutY="193.0" prefHeight="26.0" prefWidth="220.0" promptText="gebruikersnaam">
+      <JFXTextField fx:id="txfUserName" layoutX="710.0" layoutY="193.0" prefHeight="26.0" prefWidth="350.0" promptText="gebruikersnaam">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txfFirstName" layoutX="710.0" layoutY="252.0" prefHeight="26.0" prefWidth="220.0" promptText="voornaam">
+      <JFXTextField fx:id="txfFirstName" layoutX="710.0" layoutY="252.0" prefHeight="26.0" prefWidth="350.0" promptText="voornaam">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txfLastName" layoutX="710.0" layoutY="307.0" prefHeight="26.0" prefWidth="220.0" promptText="familienaam">
+      <JFXTextField fx:id="txfLastName" layoutX="710.0" layoutY="307.0" prefHeight="26.0" prefWidth="350.0" promptText="familienaam">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font></JFXTextField>
       <ComboBox fx:id="cmbUserType" layoutX="710.0" layoutY="371.0" prefHeight="26.0" prefWidth="220.0" promptText="Type gebruiker" />
       <ComboBox fx:id="cmbUserStatus" layoutX="710.0" layoutY="433.0" prefHeight="26.0" prefWidth="220.0" promptText="Status gebruiker" />
-      <Label fx:id="lblMessage" layoutX="710.0" layoutY="144.0" prefHeight="34.0" prefWidth="430.0" textFill="RED">
+      <Label fx:id="lblMessage" layoutX="702.0" layoutY="694.0" prefHeight="59.0" prefWidth="530.0" textFill="RED">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>
       </Label>
+      <JFXButton fx:id="btnGoBack" layoutX="901.0" layoutY="603.0" onMouseClicked="#clickGoBack" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Keer terug">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </fx:root>
