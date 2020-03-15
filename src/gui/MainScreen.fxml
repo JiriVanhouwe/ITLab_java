@@ -47,7 +47,7 @@
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </Line>
-            <Button fx:id="btnCalendar" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="213.0" styleClass="selected" stylesheets="@style.css" text="Kalender" textFill="WHITE" textOverrun="CLIP" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnCalendar" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#clickBtnCalendar" prefHeight="47.0" prefWidth="213.0" styleClass="selected" stylesheets="@style.css" text="Kalender" textFill="WHITE" textOverrun="CLIP" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
                </font>
@@ -71,7 +71,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnSessions" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Sessies" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnSessions" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#clickBtnSessions" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Sessies" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
                </font>
@@ -92,7 +92,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Statistieken" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#clickBtnStatistics" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Statistieken" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
                </font>
