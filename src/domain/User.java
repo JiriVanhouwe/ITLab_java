@@ -63,14 +63,14 @@ public class User {
 		return res;
 	}
 	
+
 	public String giveUserStatus() { 
-		String res = "";
-		switch(this.userStatus.toString()) { 
-		case "ACIVE" : res = "Actief"; break;
-		case "BLOCKED" : res = "Geblokkeerd"; break;
-		case "NONACTIVE" : res = "Niet-actief"; break;
+		switch(this.userStatus) { 
+			case ACTIVE : return "Actief"; 
+			case BLOCKED : return "Geblokkeerd";
+			case NONACTIVE : return "Niet-actief";
 		}
-		return res;
+		return null;
 	}
 
 	//getters and setters 
