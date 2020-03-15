@@ -94,75 +94,11 @@ public class MainScreenController extends SplitPane {
     	changeMainSection(new CalendarController());
     }
     
-//    private void initializeCalendar() {
-//		CalendarView calendarView = new CalendarView();
-//		calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
-//		calendarView.setShowPrintButton(false); // make the printing option invisible
-//	
-//		
-//		Calendar calendar1 = new Calendar("Sessies"); 
-//
-//        calendar1.setStyle(Style.STYLE2);
-//
-//        calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController(param.getEntry()));
-//        
-//
-//        CalendarSource myCalendarSource = new CalendarSource("My Calendars"); 
-//        myCalendarSource.getCalendars().add(calendar1);
-//
-//        calendarView.getCalendarSources().addAll(myCalendarSource); 
-//
-//        calendarView.setRequestedTime(LocalTime.now());
-//
-//        Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
-//                @Override
-//                public void run() {
-//                        while (true) {
-//                                Platform.runLater(() -> {
-//                                        calendarView.setToday(LocalDate.now());
-//                                        calendarView.setTime(LocalTime.now());
-//                                });
-//
-//                                try {
-//                                        // update every 10 seconds
-//                                        sleep(10000);
-//                                } catch (InterruptedException e) {
-//                                        e.printStackTrace();
-//                                }
-//                        }
-//                };
-//        };
-//        
-//        linkSessionsToEntries(calendar1);
-//
-//        Entry<String> session1 = new Entry<>("Sessie 1");
-//        session1.changeStartDate(LocalDate.now().plusDays(1));
-//        session1.changeStartTime(LocalTime.now().plusHours(1));
-//        session1.changeEndTime(LocalTime.now().plusHours(6));
-//        session1.changeEndDate(LocalDate.now().plusDays(1));
-//        calendar1.addEntry(session1);
-//
-//        updateTimeThread.setPriority(Thread.MIN_PRIORITY);
-//        updateTimeThread.setDaemon(true);
-//        updateTimeThread.start();
-//        
-//
-//    	_selectedButton = btnCalendar;
-//    	changeMainSection(calendarView);
-//	}
-//    
-//    private void linkSessionsToEntries(Calendar calendar) {
-//    	List<Session> sessions = this.sessionController.giveSessionsCurrentCalendar();
-//    	
-//    	sessions.stream().forEach(session -> {
-//    		Entry entry = new Entry();
-//    		entry.setId(Integer.toString(session.getSessionID()) + "#");
-//    		entry.setTitle(session.getTitle());
-//    		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
-//    		calendar.addEntry(entry);
-//    	});
-//    }
-    
+
+	private void initializeScreen() {
+		User user = usercontroller.giveLoggedInUser();
+	}
+	
     private void changeMainSection(Node node) {
     	if(hbox_mainSection.getChildren().size() > 0)
     		hbox_mainSection.getChildren().remove(0);
@@ -170,17 +106,35 @@ public class MainScreenController extends SplitPane {
     	HBox.setHgrow(node, Priority.ALWAYS);
     	hbox_mainSection.getChildren().add(node);
     }
-
-	private void initializeScreen() {
-		User user = usercontroller.giveLoggedInUser();
-	}
+    
+    private void changeSelectedButton(Button button) {
+    	_selectedButton.getStyleClass().remove("selected");
+    	button.getStyleClass().add("selected");
+    	_selectedButton = button;
+    }
 	
     @FXML
     void userNameClick(MouseEvent event) {
-    	hbox_mainSection.getChildren().clear();
-    	SettingsController uc = new SettingsController(this.usercontroller);
-    	hbox_mainSection.getChildren().add(uc);
+    	changeSelectedButton(btnSettings);
+    	changeMainSection(new SettingsController(this.usercontroller));
     }
+    
+    @FXML
+    void clickBtnCalendar(MouseEvent event) {
+    	changeSelectedButton(btnCalendar);
+    	changeMainSection(new CalendarController());
+    }
+    
+    @FXML
+    void clickBtnSessions(MouseEvent event) {
+    	changeSelectedButton(btnSessions);
+    }
+    
+    @FXML
+    void clickBtnStatistics(MouseEvent event) {
+    	changeSelectedButton(btnStatistics);
+    }
+    
     @FXML
     void clickBtnSettings(MouseEvent event) {
     	userNameClick(event);
@@ -188,14 +142,16 @@ public class MainScreenController extends SplitPane {
     
     @FXML
     void clickBtnUsers(MouseEvent event) {  	
-    	_selectedButton.getStyleClass().remove("selected");
-    	btnUsers.getStyleClass().add("selected");
-    	_selectedButton = btnUsers;
+//    	_selectedButton.getStyleClass().remove("selected");
+//    	btnUsers.getStyleClass().add("selected");
+//    	_selectedButton = btnUsers;
     	
     	
-    	hbox_mainSection.getChildren().clear();
-    	uc = new UsersController(this.usercontroller);
-    	hbox_mainSection.getChildren().add(uc);
+//    	hbox_mainSection.getChildren().clear();
+//    	uc = new UsersController(this.usercontroller);
+//    	hbox_mainSection.getChildren().add(uc);
+    	changeSelectedButton(btnUsers);
+    	changeMainSection(new UsersController(this.usercontroller));
     }
     
     @FXML
@@ -224,7 +180,7 @@ public class MainScreenController extends SplitPane {
 		});
 		
 		
-		stage.initStyle(StageStyle.UNDECORATED); // heel mooi effect, maar we moeten er nog in slagen het op het hoofdscherm terug te veranderen naar DECORATED
+		stage.initStyle(StageStyle.UNDECORATED); 
 		stage.show();
     }
 

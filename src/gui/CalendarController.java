@@ -20,7 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class CalendarController extends HBox{
+public class CalendarController extends HBox {
 	private SessionController sessionController;
 	
 	public CalendarController() {
