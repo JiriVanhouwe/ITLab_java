@@ -63,8 +63,8 @@ public class UserTest {
 				Arguments.of(new String[] {"Donald", "Troemp", "    "}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
 				Arguments.of(new String[] {"Donald", "Troemp", null}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
 				//fout in een van de enums
-				Arguments.of(new String[] {"Donald", "Troemp", "donald.troemp@student.hogent.turkey"}, null, UserStatus.ACTIVE, "123"),
-				Arguments.of(new String[] {"Donald", "Troemp", "donald.troemp@student.hogent.turkey"}, UserType.USERITLAB, null, "123")
+				Arguments.of(new String[] {"Donald", "Troemp", "donald.troemp@hogent.be"}, null, UserStatus.ACTIVE, "123"),
+				Arguments.of(new String[] {"Donald", "Troemp", "donald.troemp@student.hogent.be"}, UserType.USERITLAB, null, "123")
 				);		
 	}
 	

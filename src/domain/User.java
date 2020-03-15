@@ -130,6 +130,8 @@ public class User {
 	}
 	
 	public void setPassword(String password) {
+		if(password == null || password.isBlank())
+			throw new IllegalArgumentException("Het wachtwoord mag niet leeg zijn.");
 		this.password = password;
 	}
 	
