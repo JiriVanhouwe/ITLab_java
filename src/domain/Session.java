@@ -18,16 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import com.calendarfx.model.Entry;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 @Entity
 @Table(name="Session")
@@ -252,5 +249,21 @@ public class Session{
 
 	public String getNameGuest() {
 		return nameGuest;
+	}
+	
+	public StringProperty sessionTitleProperty() {
+		return new SimpleStringProperty(title);
+	}
+	
+	public StringProperty sessionDateProperty() {
+		return new SimpleStringProperty(eventDate.toString());
+	}
+	
+	public StringProperty sessionStartHourProperty() {
+		return new SimpleStringProperty(startHour.toString());
+	}
+	
+	public StringProperty sessionEndHourProperty() {
+		return new SimpleStringProperty(endHour.toString());
 	}
 }

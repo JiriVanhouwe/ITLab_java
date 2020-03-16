@@ -1,9 +1,8 @@
 package domain;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SessionCalendarController extends Controller {
 
@@ -14,6 +13,14 @@ public class SessionCalendarController extends Controller {
 	//methodes
 	public SessionCalendar giveSessionCalendar(){
 		return super.itLab.getCurrentSessioncalendar();
+	}
+	
+	public List<Session> giveSessionsCurrentMonth() {
+		return super.itLab.getCurrentSessioncalendar()
+					.getSessions()
+					.stream()
+					.filter(session -> session.getDate().getMonth() == LocalDate.now().getMonth())
+					.collect(Collectors.toList());
 	}
 	
 	public List<SessionCalendar> giveSessionCalendars(){

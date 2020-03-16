@@ -71,14 +71,14 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnSessions" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#clickBtnSessions" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Sessies" textFill="WHITE" VBox.vgrow="ALWAYS">
+            <Button fx:id="btnSessionCalendars" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" mnemonicParsing="false" onMouseClicked="#clickBtnSessionCalendars" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Sessiekalenders" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/vial-solid.png" />
+                        <Image url="@../resources/border-all-solid.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />

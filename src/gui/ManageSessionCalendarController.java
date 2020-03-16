@@ -4,28 +4,30 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import domain.Session;
 import domain.SessionCalendar;
 import domain.SessionCalendarController;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 
-public class ManageSessionCalendarController {
+public class ManageSessionCalendarController extends VBox{
 
 	   @FXML
 	    private JFXTextField txtAcademicYear;
 
 	    @FXML
-	    private JFXDatePicker txtStartDate;
+	    private DatePicker dpStartDate;
 
 	    @FXML
-	    private JFXDatePicker txtEndDate;
+	    private DatePicker dpEndDate;
 
 	    @FXML
 	    private Button btnConfirm;
@@ -40,19 +42,19 @@ public class ManageSessionCalendarController {
 	    private TableColumn<SessionCalendar, LocalDate> colStartEndDate;
 
 	    @FXML
-	    private TableView<Session> calSessions;
+	    private TableView<Session> tblSessions;
 
 	    @FXML
 	    private TableColumn<Session, String> colSessionTitle;
 
 	    @FXML
-	    private TableColumn<Session, LocalDate> colSessionDate;
+	    private TableColumn<Session, String> colSessionDate;
 
 	    @FXML
-	    private TableColumn<Session, LocalTime> colSessionStart;
+	    private TableColumn<Session, String> colSessionStart;
 
 	    @FXML
-	    private TableColumn<Session, LocalTime> colSessionEnd;
+	    private TableColumn<Session, String> colSessionEnd;
 	    
 	    private SessionCalendarController sessionCalendarController;
 	    private SessionCalendar selectedSessionCalendar;
@@ -71,8 +73,15 @@ public class ManageSessionCalendarController {
 			selectedSessionCalendar = sessionCalendarController.giveSessionCalendar();
 			
 			txtAcademicYear.setText("NOG IN KLASSE SESSIONCALENDAR STEKEN");
-			txtStartDate.setValue(selectedSessionCalendar.getStartDate());
-			txtEndDate.setValue(selectedSessionCalendar.getEndDate());
+			dpStartDate.setValue(selectedSessionCalendar.getStartDate());
+			dpEndDate.setValue(selectedSessionCalendar.getEndDate());
+			
+			colSessionTitle.setCellValueFactory(data -> data.getValue().sessionTitleProperty());
+			colSessionDate.setCellValueFactory(data -> data.getValue().sessionDateProperty());
+			colSessionStart.setCellValueFactory(data -> data.getValue().sessionStartHourProperty());
+			colSessionEnd.setCellValueFactory(data -> data.getValue().sessionEndHourProperty());
+			
+			tblSessions.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionsCurrentMonth()));
 			
 		}
 }

@@ -19,6 +19,7 @@ import domain.UserController;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -58,7 +59,7 @@ public class MainScreenController extends SplitPane {
     private Button btnCalendar;
 
     @FXML
-    private Button btnSessions;
+    private Button btnSessionCalendars;
 
     @FXML
     private Button btnStatistics;
@@ -126,8 +127,9 @@ public class MainScreenController extends SplitPane {
     }
     
     @FXML
-    void clickBtnSessions(MouseEvent event) {
-    	changeSelectedButton(btnSessions);
+    void clickBtnSessionCalendars(MouseEvent event) {
+    	changeSelectedButton(btnSessionCalendars);
+    	changeMainSection(new ManageSessionCalendarController());
     }
     
     @FXML
