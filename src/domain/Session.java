@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ import javafx.beans.property.StringProperty;
 
 @Entity
 @Table(name="Session")
-public class Session{
+public class Session implements GuiSession{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -195,7 +196,7 @@ public class Session{
 		this.media = media;
 	}
 
-	private List<User> getRegisteredUsers() {
+	public List<User> getRegisteredUsers() {
 		return registeredUsers;
 	}
 
@@ -266,4 +267,10 @@ public class Session{
 	public StringProperty sessionEndHourProperty() {
 		return new SimpleStringProperty(endHour.toString());
 	}
+
+	@Override
+	public List<GuiUser> getAttendeesGui() {
+		return this.getAttendees().stream().map(user -> (GuiUser)user).collect(Collectors.toList());
+	}
+
 }

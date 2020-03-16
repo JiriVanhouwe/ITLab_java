@@ -17,7 +17,7 @@ import javafx.beans.property.StringProperty;
 	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName ")
 })
 @Table(name="ItlabUser")
-public class User {
+public class User implements GuiUser {
 	@Id
 	private String userName; //dit moet uniek zijn, e-mailadres HoGent en wordt opgeslagen in kleine letters!
 	private String firstName;
