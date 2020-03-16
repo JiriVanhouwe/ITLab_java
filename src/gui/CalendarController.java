@@ -12,11 +12,15 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 
+import domain.RequiredElement;
 import domain.Session;
 import domain.SessionController;
+import exceptions.InformationRequiredException;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
@@ -119,7 +123,34 @@ public class CalendarController extends HBox {
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
 			System.out.println(session.getSessionID());
-			sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia());
+			try {
+				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia());
+			} catch (InformationRequiredException e) {
+				// TODO Auto-generated catch block
+				Alert a = new Alert(AlertType.ERROR);
+				String res = null;
+				for(RequiredElement el: e.getInformationRequired()) {
+					switch(el) {
+					case ATENDEESREQUIRED:
+						res += String.format("Fout: bij instellen max aanwezigen%n");
+						break;
+					case CLASSROOMREQUIRED:
+						res += String.format("Fout: bij instellen klas lokaal");
+						break;
+					case ENDDATEREQUIRED:
+						res += String.format("Fout: bij instellen eind datum");
+						break;
+					case STARTDATEREQUIRED:
+						res += String.format("Fout: bij instellen start datum");
+						break;
+					case TITLEREQUIRED:
+						res += String.format("Fout: bij instellen van de title");
+						break;
+							}
+						}
+				
+				a.setContentText(res);
+			}
 		}
 	}
 }

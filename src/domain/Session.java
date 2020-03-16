@@ -86,8 +86,8 @@ public class Session{
 		setDate(startDate.toLocalDate());
 		setStartHour(startDate.toLocalTime());
 		setEndHour(endDate.toLocalTime());
+		setClassroom(classRoom);
 		setMaxAttendee(maxAttendee);
-		setClassRoom(classRoom);
 		setNameGuest(nameGuest);
 		setMedia(media);
 
@@ -105,8 +105,8 @@ public class Session{
 		setDate(startDate.toLocalDate());
 		setStartHour(startDate.toLocalTime());
 		setEndHour(endDate.toLocalTime());
+		setClassroom(classroom);
 		setMaxAttendee(maxAttendee);
-		setClassRoom(classroom);
 		setNameGuest(nameGuest);
 		setMedia(media);
 	}
@@ -132,9 +132,7 @@ public class Session{
 		return title;
 	}
 
-	private void setTitle(String title) {
-		if (title == null || title.isBlank())
-			throw new IllegalArgumentException("titel moet ingevuld zijn");
+	protected void setTitle(String title) {
 		this.title = title; 
 	}
 
@@ -142,11 +140,11 @@ public class Session{
 		return description;
 	}
 
-	private void setDescription(String description) {
+	protected void setDescription(String description) {
 		this.description = description;
 	}
 
-	private void setNameGuest(String nameGuest) {
+	protected void setNameGuest(String nameGuest) {
 		this.nameGuest = nameGuest;
 	}
 
@@ -154,7 +152,7 @@ public class Session{
 		return classroom;
 	}
 
-	private void setClassRoom(Classroom classroom) {
+	protected void setClassroom(Classroom classroom) {
 		this.classroom = classroom;
 	}
 
@@ -164,7 +162,7 @@ public class Session{
 	}
 
 	public void setEndHour(LocalTime endHour) {
-		this.endHour = endHour;
+			this.endHour = endHour;
 	}
 
 	public LocalTime getStartHour() {
@@ -184,12 +182,11 @@ public class Session{
 	}
 
 	public int getMaxAttendee() {
+		
 		return maxAttendee;
 	}
 
-	private void setMaxAttendee(int maxAttendee) {
-		if (maxAttendee <= 0)
-			throw new IllegalArgumentException("maxaanwezigen moeten groter dan nul zijn");
+	protected void setMaxAttendee(int maxAttendee) {
 		this.maxAttendee = maxAttendee;
 	}
 
@@ -197,7 +194,7 @@ public class Session{
 		return media;
 	}
 
-	private void setMedia(List<Integer> media) {
+	protected void setMedia(List<Integer> media) {
 		this.media = media;
 	}
 
@@ -205,7 +202,7 @@ public class Session{
 		return registeredUsers;
 	}
 
-	private void setRegisteredUsers(List<User> registeredUsers) {
+	protected void setRegisteredUsers(List<User> registeredUsers) {
 		this.registeredUsers = registeredUsers;
 	}
 
@@ -213,7 +210,7 @@ public class Session{
 		return attendees;
 	}
 
-	private void setAttendees(List<User> attendees) {
+	protected void setAttendees(List<User> attendees) {
 		this.attendees = attendees;
 	}
 
@@ -225,7 +222,7 @@ public class Session{
 		this.host = host;
 	}
 
-	private SessionReminder getReminder() {
+	protected SessionReminder getReminder() {
 		return reminder;
 	}
 

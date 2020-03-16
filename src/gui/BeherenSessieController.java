@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.controlsfx.control.PopOver;
 
@@ -18,14 +19,18 @@ import com.jfoenix.controls.JFXTextField;
 import domain.Classroom;
 import domain.ITLab;
 import domain.ITLabSingleton;
+import domain.RequiredElement;
 import domain.Session;
 import domain.SessionController;
+import exceptions.InformationRequiredException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -141,15 +146,45 @@ public class BeherenSessieController extends VBox {
 
 	@FXML
 	void pressedSaveBtn(ActionEvent event) {
-		String id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
-				clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
-				clasroom_dropdown.getValue().getMaxSeats(), this.description_txt.getText(), this.speaker_txt.getText(),
-				new ArrayList<Integer>(this.sessionMedia.keySet()));
+		String id;
+		try {
+			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
+					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
+					clasroom_dropdown.getValue().getMaxSeats(), this.description_txt.getText(), this.speaker_txt.getText(),
+					new ArrayList<Integer>(this.sessionMedia.keySet()));
+		
 		this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 				entry.getEndTime());
 		this.entry.setTitle(this.title_txt.getText());
 		this.entry.setId(id);
 		this.close();
+		
+		} catch (InformationRequiredException e) {
+			// TODO Auto-generated catch block
+			Alert a = new Alert(AlertType.ERROR);
+			String res = null;
+			for(RequiredElement el: e.getInformationRequired()) {
+				switch(el) {
+				case ATENDEESREQUIRED:
+					res += String.format("Fout: bij instellen max aanwezigen%n");
+					break;
+				case CLASSROOMREQUIRED:
+					res += String.format("Fout: bij instellen klas lokaal");
+					break;
+				case ENDDATEREQUIRED:
+					res += String.format("Fout: bij instellen eind datum");
+					break;
+				case STARTDATEREQUIRED:
+					res += String.format("Fout: bij instellen start datum");
+					break;
+				case TITLEREQUIRED:
+					res += String.format("Fout: bij instellen van de title");
+					break;
+						}
+					}
+			
+			a.setContentText(res);
+		}
 	}
 
 	@FXML

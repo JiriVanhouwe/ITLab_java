@@ -13,12 +13,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Stream;
 
+import exceptions.InformationRequiredException;
 import javafx.scene.image.Image;
 
 public class SessionController extends Controller {
+	
+	private final SessionBuilder sb;
 
 	public SessionController() {
 		super();
+		sb = new SessionBuilder();
 	}
 
 	public Session giveSession(String sessionID) {
@@ -49,7 +53,7 @@ public class SessionController extends Controller {
 		return itLab.giveSessions();
 	}
 
-	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) {
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) throws InformationRequiredException {
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
 			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media);
@@ -63,9 +67,19 @@ public class SessionController extends Controller {
 	// waarom hier id terug geven -> het entryid moet onmiddelijk aangepast orden
 	// naar het juiste sessionid, want een entry neemt anders zijn eigen nummering
 	// aan die niet gelijk zal lopen met sessions
-	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classRoom,
-			int maxAttendee, String description, String nameGuest, List<Integer> media) {
-		Session session = new Session(title, description, startDate, endDate, maxAttendee, classRoom, nameGuest, media);
+	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classroom,
+			int maxAttendee, String description, String nameGuest, List<Integer> media) throws InformationRequiredException {
+		sb.createSession();
+		sb.buildTitle(title);
+		sb.buildDates(startDate, endDate);
+		sb.buildClassroomAndMaxAtendeees(classroom , maxAttendee);
+		sb.buildDescription(description);
+		sb.buildGuestSpeaker(nameGuest);
+		sb.buildMedia(media);
+		
+		
+		Session session = sb.getSession();
+		
 		itLab.addSession(session);
 		return String.format("%d#", session.getSessionID());
 	}
