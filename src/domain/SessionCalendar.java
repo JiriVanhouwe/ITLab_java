@@ -29,7 +29,7 @@ import javax.persistence.TemporalType;
 					+ " where sc.id = :id")
 })
 @Table(name="SessionCalendar")
-public class SessionCalendar {
+public class SessionCalendar implements GuiSessionCalendar {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

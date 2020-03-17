@@ -23,7 +23,7 @@ public class SessionCalendarController extends Controller {
 					.collect(Collectors.toList());
 	}
 	
-	public List<SessionCalendar> giveSessionCalendars(){
+	public List<GuiSessionCalendar> giveSessionCalendars(){
 		throw new UnsupportedOperationException();
 	}
 	
