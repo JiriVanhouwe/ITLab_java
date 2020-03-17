@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import exceptions.InformationRequiredException;
@@ -41,16 +42,11 @@ public class SessionController extends Controller {
 		return null;
 	}
 
-//	public void changeCurrentSession(int sessionID) {
-//		this.itLab.switchCurrentSession(sessionID);
-//	}
-
-	public List<Session> giveAllSessions() {
-		return this.itLab.giveSessions();
-	}
-
-	public List<Session> giveSessionsCurrentCalendar() {
-		return itLab.giveSessions();
+	public List<GuiSession> giveSessionsCurrentCalendar() {
+		return this.itLab.giveSessions()
+				.stream()
+				.map(session -> (GuiSession)session)
+				.collect(Collectors.toList());
 	}
 
 	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) throws InformationRequiredException {

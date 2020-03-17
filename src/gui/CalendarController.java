@@ -12,6 +12,7 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 
+import domain.GuiSession;
 import domain.RequiredElement;
 import domain.Session;
 import domain.SessionController;
@@ -108,7 +109,7 @@ public class CalendarController extends HBox {
 	}
 
 	private void linkSessionsToEntries(Calendar calendar) {
-    	List<Session> sessions = this.sessionController.giveSessionsCurrentCalendar();
+    	List<GuiSession> sessions = this.sessionController.giveSessionsCurrentCalendar();
     	
     	sessions.stream().forEach(session -> {
     		Entry entry = new Entry();

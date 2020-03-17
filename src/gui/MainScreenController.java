@@ -12,6 +12,7 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 
+import domain.GuiUser;
 import domain.Session;
 import domain.SessionController;
 import domain.User;
@@ -97,7 +98,7 @@ public class MainScreenController extends SplitPane {
     
 
 	private void initializeScreen() {
-		User user = usercontroller.giveLoggedInUser();
+		GuiUser user = usercontroller.giveLoggedInUser();
 	}
 	
     private void changeMainSection(Node node) {

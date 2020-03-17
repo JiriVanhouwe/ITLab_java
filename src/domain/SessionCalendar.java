@@ -55,8 +55,6 @@ public class SessionCalendar {
 		
 		setStartDate(startDate);
 		setEndDate(endDate);
-		
-		
 	}
 
 	//setters and getters

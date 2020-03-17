@@ -204,7 +204,7 @@ public class Session implements GuiSession{
 		this.registeredUsers = registeredUsers;
 	}
 
-	private List<User> getAttendees() {
+	public List<User> getAttendees() {
 		return attendees;
 	}
 
@@ -267,10 +267,4 @@ public class Session implements GuiSession{
 	public StringProperty sessionEndHourProperty() {
 		return new SimpleStringProperty(endHour.toString());
 	}
-
-	@Override
-	public List<GuiUser> getAttendeesGui() {
-		return this.getAttendees().stream().map(user -> (GuiUser)user).collect(Collectors.toList());
-	}
-
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 
+import domain.GuiUser;
 import domain.User;
 import domain.UserController;
 import javafx.fxml.FXML;
@@ -63,7 +64,7 @@ public class SettingsController extends AnchorPane{
 	}
 	
     private void setUserSettings() {
-    	User user = userController.giveLoggedInUser();
+    	GuiUser user = userController.giveLoggedInUser();
     	lblFirstName.setText(user.getFirstName());
     	lblLastName.setText(user.getLastName());
     	lblUserName.setText(user.getUserName());

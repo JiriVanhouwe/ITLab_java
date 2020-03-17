@@ -3,6 +3,7 @@ package domain;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ public class UserController extends Controller {
 		return getItLab().isUserPassComboValid(username, password);
 	}
 
-	public User giveLoggedInUser() {
+	public GuiUser giveLoggedInUser() {
 		return itLab.getLoggedInUser();
 	}
 	
@@ -25,23 +26,25 @@ public class UserController extends Controller {
 		return itLab.isUserHeadOrResponsible();
 	}
 	
-	public User giveUser(String userName) {
-		return  itLab.getEntityManager().createNamedQuery("User.getUserByUserName", User.class).setParameter("userName", userName).getSingleResult();
+	public GuiUser giveUser(String userName) {
+		return (GuiUser)giveCleanUser(userName);
 	}
-	public ObservableList<User> giveAllUsers(){
-		return itLab.getAllUsers().sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName));
+	public ObservableList<User> giveAllUsers() {
+		return itLab.getAllUsers()
+					.sorted(Comparator.comparing(User::getFirstName)
+					.thenComparing(User::getLastName));
+		
 	}
 	
 	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
-		User user = giveUser(userName);
+		User user = giveCleanUser(userName);
 		user.changeUser(firstName, lastName, userName, userType, userStatus, password); //dit gebeurt in klasse User.
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
 	
-	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
-		//TODO checken of de user al bestaat adhv userName, mag dat hier?			
+	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {		
 		User user = new User(firstName, lastName, userName, userType, userStatus, password);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
@@ -65,7 +68,7 @@ public class UserController extends Controller {
 			throw new RuntimeException();
 		}
 		
-		User user = giveUser(userName);
+		User user = giveCleanUser(userName);
 		user.setPassword(hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
@@ -74,7 +77,7 @@ public class UserController extends Controller {
 
 	
 	public void deleteUser(String userName) {
-		User user = giveUser(userName);
+		User user = giveCleanUser(userName);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().remove(user);
 		itLab.getEntityManager().getTransaction().commit();
@@ -82,6 +85,10 @@ public class UserController extends Controller {
 	
 	public void changeFilter(String filter) {
 		itLab.changeFilter(filter);
+	}
+	
+	private User giveCleanUser(String userName) {
+		return  itLab.getEntityManager().createNamedQuery("User.getUserByUserName", User.class).setParameter("userName", userName).getSingleResult();
 	}
 	
 	

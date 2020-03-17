@@ -14,12 +14,7 @@ public interface GuiSession {
 	LocalDate getDate();
 	int getMaxAttendee();
 	List<Integer> getMedia();
-	List<GuiUser> getAttendeesGui();
+	List<User> getAttendees();
 	List<User> getRegisteredUsers();
 	int getSessionID();
-	
-	StringProperty sessionTitleProperty();
-	StringProperty sessionDateProperty();
-	StringProperty sessionStartHourProperty();
-	StringProperty sessionEndHourProperty();
 }
