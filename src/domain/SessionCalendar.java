@@ -2,31 +2,30 @@ package domain;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "SessionCal.findCurCal", 
 			query = "Select sc from SessionCalendar sc"
-					+ " where sc.id = :id")
+					+ " where sc.id = :id"),
+	@NamedQuery(name = "SessoinCal.findAll", query = "Select sc from SessionCalendar sc")
 })
 @Table(name="SessionCalendar")
 public class SessionCalendar implements GuiSessionCalendar {
@@ -115,6 +114,16 @@ public class SessionCalendar implements GuiSessionCalendar {
 	public Session giveSession(int id) {
 		return sessions.stream().filter(session -> session.getSessionID() == id).findFirst().orElse(null);
 	}
-
 	
+	public StringProperty sessionCalendarYearProperty() {
+		return new SimpleStringProperty(Integer.toString(id));
+	}
+	
+	public StringProperty sessionCalendarStartDateProperty() {
+		return new SimpleStringProperty(startDate.toString());
+	}
+
+	public StringProperty sessionCalendarEndDateProperty() {
+		return new SimpleStringProperty(endDate.toString());
+	}
 }

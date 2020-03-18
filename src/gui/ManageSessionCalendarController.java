@@ -36,10 +36,13 @@ public class ManageSessionCalendarController extends VBox{
 	    private TableView<SessionCalendar> tblSessionCalendars;
 
 	    @FXML
-	    private TableColumn<SessionCalendar, Integer> colAcademicYear;
+	    private TableColumn<SessionCalendar, String> colAcademicYear;
 
 	    @FXML
-	    private TableColumn<SessionCalendar, LocalDate> colStartEndDate;
+	    private TableColumn<SessionCalendar, String> colStartDate;
+
+	    @FXML
+	    private TableColumn<SessionCalendar, String> colEndDate;
 
 	    @FXML
 	    private TableView<Session> tblSessions;
@@ -72,7 +75,7 @@ public class ManageSessionCalendarController extends VBox{
 			sessionCalendarController = new SessionCalendarController();
 			selectedSessionCalendar = sessionCalendarController.giveSessionCalendar();
 			
-			txtAcademicYear.setText("NOG IN KLASSE SESSIONCALENDAR STEKEN");
+			txtAcademicYear.setText(Integer.toString(selectedSessionCalendar.getId()));
 			dpStartDate.setValue(selectedSessionCalendar.getStartDate());
 			dpEndDate.setValue(selectedSessionCalendar.getEndDate());
 			
@@ -82,6 +85,12 @@ public class ManageSessionCalendarController extends VBox{
 			colSessionEnd.setCellValueFactory(data -> data.getValue().sessionEndHourProperty());
 			
 			tblSessions.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionsCurrentMonth()));
+			
+			colAcademicYear.setCellValueFactory(data -> data.getValue().sessionCalendarYearProperty());
+			colStartDate.setCellValueFactory(data -> data.getValue().sessionCalendarStartDateProperty());
+			colEndDate.setCellValueFactory(data -> data.getValue().sessionCalendarEndDateProperty());
+			
+			tblSessionCalendars.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionCalendars()));
 			
 		}
 }

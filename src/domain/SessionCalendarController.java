@@ -16,15 +16,15 @@ public class SessionCalendarController extends Controller {
 	}
 	
 	public List<Session> giveSessionsCurrentMonth() {
-		return super.itLab.getCurrentSessioncalendar()
+		return itLab.getCurrentSessioncalendar()
 					.getSessions()
 					.stream()
 					.filter(session -> session.getDate().getMonth() == LocalDate.now().getMonth())
 					.collect(Collectors.toList());
 	}
 	
-	public List<GuiSessionCalendar> giveSessionCalendars(){
-		throw new UnsupportedOperationException();
+	public List<SessionCalendar> giveSessionCalendars(){
+		return itLab.getSessionCalendars();
 	}
 	
 	public void changeSessionCalendar(LocalDate startDate, LocalDate endDate) {

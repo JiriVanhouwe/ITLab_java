@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -16,7 +20,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.image.Image;
@@ -30,6 +36,7 @@ public class ITLab {
 	private List<Classroom> classrooms;
 	private ObservableList<User> allUsers;
 	private FilteredList<User> filteredUserList;
+	private List<SessionCalendar> sessionCalendars;
 
 	// data
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
@@ -41,12 +48,17 @@ public class ITLab {
 		
 		try {																								
 			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 20192020 ).getSingleResult());
+			sessionCalendars = em.createNamedQuery("SessoinCal.findAll", SessionCalendar.class).getResultList();
 			loadClassrooms();
+			
 			loadAllUsers();
+			if(allUsers == null)
+				this.allUsers = FXCollections.observableList(new ArrayList<>());
 			filteredUserList = new FilteredList<>(allUsers, u -> true);
 			
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
+			
 		}	
 	}
 
@@ -118,6 +130,10 @@ public class ITLab {
 	
 	
 	// getters and setters
+	public List<SessionCalendar> getSessionCalendars() {
+		return this.sessionCalendars;
+	}
+	
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
 	}

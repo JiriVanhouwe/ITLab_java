@@ -37,7 +37,8 @@
                   <TableView fx:id="tblSessionCalendars" prefHeight="447.0" prefWidth="537.0">
                     <columns>
                       <TableColumn fx:id="colAcademicYear" prefWidth="198.0" text="Academiejaar" />
-                      <TableColumn fx:id="colStartEndDate" prefWidth="338.0" text="Begin- en einddatum" />
+                      <TableColumn fx:id="colStartDate" prefWidth="170.0" text="Startdatum" />
+                        <TableColumn fx:id="colEndDate" prefWidth="170.0" text="Einddatum" />
                     </columns>
                   </TableView>
                </children>
