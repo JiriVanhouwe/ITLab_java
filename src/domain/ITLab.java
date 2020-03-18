@@ -30,6 +30,7 @@ public class ITLab {
 	private List<Classroom> classrooms;
 	private ObservableList<User> allUsers;
 	private FilteredList<User> filteredUserList;
+	private List<SessionCalendar> sessionCalendars;
 
 	// data
 	public final String PERSISTENCE_UNIT_NAME = "ITLab_DB";
@@ -41,6 +42,7 @@ public class ITLab {
 		
 		try {																								
 			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 20192020 ).getSingleResult());
+			sessionCalendars = em.createNamedQuery("SessoinCal.findAll", SessionCalendar.class).getResultList();
 			loadClassrooms();
 			loadAllUsers();
 			filteredUserList = new FilteredList<>(allUsers, u -> true);
@@ -118,6 +120,10 @@ public class ITLab {
 	
 	
 	// getters and setters
+	public List<SessionCalendar> getSessionCalendars() {
+		return this.sessionCalendars;
+	}
+	
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;
 	}
