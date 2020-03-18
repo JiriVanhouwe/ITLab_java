@@ -21,4 +21,5 @@ open module ITLab {
 	requires org.controlsfx.controls;
 	requires com.jfoenix;
 	requires java.desktop;
+	requires java.mail;
 }

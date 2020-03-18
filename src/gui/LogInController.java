@@ -3,6 +3,9 @@ package gui;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.controlsfx.control.PopOver;
@@ -10,6 +13,7 @@ import org.controlsfx.control.PopOver;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import domain.MailController;
 import domain.UserController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -81,10 +85,13 @@ public class LogInController extends AnchorPane {
 			txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
 		else
 		{
-			//TODO zend email
-			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
-		}
-			
+			sendNewPasswordEmail(email);
+			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");			
+		}		
+	}
+
+	private void sendNewPasswordEmail(String email) {
+		new MailController(email); //send new password to user.
 	}
 
 	@FXML
