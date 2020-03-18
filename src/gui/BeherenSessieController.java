@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.controlsfx.control.PopOver;
 
@@ -104,6 +101,7 @@ public class BeherenSessieController extends VBox {
 		sessionController = new SessionController();
 		this.entry = entry;
 		fillClassrooms();
+		sessionMedia = new HashMap<Integer, Image>();
 
 		Session clickedSession = sessionController.giveSession(entry.getId());
 		this.title_txt.setText(entry.getTitle());
@@ -112,15 +110,15 @@ public class BeherenSessieController extends VBox {
 			this.description_txt.setText(clickedSession.getDescription());
 			this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
 			this.speaker_txt.setText(clickedSession.getNameGuest());
+			
+			// Fill the image list
+			loadImages();
 		}
 
 		// Formatting for the time
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 		this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
 		this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
-
-		// Fill the image list
-		loadImages();
 	}
 
 	private void fillClassrooms() {
@@ -131,7 +129,6 @@ public class BeherenSessieController extends VBox {
 
 	private void loadImages() {
 		Session clickedSession = sessionController.giveSession(entry.getId());
-		this.sessionMedia = new HashMap<Integer, Image>();
 		for (Integer i : clickedSession.getMedia()) {
 			this.sessionMedia.put(i, sessionController.giveImage(i));
 		}

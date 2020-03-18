@@ -89,13 +89,6 @@ public class CalendarController extends HBox {
         
         linkSessionsToEntries(calendar1);
 
-        Entry<String> session1 = new Entry<>("Sessie 1");
-        session1.changeStartDate(LocalDate.now().plusDays(1));
-        session1.changeStartTime(LocalTime.now().plusHours(1));
-        session1.changeEndTime(LocalTime.now().plusHours(6));
-        session1.changeEndDate(LocalDate.now().plusDays(1));
-        calendar1.addEntry(session1);
-
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
