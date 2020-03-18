@@ -65,7 +65,7 @@ public class UsersController extends AnchorPane{
 
     @FXML
     private TableColumn<User, String> statusColumn;
-	
+
 	public UsersController(UserController userController) {
 		this.userController = userController;
 		
