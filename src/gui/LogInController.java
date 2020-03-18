@@ -69,14 +69,22 @@ public class LogInController extends AnchorPane {
 
 		Optional<String> result = input.showAndWait();
 		String emailadres = result.get();
-		// TODO
-		// als het emailadres gekend is in de DB: "Je kan een nieuw wachtwoord instellen
-		// via jouw e-mail".
-		// als het emailadres niet gekend is in de DB: "Dit e-mailadres is ongekend."
-		if (!emailadres.isBlank())
-			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
+		
+		if(emailadres == null || emailadres.isBlank())
+			txt_error.setText("Gelieve jouw e-mailadres in te geven.");
 		else
+			checkEmailAdress(emailadres);		
+	}
+	
+	public void checkEmailAdress(String email) {
+		if(usercontroller.findEmailAddress(email) == null)
 			txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
+		else
+		{
+			//TODO zend email
+			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");
+		}
+			
 	}
 
 	@FXML

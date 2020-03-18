@@ -14,7 +14,8 @@ import javafx.beans.property.StringProperty;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="User.getAllUsers", query=" SELECT u FROM User u "), 
-	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName ")
+	@NamedQuery(name="User.getUserByUserName", query=" SELECT u FROM User u WHERE :userName = u.userName "),
+	@NamedQuery(name="User.findEmailAddress", query=" SELECT u FROM User u WHERE :userName = u.userName ")
 })
 @Table(name="ItlabUser")
 public class User implements GuiUser {
@@ -100,8 +101,12 @@ public class User implements GuiUser {
 	public void setUserName(String userName) {
 		if (userName == null || userName.isBlank())
 			throw new IllegalArgumentException("Gebruikersnaam moet ingevuld zijn.");
-		if(!userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "student.hogent.be") && !userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "hogent.be"))
+		//if(!userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "student.hogent.be") && !userName.toLowerCase().matches(firstName.toLowerCase() + "\\." + lastName.toLowerCase() + "@" +  "hogent.be"))
+			//throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
+		if(!userName.toLowerCase().matches( ".*" + "\\." + ".*" + "@" +  "student.hogent.be") && !userName.toLowerCase().matches(".*" + "\\." + ".*" + "@" +  "hogent.be"))
 			throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
+		if(!userName.toLowerCase().contains(firstName.toLowerCase()) || !userName.toLowerCase().contains(lastName.toLowerCase()))
+			throw new IllegalArgumentException("De gebruikersnaam moet jouw voor- en familienaam bevatten.\nZoals: jan.peters@hogent.be");
 		this.userName = userName.trim();
 	}
 

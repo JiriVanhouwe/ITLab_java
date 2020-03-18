@@ -110,7 +110,7 @@ public class UsersController extends AnchorPane{
     	if(selectedUser != null || !selectedUser.isBlank()) {
     		userController.deleteUser(selectedUser);
     	} else {
-    		//TODO hier loopt iets mis. Hij onthoudt de laatst geselecteerde. Ook al lijkt de selectie leeg te zijn.
+    		//TODO hier loopt iets mis.
     		lblMessage.setText("Gelieve eerst een gebruiker te selecteren.");
     	}
     	tableViewUsers.getSelectionModel().clearSelection();
