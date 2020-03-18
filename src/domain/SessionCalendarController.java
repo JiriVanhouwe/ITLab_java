@@ -31,8 +31,8 @@ public class SessionCalendarController extends Controller {
 		throw new UnsupportedOperationException();
 	}
 	
-	public void createSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		throw new UnsupportedOperationException();
+	public void createSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
+		itLab.addSessionCalendar(new SessionCalendar(id,startDate,endDate));
 	}
 	
 	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {

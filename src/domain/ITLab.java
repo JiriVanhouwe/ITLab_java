@@ -38,16 +38,16 @@ public class ITLab {
 
 	public ITLab() {
 		initializePersistentie();
-		//this.setCurrentSessioncalendar(new SessionCalendar(LocalDate.now(), LocalDate.now().plusYears(1))); // TODO
-																											// temporary
-		try {																								// solution
-			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 1).getSingleResult());
+		
+		try {																								
+			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 20192020 ).getSingleResult());
 			loadClassrooms();
 			loadAllUsers();
+			filteredUserList = new FilteredList<>(allUsers, u -> true);
+			
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
 		}	
-		filteredUserList = new FilteredList<>(allUsers, u -> true);
 	}
 
 	// methodes
@@ -115,7 +115,8 @@ public class ITLab {
 		em.persist(session);
 		em.getTransaction().commit();
 	}
-
+	
+	
 	// getters and setters
 	private void setCurrentSessioncalendar(SessionCalendar sessionCalendar) {
 		this.currentSessioncalendar = sessionCalendar;

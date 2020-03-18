@@ -184,6 +184,7 @@ public class BeherenSessieController extends VBox {
 					}
 			
 			a.setContentText(res);
+			a.showAndWait();
 		}
 	}
 

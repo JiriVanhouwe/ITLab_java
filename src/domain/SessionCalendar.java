@@ -32,8 +32,9 @@ import javax.persistence.TemporalType;
 public class SessionCalendar implements GuiSessionCalendar {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private int id;
+	
 	@Column(columnDefinition = "DATE")
 	private LocalDate startDate;
 	@Column(columnDefinition = "DATE")
@@ -48,13 +49,14 @@ public class SessionCalendar implements GuiSessionCalendar {
 		super();
 	}
 	
-	public SessionCalendar(LocalDate startDate, LocalDate endDate) {
+	public SessionCalendar(int id ,LocalDate startDate, LocalDate endDate) {
 		
 		if( startDate.isBefore(LocalDate.now()) || endDate.isBefore(startDate))
 				throw new IllegalArgumentException("De tijden zijn niet correct");
 		
 		setStartDate(startDate);
 		setEndDate(endDate);
+		setId(id);
 	}
 
 	//setters and getters
@@ -77,6 +79,20 @@ public class SessionCalendar implements GuiSessionCalendar {
 	public List<Session> getSessions() {
 		return sessions;
 	}
+	
+	public void setId(int id) {
+		if( String.valueOf(id).length() != 8)
+			throw new IllegalArgumentException("id moet bestaan uit schooljaar dus twee jaartallen zoals 20192020");
+		
+		int deel1 = Integer.parseInt(String.valueOf(id).substring(0,4));
+		int deel2 = Integer.parseInt(String.valueOf(id).substring(4,8));
+		System.out.println(deel1+1);
+		System.out.println(deel2);
+		if((deel1 + 1) != deel2 )
+			throw new IllegalArgumentException("id moet bestaan uit die opeenvolgende jaartallen");
+		this.id = id;
+	}
+
 	
 	public int getId() {
 		return this.id;
