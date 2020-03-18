@@ -22,14 +22,14 @@ public class MailController {
 
 	private Session session;
 
-	public MailController(String email) { //voor passwoord te wijzigen, is een standaard e-mail
+	public MailController(User user) { //voor passwoord te wijzigen, is een standaard e-mail
 		prepareToEmail();
-		sendPasswordEmail(email);
+		sendPasswordEmail(user);
 	}
 	
-	public MailController(String title, String message, List<String> receivers) { //als je meerdere mensen tegelijk wil sturen, hier geef je zelf de boodschap en titel op
+	public MailController(String title, String message, List<User> users) { //als je meerdere mensen tegelijk wil sturen, hier geef je zelf de boodschap en titel op
 		prepareToEmail();
-		sendEmailToMultipleReceivers(title, message, receivers);
+		sendEmailToMultipleReceivers(title, message, users);
 	}
 
 	private void prepareToEmail() {
@@ -46,14 +46,14 @@ public class MailController {
 		});
 	}
 
-	private void sendEmailToMultipleReceivers(String title, String message, List<String> receivers) {
-		receivers.forEach(rec -> // het bericht sturen naar alle adressen in de lijst
+	private void sendEmailToMultipleReceivers(String title, String message, List<User> users) {
+		users.forEach(user -> // het bericht sturen naar alle adressen in de lijst
 		{
 			try {
 				MimeMessage m = new MimeMessage(session);
 				m.setFrom(new InternetAddress(from));
 
-				m.addRecipient(Message.RecipientType.TO, new InternetAddress(rec));
+				m.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserName()));
 
 				m.setSubject(title);
 				m.setText(message);
@@ -66,13 +66,13 @@ public class MailController {
 		System.out.println("Message verzenden is gelukt.");
 	}
 
-	private void sendEmailToOneReceiver(String title, String message, String receiver) {
+	private void sendEmailToOneReceiver(String title, String message, User user) {
 
 		try {
 			MimeMessage m = new MimeMessage(session);
 			m.setFrom(new InternetAddress(from));
 
-			m.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getUserName()));
 
 			m.setSubject(title);
 			m.setText(message);
@@ -85,16 +85,16 @@ public class MailController {
 		System.out.println("Message verzenden is gelukt.");
 	}
 
-	private void sendPasswordEmail(String email) {
+	private void sendPasswordEmail(User user) {
 		int password = passwordGenerator();
 		String title = "Herstel jouw it-lab wachtwoord.";
 		String message = String.format(
-				"Beste,\n\nJouw wachtwoord werd ingesteld op %d.\nLog in en ga naar instellingen om een zelfgekozen wachtwoord in te stellen.\n\nVriendelijke groeten,\nHet it-lab\nHoGent\n",
-				password);
+				"Beste %s,\n\nJouw wachtwoord werd ingesteld op %d.\nLog in en ga naar instellingen om een zelfgekozen wachtwoord in te stellen.\n\nVriendelijke groeten,\nHet IT-Lab\nHoGent\n",
+				user.getFirstName(), password);
 		
-		new UserController().changePassword(email, String.valueOf(password)); //gewijzigde passwoord opslaan
+		new UserController().changePassword(user.getUserName(), String.valueOf(password)); //gewijzigde passwoord opslaan
 
-		sendEmailToOneReceiver(title, message, email);
+		sendEmailToOneReceiver(title, message, user);
 	}
 
 	private int passwordGenerator() {

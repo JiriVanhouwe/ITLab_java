@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import domain.MailController;
+import domain.User;
 import domain.UserController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -81,17 +82,14 @@ public class LogInController extends AnchorPane {
 	}
 	
 	public void checkEmailAdress(String email) {
-		if(usercontroller.findEmailAddress(email) == null)
+		User user = (User) usercontroller.giveUser(email);
+		if(user == null)
 			txt_error.setText("Het opgegeven e-mailadres is\nniet gekend.");
 		else
 		{
-			sendNewPasswordEmail(email);
+			new MailController(user);
 			txt_error.setText("Een nieuw wachtwoord werd naar\njouw e-mailadres verzonden.");			
 		}		
-	}
-
-	private void sendNewPasswordEmail(String email) {
-		new MailController(email); //send new password to user.
 	}
 
 	@FXML
