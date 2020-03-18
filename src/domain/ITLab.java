@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -16,7 +20,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.scene.image.Image;
@@ -44,11 +50,15 @@ public class ITLab {
 			setCurrentSessioncalendar(em.createNamedQuery("SessionCal.findCurCal",SessionCalendar.class).setParameter("id", 20192020 ).getSingleResult());
 			sessionCalendars = em.createNamedQuery("SessoinCal.findAll", SessionCalendar.class).getResultList();
 			loadClassrooms();
+			
 			loadAllUsers();
+			if(allUsers == null)
+				this.allUsers = FXCollections.observableList(new ArrayList<>());
 			filteredUserList = new FilteredList<>(allUsers, u -> true);
 			
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
+			
 		}	
 	}
 

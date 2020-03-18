@@ -136,16 +136,16 @@ public class CalendarController extends HBox {
 						res += String.format("Fout: bij instellen max aanwezigen%n");
 						break;
 					case CLASSROOMREQUIRED:
-						res += String.format("Fout: bij instellen klas lokaal");
+						res += String.format("Fout: bij instellen klas lokaal%n");
 						break;
 					case ENDDATEREQUIRED:
-						res += String.format("Fout: bij instellen eind datum");
+						res += String.format("Fout: bij instellen eind datum%n");
 						break;
 					case STARTDATEREQUIRED:
-						res += String.format("Fout: bij instellen start datum");
+						res += String.format("Fout: bij instellen start datum%n");
 						break;
 					case TITLEREQUIRED:
-						res += String.format("Fout: bij instellen van de title");
+						res += String.format("Fout: bij instellen van de title%n");
 						break;
 							}
 						}

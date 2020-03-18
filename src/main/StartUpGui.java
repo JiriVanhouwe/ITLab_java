@@ -22,7 +22,7 @@ public class StartUpGui extends Application {
 	public void start(Stage stage) {
 		ITLab itlab = new ITLab();
 		UserController usercontroller = new UserController();
-		
+	
 		Scene scene = new Scene(new LogInController(usercontroller));
 		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 		stage.setTitle("Log in");
