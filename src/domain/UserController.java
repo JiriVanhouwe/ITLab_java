@@ -40,37 +40,26 @@ public class UserController extends Controller {
 			String password) {
 		User user = giveCleanUser(userName);
 		if (user != null) {
-			user.changeUser(firstName, lastName, userName, userType, userStatus, password);
+			String hashedPassword = this.hashPassword(password);
+			user.changeUser(firstName, lastName, userName, userType, userStatus, hashedPassword);
 			itLab.getEntityManager().getTransaction().begin();
 			itLab.getEntityManager().persist(user);
 			itLab.getEntityManager().getTransaction().commit();
 		}
 	}
 
-	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus,
-			String password) {
-		User user = new User(firstName, lastName, userName, userType, userStatus, password);
+	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
+		
+		String hashedPassword = this.hashPassword(password);
+		User user = new User(firstName, lastName, userName, userType, userStatus, hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();
 	}
 
 	public void changePassword(String userName, String password) {
-		// Password hashing
-		String hashedPassword;
-		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			md.update(password.getBytes());
-			byte[] bytes = md.digest();
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < bytes.length; i++) {
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-			hashedPassword = sb.toString();
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException();
-		}
-
+		String hashedPassword = this.hashPassword(password);
+		
 		User user = giveCleanUser(userName);
 		user.setPassword(hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
@@ -105,6 +94,25 @@ public class UserController extends Controller {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	private String hashPassword(String password) {
+		// Password hashing
+		String hashedPassword;
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] bytes = md.digest();
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < bytes.length; i++) {
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+			hashedPassword = sb.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException();
+		}
+		
+		return hashedPassword;
 	}
 
 }
