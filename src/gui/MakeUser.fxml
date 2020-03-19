@@ -14,8 +14,7 @@
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="700.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0081c5" height="134.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc876" height="606.0" layoutX="-3.0" layoutY="132.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="704.0" />
-      <JFXButton fx:id="btnSave" layoutX="285.0" layoutY="631.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan">
+      <JFXButton fx:id="btnSave" layoutX="285.0" layoutY="631.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" styleClass="loginButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font>
@@ -95,7 +94,7 @@
             <Font name="Ebrima Bold" size="14.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnGoBack" layoutX="449.0" layoutY="631.0" onMouseClicked="#clickGoBack" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Keer terug">
+      <JFXButton fx:id="btnGoBack" layoutX="449.0" layoutY="631.0" onMouseClicked="#clickGoBack" prefHeight="31.0" prefWidth="116.0" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
          </font>
@@ -108,6 +107,6 @@
             <Font name="Ebrima Bold" size="37.0" />
          </font>
       </Label>
-      <Line endX="563.0" layoutX="137.0" layoutY="131.0" startX="-147.06668090820312" />
+      <Line endX="563.0" layoutX="137.0" layoutY="134.0" startX="-147.06668090820312" />
    </children>
 </fx:root>

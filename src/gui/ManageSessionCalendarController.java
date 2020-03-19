@@ -6,18 +6,22 @@ import java.time.LocalTime;
 
 import com.jfoenix.controls.JFXTextField;
 
+import domain.MailController;
 import domain.Session;
 import domain.SessionCalendar;
 import domain.SessionCalendarController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class ManageSessionCalendarController extends VBox{
 
@@ -100,6 +104,14 @@ public class ManageSessionCalendarController extends VBox{
 	    
 	    @FXML
 	    void clickMakeAnnouncement(MouseEvent event) {
-
+	    	//Open nieuw scherm
+			Scene scene = new Scene(new AnnouncementController());
+			
+			Stage stage = new Stage();
+			
+			stage.setTitle("ITLab");
+			stage.setScene(scene);
+			stage.setResizable(false);
+			stage.show();
 	    }
 }
