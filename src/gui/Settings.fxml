@@ -35,12 +35,12 @@
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txfNewPassword" layoutX="708.0" layoutY="412.0" prefHeight="0.0" prefWidth="220.0">
+            <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="708.0" layoutY="412.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXPasswordField fx:id="txfConfirmPassword" layoutX="708.0" layoutY="466.0" prefHeight="0.0" prefWidth="220.0">
+            <JFXPasswordField fx:id="txfConfirmPassword" focusColor="#ff9900" layoutX="708.0" layoutY="466.0" prefHeight="0.0" prefWidth="220.0" promptText="nieuw wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>

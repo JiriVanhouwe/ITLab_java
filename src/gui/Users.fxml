@@ -16,7 +16,7 @@
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <JFXTextField fx:id="txfSearch" layoutX="140.0" layoutY="42.0" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="zoeken">
+                  <JFXTextField fx:id="txfSearch" focusColor="#ff9900" labelFloat="true" layoutX="140.0" layoutY="42.0" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="zoeken" unFocusColor="#07508a">
                      <font>
                         <Font name="Ebrima" size="20.0" />
                      </font>

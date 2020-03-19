@@ -72,17 +72,17 @@
             <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txfUserName" layoutX="253.0" layoutY="204.0" prefHeight="26.0" prefWidth="375.0" promptText="gebruikersnaam">
+      <JFXTextField fx:id="txfUserName" focusColor="#ff9900" labelFloat="true" layoutX="253.0" layoutY="204.0" prefHeight="26.0" prefWidth="375.0" promptText="gebruikersnaam" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txfFirstName" layoutX="253.0" layoutY="263.0" prefHeight="26.0" prefWidth="375.0" promptText="voornaam">
+      <JFXTextField fx:id="txfFirstName" focusColor="#ff9900" labelFloat="true" layoutX="253.0" layoutY="263.0" prefHeight="26.0" prefWidth="375.0" promptText="voornaam" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txfLastName" layoutX="253.0" layoutY="318.0" prefHeight="26.0" prefWidth="375.0" promptText="familienaam">
+      <JFXTextField fx:id="txfLastName" focusColor="#ff9900" labelFloat="true" layoutX="253.0" layoutY="318.0" prefHeight="26.0" prefWidth="375.0" promptText="familienaam" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font>
