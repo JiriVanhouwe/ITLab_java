@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.jfoenix.controls.JFXButton;
 
@@ -8,8 +10,6 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import domain.UserController;
 import domain.UserStatus;
-import domain.UserType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -46,10 +46,10 @@ public class MakeUserController extends AnchorPane {
 	private JFXTextField txfLastName;
 
 	@FXML
-	private ComboBox<UserType> cmbUserType;
+	private ComboBox<String> cmbUserType;
 
 	@FXML
-	private ComboBox<UserStatus> cmbUserStatus;
+	private ComboBox<String> cmbUserStatus;
 	
     @FXML
     private JFXButton btnGoBack;
@@ -69,10 +69,19 @@ public class MakeUserController extends AnchorPane {
 	}
 
 	private void loadComboBoxes() {
-		ObservableList<UserType> combo1 = FXCollections.observableArrayList(UserType.values());
+		List<String> types = new ArrayList<>();
+		types.add("Hoofdverantwoordelijke");
+		types.add("Verantwoordelijke");
+		types.add("Gebruiker");
+		List<String> status = new ArrayList<>();
+		status.add("Actief");
+		status.add("Geblokkeerd");
+		status.add("Niet-actief");
+		
+		ObservableList<String> combo1 = FXCollections.observableArrayList(types);
 		cmbUserType.getItems().addAll(combo1);
 
-		ObservableList<UserStatus> combo2 = FXCollections.observableArrayList(UserStatus.values());
+		ObservableList<String> combo2 = FXCollections.observableArrayList(status);
 		cmbUserStatus.getItems().addAll(combo2);
 	}
 
@@ -80,8 +89,9 @@ public class MakeUserController extends AnchorPane {
 	void clickSave(MouseEvent event) {
 		if(passwordValidation()) {
 		try {	
+			
 			userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
-			cmbUserType.getValue(), cmbUserStatus.getValue(), txfPassword.getText());
+			userContoller.stringToUserType(cmbUserType.getValue()), userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
 
 			lblMessage.setText("De gebruiker werd aangemaakt.");
 
@@ -103,6 +113,5 @@ public class MakeUserController extends AnchorPane {
 		else
 			return false;
 		}
-    
 	}
 
