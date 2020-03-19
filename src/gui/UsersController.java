@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,13 +38,13 @@ public class UsersController extends AnchorPane{
     private JFXTextField txfSearch;
 
     @FXML
-    private JFXButton btnNewUser;
+    private Button btnNewUser;
 
     @FXML
-    private JFXButton btnChangeUser;
+    private Button btnChangeUser;
 
     @FXML
-    private JFXButton btnDeleteUser;
+    private Button btnDeleteUser;
     
     @FXML
     private Label lblMessage;
@@ -122,10 +123,6 @@ public class UsersController extends AnchorPane{
 		Scene scene = new Scene(new MakeUserController(userController));
 		
 		Stage stage = new Stage();
-		/*stage.setOnShown((WindowEvent t) -> {
-			stage.setMinWidth();
-			stage.setMinHeight(700);
-		});*/
 
 		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 		stage.setTitle("ITLab");
