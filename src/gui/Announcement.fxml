@@ -23,7 +23,7 @@
             <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txfTitle" layoutX="188.0" layoutY="240.0" prefHeight="31.0" prefWidth="454.0" promptText="titel van het bericht">
+      <JFXTextField fx:id="txfTitle" focusColor="#ff9900" labelFloat="true" layoutX="187.0" layoutY="237.0" prefHeight="31.0" prefWidth="454.0" promptText="Titel bericht" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="15.0" />
          </font>
@@ -44,7 +44,7 @@
             <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextArea fx:id="txaMessage" layoutX="187.0" layoutY="302.0" prefHeight="334.0" prefWidth="464.0" promptText="inhoud bericht">
+      <JFXTextArea fx:id="txaMessage" focusColor="#ff9900" labelFloat="true" layoutX="187.0" layoutY="302.0" prefHeight="334.0" prefWidth="464.0" promptText="Inhoud bericht" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="12.0" />
          </font>
