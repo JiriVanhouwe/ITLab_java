@@ -3,6 +3,7 @@ package domain;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.NoResultException;
@@ -48,8 +49,9 @@ public class UserController extends Controller {
 		}
 	}
 
-	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus, String password) {
-		
+	public void createUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus,
+			String password) {
+
 		String hashedPassword = this.hashPassword(password);
 		User user = new User(firstName, lastName, userName, userType, userStatus, hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
@@ -59,7 +61,7 @@ public class UserController extends Controller {
 
 	public void changePassword(String userName, String password) {
 		String hashedPassword = this.hashPassword(password);
-		
+
 		User user = giveCleanUser(userName);
 		user.setPassword(hashedPassword);
 		itLab.getEntityManager().getTransaction().begin();
@@ -111,8 +113,31 @@ public class UserController extends Controller {
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException();
 		}
-		
+
 		return hashedPassword;
 	}
 
+	public UserType stringToUserType(String type) {
+		switch (type) {
+		case "Hoofdverantwoordelijke":
+			return UserType.HEAD;
+		case "Verantwoordelijke":
+			return UserType.RESPONSIBLE;
+		case "Gebruiker":
+			return UserType.USERITLAB;
+			default: return null;
+		}
+	}
+
+	public UserStatus stringToUserStatus(String status) {
+		switch (status) {
+		case "Actief":
+			return UserStatus.ACTIVE;
+		case "Geblokkeerd":
+			return UserStatus.BLOCKED;
+		case "Nie- actief":
+			return UserStatus.NONACTIVE;
+			default: return null;
+		}
+	}
 }

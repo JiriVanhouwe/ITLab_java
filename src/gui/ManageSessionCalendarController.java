@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class ManageSessionCalendarController extends VBox{
@@ -59,6 +60,9 @@ public class ManageSessionCalendarController extends VBox{
 	    @FXML
 	    private TableColumn<Session, String> colSessionEnd;
 	    
+	    @FXML
+	    private Button btnAnnouncement;
+	    
 	    private SessionCalendarController sessionCalendarController;
 	    private SessionCalendar selectedSessionCalendar;
 	    
@@ -93,4 +97,9 @@ public class ManageSessionCalendarController extends VBox{
 			tblSessionCalendars.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionCalendars()));
 			
 		}
+	    
+	    @FXML
+	    void clickMakeAnnouncement(MouseEvent event) {
+
+	    }
 }
