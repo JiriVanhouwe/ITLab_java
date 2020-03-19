@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextField;
 import domain.UserController;
 import domain.UserStatus;
 import domain.UserType;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class MakeUserController extends AnchorPane {
 
@@ -91,7 +93,8 @@ public class MakeUserController extends AnchorPane {
 	
     @FXML
     void clickGoBack(MouseEvent event) {
-
+    	Stage stage = (Stage) getScene().getWindow();
+    	stage.close();
     }
 	
 	private boolean passwordValidation() {

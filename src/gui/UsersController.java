@@ -122,16 +122,15 @@ public class UsersController extends AnchorPane{
 		Scene scene = new Scene(new MakeUserController(userController));
 		
 		Stage stage = new Stage();
-		stage.setOnShown((WindowEvent t) -> {
-			stage.setMinWidth(700);
+		/*stage.setOnShown((WindowEvent t) -> {
+			stage.setMinWidth();
 			stage.setMinHeight(700);
-		});
+		});*/
 
 		stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 		stage.setTitle("ITLab");
-		stage.setHeight(1080);
-		stage.setMaximized(true);
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
     }
 
