@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
 import java.util.List;
 
 import com.calendarfx.model.Calendar;
@@ -10,7 +11,9 @@ import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.model.CalendarEvent;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
+import com.calendarfx.model.LoadEvent;
 import com.calendarfx.view.CalendarView;
+import com.calendarfx.view.DayView;
 
 import domain.GuiSession;
 import domain.RequiredElement;
@@ -27,6 +30,8 @@ import javafx.scene.layout.Priority;
 
 public class CalendarController extends HBox {
 	private SessionController sessionController;
+	private Month beginMonth;
+	private Month endMonth;
 	
 	public CalendarController() {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Calendar.fxml"));
@@ -41,16 +46,21 @@ public class CalendarController extends HBox {
     	}  
 		
 		sessionController = new SessionController();
+		beginMonth = LocalDate.now().getMonth();
+		endMonth = LocalDate.now().plusMonths(2).getMonth();
+		
 		initializeCalendar();
 	}
 	
 	private void initializeCalendar() {
+		DayView view = new DayView();
 		CalendarView calendarView = new CalendarView();
 		calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
 		calendarView.setShowPrintButton(false); // make the printing option invisible
 		
 		Calendar calendar1 = new Calendar("Sessies"); 
 		
+		view.addEventHandler(LoadEvent.LOAD, evt -> calendarMonthChanged(evt));
 		
 
         calendar1.setStyle(Style.STYLE2);
@@ -147,4 +157,8 @@ public class CalendarController extends HBox {
 			}
 		}
 	}
+    
+    private void calendarMonthChanged(LoadEvent evt) {
+    	
+    }
 }
