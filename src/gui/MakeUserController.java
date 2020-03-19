@@ -50,9 +50,9 @@ public class MakeUserController extends AnchorPane {
 
 	@FXML
 	private ComboBox<String> cmbUserStatus;
-	
-    @FXML
-    private JFXButton btnGoBack;
+
+	@FXML
+	private JFXButton btnGoBack;
 
 	public MakeUserController(UserController userController) {
 		this.userContoller = userController;
@@ -77,7 +77,7 @@ public class MakeUserController extends AnchorPane {
 		status.add("Actief");
 		status.add("Geblokkeerd");
 		status.add("Niet-actief");
-		
+
 		ObservableList<String> combo1 = FXCollections.observableArrayList(types);
 		cmbUserType.getItems().addAll(combo1);
 
@@ -87,31 +87,36 @@ public class MakeUserController extends AnchorPane {
 
 	@FXML
 	void clickSave(MouseEvent event) {
-		if(passwordValidation()) {
-		try {	
-			
-			userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
-			userContoller.stringToUserType(cmbUserType.getValue()), userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
+		if (cmbUserType.getValue() == null || cmbUserStatus.getValue() == null)
+			lblMessage.setText("Selecteer een type en status van de gebruiker.");
+		else {
+			if (passwordValidation()) {
+				try {
+					System.out.println(cmbUserType.getValue());
+					userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
+							userContoller.stringToUserType(cmbUserType.getValue()),
+							userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
 
-			lblMessage.setText("De gebruiker werd aangemaakt.");
+					lblMessage.setText("De gebruiker werd aangemaakt.");
 
-		} catch (IllegalArgumentException e) {
-			lblMessage.setText(e.getMessage());
+				} catch (IllegalArgumentException e) {
+					lblMessage.setText(e.getMessage());
+				}
+			} else
+				lblMessage.setText("De wachtwoorden komen niet overeen.");
 		}
-		} else lblMessage.setText("De wachtwoorden komen niet overeen.");
 	}
-	
-    @FXML
-    void clickGoBack(MouseEvent event) {
-    	Stage stage = (Stage) getScene().getWindow();
-    	stage.close();
-    }
-	
+
+	@FXML
+	void clickGoBack(MouseEvent event) {
+		Stage stage = (Stage) getScene().getWindow();
+		stage.close();
+	}
+
 	private boolean passwordValidation() {
-		if(txfPassword.getText().equals(txfConfirmPassword.getText())) 
+		if (txfPassword.getText().equals(txfConfirmPassword.getText()))
 			return true;
 		else
 			return false;
-		}
 	}
-
+}

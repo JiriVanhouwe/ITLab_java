@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
@@ -12,7 +13,6 @@
 
 <fx:root prefHeight="800.0" prefWidth="1310.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff9900" height="559.0" layoutX="654.0" layoutY="122.0" opacity="0.54" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="655.0" />
       <Pane prefHeight="800.0" prefWidth="655.0" style="-fx-background-color: #0081C5;">
          <children>
             <Label layoutX="58.0" layoutY="39.0" prefHeight="65.0" prefWidth="297.0" text="Instellingen" textFill="WHITE">
@@ -20,21 +20,8 @@
                   <Font name="Ebrima Bold" size="45.0" />
                </font>
             </Label>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6fb7dd" height="559.0" layoutY="122.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="655.0" />
-            <JFXButton fx:id="btnSave" layoutX="748.0" layoutY="603.0" onMouseClicked="#clickSave" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: #0081C5;" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan">
-               <font>
-                  <Font name="Ebrima Bold" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <Line endX="-391.60003662109375" endY="357.86663818359375" layoutX="849.0" layoutY="276.0" startX="-391.60003662109375" startY="-107.19999694824219" stroke="WHITE" strokeWidth="2.0" />
-            <Label fx:id="lblMessage" layoutX="715.0" layoutY="652.0" prefHeight="20.0" prefWidth="415.0" textFill="#0081c5">
-               <font>
-                  <Font name="Ebrima Bold" size="14.0" />
-               </font>
-            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6fb7dd" height="407.0" layoutY="158.0" opacity="0.84" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1313.0" />
+            <Line endX="-391.6000671386719" endY="237.33331298828125" layoutX="849.0" layoutY="276.0" startX="-391.60003662109375" startY="-107.19999694824219" stroke="WHITE" strokeWidth="2.0" />
             <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="708.0" layoutY="412.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
@@ -95,6 +82,22 @@
       <Label fx:id="lblType" layoutX="712.0" layoutY="368.0" prefHeight="18.0" prefWidth="220.0" text="type">
          <font>
             <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btnSave" defaultButton="true" layoutX="696.0" layoutY="609.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="223.0" styleClass="loginButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+         </effect>
+      </JFXButton>
+      <Label fx:id="lblMessage" layoutX="684.0" layoutY="683.0" prefHeight="20.0" prefWidth="415.0" textFill="#ff9900">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
          </font>
       </Label>
    </children>
