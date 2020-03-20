@@ -51,7 +51,7 @@ public class AnnouncementController extends AnchorPane{
 		try {
 			loader.load();
 		} catch (IOException ex) {
-			throw new RuntimeException(ex);
+			throw new RuntimeException(ex); 
 		}
 		//TODO stel lblSession en lblSessionInfo in adhv de meegegeven sessie
 	}	

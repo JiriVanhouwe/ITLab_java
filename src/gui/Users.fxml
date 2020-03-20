@@ -7,6 +7,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,39 +17,48 @@
         <items>
           <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF;">
                <children>
-                  <JFXTextField fx:id="txfSearch" layoutX="140.0" layoutY="42.0" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="zoeken">
+                  <JFXTextField fx:id="txfSearch" focusColor="#ff9900" labelFloat="true" layoutX="140.0" layoutY="42.0" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="zoeken" unFocusColor="#07508a">
                      <font>
                         <Font name="Ebrima" size="20.0" />
                      </font>
                   </JFXTextField>
-                  <Label fx:id="lblMessage" layoutX="941.0" layoutY="95.0" prefHeight="18.0" prefWidth="293.0" textFill="RED">
+                  <Label fx:id="lblMessage" layoutX="861.0" layoutY="95.0" prefHeight="18.0" prefWidth="374.0" textFill="#ff9900">
                      <font>
                         <Font name="Ebrima" size="12.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnNewUser" layoutX="579.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#btnNewUserClick" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Nieuw" textFill="WHITE">
+                  <Button fx:id="btnNewUser" defaultButton="true" layoutX="579.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#btnNewUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Nieuw" textFill="WHITE">
                      <font>
-                        <Font name="Ebrima Bold" size="20.0" />
+                        <Font name="Ebrima Bold" size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <effect>
+                        <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+                     </effect>
                   </Button>
-                  <Button fx:id="btnChangeUser" layoutX="810.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnChangeUserClick" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Wijzig" textFill="WHITE">
+                  <Button fx:id="btnChangeUser" defaultButton="true" layoutX="810.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnChangeUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Wijzig" textFill="WHITE">
                      <font>
-                        <Font name="Ebrima Bold" size="20.0" />
+                        <Font name="Ebrima Bold" size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <effect>
+                        <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+                     </effect>
                   </Button>
-                  <Button fx:id="btnDeleteUser" layoutX="1040.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnDeleteUserClick" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Verwijder" textFill="WHITE">
+                  <Button fx:id="btnDeleteUser" defaultButton="true" layoutX="1040.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnDeleteUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Verwijder" textFill="WHITE">
                      <font>
-                        <Font name="Ebrima Bold" size="20.0" />
+                        <Font name="Ebrima Bold" size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <effect>
+                        <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+                     </effect>
                   </Button>
                </children>
             </AnchorPane>

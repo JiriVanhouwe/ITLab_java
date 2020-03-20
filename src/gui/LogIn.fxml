@@ -26,7 +26,7 @@
             <Font name="Ebrima Bold" size="32.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tfUser" focusColor="#ff9900" labelFloat="true" layoutX="449.0" layoutY="163.0" prefHeight="30.0" prefWidth="223.0" promptText="Gebruikersnaam" unFocusColor="#07508a">
+      <JFXTextField fx:id="tfUser" focusColor="#ff9900" labelFloat="true" layoutX="449.0" layoutY="153.0" prefHeight="30.0" prefWidth="223.0" promptText="Gebruikersnaam" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>
@@ -39,7 +39,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Label>
-      <JFXPasswordField fx:id="tfPassword" focusColor="#ff9900" layoutX="449.0" layoutY="208.0" prefHeight="30.0" prefWidth="223.0" promptText="Paswoord" unFocusColor="#07508a">
+      <JFXPasswordField fx:id="tfPassword" focusColor="#ff9900" labelFloat="true" layoutX="449.0" layoutY="208.0" prefHeight="30.0" prefWidth="223.0" promptText="Paswoord" unFocusColor="#07508a">
          <font>
             <Font name="Ebrima" size="14.0" />
          </font>
