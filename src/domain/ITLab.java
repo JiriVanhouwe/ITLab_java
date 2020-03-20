@@ -67,6 +67,7 @@ public class ITLab {
 	public List<Session> giveSessions() {
 		return currentSessioncalendar.getSessions();
 	}
+	
 
 	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
@@ -103,16 +104,6 @@ public class ITLab {
 	private void loadClassrooms() {
 		this.classrooms = em.createNamedQuery("Classroom.findAll", Classroom.class).getResultList();
 	}
-	
-//	public void switchCurrentSession(int sessionID) {
-//		setCurrentSession(giveSessions().stream().filter(session -> session.getSessionID() == sessionID).findFirst()
-//				.orElse(null));
-//	}
-
-//	public boolean doesSessionExist(int sessionID, String title) {
-//		// return currentSessioncalendar.getSessions().stream().filter(session -> session.getSessionID() == sessionID && session.getTitle().equals(title)) != null;
-//		return false;
-//	}
 
 	// data methodes
 	public void addSessionCalendar(SessionCalendar sessionCalendar) {

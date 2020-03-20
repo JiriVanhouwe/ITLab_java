@@ -16,8 +16,10 @@ import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.DayView;
 
 import domain.GuiSession;
+import domain.ITLab;
 import domain.RequiredElement;
 import domain.Session;
+import domain.SessionCalendarController;
 import domain.SessionController;
 import exceptions.InformationRequiredException;
 import javafx.application.Platform;
@@ -30,6 +32,8 @@ import javafx.scene.layout.Priority;
 
 public class CalendarController extends HBox {
 	private SessionController sessionController;
+	private SessionCalendarController sessionCalendarController;
+	
 	private Month beginMonth;
 	private Month endMonth;
 	
@@ -46,6 +50,7 @@ public class CalendarController extends HBox {
     	}  
 		
 		sessionController = new SessionController();
+		sessionCalendarController = new SessionCalendarController();
 		beginMonth = LocalDate.now().getMonth();
 		endMonth = LocalDate.now().plusMonths(2).getMonth();
 		
@@ -59,6 +64,7 @@ public class CalendarController extends HBox {
 		calendarView.setShowPrintButton(false); // make the printing option invisible
 		
 		Calendar calendar1 = new Calendar("Sessies"); 
+		
 		
 		view.addEventHandler(LoadEvent.LOAD, evt -> calendarMonthChanged(evt));
 		
@@ -159,6 +165,8 @@ public class CalendarController extends HBox {
 	}
     
     private void calendarMonthChanged(LoadEvent evt) {
-    	
+    	if(evt.getEndDate().isBefore(sessionCalendarController.giveSessionCalendar().getEndDate())) {
+    		
+    	}
     }
 }
