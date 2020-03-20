@@ -25,10 +25,6 @@ public class UserController extends Controller {
 		return itLab.getLoggedInUser();
 	}
 
-	public boolean isUserHeadOrResponsible() { // head = true responsible = false
-		return itLab.isUserHeadOrResponsible();
-	}
-
 	public GuiUser giveUser(String userName) {
 		return (GuiUser) giveCleanUser(userName);
 	}

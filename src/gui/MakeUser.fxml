@@ -114,6 +114,6 @@
             <Font name="Ebrima Bold" size="37.0" />
          </font>
       </Label>
-      <Line endX="563.0" layoutX="137.0" layoutY="134.0" startX="-147.06668090820312" />
+      <Line endX="563.0" layoutX="137.0" layoutY="134.0" startX="-147.06668090820312" strokeWidth="2.0" />
    </children>
 </fx:root>
