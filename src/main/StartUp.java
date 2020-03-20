@@ -2,7 +2,9 @@ package main;
 
 import java.time.LocalDate;
 
+import domain.GuiUser;
 import domain.ITLab;
+import domain.Session;
 import domain.SessionCalendar;
 import domain.SessionCalendarController;
 import domain.SessionController;
@@ -13,7 +15,6 @@ public class StartUp {
 
 	public static void main(String[] args) {
 		
-	
 		SessionCalendarController scc = new SessionCalendarController();
 		SessionController sc = new SessionController();
 		UserController uc = new UserController();
@@ -25,10 +26,9 @@ public class StartUp {
 //		System.out.println("test");
 		//new PersistenceController(new ITLab());
 		//System.out.println("---Database created.---");
-		
-		scc.createSessionCalendar(20212022,LocalDate.now().plusYears(2), LocalDate.now().plusYears(2).plusDays(150));
-	
-
+		Session session = sc.giveSession("1");
+		User user = (User) uc.giveUser("artuur.everaert@student.hogent.be");
+		session.addAttendee(user);
 	}
 
 }

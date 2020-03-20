@@ -267,4 +267,10 @@ public class Session implements GuiSession{
 	public StringProperty sessionEndHourProperty() {
 		return new SimpleStringProperty(endHour.toString());
 	}
+	
+	@Override
+	public String toString() {
+		
+		return String.format("%s op %s met startuur %s",this.title, this.eventDate,this.startHour);
+	}
 }
