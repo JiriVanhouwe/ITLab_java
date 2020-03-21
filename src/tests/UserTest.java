@@ -80,7 +80,10 @@ public class UserTest {
 				Arguments.of(new String[] {"Rem", "Brand", "rem.brand@hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
 				Arguments.of(new String[] {"Rem", "Brand", "rem.brand@hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
 				Arguments.of(new String[] {"REM", "Brand", "rem.brand@student.hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
-				Arguments.of(new String[] {"Rem", "BRAND", "rem.brand@student.hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123")
+				Arguments.of(new String[] {"Rem", "BRAND", "rem.brand@student.hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
+				//voor- of familienaam met een spatie
+				Arguments.of(new String[] {"pieter jan", "Brand", "pieterjan.brand@student.hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123"),
+				Arguments.of(new String[] {"REM", "De Brand", "rem.debrand@student.hogent.be"}, UserType.USERITLAB, UserStatus.ACTIVE, "123")
 				);		
 	}
 }
