@@ -73,7 +73,7 @@ public class User implements GuiUser {
 		}
 		return null;
 	}
-
+	
 	//getters and setters 
 	public String getFirstName() {
 		return firstName;

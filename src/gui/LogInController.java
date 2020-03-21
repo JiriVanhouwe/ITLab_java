@@ -50,6 +50,8 @@ public class LogInController extends AnchorPane {
 	
     @FXML
     private Label lblClose;
+    
+    private int nrOfInvalidLogins = 0;
 
 	private UserController usercontroller;
 
@@ -134,7 +136,14 @@ public class LogInController extends AnchorPane {
 			stage.show();
 			
 		} else {
-			txt_error.setText("Verkeerde gebruikersnaam \nof wachtwoord.");
+			nrOfInvalidLogins += 1;
+				
+			if(nrOfInvalidLogins < 3)
+				txt_error.setText("Verkeerde gebruikersnaam of wachtwoord.");
+			else {
+				usercontroller.tooManyInvalidLogins(tfUser.getText());
+				txt_error.setText("Teveel foutieve pogingen.\nHet account werd geblokkeerd.\nNeem contact op met hetitlab@gmail.com");
+			}
 		}
 	}
 	
