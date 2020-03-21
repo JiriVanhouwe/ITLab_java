@@ -49,13 +49,13 @@ public class SessionController extends Controller {
 				.collect(Collectors.toList());
 	}
 
-	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) throws InformationRequiredException {
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) throws InformationRequiredException {
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
-			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media);
+			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL);
 			return sessionID;
 		} else {
-			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media);
+			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL);
 		}
 
 	}
@@ -64,7 +64,7 @@ public class SessionController extends Controller {
 	// naar het juiste sessionid, want een entry neemt anders zijn eigen nummering
 	// aan die niet gelijk zal lopen met sessions
 	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classroom,
-			int maxAttendee, String description, String nameGuest, List<Integer> media) throws InformationRequiredException {
+			int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) throws InformationRequiredException {
 		sb.createSession();
 		sb.buildTitle(title);
 		sb.buildDates(startDate, endDate);
@@ -72,6 +72,7 @@ public class SessionController extends Controller {
 		sb.buildDescription(description);
 		sb.buildGuestSpeaker(nameGuest);
 		sb.buildMedia(media);
+		sb.buildVideoURL(videoURL);
 		
 		
 		Session session = sb.getSession();
@@ -97,18 +98,20 @@ public class SessionController extends Controller {
 			//Specify where the file has to be temporarily saved, inside the project folder
 			FileOutputStream  fo = new FileOutputStream("images\\TempImage.png");
 			//Execute the query and read the result to the outputstream
-			fo.write( (byte[]) itLab.getEntityManager().createNativeQuery("SELECT image FROM IMAGE WHERE IMAGEKEY = '" + id + "'").getSingleResult());
+			byte[] imageBytes = (byte[]) itLab.getEntityManager().createNativeQuery("SELECT image FROM IMAGE WHERE IMAGEKEY = '" + id + "' AND IMAGE IS NOT NULL").getSingleResult();
+			fo.write(imageBytes);
 			fo.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}catch(NullPointerException e) {
+			return null;
 		}
 		return new Image("file:images\\TempImage.png");
 	}
 	
 	public Integer saveImage(Image image) {
-		
 		//Save the image to the Image table
 		itLab.getEntityManager().getTransaction().begin();
 		FileInputStream in;

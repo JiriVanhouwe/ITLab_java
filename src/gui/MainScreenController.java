@@ -90,8 +90,6 @@ public class MainScreenController extends SplitPane {
     	      throw new RuntimeException(ex);
     	}  
     	
-    	
-    	
     	lblUserName.setText(usercontroller.giveLoggedInUser().getFirstName());
     	initializeScreen();
     	_selectedButton = btnCalendar;

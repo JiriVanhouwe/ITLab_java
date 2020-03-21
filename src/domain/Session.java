@@ -54,6 +54,9 @@ public class Session implements GuiSession{
 	@JoinTable(name = "Session_Media")
 	private List<Integer> media;
 	
+	@Column(name="VIDEOURL")
+	private String videoURL;
+	
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	private List<User> registeredUsers;
 	
@@ -78,7 +81,7 @@ public class Session implements GuiSession{
 		
 	}
 	
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media) {
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media, String videoURL) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -88,6 +91,7 @@ public class Session implements GuiSession{
 		setMaxAttendee(maxAttendee);
 		setNameGuest(nameGuest);
 		setMedia(media);
+		setVideoURL(videoURL);
 
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
@@ -97,7 +101,7 @@ public class Session implements GuiSession{
 	
 	
 	// methoden
-	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media) {
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -107,6 +111,7 @@ public class Session implements GuiSession{
 		setMaxAttendee(maxAttendee);
 		setNameGuest(nameGuest);
 		setMedia(media);
+		setVideoURL(videoURL);
 	}
 	
 	public void registerAttendee(User user) {
@@ -250,6 +255,14 @@ public class Session implements GuiSession{
 
 	public String getNameGuest() {
 		return nameGuest;
+	}
+	
+	public void setVideoURL(String videoURL) {
+		this.videoURL = videoURL;
+	}
+	
+	public String getVideoURL() {
+		return this.videoURL;
 	}
 	
 	public StringProperty sessionTitleProperty() {

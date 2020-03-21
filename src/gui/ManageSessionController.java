@@ -28,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -37,46 +38,52 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
-public class BeherenSessieController extends VBox {
+public class ManageSessionController extends VBox {
 
 	@FXML
-	private JFXTextField title_txt;
+    private JFXTextField title_txt;
 
-	@FXML
-	private JFXTextField speaker_txt;
+    @FXML
+    private JFXTextField speaker_txt;
 
-	@FXML
-	private ComboBox<Classroom> clasroom_dropdown;
+    @FXML
+    private ComboBox<Classroom> clasroom_dropdown;
 
-	@FXML
-	private JFXTextArea description_txt;
+    @FXML
+    private JFXTextArea description_txt;
 
-	@FXML
-	private DatePicker start_date;
+    @FXML
+    private DatePicker start_date;
 
-	@FXML
-	private Label fromHour_txt;
+    @FXML
+    private Label fromHour_txt;
 
-	@FXML
-	private Label toHour_txt;
+    @FXML
+    private Label toHour_txt;
 
-	@FXML
-	private JFXButton savebtn;
+    @FXML
+    private JFXTextField image_txt;
 
-	@FXML
-	private JFXButton cancelbtn;
+    @FXML
+    private JFXButton image_btn;
 
-	@FXML
-	private JFXButton image_btn;
+    @FXML
+    private JFXButton addimage_btn;
 
-	@FXML
-	private JFXButton addimage_btn;
+    @FXML
+    private VBox image_scrollpane;
 
-	@FXML
-	private VBox image_scrollpane;
+    @FXML
+    private JFXTextField url_txt;
 
-	@FXML
-	private JFXTextField image_txt;
+    @FXML
+    private Button savebtn;
+
+    @FXML
+    private Button reminderBtn;
+
+    @FXML
+    private Button cancelbtn;
 
 	private ITLab iTLab;
 
@@ -87,8 +94,8 @@ public class BeherenSessieController extends VBox {
 
 	private SessionController sessionController;
 
-	public BeherenSessieController(Entry entry) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("BeherenSessie.fxml"));
+	public ManageSessionController(Entry entry) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageSession.fxml"));
 		loader.setController(this);
 		loader.setRoot(this);
 
@@ -110,6 +117,7 @@ public class BeherenSessieController extends VBox {
 			this.description_txt.setText(clickedSession.getDescription());
 			this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
 			this.speaker_txt.setText(clickedSession.getNameGuest());
+			this.url_txt.setText(clickedSession.getVideoURL());
 			
 			// Fill the image list
 			loadImages();
@@ -133,7 +141,11 @@ public class BeherenSessieController extends VBox {
 			this.sessionMedia.put(i, sessionController.giveImage(i));
 		}
 
-		sessionMedia.forEach((id, image) -> addImageToScrollPane(image));
+		sessionMedia.forEach((id, image) -> {
+			if(image != null) {
+				addImageToScrollPane(image);
+			}
+		});
 	}
 
 	@FXML
@@ -148,7 +160,7 @@ public class BeherenSessieController extends VBox {
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
 					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
 					clasroom_dropdown.getValue().getMaxSeats(), this.description_txt.getText(), this.speaker_txt.getText(),
-					new ArrayList<Integer>(this.sessionMedia.keySet()));
+					new ArrayList<Integer>(this.sessionMedia.keySet()), this.url_txt.getText());
 		
 		this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 				entry.getEndTime());
@@ -187,8 +199,7 @@ public class BeherenSessieController extends VBox {
 
 	@FXML
 	void pressedImageBtn(ActionEvent event) {
-		// De filechooser opens to choose what image the user wants to upload. Only png
-		// files
+		// De filechooser opens to choose what image the user wants to upload. Only png files
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("PNG images", "*.png"));
 
@@ -217,9 +228,14 @@ public class BeherenSessieController extends VBox {
 		int id = sessionController.saveImage(selectedImage);
 		this.sessionMedia.put(id, selectedImage);
 	}
+	
+
+    @FXML
+    void pressedReminderBtn(ActionEvent event) {
+
+    }
 
 	private void addImageToScrollPane(Image image) {
-    	
     	//Make a new imageview. Add the chosen image to the scrollpane, so the user can see it. 
     	ImageView newImage = new ImageView(image);
     	//We set a fixed height, the width is automagically defined

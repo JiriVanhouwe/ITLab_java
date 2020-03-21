@@ -145,7 +145,7 @@ public class UsersController extends AnchorPane{
 		stage.setTitle("ITLab");
 		stage.setScene(scene);
 		stage.setResizable(false);
-		//stage.initStyle(StageStyle.UNDECORATED);
+		//This makes sure the new stage stays on top and can't be sent to the background
 		stage.setAlwaysOnTop(true);
 		stage.showAndWait();
 		
@@ -163,6 +163,7 @@ public class UsersController extends AnchorPane{
 		ObservableList<GuiUser> filteredUsers = FXCollections.observableArrayList();
 		String lowerCaseFilter = filter.toLowerCase();
 		for(GuiUser user : userController.giveAllUsers()) {
+			//We check all the properties of every user to see if one of them contains the text we're looking for
 			if(user.getFirstName().toLowerCase().contains(lowerCaseFilter) 
 			|| user.getLastName().toLowerCase().contains(lowerCaseFilter)
 			|| user.getUserName().toLowerCase().contains(lowerCaseFilter)

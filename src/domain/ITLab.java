@@ -90,10 +90,10 @@ public class ITLab {
 		return false;
 	}
 
-	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media) {
+	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) {
 		Session session = currentSessioncalendar.giveSession(id);
 		em.getTransaction().begin();
-		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media);
+		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL);
 		currentSessioncalendar.addSession(session);
 		em.persist(session);
 		em.getTransaction().commit();

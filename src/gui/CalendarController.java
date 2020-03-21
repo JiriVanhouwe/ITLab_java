@@ -71,7 +71,7 @@ public class CalendarController extends HBox {
 
         calendar1.setStyle(Style.STYLE2);
 
-        calendarView.setEntryDetailsPopOverContentCallback(param -> new BeherenSessieController(param.getEntry()));
+        calendarView.setEntryDetailsPopOverContentCallback(param -> new ManageSessionController(param.getEntry()));
         
 
         CalendarSource myCalendarSource = new CalendarSource("Kalender");
@@ -134,7 +134,7 @@ public class CalendarController extends HBox {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
 			System.out.println(session.getSessionID());
 			try {
-				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia());
+				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL());
 			} catch (InformationRequiredException e) {
 				// TODO Auto-generated catch block
 				Alert a = new Alert(AlertType.ERROR);

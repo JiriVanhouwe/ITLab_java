@@ -17,4 +17,5 @@ public interface GuiSession {
 	List<User> getAttendees();
 	List<User> getRegisteredUsers();
 	int getSessionID();
+	String getVideoURL();
 }

@@ -74,5 +74,9 @@ public class SessionBuilder {
 		session.setMedia(medialist);
 	}
 	
+	public void buildVideoURL(String videoURL) {
+		session.setVideoURL(videoURL);
+	}
+	
 	
 }
