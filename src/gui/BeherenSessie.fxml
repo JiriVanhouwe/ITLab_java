@@ -10,27 +10,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="443.0" spacing="10.0" style="-fx-border-color: #0081c5; -fx-border-width: 10;" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="595.0" spacing="10.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Beheren">
-         <font>
-            <Font name="SansSerif Bold" size="20.0" />
-         </font>
-         <VBox.margin>
-            <Insets bottom="20.0" />
-         </VBox.margin>
-      </Text>
-      <HBox prefHeight="39.0" prefWidth="423.0">
+      <VBox alignment="BOTTOM_CENTER" prefHeight="67.0" prefWidth="423.0" style="-fx-background-color: #0081C5;">
          <children>
-            <Label text="Titel">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Sessie Beheren" textAlignment="CENTER" wrappingWidth="396.974609375">
+               <font>
+                  <Font size="37.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="20.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+         <VBox.margin>
+            <Insets left="-20.0" right="-20.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="423.0">
+         <children>
+            <Label text="Titel" HBox.hgrow="ALWAYS">
                <font>
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
             </Label>
+            <Region prefHeight="25.0" prefWidth="155.0" HBox.hgrow="ALWAYS" />
             <JFXTextField fx:id="title_txt" prefHeight="26.0" prefWidth="352.0">
                <HBox.margin>
                   <Insets left="5.0" />
@@ -176,6 +185,6 @@
       </HBox>
    </children>
    <padding>
-      <Insets left="20.0" top="20.0" />
+      <Insets left="20.0" right="20.0" />
    </padding>
 </fx:root>

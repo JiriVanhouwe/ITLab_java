@@ -29,8 +29,10 @@ public class UserController extends Controller {
 		return (GuiUser) giveCleanUser(userName);
 	}
 
-	public ObservableList<User> giveAllUsers() {
-		return itLab.getAllUsers().sorted(Comparator.comparing(User::getFirstName).thenComparing(User::getLastName));
+	public ObservableList<GuiUser> giveAllUsers() {
+		//We need to convert the list<User> to a list<GuiUser>
+		List<? extends GuiUser> guiUsers = itLab.getAllUsers();
+		return (ObservableList<GuiUser>) FXCollections.observableList(guiUsers);
 	}
 
 	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus,
@@ -39,6 +41,17 @@ public class UserController extends Controller {
 		if (user != null) {
 			String hashedPassword = this.hashPassword(password);
 			user.changeUser(firstName, lastName, userName, userType, userStatus, hashedPassword);
+			itLab.getEntityManager().getTransaction().begin();
+			itLab.getEntityManager().persist(user);
+			itLab.getEntityManager().getTransaction().commit();
+		}
+	}
+	
+	public void changeUser(String firstName, String lastName, String userName, UserType userType, UserStatus userStatus) {
+		//This is for changes without password changes, otherwise the password would be hashed twice
+		User user = giveCleanUser(userName);
+		if (user != null) {
+			user.changeUser(firstName, lastName, userName, userType, userStatus, user.getPassword());
 			itLab.getEntityManager().getTransaction().begin();
 			itLab.getEntityManager().persist(user);
 			itLab.getEntityManager().getTransaction().commit();
@@ -53,6 +66,8 @@ public class UserController extends Controller {
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().persist(user);
 		itLab.getEntityManager().getTransaction().commit();
+		
+		itLab.addUser(user);
 	}
 
 	public void changePassword(String userName, String password) {
@@ -70,10 +85,8 @@ public class UserController extends Controller {
 		itLab.getEntityManager().getTransaction().begin();
 		itLab.getEntityManager().remove(user);
 		itLab.getEntityManager().getTransaction().commit();
-	}
-
-	public void changeFilter(String filter) {
-		itLab.changeFilter(filter);
+		
+		itLab.removeUser(userName);
 	}
 
 	private User giveCleanUser(String userName) {
@@ -131,7 +144,7 @@ public class UserController extends Controller {
 			return UserStatus.ACTIVE;
 		case "Geblokkeerd":
 			return UserStatus.BLOCKED;
-		case "Nie- actief":
+		case "Niet actief":
 			return UserStatus.NONACTIVE;
 			default: return null;
 		}

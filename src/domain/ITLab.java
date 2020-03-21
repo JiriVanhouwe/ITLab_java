@@ -34,8 +34,7 @@ public class ITLab {
 	private Session currentSession;
 	private User loggedInUser;
 	private List<Classroom> classrooms;
-	private ObservableList<User> allUsers;
-	private FilteredList<User> filteredUserList;
+	private ObservableList<User> users;
 	private List<SessionCalendar> sessionCalendars;
 
 	// data
@@ -52,9 +51,8 @@ public class ITLab {
 			loadClassrooms();
 			
 			loadAllUsers();
-			if(allUsers == null)
-				this.allUsers = FXCollections.observableList(new ArrayList<>());
-			filteredUserList = new FilteredList<>(allUsers, u -> true);
+			if(users == null)
+				this.users = FXCollections.observableList(new ArrayList<>());
 			
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
@@ -155,31 +153,34 @@ public class ITLab {
 	}
 	
 	public void loadAllUsers() {
-		allUsers = FXCollections.observableArrayList(getEntityManager().createNamedQuery("User.getAllUsers", User.class).getResultList());
+		users = FXCollections.observableArrayList(getEntityManager().createNamedQuery("User.getAllUsers", User.class).getResultList());
 	}
 	
-	public ObservableList<User> getAllUsers(){
-		return filteredUserList;
+	public List<User> getAllUsers(){
+		return users;
+	}
+	
+	private User giveUser(String username) {
+		for(User u : users) {
+			if(u.getUserName().equals(username)) {
+				return u;
+			}
+		}
+		return null;
+	}
+	
+	public void removeUser(String username) {
+		this.users.remove(giveUser(username));
+	}
+	
+	public void addUser(User user) {
+		this.users.add(user);
 	}
 
 	public void setLoggedInUser(User loggedInUser) {
 		 this.loggedInUser = loggedInUser;
 	}
 	
-	public void changeFilter(String filter) {
-		filteredUserList.setPredicate(user -> 
-		{
-			if(filter == null || filter.isBlank())
-				return true;
-			
-			String lowerCaseFilter = filter.toLowerCase();
-			return user.getFirstName().toLowerCase().contains(lowerCaseFilter) 
-					|| user.getLastName().toLowerCase().contains(lowerCaseFilter)
-					|| user.getUserName().toLowerCase().contains(lowerCaseFilter)
-					|| user.giveUserStatus().toLowerCase().contains(lowerCaseFilter)
-					|| user.giveUserType().toLowerCase().contains(lowerCaseFilter);
-		});
-	}
 	//eind: alles met users
 	
 	public List<Classroom> getClassrooms() {

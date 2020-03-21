@@ -114,9 +114,6 @@ public class MakeUserController extends AnchorPane {
 	}
 
 	private boolean passwordValidation() {
-		if (txfPassword.getText().equals(txfConfirmPassword.getText()))
-			return true;
-		else
-			return false;
+		return txfPassword.getText().equals(txfConfirmPassword.getText());
 	}
 }

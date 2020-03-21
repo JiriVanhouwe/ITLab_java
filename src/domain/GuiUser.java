@@ -12,4 +12,9 @@ public interface GuiUser {
 	UserType getUserType();
 	UserStatus getUserStatus();
 	String getPassword();
+	StringProperty userNameProperty();
+	StringProperty firstNameProperty();
+	StringProperty lastNameProperty();
+	StringProperty userTypeProperty();
+	StringProperty userStatusProperty();
 }

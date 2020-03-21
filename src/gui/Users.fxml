@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,47 +10,33 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.16416040100250626" orientation="VERTICAL" prefHeight="800.0" prefWidth="1250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF;">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="1250.0" spacing="100.0" style="-fx-background-color: #0081C5;">
                <children>
-                  <JFXTextField fx:id="txfSearch" focusColor="#ff9900" labelFloat="true" layoutX="140.0" layoutY="42.0" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="zoeken" unFocusColor="#07508a">
+                  <Label prefHeight="100.0" prefWidth="297.0" text="Gebruikers" textFill="WHITE">
+                     <font>
+                        <Font name="Ebrima Bold" size="45.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="150.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="txfSearch" focusColor="#ff9900" labelFloat="true" onKeyReleased="#searchFilter" prefHeight="44.0" prefWidth="365.0" promptText="Zoeken" style="-fx-background-color: white;" unFocusColor="#ff9900">
                      <font>
                         <Font name="Ebrima" size="20.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets right="-50.0" />
+                     </HBox.margin>
                   </JFXTextField>
-                  <Label fx:id="lblMessage" layoutX="861.0" layoutY="95.0" prefHeight="18.0" prefWidth="374.0" textFill="#ff9900">
-                     <font>
-                        <Font name="Ebrima" size="12.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnNewUser" defaultButton="true" layoutX="579.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#btnNewUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Nieuw" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima Bold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
-                     </effect>
-                  </Button>
-                  <Button fx:id="btnChangeUser" defaultButton="true" layoutX="810.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnChangeUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Wijzig" textFill="WHITE">
-                     <font>
-                        <Font name="Ebrima Bold" size="15.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
-                     </effect>
-                  </Button>
-                  <Button fx:id="btnDeleteUser" defaultButton="true" layoutX="1040.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#btnDeleteUserClick" opacity="0.74" prefHeight="33.0" prefWidth="147.0" styleClass="loginButton" stylesheets="@style.css" text="Verwijder" textFill="WHITE">
+                  <Button fx:id="btnNewUser" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" onMouseClicked="#btnNewUserClick" prefHeight="36.0" prefWidth="162.0" style="-fx-background-color: white;" styleClass="loginButton" stylesheets="@style.css" text="Nieuwe gebruiker" textFill="#0081c5">
                      <font>
                         <Font name="Ebrima Bold" size="15.0" />
                      </font>
@@ -61,10 +48,13 @@
                      </effect>
                   </Button>
                </children>
-            </AnchorPane>
-          <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #0081C5;">
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <TableView fx:id="tableViewUsers" layoutX="50.0" layoutY="15.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
+                  <TableView fx:id="tableViewUsers" editable="true" prefHeight="507.0" prefWidth="1211.0" VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn fx:id="userNameColumn" prefWidth="323.199951171875" text="Gebruikersnaam" />
                       <TableColumn fx:id="firstNameColumn" minWidth="0.0" prefWidth="173.86679077148438" text="Voornaam" />
@@ -73,8 +63,45 @@
                         <TableColumn fx:id="statusColumn" prefWidth="239.73330688476562" text="Status" />
                     </columns>
                   </TableView>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="100.0">
+                     <children>
+                        <Button fx:id="btnChangeUser" defaultButton="true" mnemonicParsing="false" onMouseClicked="#btnChangeUserClick" opacity="0.74" prefHeight="33.0" prefWidth="202.0" styleClass="loginButton" stylesheets="@style.css" text="Wijzigingen opslaan" textFill="WHITE">
+                           <font>
+                              <Font name="Ebrima Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+                           </effect>
+                        </Button>
+                        <Button fx:id="btnDeleteUser" defaultButton="true" mnemonicParsing="false" onMouseClicked="#btnDeleteUserClick" opacity="0.74" prefHeight="33.0" prefWidth="181.0" styleClass="loginButton" stylesheets="@style.css" text="Verwijder gebruiker" textFill="WHITE">
+                           <font>
+                              <Font name="Ebrima Bold" size="15.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <effect>
+                              <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+                           </effect>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblMessage" prefHeight="18.0" prefWidth="374.0" textFill="#ff9900">
+                     <font>
+                        <Font name="Ebrima" size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
-            </AnchorPane>
+               <padding>
+                  <Insets left="50.0" right="50.0" top="20.0" />
+               </padding>
+            </VBox>
         </items>
       </SplitPane>
    </children>
