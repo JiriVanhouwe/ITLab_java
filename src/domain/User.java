@@ -73,7 +73,7 @@ public class User implements GuiUser {
 		}
 		return null;
 	}
-
+	
 	//getters and setters 
 	public String getFirstName() {
 		return firstName;
@@ -81,7 +81,7 @@ public class User implements GuiUser {
 	public void setFirstName(String firstName) {
 		if (firstName == null || firstName.isBlank())
 			throw new IllegalArgumentException("Voornaam moet ingevuld zijn.");
-		if(!firstName.matches("[a-zA-Z]+"))
+		if(!firstName.matches("([a-zA-Z]+\\s*[a-zA-Z]+)*"))
 			throw new IllegalArgumentException("Voornaam mag enkel letters bevatten.");
 		this.firstName = firstName.trim();
 	}
@@ -91,7 +91,7 @@ public class User implements GuiUser {
 	public void setLastName(String lastName) {
 		if (lastName == null || lastName.isBlank())
 			throw new IllegalArgumentException("Familienaam moet ingevuld zijn.");
-		if(!lastName.matches("[a-zA-Z]+"))
+			if(!lastName.matches("([a-zA-Z]+\\s*[a-zA-Z]+)*"))
 			throw new IllegalArgumentException("Familienaam mag enkel letters bevatten.");
 		this.lastName = lastName.trim();
 	}
@@ -105,7 +105,7 @@ public class User implements GuiUser {
 			//throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
 		if(!userName.toLowerCase().matches( ".*" + "\\." + ".*" + "@" +  "student.hogent.be") && !userName.toLowerCase().matches(".*" + "\\." + ".*" + "@" +  "hogent.be"))
 			throw new IllegalArgumentException("Gebruikersnaam moet je HoGent e-mailadres zijn.");
-		if(!userName.toLowerCase().contains(firstName.toLowerCase()) || !userName.toLowerCase().contains(lastName.toLowerCase()))
+		if(!userName.toLowerCase().contains(firstName.replaceAll("\\s+", "").toLowerCase()) || !userName.toLowerCase().contains(lastName.replaceAll("\\s+", "").toLowerCase()))
 			throw new IllegalArgumentException("De gebruikersnaam moet jouw voor- en familienaam bevatten.\nZoals: jan.peters@hogent.be");
 		this.userName = userName.trim();
 	}

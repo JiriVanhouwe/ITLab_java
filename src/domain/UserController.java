@@ -125,6 +125,15 @@ public class UserController extends Controller {
 
 		return hashedPassword;
 	}
+	
+	public void tooManyInvalidLogins(String userName) {
+		User user = giveCleanUser(userName);
+		user.setUserStatus(UserStatus.BLOCKED);
+		
+		itLab.getEntityManager().getTransaction().begin();
+		itLab.getEntityManager().persist(user);
+		itLab.getEntityManager().getTransaction().commit();
+	}
 
 	public UserType stringToUserType(String type) {
 		switch (type) {
