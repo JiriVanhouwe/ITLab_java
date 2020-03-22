@@ -82,19 +82,20 @@ public class UsersController extends AnchorPane{
 			throw new RuntimeException(ex);
 		}
 		
+		//Fill the columns with the correct information, we use StringProperty in de User class
 		userNameColumn.setCellValueFactory(data -> data.getValue().userNameProperty());
 		firstNameColumn.setCellValueFactory(data -> data.getValue().firstNameProperty());
 		lastNameColumn.setCellValueFactory(data -> data.getValue().lastNameProperty());
 		
-		//Fill the cells in the 'type' column with comboboxes and all the possible types
-		ObservableList typeList = FXCollections.observableArrayList("Hoofdverantwoordelijke", "Verantwoordelijke", "Gebruiker");
-		typeColumn.setCellValueFactory(data -> data.getValue().userTypeProperty());
+		//Fill the cells in the 'type' column with comboboxes and all the possible usertypes
+		ObservableList<String> typeList = FXCollections.observableArrayList("Hoofdverantwoordelijke", "Verantwoordelijke", "Gebruiker");
 		typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(typeList));
+		typeColumn.setCellValueFactory(data -> data.getValue().userTypeProperty());
 		
-		//Same thing for the status column
+		//Same thing for the 'status' column
 		ObservableList statusList = FXCollections.observableArrayList("Actief", "Geblokkeerd", "Niet actief");
-		statusColumn.setCellValueFactory(data -> data.getValue().userStatusProperty());
 		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(statusList));
+		statusColumn.setCellValueFactory(data -> data.getValue().userStatusProperty());
 		
 		tableViewUsers.setItems(userController.giveAllUsers());
 		

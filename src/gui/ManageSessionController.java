@@ -33,6 +33,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -87,7 +89,12 @@ public class ManageSessionController extends VBox {
     @FXML
     private Button cancelbtn;
     
+<<<<<<< HEAD
     private Session clickedSession;
+=======
+    @FXML
+    private Spinner<Integer> nrOfAttendeeSpinner;
+>>>>>>> afe29a7efacd0a8e03c172b7099989898835c188
 
 	private ITLab iTLab;
 
@@ -122,6 +129,8 @@ public class ManageSessionController extends VBox {
 			this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
 			this.speaker_txt.setText(clickedSession.getNameGuest());
 			this.url_txt.setText(clickedSession.getVideoURL());
+			SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, clickedSession.getClassroom().getMaxSeats(), clickedSession.getMaxAttendee());
+			nrOfAttendeeSpinner.setValueFactory(valueFactory);
 			
 			// Fill the image list
 			loadImages();
@@ -154,6 +163,7 @@ public class ManageSessionController extends VBox {
 
 	@FXML
 	void pressedCancelBtn(ActionEvent event) {
+		//TODO: We get an error on this line
 		this.close();
 	}
 
@@ -163,13 +173,14 @@ public class ManageSessionController extends VBox {
 		try {
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
 					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
-					clasroom_dropdown.getValue().getMaxSeats(), this.description_txt.getText(), this.speaker_txt.getText(),
+					nrOfAttendeeSpinner.getValue(), this.description_txt.getText(), this.speaker_txt.getText(),
 					new ArrayList<Integer>(this.sessionMedia.keySet()), this.url_txt.getText());
 		
 		this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 				entry.getEndTime());
 		this.entry.setTitle(this.title_txt.getText());
 		this.entry.setId(id);
+
 		this.close();
 		
 		} catch (InformationRequiredException e) {
