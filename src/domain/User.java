@@ -1,5 +1,6 @@
 package domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -21,13 +22,22 @@ import javafx.beans.property.StringProperty;
 public class User implements GuiUser {
 	@Id
 	private String userName; //dit moet uniek zijn, e-mailadres HoGent en wordt opgeslagen in kleine letters!
+	
+	@Column(nullable = false)
 	private String firstName;
+	
+	@Column(nullable = false)
 	private String lastName;
+	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private UserType userType;
+	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private UserStatus userStatus;
 
+	@Column(nullable = false)
 	private String password;
 	
 	

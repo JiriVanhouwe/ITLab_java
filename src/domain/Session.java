@@ -11,6 +11,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,23 +35,31 @@ public class Session implements GuiSession{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sessionID;
+	private int id;
+	
+	@Column(nullable = false)
 	private String title;
+	
 	private String description;
+	
 	private String nameGuest;
+	
 	@ManyToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(nullable = false)
 	private Classroom classroom;
 	
-	@Column(columnDefinition = "DATE")
+	@Column(columnDefinition = "DATE",nullable = false)
 	private LocalDate eventDate;
 	
-	@Column(columnDefinition = "TIME")
+	@Column(columnDefinition = "TIME",nullable = false)
 	private LocalTime startHour;
 	
-	@Column(columnDefinition = "TIME")
+	@Column(columnDefinition = "TIME",nullable = false)
 	private LocalTime endHour;
 	
+	@Column(nullable = false)
 	private int maxAttendee;
+	
 	@ElementCollection
 	@JoinTable(name = "Session_Media")
 	private List<Integer> media;
@@ -58,27 +68,38 @@ public class Session implements GuiSession{
 	private String videoURL;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			  name = "RegisterdUser", 
+			  joinColumns = @JoinColumn(name = "session_id" ), 
+			  inverseJoinColumns = @JoinColumn(name = "user_username"))
 	private List<User> registeredUsers;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			  name = "AttendeeUser", 
+					  joinColumns = @JoinColumn(name = "session_id"), 
+					  inverseJoinColumns = @JoinColumn(name = "user_username"))
 	private List<User> attendees;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(nullable = false)
 	private User host;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
-	private SessionReminder reminder;
+	
 	
 	@OneToMany(targetEntity=Feedback.class,cascade = CascadeType.ALL, 
             fetch = FetchType.LAZY, orphanRemoval = true)
-	@JoinColumn(name = "SessionId", referencedColumnName = "sessionID")
+	@JoinColumn(name = "session_id", referencedColumnName = "id")
 	private List<Feedback> feedbackList;
 	
-	@Transient
+	@OneToOne
 	private SessionState state;
 	
+	//@Enumerated(EnumType.STRING)
+	//private State stateEnum;
+	
 	protected Session() {
-		
+		//enum -> sessiestate
 	}
 	
 	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media, String videoURL) {
@@ -225,14 +246,6 @@ public class Session implements GuiSession{
 		this.host = host;
 	}
 
-	protected SessionReminder getReminder() {
-		return reminder;
-	}
-
-	private void setReminder(SessionReminder reminder) {
-		this.reminder = reminder;
-	}
-
 	private List<Feedback> getFeedbackList() {
 		return feedbackList;
 	}
@@ -242,7 +255,7 @@ public class Session implements GuiSession{
 	}
 
 	public int getSessionID() {
-		return this.sessionID;
+		return this.id;
 	}
 
 	public SessionState getState() {

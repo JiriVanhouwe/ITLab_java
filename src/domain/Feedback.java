@@ -15,7 +15,7 @@ public class Feedback {
 	private int id;
 	private User author;
 	private boolean opened;
-	private String content;
+	private String contentText;
 	
 	protected Feedback() {
 		

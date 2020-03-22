@@ -10,6 +10,12 @@
     	<class>domain.User</class>
     	<class>domain.Feedback</class>
     	<class>domain.SessionReminder</class>
+    	<class>domain.SessionState</class>
+    	<class>domain.OpenState</class>
+    	<class>domain.ClosedState</class>
+    	<class>domain.FinishedState</class>
+
+    	
     	
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
@@ -17,7 +23,8 @@
            	<property name="eclipselink.cache.shared.default" value="false"/>
            	<property name="javax.persistence.jdbc.user" value="artuur.everaert"/>
         	<property name="javax.persistence.jdbc.password" value="1D5a34_36fF8"/>
-		
+			<property name="javax.persistence.schema-generation.database.action" 
+value="drop-and-create"/>
         </properties>
     </persistence-unit>
 </persistence>

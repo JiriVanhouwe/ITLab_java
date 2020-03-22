@@ -26,9 +26,9 @@ public class StartUp {
 //		System.out.println("test");
 		//new PersistenceController(new ITLab());
 		//System.out.println("---Database created.---");
-		Session session = sc.giveSession("1");
-		User user = (User) uc.giveUser("artuur.everaert@student.hogent.be");
-		session.addAttendee(user);
+		//Session session = sc.giveSession("1");
+		//User user = (User) uc.giveUser("artuur.everaert@student.hogent.be");
+		//session.addAttendee(user);
 	}
 
 }
