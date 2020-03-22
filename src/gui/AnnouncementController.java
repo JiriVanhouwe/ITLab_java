@@ -5,6 +5,9 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
+import domain.MailController;
+import domain.Session;
+import domain.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -39,11 +42,12 @@ public class AnnouncementController extends AnchorPane{
     @FXML
     private Label lblSessionInfo;
     
+    private Session session;
     private String title;
     private String messageToSend;
 	
-	public AnnouncementController() {
-		//TODO als parameter moet de aangeduide sessie meegegeven worden. 
+	public AnnouncementController(Session session) {
+		this.session = session;
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Announcement.fxml"));
 		loader.setRoot(this);
@@ -54,6 +58,8 @@ public class AnnouncementController extends AnchorPane{
 			throw new RuntimeException(ex); 
 		}
 		//TODO stel lblSession en lblSessionInfo in adhv de meegegeven sessie
+		lblSession.setText(session.getTitle());
+		lblSessionInfo.setText(String.format("Spreker: %s op %s van %s tot %s", session.getNameGuest(), session.getDate(), session.getStartHour(), session.getEndHour()));
 	}	
 	
     @FXML
@@ -75,14 +81,26 @@ public class AnnouncementController extends AnchorPane{
     	if(!title.isBlank() && !messageToSend.isBlank())
     	{
     		sendMail(title, messageToSend);
-    		lblMessage.setText("Het bericht werd verzonden naar de geregistreerde studenten.");
     	}
     	
     }
 
 	private void sendMail(String title, String message) {
-		//TODO haal de geregistreerde users (hun UserName) van de sessie op en geef ze mee als derder parameter
-		//new MailController(title, message);
+		if(session.getRegisteredUsers().isEmpty()) {
+			for(User u : session.getRegisteredUsers()) {
+				System.out.println(u.getFirstName());
+				lblMessage.setText("Er zijn nog geen geregistreerde gebruikers voor deze sessie.");
+			}
+		}
+		else {
+			for(User u : session.getRegisteredUsers()) {
+				System.out.println(u.getFirstName());
+			}
+				new MailController(title, message, session.getRegisteredUsers());
+				lblMessage.setText("Het bericht werd verzonden naar de geregistreerde studenten.");
+			
+		}
+			
+		
 	}
-
 }

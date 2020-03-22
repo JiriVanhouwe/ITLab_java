@@ -26,6 +26,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -37,6 +38,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class ManageSessionController extends VBox {
 
@@ -84,6 +86,8 @@ public class ManageSessionController extends VBox {
 
     @FXML
     private Button cancelbtn;
+    
+    private Session clickedSession;
 
 	private ITLab iTLab;
 
@@ -110,7 +114,7 @@ public class ManageSessionController extends VBox {
 		fillClassrooms();
 		sessionMedia = new HashMap<Integer, Image>();
 
-		Session clickedSession = sessionController.giveSession(entry.getId());
+		clickedSession = sessionController.giveSession(entry.getId());
 		this.title_txt.setText(entry.getTitle());
 		this.start_date.setValue(entry.getStartDate());
 		if (clickedSession != null || entry.getId().charAt(entry.getId().length() - 1) == '#') {
@@ -232,7 +236,14 @@ public class ManageSessionController extends VBox {
 
     @FXML
     void pressedReminderBtn(ActionEvent event) {
-
+    	Scene scene = new Scene(new AnnouncementController(clickedSession));
+		
+		Stage stage = new Stage();
+		
+		stage.setTitle("ITLab");
+		stage.setScene(scene);
+		stage.setResizable(false);
+		stage.show();
     }
 
 	private void addImageToScrollPane(Image image) {

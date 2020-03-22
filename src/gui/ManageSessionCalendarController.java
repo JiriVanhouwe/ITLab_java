@@ -64,9 +64,6 @@ public class ManageSessionCalendarController extends VBox{
 	    @FXML
 	    private TableColumn<Session, String> colSessionEnd;
 	    
-	    @FXML
-	    private Button btnAnnouncement;
-	    
 	    private SessionCalendarController sessionCalendarController;
 	    private SessionCalendar selectedSessionCalendar;
 	    
@@ -102,16 +99,4 @@ public class ManageSessionCalendarController extends VBox{
 			
 		}
 	    
-	    @FXML
-	    void clickMakeAnnouncement(MouseEvent event) {
-	    	//Open nieuw scherm
-			Scene scene = new Scene(new AnnouncementController());
-			
-			Stage stage = new Stage();
-			
-			stage.setTitle("ITLab");
-			stage.setScene(scene);
-			stage.setResizable(false);
-			stage.show();
-	    }
 }

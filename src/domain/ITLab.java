@@ -63,7 +63,7 @@ public class ITLab {
 	// methodes
 
 	public List<Session> giveSessions() {
-		return currentSessioncalendar.getSessions();
+		return currentSessioncalendar.getSessions(); 
 	}
 	
 
