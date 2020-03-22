@@ -190,18 +190,18 @@
             <Insets bottom="20.0" />
          </VBox.margin>
          <children>
-            <Button fx:id="savebtn" mnemonicParsing="false" onAction="#pressedSaveBtn" onMouseClicked="#pressedSaveBtn" styleClass="loginButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
+            <Button fx:id="savebtn" mnemonicParsing="false" onAction="#pressedSaveBtn" styleClass="loginButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
             </Button>
-            <Button fx:id="reminderBtn" layoutX="170.0" layoutY="25.0" mnemonicParsing="false" onAction="#pressedReminderBtn" onMouseClicked="#pressedCancelBtn" styleClass="loginButton" stylesheets="@style.css" text="Aankondiging" textFill="WHITE">
+            <Button fx:id="reminderBtn" layoutX="170.0" layoutY="25.0" mnemonicParsing="false" onAction="#pressedReminderBtn" styleClass="loginButton" stylesheets="@style.css" text="Aankondiging" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
             </Button>
             <JFXToggleButton prefHeight="58.0" prefWidth="146.0" text="Sessie openen" unToggleLineColor="#0081c5" />
-            <Button fx:id="cancelbtn" mnemonicParsing="false" onAction="#pressedCancelBtn" onMouseClicked="#pressedCancelBtn" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
+            <Button fx:id="cancelbtn" mnemonicParsing="false" onAction="#pressedCancelBtn" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>

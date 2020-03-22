@@ -86,21 +86,13 @@ public class AnnouncementController extends AnchorPane{
     }
 
 	private void sendMail(String title, String message) {
-		if(session.getRegisteredUsers().isEmpty()) {
-			for(User u : session.getRegisteredUsers()) {
-				System.out.println(u.getFirstName());
+		if(session.getRegisteredUsers() == null || session.getRegisteredUsers().isEmpty()) {			
 				lblMessage.setText("Er zijn nog geen geregistreerde gebruikers voor deze sessie.");
-			}
 		}
 		else {
-			for(User u : session.getRegisteredUsers()) {
-				System.out.println(u.getFirstName());
-			}
 				new MailController(title, message, session.getRegisteredUsers());
 				lblMessage.setText("Het bericht werd verzonden naar de geregistreerde studenten.");
-			
-		}
-			
-		
+			}
+		}	
 	}
-}
+
