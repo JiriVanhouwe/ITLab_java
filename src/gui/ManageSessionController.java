@@ -89,12 +89,11 @@ public class ManageSessionController extends VBox {
     @FXML
     private Button cancelbtn;
     
-<<<<<<< HEAD
     private Session clickedSession;
-=======
+
     @FXML
     private Spinner<Integer> nrOfAttendeeSpinner;
->>>>>>> afe29a7efacd0a8e03c172b7099989898835c188
+
 
 	private ITLab iTLab;
 
