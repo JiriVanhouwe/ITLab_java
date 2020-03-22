@@ -125,7 +125,7 @@ public class Session implements GuiSession{
 	
 	
 	// methoden
-	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL) {
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL, User host) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -136,6 +136,7 @@ public class Session implements GuiSession{
 		setNameGuest(nameGuest);
 		setMedia(media);
 		setVideoURL(videoURL);
+		setHost(host);
 	}
 	
 	public void registerAttendee(User user) {
@@ -269,7 +270,7 @@ public class Session implements GuiSession{
 		return host;
 	}
 
-	private void setHost(User host) {
+	protected void setHost(User host) {
 		this.host = host;
 	}
 

@@ -59,7 +59,6 @@ public class SessionBuilder {
 			session.setStartHour(startDate.toLocalTime());
 			session.setEndHour(endDate.toLocalTime());
 		}
-
 	}
 	
 	public void buildGuestSpeaker(String guestSpeaker) {
@@ -76,6 +75,10 @@ public class SessionBuilder {
 	
 	public void buildVideoURL(String videoURL) {
 		session.setVideoURL(videoURL);
+	}
+	
+	public void buildHost(User host) {
+		session.setHost(host);
 	}
 	
 	

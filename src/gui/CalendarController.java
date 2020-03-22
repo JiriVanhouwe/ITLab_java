@@ -20,6 +20,7 @@ import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
+import domain.UserController;
 import exceptions.InformationRequiredException;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -135,10 +136,11 @@ public class CalendarController extends HBox {
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
 			System.out.println(session.getSessionID());
+			
 			try {
 				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL());
 			} catch (InformationRequiredException e) {
-				// TODO Auto-generated catch block
+				
 				Alert a = new Alert(AlertType.ERROR);
 				String res = null;
 				for(RequiredElement el: e.getInformationRequired()) {
@@ -162,6 +164,7 @@ public class CalendarController extends HBox {
 						}
 				
 				a.setContentText(res);
+				a.showAndWait();
 			}
 		}
 	}

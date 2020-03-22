@@ -52,7 +52,6 @@ public class SessionController extends Controller {
 		} else {
 			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL);
 		}
-
 	}
 	
 	public List<GuiSession> giveSessionsBetweenDates(LocalDate startDate, LocalDate endDate) {
@@ -72,6 +71,7 @@ public class SessionController extends Controller {
 		sb.buildGuestSpeaker(nameGuest);
 		sb.buildMedia(media);
 		sb.buildVideoURL(videoURL);
+		sb.buildHost(itLab.getLoggedInUser());
 		
 		
 		Session session = sb.getSession();
@@ -132,9 +132,5 @@ public class SessionController extends Controller {
 		
 		//Return the id that has been generated
 		return ((BigDecimal) itLab.getEntityManager().createNativeQuery("SELECT IDENT_CURRENT('Image')").getSingleResult()).intValue();
-	}
-	
-	private void changeToAssociatedSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
-		
 	}
 }

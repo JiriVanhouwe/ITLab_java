@@ -101,7 +101,7 @@ public class ITLab {
 	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) {
 		Session session = currentSessioncalendar.giveSession(id);
 		em.getTransaction().begin();
-		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL);
+		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL, loggedInUser);
 		currentSessioncalendar.addSession(session);
 		em.persist(session);
 		em.getTransaction().commit();
