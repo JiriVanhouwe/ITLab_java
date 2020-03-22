@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 
 import domain.MailController;
 import domain.Session;
-import domain.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -90,8 +89,11 @@ public class AnnouncementController extends AnchorPane{
 				lblMessage.setText("Er zijn nog geen geregistreerde gebruikers voor deze sessie.");
 		}
 		else {
+				lblMessage.setText("Aan het verzenden. Even geduld.");
+				getScene().setCursor(javafx.scene.Cursor.WAIT);
 				new MailController(title, message, session.getRegisteredUsers());
 				lblMessage.setText("Het bericht werd verzonden naar de geregistreerde studenten.");
+				getScene().setCursor(javafx.scene.Cursor.DEFAULT);
 			}
 		}	
 	}
