@@ -3,7 +3,7 @@ package gui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.calendarfx.model.Calendar;
@@ -16,7 +16,6 @@ import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.DayView;
 
 import domain.GuiSession;
-import domain.ITLab;
 import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
@@ -34,8 +33,9 @@ public class CalendarController extends HBox {
 	private SessionController sessionController;
 	private SessionCalendarController sessionCalendarController;
 	
-	private Month beginMonth;
-	private Month endMonth;
+	private LocalDate _startDate;
+	private LocalDate _endDate;
+	private CalendarView _calendarView;
 	
 	public CalendarController() {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Calendar.fxml"));
@@ -51,27 +51,26 @@ public class CalendarController extends HBox {
 		
 		sessionController = new SessionController();
 		sessionCalendarController = new SessionCalendarController();
-		beginMonth = LocalDate.now().getMonth();
-		endMonth = LocalDate.now().plusMonths(2).getMonth();
+		
+		_startDate = sessionCalendarController.giveSessionCalendar().getStartDate();
+		_endDate = sessionCalendarController.giveSessionCalendar().getEndDate();
 		
 		initializeCalendar();
 	}
 	
 	private void initializeCalendar() {
-		DayView view = new DayView();
-		CalendarView calendarView = new CalendarView();
-		calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
-		calendarView.setShowPrintButton(false); // make the printing option invisible
+		_calendarView = new CalendarView();
+		_calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
+		_calendarView.setShowPrintButton(false); // make the printing option invisible
 		
 		Calendar calendar1 = new Calendar("Sessies"); 
 		
-		
-		view.addEventHandler(LoadEvent.LOAD, evt -> calendarMonthChanged(evt));
+		_calendarView.addEventHandler(LoadEvent.LOAD, evt -> calendarRangeChanged(evt));
 		
 
         calendar1.setStyle(Style.STYLE2);
 
-        calendarView.setEntryDetailsPopOverContentCallback(param -> new ManageSessionController(param.getEntry()));
+        _calendarView.setEntryDetailsPopOverContentCallback(param -> new ManageSessionController(param.getEntry()));
         
 
         CalendarSource myCalendarSource = new CalendarSource("Kalender");
@@ -79,18 +78,18 @@ public class CalendarController extends HBox {
         
 
 
-        calendarView.getCalendarSources().remove(0);
-        calendarView.getCalendarSources().addAll(myCalendarSource); 
+        _calendarView.getCalendarSources().remove(0);
+        _calendarView.getCalendarSources().addAll(myCalendarSource); 
 
-        calendarView.setRequestedTime(LocalTime.now());
+        _calendarView.setRequestedTime(LocalTime.now());
 
         Thread updateTimeThread = new Thread("Calendar: Update Time Thread") {
                 @Override
                 public void run() {
                         while (true) {
                                 Platform.runLater(() -> {
-                                        calendarView.setToday(LocalDate.now());
-                                        calendarView.setTime(LocalTime.now());
+                                        _calendarView.setToday(LocalDate.now());
+                                        _calendarView.setTime(LocalTime.now());
                                 });
 
                                 try {
@@ -109,9 +108,9 @@ public class CalendarController extends HBox {
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
     	
-    	HBox.setHgrow(calendarView, Priority.ALWAYS);
+    	HBox.setHgrow(_calendarView, Priority.ALWAYS);
     	
-    	this.getChildren().add(calendarView);
+    	this.getChildren().add(_calendarView);
     	
     	EventHandler<CalendarEvent> handler = evt -> calendarEntryChanged(evt);
     	calendar1.addEventHandler(handler);
@@ -164,9 +163,20 @@ public class CalendarController extends HBox {
 		}
 	}
     
-    private void calendarMonthChanged(LoadEvent evt) {
-    	if(evt.getEndDate().isBefore(sessionCalendarController.giveSessionCalendar().getEndDate())) {
+    private void calendarRangeChanged(LoadEvent evt) {
+    	LocalDate newStartDate = evt.getStartDate();
+    	LocalDate newEndDate = evt.getEndDate();
+    	List<GuiSession> sessions = new ArrayList<>();
+    	
+    	if (newStartDate.isBefore(_startDate) || newEndDate.isAfter(_endDate)) {
+    		_startDate = newStartDate;
+    		_endDate = newEndDate;
     		
+    		sessions = sessionController.giveSessionsBetweenDates(_startDate, _endDate);
     	}
+    }
+    
+    private void loadSessions(List<GuiSession> sessions) {
+    	
     }
 }

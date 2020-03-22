@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,10 +54,14 @@ public class SessionController extends Controller {
 		}
 
 	}
+	
+	public List<GuiSession> giveSessionsBetweenDates(LocalDate startDate, LocalDate endDate) {
+		return itLab.giveSessionsBetweenDates(startDate, endDate)
+					.stream()
+					.map(session -> (GuiSession)session)
+					.collect(Collectors.toList());
+	}
 
-	// waarom hier id terug geven -> het entryid moet onmiddelijk aangepast orden
-	// naar het juiste sessionid, want een entry neemt anders zijn eigen nummering
-	// aan die niet gelijk zal lopen met sessions
 	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classroom,
 			int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) throws InformationRequiredException {
 		sb.createSession();
