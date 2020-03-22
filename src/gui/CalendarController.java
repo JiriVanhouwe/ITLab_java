@@ -36,6 +36,7 @@ public class CalendarController extends HBox {
 	private LocalDate _startDate;
 	private LocalDate _endDate;
 	private CalendarView _calendarView;
+	private Calendar _calendar1;
 	
 	public CalendarController() {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Calendar.fxml"));
@@ -63,18 +64,18 @@ public class CalendarController extends HBox {
 		_calendarView.setShowAddCalendarButton(false); // make sure it is not possible to add multiple calendars in a calendarview
 		_calendarView.setShowPrintButton(false); // make the printing option invisible
 		
-		Calendar calendar1 = new Calendar("Sessies"); 
+		_calendar1 = new Calendar("Sessies"); 
 		
 		_calendarView.addEventHandler(LoadEvent.LOAD, evt -> calendarRangeChanged(evt));
 		
 
-        calendar1.setStyle(Style.STYLE2);
+        _calendar1.setStyle(Style.STYLE2);
 
         _calendarView.setEntryDetailsPopOverContentCallback(param -> new ManageSessionController(param.getEntry()));
         
 
         CalendarSource myCalendarSource = new CalendarSource("Kalender");
-        myCalendarSource.getCalendars().add(calendar1);
+        myCalendarSource.getCalendars().add(_calendar1);
         
 
 
@@ -102,7 +103,7 @@ public class CalendarController extends HBox {
                 };
         };
         
-        linkSessionsToEntries(calendar1);
+        linkSessionsToEntries(_calendar1);
 
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
@@ -113,19 +114,21 @@ public class CalendarController extends HBox {
     	this.getChildren().add(_calendarView);
     	
     	EventHandler<CalendarEvent> handler = evt -> calendarEntryChanged(evt);
-    	calendar1.addEventHandler(handler);
+    	_calendar1.addEventHandler(handler);
 	}
 
 	private void linkSessionsToEntries(Calendar calendar) {
     	List<GuiSession> sessions = this.sessionController.giveSessionsCurrentCalendar();
     	
-    	sessions.stream().forEach(session -> {
-    		Entry entry = new Entry();
-    		entry.setId(Integer.toString(session.getSessionID()) + "#");
-    		entry.setTitle(session.getTitle());
-    		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
-    		calendar.addEntry(entry);
-    	});
+    	loadSessions(sessions);
+    	
+//    	sessions.stream().forEach(session -> {
+//    		Entry entry = new Entry();
+//    		entry.setId(Integer.toString(session.getSessionID()) + "#");
+//    		entry.setTitle(session.getTitle());
+//    		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+//    		calendar.addEntry(entry);
+//    	});
     }
 	
     private void calendarEntryChanged(CalendarEvent evt) {
@@ -173,10 +176,20 @@ public class CalendarController extends HBox {
     		_endDate = newEndDate;
     		
     		sessions = sessionController.giveSessionsBetweenDates(_startDate, _endDate);
+    		loadSessions(sessions);
     	}
     }
     
     private void loadSessions(List<GuiSession> sessions) {
-    	
+    	sessions.stream().forEach(session -> {
+    		Entry entry = new Entry();
+    		entry.setId(Integer.toString(session.getSessionID()) + "#");
+    		
+    		if(_calendar1.findEntries(entry.getId()).isEmpty()) {
+        		entry.setTitle(session.getTitle());
+        		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+        		_calendar1.addEntry(entry);
+    		}
+    	});
     }
 }
