@@ -70,6 +70,13 @@ public class ITLab {
 	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
 	}
+	
+	public List<Session> giveSessionsBetweenDates(LocalDate startDate, LocalDate endDate) {
+		return sessionCalendars.stream()
+								.filter(sc -> !(sc.getStartDate().isBefore(startDate) || sc.getEndDate().isAfter(endDate)))
+								.flatMap(sc -> sc.getSessions().stream())
+								.collect(Collectors.toList());
+	}
 
 	public boolean isUserPassComboValid(String username, String password) {
 		User u;
