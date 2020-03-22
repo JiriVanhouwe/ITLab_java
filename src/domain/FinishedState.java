@@ -3,8 +3,8 @@ package domain;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("FINISHED")
+//@Entity
+//@DiscriminatorValue("FINISHED")
 public class FinishedState extends SessionState {
 
 	public FinishedState() {

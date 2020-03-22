@@ -92,11 +92,12 @@ public class Session implements GuiSession{
 	@JoinColumn(name = "session_id", referencedColumnName = "id")
 	private List<Feedback> feedbackList;
 	
-	@OneToOne
+	//@OneToOne
+	@Transient
 	private SessionState state;
 	
 	//@Enumerated(EnumType.STRING)
-	//private State stateEnum;
+	private State stateEnum;
 	
 	protected Session() {
 		//enum -> sessiestate
@@ -152,6 +153,30 @@ public class Session implements GuiSession{
 	}
 
 	// getters and setters
+	@Enumerated(EnumType.STRING)
+	public State getStateEnum() {
+		System.out.println(this.state);
+		return this.stateEnum;
+	}
+	
+	public void setStateEnum(State state) {
+		this.stateEnum = state;
+		
+		switch(state) {
+		case OPEN: 
+			this.state = new OpenState();
+			break;
+		case CLOSED:
+			this.state = new ClosedState();
+			break;
+		case FINISHED:
+			this.state = new FinishedState();
+		}
+		
+		System.out.println(this.state);
+	}
+	
+	
 	public String getTitle() {
 		return title;
 	}

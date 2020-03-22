@@ -3,8 +3,8 @@ package domain;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("CLOSED")
+//@Entity
+//@DiscriminatorValue("CLOSED")
 public class ClosedState extends SessionState {
 
 	public ClosedState() {

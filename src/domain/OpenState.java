@@ -3,8 +3,8 @@ package domain;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-@Entity
-@DiscriminatorValue("OPEN")
+//@Entity
+//@DiscriminatorValue("OPEN")
 public class OpenState extends SessionState{
 
 	public OpenState() {

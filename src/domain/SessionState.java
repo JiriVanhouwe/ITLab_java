@@ -13,21 +13,21 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
-@Entity
-@Inheritance
-@DiscriminatorColumn(name="State_Type")
-@Table(name = "SessionState")
+//@Entity
+//@Inheritance
+//@DiscriminatorColumn(name="State_Type")
+//@Table(name = "SessionState")
 public abstract class SessionState implements Serializable {
 
 	public SessionState() {
 		// TODO Auto-generated constructor stub
 	}
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int ID;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    protected int ID;
 	
-	@OneToOne(mappedBy = "state")
+//	@OneToOne(mappedBy = "state")
 	protected Session session;
 	
 	//protected State stateEnum;
