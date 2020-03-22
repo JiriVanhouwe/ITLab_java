@@ -133,4 +133,8 @@ public class SessionController extends Controller {
 		//Return the id that has been generated
 		return ((BigDecimal) itLab.getEntityManager().createNativeQuery("SELECT IDENT_CURRENT('Image')").getSingleResult()).intValue();
 	}
+	
+	private void changeToAssociatedSessionCalendar(LocalDateTime startDate, LocalDateTime endDate) {
+		
+	}
 }

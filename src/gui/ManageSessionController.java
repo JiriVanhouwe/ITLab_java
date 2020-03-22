@@ -18,8 +18,10 @@ import domain.ITLab;
 import domain.ITLabSingleton;
 import domain.RequiredElement;
 import domain.Session;
+import domain.SessionCalendarController;
 import domain.SessionController;
 import exceptions.InformationRequiredException;
+import exceptions.NotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,6 +105,7 @@ public class ManageSessionController extends VBox {
 	private HashMap<Integer, Image> sessionMedia;
 
 	private SessionController sessionController;
+	private SessionCalendarController sessionCalendarController;
 
 	public ManageSessionController(Entry entry) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ManageSession.fxml"));
@@ -116,6 +119,8 @@ public class ManageSessionController extends VBox {
 		}
 
 		sessionController = new SessionController();
+		sessionCalendarController = new SessionCalendarController();
+		
 		this.entry = entry;
 		fillClassrooms();
 		sessionMedia = new HashMap<Integer, Image>();
@@ -171,6 +176,14 @@ public class ManageSessionController extends VBox {
 
 	@FXML
 	void pressedSaveBtn(ActionEvent event) {
+		try {
+			sessionCalendarController.changeSessionCalendarByDate(this.start_date.getValue());
+		} catch (NotFoundException e) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Geen sessiekalender");
+			a.setContentText("De sessie valt niet binnen het bereik van een sessiekalender");
+		}
+		
 		String id;
 		try {
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
@@ -178,12 +191,12 @@ public class ManageSessionController extends VBox {
 					nrOfAttendeeSpinner.getValue(), this.description_txt.getText(), this.speaker_txt.getText(),
 					new ArrayList<Integer>(this.sessionMedia.keySet()), this.url_txt.getText());
 		
-		this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
-				entry.getEndTime());
-		this.entry.setTitle(this.title_txt.getText());
-		this.entry.setId(id);
-
-		this.close();
+			this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
+					entry.getEndTime());
+			this.entry.setTitle(this.title_txt.getText());
+			this.entry.setId(id);
+	
+			this.close();
 		
 		} catch (InformationRequiredException e) {
 			// TODO Auto-generated catch block

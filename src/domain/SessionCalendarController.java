@@ -1,8 +1,11 @@
 package domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import exceptions.NotFoundException;
 
 public class SessionCalendarController extends Controller {
 
@@ -27,15 +30,11 @@ public class SessionCalendarController extends Controller {
 		return itLab.getSessionCalendars();
 	}
 	
-	public void changeSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		throw new UnsupportedOperationException();
+	public void changeSessionCalendarByDate(LocalDate startDate) throws NotFoundException {
+		itLab.changeSessionCalendaryByDate(startDate);
 	}
 	
 	public void createSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
 		itLab.addSessionCalendar(new SessionCalendar(id,startDate,endDate));
-	}
-	
-	public void removeSessionCalendar(LocalDate startDate, LocalDate endDate) {
-		throw new UnsupportedOperationException();
 	}
 }

@@ -20,6 +20,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
+import exceptions.NotFoundException;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -104,6 +105,19 @@ public class ITLab {
 		currentSessioncalendar.addSession(session);
 		em.persist(session);
 		em.getTransaction().commit();
+	}
+	
+	public void changeSessionCalendaryByDate(LocalDate startDate) throws NotFoundException {
+		SessionCalendar sessionCalendar = sessionCalendars.stream()
+															.filter(sc -> !(startDate.isBefore(sc.getStartDate()) || startDate.isAfter(sc.getEndDate())))
+															.findFirst()
+															.orElse(null);
+		
+		if(sessionCalendar == null) 
+			throw new NotFoundException();
+			
+		this.currentSessioncalendar = sessionCalendar;
+		
 	}
 
 	private void loadClassrooms() {
