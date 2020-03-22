@@ -118,6 +118,8 @@ public class Session implements GuiSession{
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
 		attendees = new ArrayList<>();
+		
+		setState(new ClosedState());
 	}
 
 	

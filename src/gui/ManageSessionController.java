@@ -133,6 +133,9 @@ public class ManageSessionController extends VBox {
 			
 			// Fill the image list
 			loadImages();
+		}else {
+			SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
+			nrOfAttendeeSpinner.setValueFactory(valueFactory);
 		}
 
 		// Formatting for the time
