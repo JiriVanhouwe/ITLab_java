@@ -1,59 +1,110 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.jfoenix.controls.JFXListView;
 
 import domain.GuiSession;
-import domain.Session;
-import domain.SessionCalendarController;
+import domain.GuiUser;
 import domain.SessionController;
 import domain.User;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import domain.UserController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
-
-import javafx.scene.control.ListView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.scene.control.ChoiceBox;
 
-public class StatsController extends GridPane{
+public class StatsController extends AnchorPane {
+
+	// de items voor een geselecteerde session//
 	@FXML
-	private ChoiceBox cb_sessions;
+	private ChoiceBox<String> choiceBoxSession;
+
 	@FXML
-	private Label lbl_sessieinfo;
+	private ChoiceBox<String> choiceBoxUser;
+
 	@FXML
-	private Label lbl_attendeesstats;
+	private JFXListView<String> lvRegistered;
+
 	@FXML
-	private Label lbl_registeredUsers;
+	private JFXListView<String> lvAttended;
+
 	@FXML
-	private Label lbl_attendees;
+	private Label lblRegistUsers;
+
 	@FXML
-	private ListView lv_registeredUsers;
+	private Label lblAttendedUsers;
+	
+    @FXML
+    private Button btnFeedback;
+	// tot hier voor geselecteerde session//
+
+	// de items voor een geselecteerde user//
 	@FXML
-	private ListView lv_attendees;
+	private Label lblUserName;
+
 	@FXML
-	private ChoiceBox cb_feedback;
+	private Label lblFirstName;
+
 	@FXML
-	private Button btn_feedbackDelete;
+	private Label lblLastName;
+
 	@FXML
-	private Label lbl_feedbacktitle;
+	private Label lblType;
+
 	@FXML
-	private Label lbl_feedbackinfo;
+	private Label lblStatus;
+
+	@FXML
+	private Label lblSelectedUserAttended;
+
+	@FXML
+	private Label lblSelectedUserAbsent;
+	
+    @FXML
+    private Label lblFillUserName;
+
+    @FXML
+    private Label lblFillFirstName;
+
+    @FXML
+    private Label lblFillLastName;
+
+    @FXML
+    private Label lblFillType;
+
+    @FXML
+    private Label lblFillStatus;
+
+    @FXML
+    private Label lblFillRegistered;
+
+    @FXML
+    private Label lblFillAbsent;
+	// tot hier voor geselecteerde user//
 
 	private SessionController sessionController;
-	private SessionCalendarController sessionCalendarController;
-	
+	private UserController userController;
+	private GuiSession selectedSession;
+
 	private ObservableList<GuiSession> sessionList;
-	
-	public StatsController(SessionController sessionController) {
+
+	public StatsController(SessionController sessionController, UserController userController) {
 		this.sessionController = sessionController;
-		//this.sessionCalendarController = sessionCalendarController;
-		
+		this.userController = userController;
+
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Stats.fxml"));
 		loader.setRoot(this);
 		loader.setController(this);
@@ -62,51 +113,104 @@ public class StatsController extends GridPane{
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
-		updateSessionList();
-		
-		ChangeListener<GuiSession> changeListener = new ChangeListener<GuiSession>() {
-			@Override
-			public void changed(ObservableValue<? extends GuiSession> observable, //
-                    GuiSession oldValue, GuiSession newValue) {
-				// TODO Auto-generated method stub
-				updateInfo(newValue);
+		loadChoiceBoxes();
+
+		choiceBoxUser.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> {
+			if (newVal != null) {
+				updateUserStatistics(newVal);
+				System.out.println(newVal);
 			}
-		};
+		});
 		
-		cb_sessions.getSelectionModel().selectedItemProperty().addListener(changeListener);
-		
-		
-		}
+		choiceBoxSession.getSelectionModel().selectedIndexProperty().addListener((obsVal, oldVal, newVal) -> {
+			if (newVal != null) {
+				updateSessionStatistics(newVal.intValue());
+				System.out.println(newVal);
+			}
+		});
+	}
 
-	private void updateSessionList() {
-		this.sessionList = FXCollections.observableList(sessionController.giveSessionsCurrentCalendar());
-					
-		cb_sessions.setItems(sessionList);
+	private void updateUserStatistics(String userName) {
+		placeLabelsVisible();
+		User user = (User) userController.giveUser(userName);
+		lblFillUserName.setText(user.getUserName());
+		lblFillFirstName.setText(user.getFirstName());
+		lblFillLastName.setText(user.getLastName());
+		lblFillStatus.setText(user.giveUserStatus());
+		lblFillType.setText(user.giveUserType());
+		lblFillAbsent.setText("nog geen data");
+		lblFillRegistered.setText("nog geen data");
+		System.out.println(userName);
+	}
+
+	private void updateSessionStatistics(int index) {
+		placeListViewsVisible();
 		
+		selectedSession = sessionController.giveSessionsCurrentCalendar().get(index);
+		System.out.println(selectedSession.getTitle()); //dit print hij
+		List<User> registUsers = selectedSession.getRegisteredUsers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
+		List<User> attendUsers = selectedSession.getAttendees().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());;
+		
+		registUsers.forEach(el -> System.out.println(el.getUserName()));
+		lvRegistered.setItems(FXCollections.observableArrayList(registUsers.stream().map(el -> el.getUserName()).collect(Collectors.toList())));
+		lvAttended.setItems(FXCollections.observableArrayList(attendUsers.stream().map(el -> el.getUserName()).collect(Collectors.toList())));
+		
+		lblAttendedUsers.setText(String.format("Aanwezigen: %d", attendUsers.size()));
+		lblRegistUsers.setText(String.format("Geregistreerden: %d", registUsers.size()));
 	}
 	
-	private void updateInfo(GuiSession session) {
+    @FXML
+    void clickFeedback(MouseEvent event) {  	
+		Scene scene = new Scene(new FeedbackController(selectedSession));	
+		Stage stage = new Stage();
 
-		lbl_attendees.setText("aanwezige gebruikers");
-		ObservableList<User> attendeeslist = FXCollections.observableList(session.getAttendees());
-		if(attendeeslist.size()>0) {
-			lv_attendees.setItems(attendeeslist);
-			lv_attendees.setVisible(true);
-			lbl_attendees.setVisible(true);
-		}
-		
-		lbl_registeredUsers.setText("geristreerde gebruikers");
-		ObservableList<User> registerdlist = FXCollections.observableList(session.getRegisteredUsers());
-		if(registerdlist.size()>0) {
-			lv_registeredUsers.setItems(registerdlist);
-			lv_registeredUsers.setVisible(true);
-			lbl_registeredUsers.setVisible(true);
-		}
-		
-		//feedback ophalen
-		//ObservableList<Feeback> feedbacklist = FXCollections.observableArrayList();
-		lbl_feedbacktitle.setText("nog geen feedback ingegeven");
-		lbl_feedbacktitle.setVisible(true);
+		stage.setTitle("ITLab");
+		stage.setScene(scene);
+		stage.setResizable(false);
+		//This makes sure the new stage stays on top and can't be sent to the background
+		stage.setAlwaysOnTop(true);
+		stage.showAndWait();
+    }
+
+	private void loadChoiceBoxes() {
+		choiceBoxSession.setItems(convertSessionToStringChoiceBox());
+		choiceBoxUser.setItems(convertUserToStringChoiceBox());
+	}
+
+	// sessie omzetten naar datum + naam van de sessie
+	private ObservableList<String> convertSessionToStringChoiceBox() { 
+		List<GuiSession> list = sessionController.giveSessionsCurrentCalendar();
+		List<String> listSessions = list.stream().sorted(Comparator.comparing(GuiSession::getDate))
+				.map(el -> el.getDate() + " - " + el.getTitle()).collect(Collectors.toList());
+		return FXCollections.observableArrayList(listSessions);
+	}
+
+	// users omzetten naar voornaam + familienaam
+	private ObservableList<String> convertUserToStringChoiceBox() { 
+		ObservableList<GuiUser> list = userController.giveAllUsers();
+		List<String> listUsers = list.stream().sorted(Comparator.comparing(GuiUser::getUserName))
+				.map(el -> el.getUserName()).collect(Collectors.toList());
+		return FXCollections.observableArrayList(listUsers);
 	}
 	
+	//hulpmethode: zet de labels visible zodra een user geselecteerd wordt.
+	private void placeLabelsVisible() {
+		lblUserName.setVisible(true);
+		lblFirstName.setVisible(true);
+		lblLastName.setVisible(true);
+		lblStatus.setVisible(true);
+		lblType.setVisible(true);
+		lblSelectedUserAbsent.setVisible(true);
+		lblSelectedUserAttended.setVisible(true);
+	}
+	
+	//hulpmethode: zet listviews en knop visible zodra een sessie geselecteerd wordt
+	private void placeListViewsVisible() {
+		btnFeedback.setVisible(true);
+		lvAttended.setVisible(true);
+		lvRegistered.setVisible(true);
+		lblRegistUsers.setVisible(true);
+		lblAttendedUsers.setVisible(true);
+	}
+
 }

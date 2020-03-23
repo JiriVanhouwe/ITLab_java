@@ -28,4 +28,31 @@ public class Feedback {
 	protected Feedback() {
 		
 	}
+	
+	protected Feedback(User user, String feedback) {
+		setUser(user);
+		setContentText(feedback);
+	}
+	
+	private void setUser(User user) {
+		if(user != null)
+			author = user;
+		else
+			throw new IllegalArgumentException("De auteur van de feedback moet ingevuld zijn.");
+	}
+	
+	public User getAuthor() {
+		return author;
+	}
+
+	private void setContentText(String text) {
+		if(text != null && !text.isBlank())
+			contentText = text;
+		else 
+			throw new IllegalArgumentException("Feedback mag niet leeg zijn.");
+	}
+	
+	public String getContentText() {
+		return contentText;
+	}
 }

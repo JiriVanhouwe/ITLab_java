@@ -1,58 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="835.0" type="GridPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="393.6000244140625" minWidth="10.0" prefWidth="375.2" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.40000000000003" minWidth="10.0" prefWidth="377.6000122070313" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="466.40000000000003" minWidth="10.0" prefWidth="377.6000122070313" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="127.00000610351563" minHeight="10.0" prefHeight="67.0000244140625" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="268.7999778747559" minHeight="10.0" prefHeight="225.60001220703128" vgrow="SOMETIMES" />
-  </rowConstraints>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ChoiceBox fx:id="cb_sessions" prefHeight="26.0" prefWidth="260.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="42.0" prefWidth="277.0" text="kies de gewenste sessie:" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <SplitPane orientation="VERTICAL" prefHeight="145.0" prefWidth="1250.0" style="-fx-background-color: #0081C5;" AnchorPane.bottomAnchor="649.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <Label prefHeight="140.0" prefWidth="1138.0" text="Statistieken" textFill="WHITE">
+               <font>
+                  <Font name="Ebrima Bold" size="45.0" />
+               </font>
+            </Label>
+         </items>
+      </SplitPane>
+      <Label layoutX="49.0" layoutY="186.0" text="Kies een sessie:">
          <font>
-            <Font size="18.0" />
+            <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
-      <Label fx:id="lbl_sessieinfo" prefHeight="18.0" prefWidth="728.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label fx:id="lbl_attendeesstats" prefHeight="18.0" prefWidth="758.0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-      <Label fx:id="lbl_registeredUsers" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="276.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <Label fx:id="lbl_attendees" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="298.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-      <ListView fx:id="lv_registeredUsers" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </GridPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
-      </ListView>
-      <ListView fx:id="lv_attendees" prefHeight="200.0" prefWidth="200.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </GridPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
-      </ListView>
-      <ChoiceBox fx:id="cb_feedback" prefWidth="150.0" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-      <Button fx:id="btn_feedbackDelete" mnemonicParsing="false" text="Delete selected feedback" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Label fx:id="lbl_feedbacktitle" alignment="CENTER" prefHeight="18.0" prefWidth="280.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Label fx:id="lbl_feedbackinfo" alignment="TOP_LEFT" prefHeight="226.0" prefWidth="256.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <Label layoutX="744.0" layoutY="183.0" text="Kies een gebruiker:">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceBoxSession" layoutX="203.0" layoutY="183.0" prefHeight="26.0" prefWidth="487.0" />
+      <ChoiceBox fx:id="choiceBoxUser" layoutX="926.0" layoutY="181.0" prefHeight="26.0" prefWidth="291.0" />
+      <JFXListView fx:id="lvRegistered" layoutX="45.0" layoutY="237.0" prefHeight="461.0" prefWidth="310.0" visible="false" />
+      <JFXListView fx:id="lvAttended" layoutX="382.0" layoutY="239.0" prefHeight="459.0" prefWidth="310.0" visible="false" />
+      <Label fx:id="lblRegistUsers" layoutX="49.0" layoutY="714.0" prefHeight="22.0" prefWidth="305.0" text="Geregistreerden:" visible="false">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAttendedUsers" layoutX="385.0" layoutY="714.0" prefHeight="22.0" prefWidth="307.0" text="Aanwezigen:" visible="false">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnFeedback" layoutX="54.0" layoutY="752.0" mnemonicParsing="false" onMouseClicked="#clickFeedback" opacity="0.74" prefHeight="26.0" prefWidth="298.0" styleClass="loginButton" stylesheets="@style.css" text="Feedback ophalen" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+         </effect>
+      </Button>
+      <Label fx:id="lblUserName" layoutX="746.0" layoutY="254.0" text="Gebruikersnaam" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFirstName" layoutX="746.0" layoutY="304.0" text="Voornaam" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblLastName" layoutX="744.0" layoutY="351.0" text="Familienaam" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblType" layoutX="745.0" layoutY="397.0" text="Type" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblStatus" layoutX="745.0" layoutY="448.0" text="Status" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectedUserAttended" layoutX="745.0" layoutY="498.0" text="Aantal aanwezigheden" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSelectedUserAbsent" layoutX="745.0" layoutY="548.0" text="Aantal afwezigheden" visible="false">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillUserName" layoutX="932.0" layoutY="253.0" prefHeight="19.0" prefWidth="283.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillFirstName" layoutX="932.0" layoutY="303.0" prefHeight="19.0" prefWidth="274.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillLastName" layoutX="930.0" layoutY="350.0" prefHeight="19.0" prefWidth="279.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillType" layoutX="931.0" layoutY="396.0" prefHeight="19.0" prefWidth="283.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillStatus" layoutX="931.0" layoutY="447.0" prefHeight="19.0" prefWidth="280.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillRegistered" layoutX="931.0" layoutY="497.0" prefHeight="19.0" prefWidth="278.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblFillAbsent" layoutX="931.0" layoutY="547.0" prefHeight="19.0" prefWidth="280.0">
+         <font>
+            <Font name="Ebrima" size="15.0" />
+         </font>
+      </Label>
    </children>
 </fx:root>
