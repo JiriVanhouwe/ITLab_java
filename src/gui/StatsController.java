@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXListView;
 
 import domain.GuiSession;
 import domain.GuiUser;
+import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.User;
 import domain.UserController;
@@ -113,6 +114,7 @@ public class StatsController extends AnchorPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+		
 		loadChoiceBoxes();
 
 		choiceBoxUser.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> {

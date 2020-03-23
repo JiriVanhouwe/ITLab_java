@@ -78,7 +78,7 @@ public class ManageSessionCalendarController extends VBox{
 			}
 			
 			sessionCalendarController = new SessionCalendarController();
-			selectedSessionCalendar = sessionCalendarController.giveSessionCalendar();
+			//selectedSessionCalendar = sessionCalendarController.giveSessionCalendar();
 			
 			txtAcademicYear.setText(Integer.toString(selectedSessionCalendar.getId()));
 			dpStartDate.setValue(selectedSessionCalendar.getStartDate());

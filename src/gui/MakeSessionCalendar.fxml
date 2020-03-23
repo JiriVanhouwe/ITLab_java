@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root minHeight="372.0" minWidth="707.0" prefHeight="372.0" prefWidth="707.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="171.0" layoutY="186.0" text="Startdatum">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="172.0" layoutY="227.0" text="Einddatum">
+         <font>
+            <Font name="Ebrima Bold" size="15.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="calStartDate" layoutX="322.0" layoutY="184.0" />
+      <DatePicker fx:id="calEndDate" layoutX="322.0" layoutY="225.0" />
+      <JFXButton fx:id="btnSave" defaultButton="true" layoutX="242.0" layoutY="285.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="223.0" styleClass="loginButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+         </effect>
+      </JFXButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0081c5" height="144.0" layoutY="-3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="707.0" />
+      <Label layoutX="55.0" layoutY="36.0" minHeight="66.0" minWidth="245.0" prefHeight="66.0" prefWidth="584.0" text="Sessiekalender maken" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="37.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMessage" layoutX="146.0" layoutY="338.0" prefHeight="20.0" prefWidth="415.0" textFill="#ff9900">
+         <font>
+            <Font name="Ebrima Bold" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</fx:root>

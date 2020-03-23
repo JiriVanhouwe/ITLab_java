@@ -1,6 +1,9 @@
 package gui;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -70,6 +73,10 @@ public class UsersController extends AnchorPane{
     @FXML
     private TableColumn<GuiUser, String> statusColumn;
 
+    private Map<GuiUser, String> userTypeChanges;
+    private Map<GuiUser, String> userStatusChanges;
+    
+    
 	public UsersController(UserController userController) {
 		this.userController = userController;
 		
@@ -82,6 +89,10 @@ public class UsersController extends AnchorPane{
 			throw new RuntimeException(ex);
 		}
 		
+		//Create new maps where will store all changed values
+		userTypeChanges = new HashMap<GuiUser, String>();
+		userStatusChanges = new HashMap<GuiUser, String>();
+		
 		//Fill the columns with the correct information, we use StringProperty in de User class
 		userNameColumn.setCellValueFactory(data -> data.getValue().userNameProperty());
 		firstNameColumn.setCellValueFactory(data -> data.getValue().firstNameProperty());
@@ -89,13 +100,19 @@ public class UsersController extends AnchorPane{
 		
 		//Fill the cells in the 'type' column with comboboxes and all the possible usertypes
 		ObservableList<String> typeList = FXCollections.observableArrayList("Hoofdverantwoordelijke", "Verantwoordelijke", "Gebruiker");
-		typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(typeList));
 		typeColumn.setCellValueFactory(data -> data.getValue().userTypeProperty());
+		typeColumn.setCellFactory(ComboBoxTableCell.forTableColumn(typeList));
+		typeColumn.setOnEditCommit(e -> {
+			userTypeChanges.put(e.getRowValue(), e.getNewValue());
+		});
 		
 		//Same thing for the 'status' column
 		ObservableList statusList = FXCollections.observableArrayList("Actief", "Geblokkeerd", "Niet actief");
-		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(statusList));
 		statusColumn.setCellValueFactory(data -> data.getValue().userStatusProperty());
+		statusColumn.setCellFactory(ComboBoxTableCell.forTableColumn(statusList));
+		statusColumn.setOnEditCommit(e -> {
+			userStatusChanges.put(e.getRowValue(), e.getNewValue());
+		});
 		
 		tableViewUsers.setItems(userController.giveAllUsers());
 		
@@ -112,15 +129,21 @@ public class UsersController extends AnchorPane{
     @FXML
     void btnChangeUserClick(MouseEvent event) {
     	ObservableList<GuiUser> users = tableViewUsers.getItems();
-    	//We loop over all users and check if the type and status has changed
-    	for(GuiUser u : users) {
-    		System.out.println( u.getUserName() + " " + u.getUserType().toString() + " " + userController.stringToUserType(typeColumn.getCellData(u)));
-    		if(u.getUserType() != userController.stringToUserType(typeColumn.getCellData(u)) || u.getUserStatus() != userController.stringToUserStatus(statusColumn.getCellData(u))) {
-    			userController.changeUser(u.getFirstName(), u.getLastName(), u.getLastName(), userController.stringToUserType(typeColumn.getCellData(u)) , userController.stringToUserStatus(statusColumn.getCellData(u)));
-    			lblMessage.setText("De wijzigingen zijn toegepast"); 
-    		}
-
+    	//We loop over all changes in the changes-maps, then we use changeUser to commit the changes
+    	for(Map.Entry<GuiUser, String> entry : userTypeChanges.entrySet()) {
+    		GuiUser u = entry.getKey();
+    		String type = entry.getValue();
+    		userController.changeUser(u.getFirstName(), u.getLastName(), u.getUserName(), userController.stringToUserType(type) , u.getUserStatus());
     	}
+    	
+    	for(Map.Entry<GuiUser, String> entry : userStatusChanges.entrySet()) {
+    		GuiUser u = entry.getKey();
+    		String status = entry.getValue();
+    		userController.changeUser(u.getFirstName(), u.getLastName(), u.getUserName(), u.getUserType() , userController.stringToUserStatus(status));
+    	}
+    	
+    	lblMessage.setText("De wijzigingen zijn toegepast"); 
+    	
     }
 
     @FXML

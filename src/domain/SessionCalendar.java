@@ -85,8 +85,6 @@ public class SessionCalendar implements GuiSessionCalendar {
 		
 		int deel1 = Integer.parseInt(String.valueOf(id).substring(0,4));
 		int deel2 = Integer.parseInt(String.valueOf(id).substring(4,8));
-		System.out.println(deel1+1);
-		System.out.println(deel2);
 		if((deel1 + 1) != deel2 )
 			throw new IllegalArgumentException("id moet bestaan uit die opeenvolgende jaartallen");
 		this.id = id;

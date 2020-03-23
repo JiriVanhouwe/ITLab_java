@@ -74,7 +74,6 @@ public class CalendarController extends HBox {
 
         _calendarView.setEntryDetailsPopOverContentCallback(param -> new ManageSessionController(param.getEntry()));
         
-
         CalendarSource myCalendarSource = new CalendarSource("Kalender");
         myCalendarSource.getCalendars().add(_calendar1);
         
@@ -122,14 +121,6 @@ public class CalendarController extends HBox {
     	List<GuiSession> sessions = this.sessionController.giveSessionsCurrentCalendar();
     	
     	loadSessions(sessions);
-    	
-//    	sessions.stream().forEach(session -> {
-//    		Entry entry = new Entry();
-//    		entry.setId(Integer.toString(session.getSessionID()) + "#");
-//    		entry.setTitle(session.getTitle());
-//    		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
-//    		calendar.addEntry(entry);
-//    	});
     }
 	
     private void calendarEntryChanged(CalendarEvent evt) {

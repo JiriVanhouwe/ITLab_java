@@ -57,7 +57,6 @@ public class ITLab {
 			
 		}catch(NoResultException e) {
 			System.err.println("Fout in databank");
-			
 		}	
 	}
 
@@ -65,6 +64,23 @@ public class ITLab {
 
 	public List<Session> giveSessions() {
 		return currentSessioncalendar.getSessions(); 
+	}
+	
+	public void editSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
+		SessionCalendar sessioncalendar = sessionCalendars.stream()
+															.filter(sc -> sc.getId() == id)
+															.findFirst()
+															.orElse(null);
+		
+		sessioncalendar.ChangeDates(startDate, endDate);
+	}
+	
+	public boolean doesSessionCalendarExist(int id) {
+		SessionCalendar sessionCalendar =  sessionCalendars.stream()
+															.filter(sc -> sc.getId() == id)
+															.findAny()
+															.orElse(null);
+		return sessionCalendar != null;
 	}
 	
 
@@ -98,14 +114,6 @@ public class ITLab {
 		return false;
 	}
 
-	public void changeSession(int id, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) {
-		Session session = currentSessioncalendar.giveSession(id);
-		em.getTransaction().begin();
-		session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL, loggedInUser, state);
-		currentSessioncalendar.addSession(session);
-		em.persist(session);
-		em.getTransaction().commit();
-	}
 	
 	public void changeSessionCalendaryByDate(LocalDate startDate) throws NotFoundException {
 		SessionCalendar sessionCalendar = sessionCalendars.stream()
