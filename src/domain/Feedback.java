@@ -14,7 +14,6 @@ public class Feedback {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private User author;
-	private boolean opened;
 	private String contentText;
 	
 	protected Feedback() {

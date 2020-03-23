@@ -3,7 +3,6 @@ package gui;
 import java.io.IOException;
 
 import domain.GuiSession;
-import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.User;
@@ -19,9 +18,13 @@ import javafx.scene.control.Label;
 
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+
 import javafx.scene.control.ChoiceBox;
 
-public class StatsController extends GridPane{
+public class StatsController extends GridPane {
+	@FXML
+	private RowConstraints header;
 	@FXML
 	private ChoiceBox cb_sessions;
 	@FXML
@@ -62,6 +65,7 @@ public class StatsController extends GridPane{
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+		
 		updateSessionList();
 		
 		ChangeListener<GuiSession> changeListener = new ChangeListener<GuiSession>() {

@@ -17,8 +17,6 @@ public class SessionBuilder {
 		if(session.getTitle() == null)
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
-		if(session.getMaxAttendee() == 0)
-			requiredElements.add(RequiredElement.ATENDEESREQUIRED);
 		
 		if(session.getStartHour() == null || session.getDate() == null )
 			requiredElements.add(RequiredElement.STARTDATEREQUIRED);
@@ -26,8 +24,15 @@ public class SessionBuilder {
 		if(session.getDate() == null || session.getEndHour() == null)
 			requiredElements.add(RequiredElement.ENDDATEREQUIRED);
 		
+		if(session.getClass() == null)
+			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
+		
+		if(session.getMaxAttendee() == 0)
+			requiredElements.add(RequiredElement.ATENDEESREQUIRED);
+		
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
+		
 			
 		return this.session;
 		
@@ -47,18 +52,25 @@ public class SessionBuilder {
 		if(classroom != null)
 			session.setClassroom(classroom);
 		
-		if(maxAttendee > 0 || maxAttendee <= session.getClassroom().getMaxSeats()) 
+		if(maxAttendee > 0 && maxAttendee <= session.getClassroom().getMaxSeats()) 
 			session.setMaxAttendee(maxAttendee);
 		else 
 			session.setMaxAttendee(0);
 	}
 	
 	public void buildDates(LocalDateTime startDate, LocalDateTime endDate) {
-		if( (startDate != null && startDate.isAfter(LocalDateTime.now().plusDays(1))) || (endDate.toLocalDate().equals(startDate.toLocalTime()) && endDate.minusMinutes(30).isAfter(startDate)) ) {
-			session.setDate(startDate.toLocalDate());
-			session.setStartHour(startDate.toLocalTime());
-			session.setEndHour(endDate.toLocalTime());
+		
+		if(startDate != null && endDate !=null && startDate.isBefore(endDate) && startDate.isAfter(LocalDateTime.now().plusDays(1))) {
+			if(startDate.toLocalDate().equals(endDate.toLocalDate())) {
+				if(startDate.toLocalTime().isBefore(endDate.toLocalTime().minusMinutes(29).minusSeconds(59))) {
+					session.setDate(startDate.toLocalDate());
+					session.setStartHour(startDate.toLocalTime());
+					session.setEndHour(endDate.toLocalTime());
+				}
+			}
 		}
+		
+	
 	}
 	
 	public void buildGuestSpeaker(String guestSpeaker) {
