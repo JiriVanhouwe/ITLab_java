@@ -1,6 +1,8 @@
 package gui;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +15,7 @@ import com.calendarfx.model.Entry;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 
 import domain.Classroom;
 import domain.ITLab;
@@ -21,6 +24,7 @@ import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
+import domain.State;
 import exceptions.InformationRequiredException;
 import exceptions.NotFoundException;
 import javafx.collections.FXCollections;
@@ -97,6 +101,8 @@ public class ManageSessionController extends VBox {
     @FXML
     private Spinner<Integer> nrOfAttendeeSpinner;
 
+    @FXML
+    private JFXToggleButton sessionStateToggle;
 
 	private ITLab iTLab;
 
@@ -122,6 +128,7 @@ public class ManageSessionController extends VBox {
 		sessionController = new SessionController();
 		sessionCalendarController = new SessionCalendarController();
 		
+		//Fill up all the fields with the correct information
 		this.entry = entry;
 		fillClassrooms();
 		sessionMedia = new HashMap<Integer, Image>();
@@ -136,7 +143,8 @@ public class ManageSessionController extends VBox {
 			this.url_txt.setText(clickedSession.getVideoURL());
 			SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, clickedSession.getClassroom().getMaxSeats(), clickedSession.getMaxAttendee());
 			nrOfAttendeeSpinner.setValueFactory(valueFactory);
-			
+			//Set the correct state to the toggle
+			this.instantiateStateToggle();
 			// Fill the image list
 			loadImages();
 		}else {
@@ -190,7 +198,7 @@ public class ManageSessionController extends VBox {
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
 					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
 					nrOfAttendeeSpinner.getValue(), this.description_txt.getText(), this.speaker_txt.getText(),
-					new ArrayList<Integer>(this.sessionMedia.keySet()), this.url_txt.getText());
+					new ArrayList<Integer>(this.sessionMedia.keySet()), this.url_txt.getText(), this.giveClickedSessionState());
 		
 			this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 					entry.getEndTime());
@@ -321,6 +329,35 @@ public class ManageSessionController extends VBox {
     	
     	image_scrollpane.getChildren().add(hbox);
     }
+	
+	private State giveClickedSessionState() {
+		//This methods returns the state the current session is in.It also checks if the session was in the past
+		if(clickedSession == null) {
+			return State.CLOSED;
+		}
+		if(clickedSession.getDate().isBefore(LocalDate.now()) || (clickedSession.getEndHour().isBefore(LocalTime.now()) && clickedSession.getDate().equals(LocalDate.now()))) {
+			return State.FINISHED;
+		}
+			
+		if(sessionStateToggle.isSelected()) {
+			return State.OPEN;
+		}else {
+			return State.CLOSED;
+		}
+	}
+	
+	private void instantiateStateToggle() {
+		if(clickedSession.getDate().isBefore(LocalDate.now()) || (clickedSession.getEndHour().isBefore(LocalTime.now()) && clickedSession.getDate().equals(LocalDate.now()))) {
+			this.sessionStateToggle.setDisable(true);
+		}else if(clickedSession.getStateEnum() == State.FINISHED) {
+			this.sessionStateToggle.setDisable(true);
+		}else if(clickedSession.getStateEnum() == State.CLOSED) {
+			
+		}else if(clickedSession.getStateEnum() == State.OPEN) {
+			this.sessionStateToggle.setDisable(true);
+			this.sessionStateToggle.setText("Sessie is open");
+		}
+	}
 
 	private void close() {
 		PopOver popover = (PopOver) cancelbtn.getScene().getWindow();

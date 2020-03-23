@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -25,6 +27,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.Version;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -96,14 +99,14 @@ public class Session implements GuiSession{
 	@Transient
 	private SessionState state;
 	
-	//@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private State stateEnum;
 	
 	protected Session() {
 		//enum -> sessiestate
 	}
 	
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media, String videoURL) {
+	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media, String videoURL, State state) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -114,18 +117,18 @@ public class Session implements GuiSession{
 		setNameGuest(nameGuest);
 		setMedia(media);
 		setVideoURL(videoURL);
+		setStateEnum(state);
 
 		feedbackList = new ArrayList<>();
 		registeredUsers = new ArrayList<>();
 		attendees = new ArrayList<>();
 		
-		setState(new ClosedState());
 	}
 
 	
 	
 	// methoden
-	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL, User host) {
+	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL, User host, State state) {
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());
@@ -137,6 +140,7 @@ public class Session implements GuiSession{
 		setMedia(media);
 		setVideoURL(videoURL);
 		setHost(host);
+		setStateEnum(state);
 	}
 	
 	public void registerAttendee(User user) {
@@ -147,39 +151,24 @@ public class Session implements GuiSession{
 		this.attendees.add(user);
 	}
 	
-	public void closenSession() {
-		setState(new ClosedState());
-	}
-	
-	public void finishSession() {
-		setState(new FinishedState());
-	}
-
-	// getters and setters
-	@Enumerated(EnumType.STRING)
-	public State getStateEnum() {
-		System.out.println(this.state);
-		return this.stateEnum;
-	}
-	
-	public void setStateEnum(State state) {
-		this.stateEnum = state;
-		
-		switch(state) {
-		case OPEN: 
-			this.state = new OpenState();
-			break;
+	public void updateState() {
+		switch(stateEnum){
 		case CLOSED:
 			this.state = new ClosedState();
 			break;
 		case FINISHED:
 			this.state = new FinishedState();
+			break;
+		case OPEN:
+			this.state = new OpenState();
+			break;
+		default:
+			this.state = new ClosedState();
+			break;
 		}
-		
-		System.out.println(this.state);
 	}
-	
-	
+
+	// getters and setters
 	public String getTitle() {
 		return title;
 	}
@@ -286,12 +275,32 @@ public class Session implements GuiSession{
 		return this.id;
 	}
 
-	public SessionState getState() {
+	@Enumerated(EnumType.STRING)
+	public State getStateEnum() {
+		return stateEnum;
+	}
+	
+	public SessionState getSessionState() {
 		return state;
 	}
-
-	public void setState(SessionState state) {
-		this.state = state;
+	
+	@Enumerated(EnumType.STRING)
+	public void setStateEnum(State state) {
+		this.stateEnum = state;
+		switch(state){
+			case CLOSED:
+				this.state = new ClosedState();
+				break;
+			case FINISHED:
+				this.state = new FinishedState();
+				break;
+			case OPEN:
+				this.state = new OpenState();
+				break;
+			default:
+				this.state = new ClosedState();
+				break;
+		}
 	}
 
 	public String getNameGuest() {

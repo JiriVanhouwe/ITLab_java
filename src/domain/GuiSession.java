@@ -18,4 +18,5 @@ public interface GuiSession {
 	List<User> getRegisteredUsers();
 	int getSessionID();
 	String getVideoURL();
+	void updateState();
 }

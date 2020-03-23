@@ -14,7 +14,7 @@ public class SessionBuilder {
 	public Session getSession() throws InformationRequiredException {
 		requiredElements = new HashSet<>();
 		
-		if(session.getTitle() == null)
+		if(session.getTitle() == null || session.getTitle().startsWith("New Entry"))
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
 		if(session.getMaxAttendee() == 0)
@@ -25,6 +25,9 @@ public class SessionBuilder {
 		
 		if(session.getDate() == null || session.getEndHour() == null)
 			requiredElements.add(RequiredElement.ENDDATEREQUIRED);
+		
+		if(session.getClassroom() == null)
+			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
 		
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
@@ -79,6 +82,10 @@ public class SessionBuilder {
 	
 	public void buildHost(User host) {
 		session.setHost(host);
+	}
+	
+	public void buildState(State state) {
+		session.setStateEnum(state);
 	}
 	
 	
