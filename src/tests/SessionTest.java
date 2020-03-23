@@ -38,68 +38,7 @@ public class SessionTest {
 		this.sb = new SessionBuilder();
 		this.dummyUser = new User("user","test","test.user@hogent.be",UserType.RESPONSIBLE,UserStatus.ACTIVE, "password");
 	}
-	
-//	//---UseCase: Beheren sessie ---
-//	@ParameterizedTest
-//	@MethodSource("newSessionValidParameters")
-//	public void testChangeSession_ChangesSessionValid(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classroom, String nameGuest) {
-//		sb.createSession();
-//		sb.
-//		
-//		Session s = new Session("A new session", "some text", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 
-//										10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker", null);
-//		
-//		s.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest);
-//		
-//		assertEquals(title,s.getTitle());
-//		assertEquals(classroom, s.getClassroom());
-//	}
-//
-//	@ParameterizedTest
-//	@MethodSource("newSessionInvalidParameters")
-//	public void testChangeSession_ChangesSessionInvalid(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String guestspeaker, String description) {
-//		Session s = new Session("A new session", "some text", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 
-//				10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker");
-//		
-//		Assertions.assertThrows(IllegalArgumentException.class, () -> s.changeSession(title, classroom, startDate, endDate, maxAttendee, description, guestspeaker));
-//	
-//	}
-//	
-//	@ParameterizedTest
-//	@MethodSource("giveSessionsParameters")
-//	public void testGiveSessions_GivesSessions(List<Session> sessions) {
-//	
-//		List<Session> returnedSessions = sc.giveAllSessions();
-//		Assertions.assertEquals(sessions, returnedSessions);
-//		
-//	}
-//	
-//	private static List<Session> giveSessionsParameters(){
-//		List<Session> sessions = new ArrayList<Session>();
-//		sessions.add(new Session("A new session", "B0001", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 10, null, null));
-//		sessions.add(new Session("A session about ...", "B1234", LocalDateTime.now().plusDays(50), LocalDateTime.now().plusDays(50).plusMinutes(30), 20, null, null));
-//		sessions.add(new Session("S", "C0130", LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(5).plusHours(1), 30, null, null));
-//		sessions.add(new Session("Session", "C0130", LocalDateTime.now().plusDays(1), LocalDateTime.now().plusDays(1).plusHours(1), 40, null, null));
-//		return sessions;
-//	}
-//	
-//	@ParameterizedTest
-//	@MethodSource("giveSessionParameters")
-//	public void testGiveSession_GivesSession(int sessionID, Session session) {
-//		Mockito.when(srDummy.giveSession(sessionID)).thenReturn(session);
-//		Session returnedSession = sc.giveSession(sessionID);
-//		Assertions.assertEquals(session, returnedSession);
-//		//Mockito.verify(pcDummy).giveSession(sessionID);
-//	}
-//	
-//	private static Stream<Arguments> giveSessionParameters(){
-//		return Stream.of(Arguments.of("001", new Session("A new session", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
-//						Arguments.of("002", new Session("A new session",new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
-//						Arguments.of("003", new Session("A new session",new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 50)),
-//						Arguments.of("1234", new Session("A new session",new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2),  50)));
-//	}
-//	
-	//---UseCase: Aanmaken sessie ---
+
 	
 	@ParameterizedTest
 	@MethodSource("newSessionValidParameters")
