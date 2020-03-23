@@ -15,16 +15,16 @@
 }
 
 .loginButton {
-	-fx-background-color: rgba(0, 129, 197, 0.8);
+  -fx-background-color: rgba(0, 129, 197, 0.8);
 }
 
 .loginButton:hover {
-	 -fx-background-color: rgba(255, 153, 0, 0.5);
+  -fx-background-color: rgba(255, 153, 0, 0.5);
 }
 
 .settingsButton {
-	-fx-background-color: rgba(0, 129, 197, 1);
- 	 -fx-background-radius: 15px;
+  -fx-background-color: rgba(0, 129, 197, 1);
+  -fx-background-radius: 15px;
 }
 
 .settingsButton:hover {

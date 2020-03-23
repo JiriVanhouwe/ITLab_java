@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
@@ -95,5 +96,6 @@
             <Font name="Ebrima Bold" size="15.0" />
          </font>
       </Label>
+      <ScrollBar layoutX="1313.0" layoutY="160.0" orientation="VERTICAL" prefHeight="640.0" prefWidth="14.0" />
    </children>
 </fx:root>
