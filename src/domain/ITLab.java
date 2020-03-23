@@ -67,6 +67,23 @@ public class ITLab {
 		return currentSessioncalendar.getSessions(); 
 	}
 	
+	public void editSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
+		SessionCalendar sessioncalendar = sessionCalendars.stream()
+															.filter(sc -> sc.getId() == id)
+															.findFirst()
+															.orElse(null);
+		
+		sessioncalendar.ChangeDates(startDate, endDate);
+	}
+	
+	public boolean doesSessionCalendarExist(int id) {
+		SessionCalendar sessionCalendar =  sessionCalendars.stream()
+															.filter(sc -> sc.getId() == id)
+															.findAny()
+															.orElse(null);
+		return sessionCalendar != null;
+	}
+	
 
 	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
 		currentSessioncalendar.ChangeDates(startDate, endDate);
