@@ -14,8 +14,21 @@ public class SessionCalendarController extends Controller {
 	}
 	
 	//methodes
-	public SessionCalendar giveSessionCalendar(){
-		return super.itLab.getCurrentSessioncalendar();
+	public GuiSessionCalendar giveSessionCalendar(){
+		return super.itLab.getSessionCalendars()
+							.stream()
+							.map(sc -> (GuiSessionCalendar)sc)
+							.findFirst()
+							.orElse(null);
+	}
+	
+	public GuiSessionCalendar giveSessionCalendarById(int id){
+		return super.itLab.getSessionCalendars()
+							.stream()
+							.filter(sc -> sc.getId() == id)
+							.map(sc -> (GuiSessionCalendar)sc)
+							.findFirst()
+							.orElse(null);
 	}
 	
 	public List<Session> giveSessionsCurrentMonth() {
@@ -39,5 +52,13 @@ public class SessionCalendarController extends Controller {
 	
 	public void createSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
 		itLab.addSessionCalendar(new SessionCalendar(id,startDate,endDate));
+	}
+	
+	public void editSessionCalendar(int id, LocalDate startDate, LocalDate endDate) {
+		itLab.editSessionCalendar(id, startDate, endDate);
+	}
+	
+	public boolean doesSessionCalendarExist(int id) {
+		return itLab.doesSessionCalendarExist(id);
 	}
 }

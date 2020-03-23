@@ -22,6 +22,7 @@ public class Feedback {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private User author;
+
 	@Column(nullable = false)
 	private String contentText;
 	
