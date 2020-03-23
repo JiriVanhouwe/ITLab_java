@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 public class SettingsController extends SplitPane{
 	
@@ -96,5 +98,13 @@ public class SettingsController extends SplitPane{
 			return false;
 		}
 	}
+//    @FXML
+//    void clickEditSessionCalendars(MouseEvent event) {
+//    	if(hbox_mainSection.getChildren().size() > 0)
+//    		hbox_mainSection.getChildren().remove(0);
+//    	
+//    	HBox.setHgrow(node, Priority.ALWAYS);
+//    	hbox_mainSection.getChildren().add(node);
+//    }
 
 }

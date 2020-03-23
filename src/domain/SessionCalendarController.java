@@ -26,8 +26,11 @@ public class SessionCalendarController extends Controller {
 					.collect(Collectors.toList());
 	}
 	
-	public List<SessionCalendar> giveSessionCalendars(){
-		return itLab.getSessionCalendars();
+	public List<GuiSessionCalendar> giveSessionCalendars(){
+		return itLab.getSessionCalendars()
+					.stream()
+					.map(sc -> (GuiSessionCalendar)sc)
+					.collect(Collectors.toList());
 	}
 	
 	public void changeSessionCalendarByDate(LocalDate startDate) throws NotFoundException {
