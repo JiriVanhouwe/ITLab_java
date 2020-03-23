@@ -138,19 +138,19 @@ public class CalendarController extends HBox {
 				for(RequiredElement el: e.getInformationRequired()) {
 					switch(el) {
 					case ATENDEESREQUIRED:
-						res += String.format("Fout: bij instellen max aanwezigen%n");
+						res += String.format("max aantal aanwezigen niet geldig!%n");
 						break;
 					case CLASSROOMREQUIRED:
-						res += String.format("Fout: bij instellen klas lokaal%n");
+						res += String.format("lokaal niet geldig!%n");
 						break;
 					case ENDDATEREQUIRED:
-						res += String.format("Fout: bij instellen eind datum%n");
+						res += String.format("Eind datum niet geldig!%n");
 						break;
 					case STARTDATEREQUIRED:
-						res += String.format("Fout: bij instellen start datum%n");
+						res += String.format("Begin datum niet geldig!%n");
 						break;
 					case TITLEREQUIRED:
-						res += String.format("Fout: bij instellen van de title%n");
+						res += String.format("Title niet geldig!%n");
 						break;
 							}
 						}
