@@ -196,7 +196,7 @@ public class ManageSessionController extends VBox {
 					entry.getEndTime());
 			this.entry.setTitle(this.title_txt.getText());
 			this.entry.setId(id);
-	
+			
 			this.close();
 		
 		} catch (InformationRequiredException e) {
@@ -206,19 +206,19 @@ public class ManageSessionController extends VBox {
 			for(RequiredElement el: e.getInformationRequired()) {
 				switch(el) {
 				case ATENDEESREQUIRED:
-					res += String.format("Fout: bij instellen max aanwezigen%n");
+					res += String.format("Fout: Max aanwezigen moet ingevuld worden%n");
 					break;
 				case CLASSROOMREQUIRED:
-					res += String.format("Fout: bij instellen klas lokaal%n");
+					res += String.format("Fout: Lokaal moet ingesteld worden%n");
 					break;
 				case ENDDATEREQUIRED:
-					res += String.format("Fout: bij instellen eind datum%n");
+					res += String.format("Fout: Er moet een einddatum gekozen worden%n");
 					break;
 				case STARTDATEREQUIRED:
-					res += String.format("Fout: bij instellen start datum%n");
+					res += String.format("Fout: Er moet een startdatum gekozen worden%n");
 					break;
 				case TITLEREQUIRED:
-					res += String.format("Fout: bij instellen van de title%n");
+					res += String.format("Fout: Er moet een titel ingevuld zijn, deze mag niet beginnen met 'New Entry'%n");
 					break;
 						}
 					}
@@ -271,6 +271,15 @@ public class ManageSessionController extends VBox {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
+    }
+    
+    @FXML
+    void classroomChanged(ActionEvent event) {
+    	//If the use selected a new classroom we will set the maxSeats of that classroom to the max attendee spinner
+    	if(clasroom_dropdown.getValue() != null) {
+    		SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, clasroom_dropdown.getValue().getMaxSeats(), clasroom_dropdown.getValue().getMaxSeats());
+			nrOfAttendeeSpinner.setValueFactory(valueFactory);
+    	}
     }
 
 	private void addImageToScrollPane(Image image) {
