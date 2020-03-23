@@ -130,7 +130,7 @@ public class MainScreenController extends SplitPane {
     @FXML
     void clickBtnSessionCalendars(MouseEvent event) {
     	changeSelectedButton(btnSessionCalendars);
-    	changeMainSection(new ManageSessionCalendarController());
+    	changeMainSection(new SessionCalendarsController());
     }
     
     @FXML

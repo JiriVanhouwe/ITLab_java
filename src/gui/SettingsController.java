@@ -2,21 +2,21 @@ package gui;
 
 import java.io.IOException;
 
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 
 import domain.GuiUser;
-import domain.User;
 import domain.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
-public class SettingsController extends AnchorPane{
+public class SettingsController extends SplitPane{
 	
 	private UserController userController;
 	
@@ -98,5 +98,13 @@ public class SettingsController extends AnchorPane{
 			return false;
 		}
 	}
+//    @FXML
+//    void clickEditSessionCalendars(MouseEvent event) {
+//    	if(hbox_mainSection.getChildren().size() > 0)
+//    		hbox_mainSection.getChildren().remove(0);
+//    	
+//    	HBox.setHgrow(node, Priority.ALWAYS);
+//    	hbox_mainSection.getChildren().add(node);
+//    }
 
 }

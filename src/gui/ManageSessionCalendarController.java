@@ -95,7 +95,7 @@ public class ManageSessionCalendarController extends VBox{
 			colStartDate.setCellValueFactory(data -> data.getValue().sessionCalendarStartDateProperty());
 			colEndDate.setCellValueFactory(data -> data.getValue().sessionCalendarEndDateProperty());
 			
-			tblSessionCalendars.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionCalendars()));
+			//tblSessionCalendars.setItems(FXCollections.observableArrayList(sessionCalendarController.giveSessionCalendars()));
 			
 		}
 	    

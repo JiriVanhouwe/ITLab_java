@@ -185,16 +185,12 @@ public class ManageSessionController extends VBox {
 
 	@FXML
 	void pressedSaveBtn(ActionEvent event) {
-		try {
-			sessionCalendarController.changeSessionCalendarByDate(this.start_date.getValue());
-		} catch (NotFoundException e) {
-			Alert a = new Alert(AlertType.ERROR);
-			a.setTitle("Geen sessiekalender");
-			a.setContentText("De sessie valt niet binnen het bereik van een sessiekalender");
-		}
 		
 		String id;
+		
 		try {
+			sessionCalendarController.changeSessionCalendarByDate(this.start_date.getValue());
+			
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
 					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
 					nrOfAttendeeSpinner.getValue(), this.description_txt.getText(), this.speaker_txt.getText(),
@@ -232,6 +228,14 @@ public class ManageSessionController extends VBox {
 					}
 			
 			a.setContentText(res);
+			a.showAndWait();
+			
+		} catch (NotFoundException e) {
+			
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Geen sessiekalender");
+			a.setContentText("De sessie valt niet binnen het bereik van een sessiekalender");
+			
 			a.showAndWait();
 		}
 	}

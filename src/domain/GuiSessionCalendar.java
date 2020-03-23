@@ -8,4 +8,5 @@ public interface GuiSessionCalendar {
 	LocalDate getEndDate();
 	List<Session> getSessions();
 	Session giveSession(int id);
+	int getId();
 }
