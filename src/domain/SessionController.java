@@ -45,9 +45,25 @@ public class SessionController extends Controller {
 	}
 
 	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {
+		
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
-			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL, state);
+			Session session = itLab.getCurrentSessioncalendar().giveSession(id);
+			if(itLab.getLoggedInUser().equals(session.getHost()) || itLab.getLoggedInUser().getUserType().equals(UserType.HEAD))
+			itLab.getEntityManager().getTransaction().begin();
+			sb.setSession(session);
+			sb.buildTitle(title);
+			sb.buildClassroomAndMaxAtendeees(classroom, maxAttendee);
+			sb.buildDates(startDate, endDate);
+			sb.buildDescription(description);
+			sb.buildMedia(media);
+			sb.buildVideoURL(videoURL);
+			sb.buildState(state);
+			sb.buildGuestSpeaker(nameGuest);
+			sb.buildVideoURL(videoURL);
+			itLab.getCurrentSessioncalendar().addSession(session);
+			itLab.getEntityManager().persist(session);
+			itLab.getEntityManager().getTransaction().commit();
 			return sessionID;
 		} else {
 			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL, state);

@@ -30,9 +30,6 @@ public class SessionBuilder {
 		if(session.getMaxAttendee() == 0)
 			requiredElements.add(RequiredElement.ATENDEESREQUIRED);
 
-		if(session.getClassroom() == null)
-			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
-
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
 		
@@ -98,6 +95,10 @@ public class SessionBuilder {
 	
 	public void buildState(State state) {
 		session.setStateEnum(state);
+	}
+
+	public void setSession(Session session) {
+		this.session = session;
 	}
 	
 	
