@@ -133,12 +133,13 @@ public class CalendarController extends HBox {
     }
 	
     private void calendarEntryChanged(CalendarEvent evt) {
+    	//This method gets called when the start- or endtime of an entry was changed in the calendar by dragging
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
 			System.out.println(session.getSessionID());
 			
 			try {
-				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL());
+				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
 			} catch (InformationRequiredException e) {
 				
 				Alert a = new Alert(AlertType.ERROR);
@@ -187,7 +188,7 @@ public class CalendarController extends HBox {
     	sessions.stream().forEach(session -> {
     		Entry entry = new Entry();
     		entry.setId(Integer.toString(session.getSessionID()) + "#");
-    		
+    		session.updateState();
     		if(_calendar1.findEntries(entry.getId()).isEmpty()) {
         		entry.setTitle(session.getTitle());
         		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));

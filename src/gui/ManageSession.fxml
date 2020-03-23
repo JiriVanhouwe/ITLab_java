@@ -72,7 +72,7 @@
                </font>
             </Label>
             <Region prefHeight="25.0" prefWidth="49.0" />
-            <ComboBox fx:id="clasroom_dropdown" prefHeight="25.0" prefWidth="277.0">
+            <ComboBox fx:id="clasroom_dropdown" onAction="#classroomChanged" prefHeight="25.0" prefWidth="277.0">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -200,7 +200,7 @@
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
             </Button>
-            <JFXToggleButton prefHeight="58.0" prefWidth="146.0" text="Sessie openen" unToggleLineColor="#0081c5" />
+            <JFXToggleButton fx:id="sessionStateToggle" prefHeight="58.0" prefWidth="146.0" text="Sessie openen" toggleColor="#0081c5" toggleLineColor="#829fd0" unToggleLineColor="#747e83" />
             <Button fx:id="cancelbtn" mnemonicParsing="false" onAction="#pressedCancelBtn" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />

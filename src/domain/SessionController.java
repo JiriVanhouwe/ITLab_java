@@ -44,13 +44,13 @@ public class SessionController extends Controller {
 				.collect(Collectors.toList());
 	}
 
-	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) throws InformationRequiredException {
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
-			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL);
+			this.itLab.changeSession(id, title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL, state);
 			return sessionID;
 		} else {
-			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL);
+			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL, state);
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class SessionController extends Controller {
 	}
 
 	public String createSession(String title, LocalDateTime startDate, LocalDateTime endDate, Classroom classroom,
-			int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL) throws InformationRequiredException {
+			int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {
 		sb.createSession();
 		sb.buildTitle(title);
 		sb.buildDates(startDate, endDate);
@@ -72,7 +72,7 @@ public class SessionController extends Controller {
 		sb.buildMedia(media);
 		sb.buildVideoURL(videoURL);
 		sb.buildHost(itLab.getLoggedInUser());
-		
+		sb.buildState(state);
 		
 		Session session = sb.getSession();
 		

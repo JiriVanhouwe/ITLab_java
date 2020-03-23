@@ -14,7 +14,7 @@ public class SessionBuilder {
 	public Session getSession() throws InformationRequiredException {
 		requiredElements = new HashSet<>();
 		
-		if(session.getTitle() == null)
+		if(session.getTitle() == null || session.getTitle().startsWith("New Entry"))
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
 		
@@ -24,11 +24,16 @@ public class SessionBuilder {
 		if(session.getDate() == null || session.getEndHour() == null)
 			requiredElements.add(RequiredElement.ENDDATEREQUIRED);
 		
+<<<<<<< HEAD
 		if(session.getClass() == null)
 			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
 		
 		if(session.getMaxAttendee() == 0)
 			requiredElements.add(RequiredElement.ATENDEESREQUIRED);
+=======
+		if(session.getClassroom() == null)
+			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
+>>>>>>> branch 'master' of https://github.com/HoGentProjectenII/java-g010.git
 		
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
@@ -91,6 +96,10 @@ public class SessionBuilder {
 	
 	public void buildHost(User host) {
 		session.setHost(host);
+	}
+	
+	public void buildState(State state) {
+		session.setStateEnum(state);
 	}
 	
 	
