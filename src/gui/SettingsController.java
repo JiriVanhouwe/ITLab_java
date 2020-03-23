@@ -2,21 +2,19 @@ package gui;
 
 import java.io.IOException;
 
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 
 import domain.GuiUser;
-import domain.User;
 import domain.UserController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 
-public class SettingsController extends AnchorPane{
+public class SettingsController extends SplitPane{
 	
 	private UserController userController;
 	
