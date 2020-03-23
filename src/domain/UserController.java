@@ -136,6 +136,9 @@ public class UserController extends Controller {
 	}
 
 	public UserType stringToUserType(String type) {
+		if(type == null) {
+			return UserType.USERITLAB;
+		}
 		switch (type) {
 		case "Hoofdverantwoordelijke":
 			return UserType.HEAD;
