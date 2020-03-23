@@ -136,7 +136,8 @@ public class ManageSessionController extends VBox {
 		clickedSession = sessionController.giveSession(entry.getId());
 		this.title_txt.setText(entry.getTitle());
 		this.start_date.setValue(entry.getStartDate());
-		if (clickedSession != null || entry.getId().charAt(entry.getId().length() - 1) == '#') {
+		
+		if (clickedSession != null && entry.getId().charAt(entry.getId().length() - 1) == '#') {
 			this.description_txt.setText(clickedSession.getDescription());
 			this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
 			this.speaker_txt.setText(clickedSession.getNameGuest());
@@ -147,7 +148,7 @@ public class ManageSessionController extends VBox {
 			this.instantiateStateToggle();
 			// Fill the image list
 			loadImages();
-		}else {
+		} else {
 			SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
 			nrOfAttendeeSpinner.setValueFactory(valueFactory);
 		}
@@ -156,6 +157,8 @@ public class ManageSessionController extends VBox {
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 		this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
 		this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
+		
+		System.out.println(entry.getId());
 	}
 
 	private void fillClassrooms() {
