@@ -72,7 +72,7 @@ public class ITLab {
 															.findFirst()
 															.orElse(null);
 		
-		sessioncalendar.ChangeDates(startDate, endDate);
+		sessioncalendar.changeDates(startDate, endDate);
 	}
 	
 	public boolean doesSessionCalendarExist(int id) {
@@ -85,7 +85,7 @@ public class ITLab {
 	
 
 	public void changeSessionCurrentCalendar(LocalDate startDate, LocalDate endDate) {
-		currentSessioncalendar.ChangeDates(startDate, endDate);
+		currentSessioncalendar.changeDates(startDate, endDate);
 	}
 	
 	public List<Session> giveSessionsBetweenDates(LocalDate startDate, LocalDate endDate) {
