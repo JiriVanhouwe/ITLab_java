@@ -1,6 +1,5 @@
 package domain;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public interface GuiUser {

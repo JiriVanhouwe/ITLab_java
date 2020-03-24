@@ -263,11 +263,11 @@ public class Session implements GuiSession{
 		this.host = host;
 	}
 
-	private List<Feedback> getFeedbackList() {
+	public List<Feedback> getFeedbackList() {
 		return feedbackList;
 	}
 
-	private void setFeedbackList(List<Feedback> feedbackList) {
+	protected void setFeedbackList(List<Feedback> feedbackList) {
 		this.feedbackList = feedbackList;
 	}
 
@@ -334,6 +334,6 @@ public class Session implements GuiSession{
 	@Override
 	public String toString() {
 		
-		return String.format("%s op %s met startuur %s",this.title, this.eventDate,this.startHour);
+		return String.format("%s - %s - %s", this.eventDate, this.startHour, this.title);
 	}
 }

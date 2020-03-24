@@ -182,7 +182,6 @@ public class ManageSessionController extends VBox {
 
 	@FXML
 	void pressedCancelBtn(ActionEvent event) {
-		//TODO: We get an error on this line
 		this.close();
 	}
 
@@ -213,23 +212,24 @@ public class ManageSessionController extends VBox {
 			for(RequiredElement el: e.getInformationRequired()) {
 				switch(el) {
 				case ATENDEESREQUIRED:
-					res += String.format("Fout: Max aanwezigen moet ingevuld worden%n");
+					res += String.format("max aantal aanwezigen niet geldig!%n");
 					break;
 				case CLASSROOMREQUIRED:
-					res += String.format("Fout: Lokaal moet ingesteld worden%n");
+					res += String.format("lokaal niet geldig!%n");
 					break;
 				case ENDDATEREQUIRED:
-					res += String.format("Fout: Er moet een einddatum gekozen worden%n");
+					res += String.format("Eind datum niet geldig!%n");
 					break;
 				case STARTDATEREQUIRED:
-					res += String.format("Fout: Er moet een startdatum gekozen worden%n");
+					res += String.format("Begin datum niet geldig!%n");
 					break;
 				case TITLEREQUIRED:
-					res += String.format("Fout: Er moet een titel ingevuld zijn, deze mag niet beginnen met 'New Entry'%n");
+					res += String.format("Title niet geldig!%n");
 					break;
 						}
 					}
-			
+			//entry verwijderen indien niet 
+			this.entry.removeFromCalendar();
 			a.setContentText(res);
 			a.showAndWait();
 			

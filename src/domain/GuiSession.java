@@ -13,6 +13,7 @@ public interface GuiSession {
 	LocalTime getStartHour();
 	LocalDate getDate();
 	int getMaxAttendee();
+	List<Feedback> getFeedbackList();
 	List<Integer> getMedia();
 	List<User> getAttendees();
 	List<User> getRegisteredUsers();

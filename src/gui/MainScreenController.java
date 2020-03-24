@@ -136,7 +136,7 @@ public class MainScreenController extends SplitPane {
     @FXML
     void clickBtnStatistics(MouseEvent event) {
     	changeSelectedButton(btnStatistics);
-    	changeMainSection(new StatsController(this.sessionController));
+    	changeMainSection(new StatsController(this.sessionController, this.usercontroller));
     }
     
     @FXML

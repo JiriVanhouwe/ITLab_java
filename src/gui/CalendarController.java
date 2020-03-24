@@ -127,8 +127,6 @@ public class CalendarController extends HBox {
     	//This method gets called when the start- or endtime of an entry was changed in the calendar by dragging
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			Session session = sessionController.giveSession(evt.getEntry().getId());
-			System.out.println(session.getSessionID());
-			
 			try {
 				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
 			} catch (InformationRequiredException e) {
@@ -138,19 +136,19 @@ public class CalendarController extends HBox {
 				for(RequiredElement el: e.getInformationRequired()) {
 					switch(el) {
 					case ATENDEESREQUIRED:
-						res += String.format("Fout: bij instellen max aanwezigen%n");
+						res += String.format("max aantal aanwezigen niet geldig!%n");
 						break;
 					case CLASSROOMREQUIRED:
-						res += String.format("Fout: bij instellen klas lokaal%n");
+						res += String.format("lokaal niet geldig!%n");
 						break;
 					case ENDDATEREQUIRED:
-						res += String.format("Fout: bij instellen eind datum%n");
+						res += String.format("Eind datum niet geldig!%n");
 						break;
 					case STARTDATEREQUIRED:
-						res += String.format("Fout: bij instellen start datum%n");
+						res += String.format("Begin datum niet geldig!%n");
 						break;
 					case TITLEREQUIRED:
-						res += String.format("Fout: bij instellen van de title%n");
+						res += String.format("Title niet geldig!%n");
 						break;
 							}
 						}
@@ -158,6 +156,10 @@ public class CalendarController extends HBox {
 				a.setContentText(res);
 				a.showAndWait();
 			}
+		}
+		//This event gets called when a session/entry is removed
+		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
+			Session session = sessionController.giveSession(evt.getEntry().getId());
 		}
 	}
     
