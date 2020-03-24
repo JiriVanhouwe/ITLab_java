@@ -16,7 +16,7 @@ public class SessionBuilder {
 	public Session getSession() throws InformationRequiredException {
 		requiredElements = new HashSet<>();
 		
-		if(session.getTitle() == null || session.getTitle().startsWith("New Entry"))
+		if(session.getTitle() == null || session.getTitle().startsWith("New Entry") || session.getTitle().isBlank())
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
 		if(session.getStartHour() == null || session.getDate() == null || session.getDate().isBefore(LocalDate.now()))
