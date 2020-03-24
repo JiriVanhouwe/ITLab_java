@@ -2,6 +2,7 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -33,13 +34,17 @@ public class SessionBuilder {
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
 		
-			
+		
+		
 		return this.session;
 		
 	}
 	
 	public void createSession() {
 		session = new Session();
+		session.setFeedbackList( new ArrayList<>());
+		session.setRegisteredUsers( new ArrayList<>());
+		session.setAttendees(new ArrayList<>());
 	}
 	
 	public void buildTitle(String title) {

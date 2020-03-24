@@ -103,6 +103,7 @@ public class SessionController extends Controller {
 		sb.buildHost(itLab.getLoggedInUser());
 		sb.buildState(state);
 		
+		
 		Session session = sb.getSession();
 		
 		itLab.addSession(session);
