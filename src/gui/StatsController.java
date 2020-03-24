@@ -31,7 +31,7 @@ public class StatsController extends AnchorPane {
 
 	// de items voor een geselecteerde session//
 	@FXML
-	private ChoiceBox<String> choiceBoxSession;
+	private ChoiceBox<GuiSession> choiceBoxSession;
 
 	@FXML
 	private ChoiceBox<String> choiceBoxUser;
@@ -124,10 +124,9 @@ public class StatsController extends AnchorPane {
 			}
 		});
 		
-		choiceBoxSession.getSelectionModel().selectedIndexProperty().addListener((obsVal, oldVal, newVal) -> {
+		choiceBoxSession.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> {
 			if (newVal != null) {
-				updateSessionStatistics(newVal.intValue());
-				System.out.println(newVal);
+				updateSessionStatistics(newVal);
 			}
 		});
 	}
@@ -142,18 +141,17 @@ public class StatsController extends AnchorPane {
 		lblFillType.setText(user.giveUserType());
 		lblFillAbsent.setText("nog geen data");
 		lblFillRegistered.setText("nog geen data");
-		System.out.println(userName);
+
 	}
 
-	private void updateSessionStatistics(int index) {
+	private void updateSessionStatistics(GuiSession session) {
 		placeListViewsVisible();
-		
-		selectedSession = sessionController.giveSessionsCurrentCalendar().get(index);
+
+		selectedSession = session;
 		System.out.println(selectedSession.getTitle()); //dit print hij
 		List<User> registUsers = selectedSession.getRegisteredUsers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
 		List<User> attendUsers = selectedSession.getAttendees().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());;
 		
-		registUsers.forEach(el -> System.out.println(el.getUserName()));
 		lvRegistered.setItems(FXCollections.observableArrayList(registUsers.stream().map(el -> el.getUserName()).collect(Collectors.toList())));
 		lvAttended.setItems(FXCollections.observableArrayList(attendUsers.stream().map(el -> el.getUserName()).collect(Collectors.toList())));
 		
@@ -175,7 +173,7 @@ public class StatsController extends AnchorPane {
     }
 
 	private void loadChoiceBoxes() {
-		choiceBoxSession.setItems(convertSessionToStringChoiceBox());
+		choiceBoxSession.setItems(FXCollections.observableArrayList(sessionController.giveSessionsCurrentCalendar().stream().sorted(Comparator.comparing(GuiSession::getDate)).collect(Collectors.toList())));
 		choiceBoxUser.setItems(convertUserToStringChoiceBox());
 	}
 

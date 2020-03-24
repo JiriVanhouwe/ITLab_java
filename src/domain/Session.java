@@ -334,6 +334,6 @@ public class Session implements GuiSession{
 	@Override
 	public String toString() {
 		
-		return String.format("%s op %s met startuur %s",this.title, this.eventDate,this.startHour);
+		return String.format("%s - %s - %s", this.eventDate, this.startHour, this.title);
 	}
 }
