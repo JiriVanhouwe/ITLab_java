@@ -136,7 +136,8 @@ public class ManageSessionController extends VBox {
 		clickedSession = sessionController.giveSession(entry.getId());
 		this.title_txt.setText(entry.getTitle());
 		this.start_date.setValue(entry.getStartDate());
-		if (clickedSession != null || entry.getId().charAt(entry.getId().length() - 1) == '#') {
+		
+		if (clickedSession != null && entry.getId().charAt(entry.getId().length() - 1) == '#') {
 			this.description_txt.setText(clickedSession.getDescription());
 			this.clasroom_dropdown.getSelectionModel().select(clickedSession.getClassroom());
 			this.speaker_txt.setText(clickedSession.getNameGuest());
@@ -147,7 +148,7 @@ public class ManageSessionController extends VBox {
 			this.instantiateStateToggle();
 			// Fill the image list
 			loadImages();
-		}else {
+		} else {
 			SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1);
 			nrOfAttendeeSpinner.setValueFactory(valueFactory);
 		}
@@ -156,6 +157,8 @@ public class ManageSessionController extends VBox {
 		DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
 		this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
 		this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
+		
+		System.out.println(entry.getId());
 	}
 
 	private void fillClassrooms() {
@@ -209,23 +212,24 @@ public class ManageSessionController extends VBox {
 			for(RequiredElement el: e.getInformationRequired()) {
 				switch(el) {
 				case ATENDEESREQUIRED:
-					res += String.format("Fout: Max aanwezigen moet ingevuld worden%n");
+					res += String.format("max aantal aanwezigen niet geldig!%n");
 					break;
 				case CLASSROOMREQUIRED:
-					res += String.format("Fout: Lokaal moet ingesteld worden%n");
+					res += String.format("lokaal niet geldig!%n");
 					break;
 				case ENDDATEREQUIRED:
-					res += String.format("Fout: Er moet een einddatum gekozen worden%n");
+					res += String.format("Eind datum niet geldig!%n");
 					break;
 				case STARTDATEREQUIRED:
-					res += String.format("Fout: Er moet een startdatum gekozen worden%n");
+					res += String.format("Begin datum niet geldig!%n");
 					break;
 				case TITLEREQUIRED:
-					res += String.format("Fout: Er moet een titel ingevuld zijn, deze mag niet beginnen met 'New Entry'%n");
+					res += String.format("Title niet geldig!%n");
 					break;
 						}
 					}
-			
+			//entry verwijderen indien niet 
+			this.entry.removeFromCalendar();
 			a.setContentText(res);
 			a.showAndWait();
 			

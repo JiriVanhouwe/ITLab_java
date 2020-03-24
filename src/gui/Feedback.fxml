@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="700.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0081c5" height="134.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="700.0" />
+      <JFXButton fx:id="btnGoBack" defaultButton="true" layoutX="294.0" layoutY="648.0" onMouseClicked="#clickGoBack" prefHeight="31.0" prefWidth="116.0" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+         </effect>
+      </JFXButton>
+      <Label layoutX="266.0" layoutY="34.0" prefHeight="66.0" prefWidth="194.0" text="Feedback" textFill="WHITE">
+         <font>
+            <Font name="Ebrima Bold" size="37.0" />
+         </font>
+      </Label>
+      <Line endX="563.0" layoutX="137.0" layoutY="134.0" startX="-147.06668090820312" strokeWidth="2.0" />
+      <JFXTextArea fx:id="txaFeedback" editable="false" layoutX="43.0" layoutY="160.0" prefHeight="466.0" prefWidth="626.0" />
+   </children>
+</fx:root>

@@ -49,13 +49,14 @@ public class SessionBuilder {
 	
 	
 	public void buildClassroomAndMaxAtendeees(Classroom classroom ,int maxAttendee) {
-		if(classroom != null)
+		if(classroom != null) {
 			session.setClassroom(classroom);
 		
 		if(maxAttendee > 0 && maxAttendee <= session.getClassroom().getMaxSeats()) 
 			session.setMaxAttendee(maxAttendee);
 		else 
 			session.setMaxAttendee(0);
+		}
 	}
 	
 	public void buildDates(LocalDateTime startDate, LocalDateTime endDate) {
