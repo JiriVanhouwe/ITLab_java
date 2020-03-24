@@ -18,7 +18,7 @@
    <children>
       <SplitPane dividerPositions="0.16416040100250626" orientation="VERTICAL" prefHeight="800.0" prefWidth="1250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-            <HBox alignment="CENTER" maxHeight="150.0" prefHeight="150.0" prefWidth="1250.0" spacing="100.0" style="-fx-background-color: #0081C5;">
+            <HBox alignment="CENTER" maxHeight="150.0" minHeight="150.0" prefHeight="150.0" prefWidth="1250.0" spacing="100.0" style="-fx-background-color: #0081C5;">
                <children>
                   <Label prefHeight="100.0" prefWidth="297.0" text="Gebruikers" textFill="WHITE">
                      <font>

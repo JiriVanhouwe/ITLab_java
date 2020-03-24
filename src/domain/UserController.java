@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import javax.persistence.NoResultException;
 
 import javafx.collections.FXCollections;
@@ -160,5 +161,17 @@ public class UserController extends Controller {
 			return UserStatus.NONACTIVE;
 			default: return null;
 		}
+	}
+	
+	public int countAttendeesFromUser(String userid) {
+		javax.persistence.Query q = itLab.getEntityManager().createNativeQuery(" select count(*) from AttendeeUser where user_username = ?1 ");
+		q.setParameter(1, userid);
+		return ((Number) q.getSingleResult()).intValue();
+	}
+	
+	public int countRegisterdFromUser(String userid) {
+		javax.persistence.Query q = itLab.getEntityManager().createNativeQuery(" select count(*) from RegisterdUser where user_username = ?1 ");
+		q.setParameter(1, userid);
+		return ((Number) q.getSingleResult()).intValue();
 	}
 }
