@@ -53,7 +53,13 @@ public class MakeSessionCalendarController extends AnchorPane {
     		lblMessage.setText("Er bestaat al een sessiekalender in het schooljaar " + id);
 			
 		} else {
-			sessionCalendarController.createSessionCalendar(id, calStartDate.getValue(), calEndDate.getValue());
+			
+			try {
+				sessionCalendarController.createSessionCalendar(id, calStartDate.getValue(), calEndDate.getValue());
+			} catch (Exception e) {
+				lblMessage.setText(e.getMessage());
+			}
+
 		}
 	}
 }
