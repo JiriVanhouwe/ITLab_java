@@ -16,11 +16,13 @@ import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.DayView;
 
 import domain.GuiSession;
+import domain.ITLabSingleton;
 import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.UserController;
+import domain.UserType;
 import exceptions.InformationRequiredException;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -125,10 +127,24 @@ public class CalendarController extends HBox {
 	
     private void calendarEntryChanged(CalendarEvent evt) {
     	//This method gets called when the start- or endtime of an entry was changed in the calendar by dragging
+		GuiSession session = sessionController.giveSession(evt.getEntry().getId());
+		if(session == null) {
+			return;
+		}
+		
+    	//Firstly we check if the user that performed the action has permission
+    	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
+    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost())) {
+    		//If the user doens't have permission we undo the event
+    		
+			return;
+    	}
+    	
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
-			GuiSession session = sessionController.giveSession(evt.getEntry().getId());
 			try {
-				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
+				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), 
+						evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(),
+						session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
 			} catch (InformationRequiredException e) {
 				
 				Alert a = new Alert(AlertType.ERROR);
@@ -159,7 +175,6 @@ public class CalendarController extends HBox {
 		}
 		//This event gets called when a session/entry is removed
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
-			GuiSession session = sessionController.giveSession(evt.getEntry().getId());
 			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
 			//er bestaat niet echt een event voor enkel verwijderen
 		}

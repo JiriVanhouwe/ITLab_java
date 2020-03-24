@@ -17,6 +17,7 @@ import domain.Session;
 import domain.SessionController;
 import domain.User;
 import domain.UserController;
+import domain.UserType;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -94,6 +95,11 @@ public class MainScreenController extends SplitPane {
     	initializeScreen();
     	_selectedButton = btnCalendar;
     	changeMainSection(new CalendarController());
+    	
+    	//Only the head users can acces the user screen
+    	if(this.usercontroller.giveLoggedInUser().getUserType() != UserType.HEAD) {
+    		btnUsers.setDisable(true);
+    	}
     }
     
 

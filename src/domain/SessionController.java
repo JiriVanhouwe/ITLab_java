@@ -73,7 +73,7 @@ public class SessionController extends Controller {
 			sb.buildVideoURL(videoURL);
 			sb.buildState(state);
 			sb.buildGuestSpeaker(nameGuest);
-			sb.buildVideoURL(videoURL);
+			sb.buildHost(itLab.getLoggedInUser());
 			itLab.getCurrentSessioncalendar().addSession(session);
 			itLab.getEntityManager().persist(session);
 			itLab.getEntityManager().getTransaction().commit();
@@ -166,12 +166,9 @@ public class SessionController extends Controller {
 
 
 	public List<GuiSession> giveSessionsClosedAndFinshedCurrentCalendar() {
-		// TODO Auto-generated method stub
 		List<GuiSession> list = null ;
 		if(!itLab.getLoggedInUser().getUserType().equals(UserType.HEAD)) {
-			System.out.println(itLab.getLoggedInUser());
 			list = itLab.giveSessions().stream().filter(e -> itLab.getLoggedInUser().equals(e.getHost())).collect(Collectors.toList());
-			System.out.println("lengte list"+ list.size());
 		} else {
 			list = giveSessionsCurrentCalendar();
 		}

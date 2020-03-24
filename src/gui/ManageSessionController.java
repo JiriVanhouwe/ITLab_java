@@ -20,6 +20,7 @@ import com.jfoenix.controls.JFXToggleButton;
 
 import domain.Classroom;
 import domain.GuiSession;
+import domain.GuiUser;
 import domain.ITLab;
 import domain.ITLabSingleton;
 import domain.RequiredElement;
@@ -27,6 +28,7 @@ import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.State;
+import domain.UserType;
 import exceptions.InformationRequiredException;
 import exceptions.NotFoundException;
 import javafx.collections.FXCollections;
@@ -165,7 +167,8 @@ public class ManageSessionController extends VBox {
 		this.fromHour_txt.setText(entry.getStartTime().format(timeFormat).toString());
 		this.toHour_txt.setText(entry.getEndTime().format(timeFormat).toString());
 		
-		System.out.println(entry.getId());
+		//We check if the user can modify this session
+		checkUserPermissions();
 	}
 
 	private void fillClassrooms() {
@@ -379,6 +382,36 @@ public class ManageSessionController extends VBox {
 		}else if(clickedSession.getStateEnum() == State.OPEN) {
 			this.sessionStateToggle.setDisable(true);
 			this.sessionStateToggle.setText("Sessie is open");
+		}
+	}
+	
+	private void checkUserPermissions() {
+		GuiUser loggedInUser = ITLabSingleton.getITLabInstance().getLoggedInUser();
+		
+		if(clickedSession == null) {
+			//If the user just created a new session it will be null
+			//Since he created the session himself we don't need to diable anything
+			return;
+		}
+		
+		//If the user is headuser he can edit every session, if he's just a responsible he can only edit his own sessions
+		if(loggedInUser.getUserType().equals(UserType.RESPONSIBLE)) {
+			if(!clickedSession.getHost().getUserName().equals(loggedInUser.getUserName())) {
+				//If the logged in user is not the host of the selected session or he's not the head responsible he can't edit this session
+				this.title_txt.setEditable(false);
+				this.speaker_txt.setEditable(false);
+				this.clasroom_dropdown.setEditable(false);
+				this.description_txt.setEditable(false);
+				this.start_date.setEditable(false);
+				this.image_btn.setDisable(true);
+				this.addimage_btn.setDisable(true);
+				this.savebtn.setDisable(true);
+				this.reminderBtn.setDisable(true);
+				this.nrOfAttendeeSpinner.setEditable(false);
+				this.sessionStateToggle.setDisable(true);
+				this.deleteBtn.setDisable(true);
+				this.errorTxt.setText("Deze sessie werd niet door u aangemaakt");
+			}
 		}
 	}
 

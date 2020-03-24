@@ -255,7 +255,7 @@ public class Session implements GuiSession{
 		this.attendees = attendees;
 	}
 
-	protected User getHost() {
+	public User getHost() {
 		return host;
 	}
 
