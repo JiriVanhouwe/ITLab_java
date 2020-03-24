@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXListView;
 
 import domain.GuiSession;
 import domain.GuiUser;
-import domain.SessionCalendarController;
 import domain.SessionController;
 import domain.User;
 import domain.UserController;
@@ -21,15 +20,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
-public class StatsController extends AnchorPane {
+public class StatsController extends SplitPane {
 
 	// de items voor een geselecteerde session//
 	@FXML
