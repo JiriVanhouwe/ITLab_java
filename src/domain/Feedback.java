@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Feedback")
-public class Feedback {
+public class Feedback implements GuiFeedback {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

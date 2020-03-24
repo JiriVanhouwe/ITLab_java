@@ -149,4 +149,12 @@ public class SessionController extends Controller {
 		//Return the id that has been generated
 		return ((BigDecimal) itLab.getEntityManager().createNativeQuery("SELECT IDENT_CURRENT('Image')").getSingleResult()).intValue();
 	}
+
+	
+	public List<GuiFeedback> getFeedbackBy(int sessionid) {
+		System.out.println(sessionid);
+		return (List<GuiFeedback>) itLab.getEntityManager().createQuery("SELECT f FROM feedback WHERE session_id = :id").setParameter("id", Integer.toString(sessionid)).getResultList();
+	}
+
+
 }

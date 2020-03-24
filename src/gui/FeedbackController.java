@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXTextArea;
 
 import domain.Feedback;
 import domain.GuiSession;
+import domain.SessionController;
 
 public class FeedbackController extends AnchorPane {
 
@@ -24,8 +25,11 @@ public class FeedbackController extends AnchorPane {
 	private JFXTextArea txaFeedback;
 
 	private GuiSession selectedSession;
+	
+	private SessionController sessionController;
 
-	public FeedbackController(GuiSession selectedSession) {
+	public FeedbackController(GuiSession selectedSession,SessionController sessionController) {
+		this.sessionController = sessionController;
 		this.selectedSession = selectedSession;
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Feedback.fxml"));
@@ -50,6 +54,19 @@ public class FeedbackController extends AnchorPane {
 			}
 		}
 	}
+	
+//	private void loadFeedback() {
+//		int sessionid = selectedSession.getSessionID();
+//		List<GuiFeedback> feedbackList = sessionController.getFeedbackBy(sessionid);
+//		if (feedbackList.isEmpty())
+//			txaFeedback.setText("Er is nog geen ingezonden feedback");
+//		else {
+//			for (GuiFeedback f : feedbackList) {
+//				txaFeedback.setText(f.getAuthor().getUserName() + "\n");
+//				txaFeedback.setText(f.getContentText() + "\n\n");
+//			}
+//		}
+//	}
 
 	@FXML
 	public void clickGoBack(MouseEvent event) {
