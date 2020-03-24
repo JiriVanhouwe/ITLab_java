@@ -55,7 +55,7 @@
                   <Font name="Ebrima" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btnFeedback" layoutX="43.0" layoutY="592.0" mnemonicParsing="false" onMouseClicked="#clickFeedback" opacity="0.74" prefHeight="26.0" prefWidth="298.0" styleClass="loginButton" stylesheets="@style.css" text="Feedback ophalen" textFill="WHITE" visible="false">
+            <Button fx:id="btnFeedback" layoutX="84.0" layoutY="586.0" mnemonicParsing="false" onMouseClicked="#clickFeedback" opacity="0.74" prefHeight="27.0" prefWidth="243.0" styleClass="loginButton" stylesheets="@style.css" text="Feedback ophalen" textFill="WHITE" visible="false">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
@@ -136,6 +136,17 @@
                   <Font name="Ebrima" size="15.0" />
                </font>
             </Label>
+            <Button fx:id="btn_mailAtendees" layoutX="420.0" layoutY="586.0" mnemonicParsing="false" onMouseClicked="#clickMailTo" opacity="0.74" prefHeight="27.0" prefWidth="243.0" styleClass="loginButton" stylesheets="@style.css" text="mail aanwezigen" textFill="WHITE" visible="false">
+               <font>
+                  <Font name="Ebrima Bold" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
+               </effect>
+            </Button>
          </children>
       </AnchorPane>
    </items>
