@@ -49,8 +49,8 @@ public class FeedbackController extends AnchorPane {
 			txaFeedback.setText("Er is nog geen ingezonden feedback");
 		else {
 			for (Feedback f : feedbackList) {
-				txaFeedback.setText(f.getAuthor().getUserName() + "\n");
-				txaFeedback.setText(f.getContentText() + "\n\n");
+				txaFeedback.appendText(f.getAuthor().getUserName() + "\n");
+				txaFeedback.appendText(f.getContentText() + "\n\n");
 			}
 		}
 	}
