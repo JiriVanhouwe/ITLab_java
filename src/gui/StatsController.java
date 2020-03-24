@@ -163,7 +163,7 @@ public class StatsController extends AnchorPane {
 	
     @FXML
     void clickFeedback(MouseEvent event) {  	
-		Scene scene = new Scene(new FeedbackController(selectedSession));	
+		Scene scene = new Scene(new FeedbackController(selectedSession,sessionController));	
 		Stage stage = new Stage();
 
 		stage.setTitle("ITLab");
