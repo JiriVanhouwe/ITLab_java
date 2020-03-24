@@ -179,7 +179,6 @@ public class ManageSessionController extends VBox {
 
 	@FXML
 	void pressedCancelBtn(ActionEvent event) {
-		//TODO: We get an error on this line
 		this.close();
 	}
 
