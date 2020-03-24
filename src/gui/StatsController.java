@@ -12,6 +12,7 @@ import domain.GuiUser;
 import domain.SessionController;
 import domain.User;
 import domain.UserController;
+import domain.UserType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -182,6 +183,11 @@ public class StatsController extends SplitPane {
 	private void setChoiceBoxSession() { 
 		 List<GuiSession> listSessions = sessionController.giveSessionsClosedAndFinshedCurrentCalendar().stream().sorted(Comparator.comparing(GuiSession::getDate)).collect(Collectors.toList());
 		 choiceBoxSession.setItems(FXCollections.observableArrayList(listSessions));
+		 //Een verantwoordelijke mag enkel zijn eigen sessies zien
+		 if(!userController.giveLoggedInUser().getUserType().equals(UserType.HEAD)) {
+			 listSessions.stream().filter(s -> s.getHost().getUserName().equals(userController.giveLoggedInUser()));
+		 }
+		 
 		 if(listSessions.size() < 1)
 		 	{ 	
 		 		Alert alert = new Alert(AlertType.INFORMATION);
