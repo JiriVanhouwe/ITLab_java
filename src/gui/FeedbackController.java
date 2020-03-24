@@ -1,10 +1,5 @@
 package gui;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,10 +8,24 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 
 import domain.Feedback;
+import domain.GuiFeedback;
 import domain.GuiSession;
 import domain.SessionController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class FeedbackController extends AnchorPane {
+public class FeedbackController extends AnchorPane{
+
+	
+	private GuiSession selectedSession;
+	
+	private SessionController sessionController;
 
 	@FXML
 	private JFXButton btnGoBack;
@@ -24,10 +33,16 @@ public class FeedbackController extends AnchorPane {
 	@FXML
 	private JFXTextArea txaFeedback;
 
-	private GuiSession selectedSession;
+	@FXML
+	private JFXButton btnDeleteFeedback;
 	
-	private SessionController sessionController;
-
+	@FXML
+	private ChoiceBox<GuiFeedback> cb_feedbackfordelete;
+	
+	private ObservableList<GuiFeedback> feedbackList;
+	
+	private GuiFeedback selectedFeedback;
+	
 	public FeedbackController(GuiSession selectedSession,SessionController sessionController) {
 		this.sessionController = sessionController;
 		this.selectedSession = selectedSession;
@@ -40,33 +55,44 @@ public class FeedbackController extends AnchorPane {
 		} catch (IOException ex) {
 			throw new RuntimeException(ex);
 		}
+		
 		loadFeedback();
+		
+		cb_feedbackfordelete.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> {
+			if (newVal != null) {
+				this.selectedFeedback = newVal;
+			}
+		});
+		
 	}
 
 	private void loadFeedback() {
-		List<Feedback> feedbackList = selectedSession.getFeedbackList();
-		if (feedbackList.isEmpty())
+		feedbackList = FXCollections.observableArrayList(selectedSession.getFeedbackList());
+		//textview vullen
+		txaFeedback.setText("");
+		if (feedbackList.isEmpty()) {
 			txaFeedback.setText("Er is nog geen ingezonden feedback");
+			cb_feedbackfordelete.setDisable(true);
+			btnDeleteFeedback.setDisable(true);
+		}
 		else {
-			for (Feedback f : feedbackList) {
-				txaFeedback.appendText(f.getAuthor().getUserName() + "\n");
+			
+			for (GuiFeedback f : feedbackList) {
+				txaFeedback.appendText("Fedback met id:" + f.getId()+"\n" + "van "+f.getAuthor().getUserName() + "\n");
 				txaFeedback.appendText(f.getContentText() + "\n\n");
 			}
+			// choicebox vullen
+			cb_feedbackfordelete.setItems(feedbackList);
 		}
+		
 	}
 	
-//	private void loadFeedback() {
-//		int sessionid = selectedSession.getSessionID();
-//		List<GuiFeedback> feedbackList = sessionController.getFeedbackBy(sessionid);
-//		if (feedbackList.isEmpty())
-//			txaFeedback.setText("Er is nog geen ingezonden feedback");
-//		else {
-//			for (GuiFeedback f : feedbackList) {
-//				txaFeedback.setText(f.getAuthor().getUserName() + "\n");
-//				txaFeedback.setText(f.getContentText() + "\n\n");
-//			}
-//		}
-//	}
+    @FXML
+    void clickDeleteSelectedFeedback(MouseEvent event) {  
+    	this.sessionController.removeFeedbackFromSession(this.selectedFeedback,this.selectedSession);
+    	loadFeedback();
+    }
+	
 
 	@FXML
 	public void clickGoBack(MouseEvent event) {

@@ -169,13 +169,18 @@ public class SessionController extends Controller {
 		// TODO Auto-generated method stub
 		List<GuiSession> list = null ;
 		if(!itLab.getLoggedInUser().getUserType().equals(UserType.HEAD)) {
-			System.out.println(itLab.getLoggedInUser());
 			list = itLab.giveSessions().stream().filter(e -> itLab.getLoggedInUser().equals(e.getHost())).collect(Collectors.toList());
-			System.out.println("lengte list"+ list.size());
 		} else {
 			list = giveSessionsCurrentCalendar();
 		}
 		return list.stream().filter(e -> e.getStateEnum().equals(State.CLOSED) || e.getStateEnum().equals(State.FINISHED) ).collect(Collectors.toList());
+	}
+
+	public void removeFeedbackFromSession(GuiFeedback selectedFeedback, GuiSession selectedSession) {
+		itLab.getEntityManager().getTransaction().begin();
+		((Session) selectedSession).removeFeedback((Feedback)selectedFeedback);
+		itLab.getEntityManager().getTransaction().commit();
+		
 	}
 
 
