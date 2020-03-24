@@ -21,7 +21,7 @@ public class SessionController extends Controller {
 		sb = new SessionBuilder();
 	}
 
-	public Session giveSession(String sessionID) {
+	public GuiSession giveSession(String sessionID) {
 		for (Session s : itLab.giveSessions()) {
 			int id;
 			if (sessionID.endsWith("#")) {
@@ -42,6 +42,16 @@ public class SessionController extends Controller {
 				.stream()
 				.map(session -> (GuiSession)session)
 				.collect(Collectors.toList());
+	}
+	
+	public void removeSession(String sessionID) {
+		Session session = (Session) giveSession(sessionID);
+		
+		itLab.getEntityManager().getTransaction().begin();
+		itLab.getEntityManager().remove(session);
+		itLab.getEntityManager().getTransaction().commit();
+		
+		itLab.removeSession(session);
 	}
 
 	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {

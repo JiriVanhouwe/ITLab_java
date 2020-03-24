@@ -126,7 +126,7 @@ public class CalendarController extends HBox {
     private void calendarEntryChanged(CalendarEvent evt) {
     	//This method gets called when the start- or endtime of an entry was changed in the calendar by dragging
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
-			Session session = sessionController.giveSession(evt.getEntry().getId());
+			GuiSession session = sessionController.giveSession(evt.getEntry().getId());
 			try {
 				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(), session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
 			} catch (InformationRequiredException e) {
@@ -159,7 +159,9 @@ public class CalendarController extends HBox {
 		}
 		//This event gets called when a session/entry is removed
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
-			Session session = sessionController.giveSession(evt.getEntry().getId());
+			GuiSession session = sessionController.giveSession(evt.getEntry().getId());
+			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
+			//er bestaat niet echt een event voor enkel verwijderen
 		}
 	}
     

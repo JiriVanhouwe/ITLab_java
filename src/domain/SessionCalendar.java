@@ -98,6 +98,10 @@ public class SessionCalendar implements GuiSessionCalendar {
 	public void addSession(Session session) {
 		sessions.add(session);
 	}
+	
+	public void removeSession(Session session) {
+		sessions.remove(session);
+	}
 
 	//methodes
 	public void ChangeDates(LocalDate newStartDate, LocalDate newEndDate) {

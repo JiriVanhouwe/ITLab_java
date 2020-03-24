@@ -94,6 +94,10 @@ public class ITLab {
 								.flatMap(sc -> sc.getSessions().stream())
 								.collect(Collectors.toList());
 	}
+	
+	public void removeSession(Session session) {
+		this.getCurrentSessioncalendar().removeSession(session);
+	}
 
 	public boolean isUserPassComboValid(String username, String password) {
 		User u;

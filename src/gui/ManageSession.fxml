@@ -17,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="764.0" prefWidth="518.0" spacing="10.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="518.0" spacing="10.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="BOTTOM_CENTER" prefHeight="67.0" prefWidth="423.0" style="-fx-background-color: #0081C5;">
          <children>
@@ -140,7 +140,7 @@
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="423.0">
                <children>
-                  <Label prefHeight="23.0" prefWidth="169.0" text="Afbeeldingen">
+                  <Label prefHeight="23.0" prefWidth="192.0" text="Afbeeldingen">
                      <font>
                         <Font name="SansSerif Regular" size="20.0" />
                      </font>
@@ -174,7 +174,7 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="478.0">
          <children>
-            <Label prefHeight="23.0" prefWidth="177.0" text="Video">
+            <Label prefHeight="23.0" prefWidth="199.0" text="Video">
                <font>
                   <Font name="SansSerif Regular" size="20.0" />
                </font>
@@ -182,7 +182,16 @@
             <JFXTextField fx:id="url_txt" prefHeight="25.0" prefWidth="280.0" promptText="URL" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="423.0" spacing="20.0">
+      <VBox prefHeight="76.0" prefWidth="478.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label fx:id="errorTxt" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="61.0" prefWidth="478.0" textAlignment="CENTER" textFill="#ff9900" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="SansSerif Regular" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="43.0" prefWidth="478.0" spacing="40.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -201,12 +210,24 @@
                </font>
             </Button>
             <JFXToggleButton fx:id="sessionStateToggle" prefHeight="58.0" prefWidth="146.0" text="Sessie openen" toggleColor="#0081c5" toggleLineColor="#829fd0" unToggleLineColor="#747e83" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="53.0" prefWidth="478.0" spacing="40.0">
+         <children>
+            <Button fx:id="deleteBtn" mnemonicParsing="false" onAction="#pressedDeleteBtn" styleClass="loginButton" stylesheets="@style.css" text="Sessie verwijderen" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Button>
             <Button fx:id="cancelbtn" mnemonicParsing="false" onAction="#pressedCancelBtn" styleClass="loginButton" stylesheets="@style.css" text="Keer terug" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
             </Button>
          </children>
+         <VBox.margin>
+            <Insets bottom="10.0" top="-30.0" />
+         </VBox.margin>
       </HBox>
    </children>
    <padding>

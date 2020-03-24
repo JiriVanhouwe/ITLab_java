@@ -20,4 +20,7 @@ public interface GuiSession {
 	int getSessionID();
 	String getVideoURL();
 	void updateState();
+	String getNameGuest();
+	Classroom getClassroom();
+	State getStateEnum();
 }

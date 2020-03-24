@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -17,14 +18,13 @@ public class SessionBuilder {
 		if(session.getTitle() == null || session.getTitle().startsWith("New Entry"))
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
-		
-		if(session.getStartHour() == null || session.getDate() == null )
+		if(session.getStartHour() == null || session.getDate() == null || session.getDate().isBefore(LocalDate.now()))
 			requiredElements.add(RequiredElement.STARTDATEREQUIRED);
 		
 		if(session.getDate() == null || session.getEndHour() == null)
 			requiredElements.add(RequiredElement.ENDDATEREQUIRED);
 		
-		if(session.getClass() == null)
+		if(session.getClassroom() == null)
 			requiredElements.add(RequiredElement.CLASSROOMREQUIRED);
 		
 		if(session.getMaxAttendee() == 0)

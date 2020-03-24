@@ -5,8 +5,8 @@ import java.io.IOException;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
+import domain.GuiSession;
 import domain.MailController;
-import domain.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -41,11 +41,11 @@ public class AnnouncementController extends AnchorPane{
     @FXML
     private Label lblSessionInfo;
     
-    private Session session;
+    private GuiSession session;
     private String title;
     private String messageToSend;
 	
-	public AnnouncementController(Session session) {
+	public AnnouncementController(GuiSession session) {
 		this.session = session;
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Announcement.fxml"));

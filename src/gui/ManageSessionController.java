@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.controlsfx.control.PopOver;
 
@@ -18,6 +19,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 
 import domain.Classroom;
+import domain.GuiSession;
 import domain.ITLab;
 import domain.ITLabSingleton;
 import domain.RequiredElement;
@@ -37,6 +39,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -95,8 +98,6 @@ public class ManageSessionController extends VBox {
 
     @FXML
     private Button cancelbtn;
-    
-    private Session clickedSession;
 
     @FXML
     private Spinner<Integer> nrOfAttendeeSpinner;
@@ -104,8 +105,14 @@ public class ManageSessionController extends VBox {
     @FXML
     private JFXToggleButton sessionStateToggle;
 
-	private ITLab iTLab;
+    @FXML
+    private Button deleteBtn;
+    
+    @FXML
+    private Label errorTxt;
 
+    private GuiSession clickedSession;
+    
 	private Entry entry;
 
 	private Image selectedImage;
@@ -168,7 +175,6 @@ public class ManageSessionController extends VBox {
 	}
 
 	private void loadImages() {
-		Session clickedSession = sessionController.giveSession(entry.getId());
 		for (Integer i : clickedSession.getMedia()) {
 			this.sessionMedia.put(i, sessionController.giveImage(i));
 		}
@@ -206,40 +212,32 @@ public class ManageSessionController extends VBox {
 			this.close();
 		
 		} catch (InformationRequiredException e) {
-			
-			Alert a = new Alert(AlertType.ERROR);
-			String res = "";
+			//Loop over all the errors that are thrown and insert them into the error label
+			String error = "";
 			for(RequiredElement el: e.getInformationRequired()) {
 				switch(el) {
 				case ATENDEESREQUIRED:
-					res += String.format("max aantal aanwezigen niet geldig!%n");
+					error += String.format("Max aantal aanwezigen niet geldig!%n");
 					break;
 				case CLASSROOMREQUIRED:
-					res += String.format("lokaal niet geldig!%n");
+					error += String.format("Lokaal niet geldig!%n");
 					break;
 				case ENDDATEREQUIRED:
-					res += String.format("Eind datum niet geldig!%n");
+					error += String.format("Datum niet geldig!%n");
 					break;
 				case STARTDATEREQUIRED:
-					res += String.format("Begin datum niet geldig!%n");
+					error += String.format("Begin datum niet geldig!%n");
 					break;
 				case TITLEREQUIRED:
-					res += String.format("Title niet geldig!%n");
+					error += String.format("Titel niet geldig!%n");
 					break;
-						}
-					}
-			//entry verwijderen indien niet 
-			this.entry.removeFromCalendar();
-			a.setContentText(res);
-			a.showAndWait();
+				}
+			}
+			errorTxt.setText(error);
+
 			
 		} catch (NotFoundException e) {
-			
-			Alert a = new Alert(AlertType.ERROR);
-			a.setTitle("Geen sessiekalender");
-			a.setContentText("De sessie valt niet binnen het bereik van een sessiekalender");
-			
-			a.showAndWait();
+			errorTxt.setText("De sessie valt niet binnen het bereik van een sessiekalender");
 		}
 	}
 
@@ -286,6 +284,24 @@ public class ManageSessionController extends VBox {
 		stage.setScene(scene);
 		stage.setResizable(false);
 		stage.show();
+    }
+    
+
+    @FXML
+    void pressedDeleteBtn(ActionEvent event) {
+    	//We first ask if the user really wants to delete the session
+    	Alert alert = new Alert(AlertType.CONFIRMATION);
+    	alert.setTitle("Sessie verwijderen");
+    	alert.setHeaderText("Deze sessie verwijderen");
+    	alert.setContentText("Bent u zeker dat u deze sessie wilt verwijderen?");
+
+    	Optional<ButtonType> result = alert.showAndWait();
+    	if (result.get() == ButtonType.OK){
+    	    //The user confirmed to delete the session
+    		entry.removeFromCalendar();
+    		sessionController.removeSession(clickedSession.getSessionID() + "");
+        	this.close();
+    	}
     }
     
     @FXML
