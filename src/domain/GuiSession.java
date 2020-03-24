@@ -20,4 +20,5 @@ public interface GuiSession {
 	int getSessionID();
 	String getVideoURL();
 	void updateState();
+	State getStateEnum();
 }

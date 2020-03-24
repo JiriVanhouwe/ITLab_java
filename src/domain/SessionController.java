@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.swing.text.StyledEditorKit.ItalicAction;
+
 import exceptions.InformationRequiredException;
 import javafx.scene.image.Image;
 
@@ -150,10 +153,19 @@ public class SessionController extends Controller {
 		return ((BigDecimal) itLab.getEntityManager().createNativeQuery("SELECT IDENT_CURRENT('Image')").getSingleResult()).intValue();
 	}
 
-	
-	public List<GuiFeedback> getFeedbackBy(int sessionid) {
-		System.out.println(sessionid);
-		return (List<GuiFeedback>) itLab.getEntityManager().createQuery("SELECT f FROM feedback WHERE session_id = :id").setParameter("id", Integer.toString(sessionid)).getResultList();
+
+
+	public List<GuiSession> giveSessionsClosedAndFinshedCurrentCalendar() {
+		// TODO Auto-generated method stub
+		List<GuiSession> list = null ;
+		if(!itLab.getLoggedInUser().getUserType().equals(UserType.HEAD)) {
+			System.out.println(itLab.getLoggedInUser());
+			list = itLab.giveSessions().stream().filter(e -> itLab.getLoggedInUser().equals(e.getHost())).collect(Collectors.toList());
+			System.out.println("lengte list"+ list.size());
+		} else {
+			list = giveSessionsCurrentCalendar();
+		}
+		return list.stream().filter(e -> e.getStateEnum().equals(State.CLOSED) || e.getStateEnum().equals(State.FINISHED) ).collect(Collectors.toList());
 	}
 
 

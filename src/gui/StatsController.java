@@ -18,6 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
@@ -120,7 +122,6 @@ public class StatsController extends AnchorPane {
 		choiceBoxUser.getSelectionModel().selectedItemProperty().addListener((obsVal, oldVal, newVal) -> {
 			if (newVal != null) {
 				updateUserStatistics(newVal);
-				System.out.println(newVal);
 			}
 		});
 		
@@ -139,8 +140,12 @@ public class StatsController extends AnchorPane {
 		lblFillLastName.setText(user.getLastName());
 		lblFillStatus.setText(user.giveUserStatus());
 		lblFillType.setText(user.giveUserType());
-		lblFillAbsent.setText("nog geen data");
-		lblFillRegistered.setText("nog geen data");
+		int registered = userController.countRegisterdFromUser(userName);
+		int atend = userController.countAttendeesFromUser(userName);
+		int absent = registered - atend;
+		
+		lblFillAbsent.setText(String.format("%d",absent));
+		lblFillRegistered.setText(String.format("%d",atend));
 
 	}
 
@@ -148,7 +153,6 @@ public class StatsController extends AnchorPane {
 		placeListViewsVisible();
 
 		selectedSession = session;
-		System.out.println(selectedSession.getTitle()); //dit print hij
 		List<User> registUsers = selectedSession.getRegisteredUsers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
 		List<User> attendUsers = selectedSession.getAttendees().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());;
 		
@@ -173,16 +177,20 @@ public class StatsController extends AnchorPane {
     }
 
 	private void loadChoiceBoxes() {
-		choiceBoxSession.setItems(FXCollections.observableArrayList(sessionController.giveSessionsCurrentCalendar().stream().sorted(Comparator.comparing(GuiSession::getDate)).collect(Collectors.toList())));
+		setChoiceBoxSession();
 		choiceBoxUser.setItems(convertUserToStringChoiceBox());
 	}
 
 	// sessie omzetten naar datum + naam van de sessie
-	private ObservableList<String> convertSessionToStringChoiceBox() { 
-		List<GuiSession> list = sessionController.giveSessionsCurrentCalendar();
-		List<String> listSessions = list.stream().sorted(Comparator.comparing(GuiSession::getDate))
-				.map(el -> el.getDate() + " - " + el.getTitle()).collect(Collectors.toList());
-		return FXCollections.observableArrayList(listSessions);
+	private void setChoiceBoxSession() { 
+		 List<GuiSession> listSessions = sessionController.giveSessionsClosedAndFinshedCurrentCalendar().stream().sorted(Comparator.comparing(GuiSession::getDate)).collect(Collectors.toList());
+		 choiceBoxSession.setItems(FXCollections.observableArrayList(listSessions));
+		 if(listSessions.size() < 1)
+		 	{ 	
+		 		Alert alert = new Alert(AlertType.INFORMATION);
+		 		alert.setContentText("nog geen data beschikbaar");
+		 		alert.showAndWait();
+		 	}
 	}
 
 	// users omzetten naar voornaam + familienaam

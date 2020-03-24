@@ -29,6 +29,7 @@ public class StartUp {
 		//Session session = sc.giveSession("1");
 		//User user = (User) uc.giveUser("artuur.everaert@student.hogent.be");
 		//session.addAttendee(user);
+		System.out.println(uc.countAttendeesFromUser("artuur.everaert@student.hogent.be"));
 	}
 
 }
