@@ -9,6 +9,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <fx:root dividerPositions="0.5" orientation="VERTICAL" prefHeight="861.0" prefWidth="1375.0" type="SplitPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -30,47 +31,48 @@
       </HBox>
       <AnchorPane prefHeight="800.0" prefWidth="1310.0">
          <children>
-            <Label layoutX="488.0" layoutY="117.0" text="Gebruikersnaam">
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0084c21a" height="533.0" layoutX="102.0" layoutY="67.0" stroke="#0081c5" strokeType="INSIDE" width="627.0" />
+            <Label layoutX="208.0" layoutY="158.0" text="Gebruikersnaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="488.0" layoutY="176.0" text="Voornaam">
+            <Label layoutX="208.0" layoutY="217.0" text="Voornaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="488.0" layoutY="231.0" text="Familienaam">
+            <Label layoutX="208.0" layoutY="272.0" text="Familienaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="487.0" layoutY="289.0" text="Type">
+            <Label layoutX="207.0" layoutY="330.0" text="Type">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblUserName" layoutX="719.0" layoutY="117.0" prefHeight="18.0" prefWidth="220.0" text="gebruikersnaam">
+            <Label fx:id="lblUserName" layoutX="439.0" layoutY="158.0" prefHeight="18.0" prefWidth="220.0" text="gebruikersnaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblFirstName" layoutX="718.0" layoutY="174.0" prefHeight="18.0" prefWidth="220.0" text="voornaam">
+            <Label fx:id="lblFirstName" layoutX="438.0" layoutY="215.0" prefHeight="18.0" prefWidth="220.0" text="voornaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblLastName" layoutX="718.0" layoutY="231.0" prefHeight="18.0" prefWidth="220.0" text="familienaam">
+            <Label fx:id="lblLastName" layoutX="438.0" layoutY="272.0" prefHeight="18.0" prefWidth="220.0" text="familienaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblType" layoutX="718.0" layoutY="289.0" prefHeight="18.0" prefWidth="220.0" text="type">
+            <Label fx:id="lblType" layoutX="438.0" layoutY="330.0" prefHeight="18.0" prefWidth="220.0" text="type">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnSave" defaultButton="true" layoutX="1055.0" layoutY="617.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="223.0" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
+            <JFXButton fx:id="btnSave" defaultButton="true" layoutX="295.0" layoutY="511.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="223.0" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
@@ -81,29 +83,34 @@
                   <ColorAdjust brightness="0.17" contrast="0.31" hue="0.05" />
                </effect>
             </JFXButton>
-            <Label fx:id="lblMessage" layoutX="718.0" layoutY="561.0" prefHeight="20.0" prefWidth="415.0" textFill="#ff9900">
+            <Label fx:id="lblMessage" layoutX="199.0" layoutY="573.0" prefHeight="20.0" prefWidth="415.0" textFill="#ff9900">
                <font>
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="719.0" layoutY="338.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord" unFocusColor="#07508a">
+            <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="439.0" layoutY="379.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXPasswordField fx:id="txfConfirmPassword" focusColor="#ff9900" layoutX="718.0" layoutY="392.0" prefHeight="0.0" prefWidth="220.0" promptText="nieuw wachtwoord" unFocusColor="#07508a">
+            <JFXPasswordField fx:id="txfConfirmPassword" focusColor="#ff9900" layoutX="438.0" layoutY="433.0" prefHeight="0.0" prefWidth="220.0" promptText="nieuw wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
             </JFXPasswordField>
-            <Label layoutX="486.0" layoutY="346.0" text="Wijzig wachtwoord">
+            <Label layoutX="206.0" layoutY="387.0" text="Wijzig wachtwoord">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="487.0" layoutY="404.0" text="Bevestig wachtwoord">
+            <Label layoutX="207.0" layoutY="445.0" text="Bevestig wachtwoord">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="342.0" layoutY="90.0" text="Account" textFill="#0081c5">
+               <font>
+                  <Font name="Roboto" size="35.0" />
                </font>
             </Label>
          </children>
