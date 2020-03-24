@@ -136,7 +136,7 @@
                   <Font name="Ebrima" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btn_mailAtendees" layoutX="420.0" layoutY="586.0" mnemonicParsing="false" onMouseClicked="#clickMailTo" opacity="0.74" prefHeight="27.0" prefWidth="243.0" styleClass="loginButton" stylesheets="@style.css" text="mail aanwezigen" textFill="WHITE" visible="false">
+            <Button fx:id="btn_mailAtendees" layoutX="420.0" layoutY="586.0" mnemonicParsing="false" onMouseClicked="#clickMailTo" opacity="0.74" prefHeight="27.0" prefWidth="243.0" styleClass="loginButton" stylesheets="@style.css" text="Mail aanwezigen" textFill="WHITE" visible="false">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>

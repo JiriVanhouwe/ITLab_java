@@ -64,7 +64,7 @@ public class MailToController extends AnchorPane {
 				} catch (IllegalArgumentException e) {
 					lblMessage.setText(e.getMessage());
 				}
-				
+				getScene().setCursor(javafx.scene.Cursor.WAIT);
 			
 		}	
 	
@@ -79,9 +79,9 @@ public class MailToController extends AnchorPane {
 		String title = "Lijst aanwezigen van Sessie itlab";
 		String infoSession = String.format(selectedSession.getTitle() + 
 				"\nmet datum " + selectedSession.getDate().format(DateTimeFormatter.ofPattern("dd/MM/YYYY")) + " start uur " + selectedSession.getStartHour().format(DateTimeFormatter.ofPattern("HH:mm")));
-		String message = String.format("Beste%n%nDit waren de aanwezigen voor de sessie %s%n %s%n%nVriendelijke groeten uit het ITLab", 
+		String message = String.format("Beste%n%nDit waren de aanwezigen voor de sessie %s%n  %s%n%nVriendelijke groeten uit het ITLab", 
 				infoSession, 
-				selectedSession.getAttendees().stream().map(e -> String.format("%s %s", e.getFirstName(), e.getLastName() )).collect(Collectors.joining("\n"))); 
+				selectedSession.getAttendees().stream().map(e -> String.format("   %s %s", e.getFirstName(), e.getLastName())).collect(Collectors.joining("\n"))); 
 		String emailadres = tfEmail.getText();
 		sendMail(title, message, emailadres);
 		
