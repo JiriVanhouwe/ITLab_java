@@ -12,12 +12,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <fx:root dividerPositions="0.5" orientation="VERTICAL" prefHeight="800.0" prefWidth="1250.0" type="SplitPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <items>
       <HBox alignment="CENTER" maxHeight="156.0" minHeight="150.0" prefHeight="150.0" prefWidth="1248.0" spacing="100.0" style="-fx-background-color: #0081C5;">
          <children>
-            <Label prefHeight="100.0" prefWidth="1023.0" text="Instellingen" textFill="WHITE">
+            <Label prefHeight="100.0" prefWidth="1023.0" text="Statistieken" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="45.0" />
                </font>
