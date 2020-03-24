@@ -104,7 +104,7 @@ public class SessionCalendar implements GuiSessionCalendar {
 	}
 
 	//methodes
-	public void ChangeDates(LocalDate newStartDate, LocalDate newEndDate) {
+	public void changeDates(LocalDate newStartDate, LocalDate newEndDate) {
 		if(this.startDate != newStartDate) {
 			setStartDate(newStartDate);
 		}

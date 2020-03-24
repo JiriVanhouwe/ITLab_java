@@ -92,10 +92,9 @@ public class MakeUserController extends AnchorPane {
 		else {
 			if (passwordValidation()) {
 				try {
-					System.out.println(cmbUserType.getValue());
 					userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
-							userContoller.stringToUserType(cmbUserType.getValue()),
-							userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
+					userContoller.stringToUserType(cmbUserType.getValue()),
+					userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
 
 					lblMessage.setText("De gebruiker werd aangemaakt.");
 

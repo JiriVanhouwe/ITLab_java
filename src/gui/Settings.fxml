@@ -31,7 +31,7 @@
       </HBox>
       <AnchorPane prefHeight="800.0" prefWidth="1310.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0084c21a" height="533.0" layoutX="102.0" layoutY="67.0" stroke="#0081c5" strokeType="INSIDE" width="627.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0084c21a" height="533.0" layoutX="102.0" layoutY="67.0" stroke="#0081c5" strokeType="INSIDE" width="695.0" />
             <Label layoutX="208.0" layoutY="158.0" text="Gebruikersnaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
@@ -52,27 +52,27 @@
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblUserName" layoutX="439.0" layoutY="158.0" prefHeight="18.0" prefWidth="220.0" text="gebruikersnaam">
+            <Label fx:id="lblUserName" layoutX="412.0" layoutY="158.0" prefHeight="18.0" prefWidth="300.0" text="gebruikersnaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblFirstName" layoutX="438.0" layoutY="215.0" prefHeight="18.0" prefWidth="220.0" text="voornaam">
+            <Label fx:id="lblFirstName" layoutX="411.0" layoutY="215.0" prefHeight="18.0" prefWidth="300.0" text="voornaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblLastName" layoutX="438.0" layoutY="272.0" prefHeight="18.0" prefWidth="220.0" text="familienaam">
+            <Label fx:id="lblLastName" layoutX="411.0" layoutY="272.0" prefHeight="18.0" prefWidth="300.0" text="familienaam">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label fx:id="lblType" layoutX="438.0" layoutY="330.0" prefHeight="18.0" prefWidth="220.0" text="type">
+            <Label fx:id="lblType" layoutX="411.0" layoutY="330.0" prefHeight="18.0" prefWidth="300.0" text="type">
                <font>
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnSave" defaultButton="true" layoutX="295.0" layoutY="511.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="223.0" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
+            <JFXButton fx:id="btnSave" defaultButton="true" layoutX="426.0" layoutY="503.0" onMouseClicked="#clickSave" opacity="0.74" prefHeight="39.0" prefWidth="272.0" styleClass="settingsButton" stylesheets="@style.css" text="Opslaan" textFill="WHITE">
                <font>
                   <Font name="Ebrima Bold" size="13.0" />
                </font>
@@ -88,12 +88,12 @@
                   <Font name="Ebrima Bold" size="14.0" />
                </font>
             </Label>
-            <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="439.0" layoutY="379.0" prefHeight="0.0" prefWidth="220.0" promptText="wachtwoord" unFocusColor="#07508a">
+            <JFXPasswordField fx:id="txfNewPassword" focusColor="#ff9900" layoutX="412.0" layoutY="379.0" prefHeight="0.0" prefWidth="300.0" promptText="wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXPasswordField fx:id="txfConfirmPassword" focusColor="#ff9900" layoutX="438.0" layoutY="433.0" prefHeight="0.0" prefWidth="220.0" promptText="nieuw wachtwoord" unFocusColor="#07508a">
+            <JFXPasswordField fx:id="txfConfirmPassword" focusColor="#ff9900" layoutX="411.0" layoutY="433.0" prefHeight="0.0" prefWidth="300.0" promptText="nieuw wachtwoord" unFocusColor="#07508a">
                <font>
                   <Font name="Ebrima" size="14.0" />
                </font>
@@ -108,7 +108,7 @@
                   <Font name="Ebrima Bold" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="342.0" layoutY="90.0" text="Account" textFill="#0081c5">
+            <Label layoutX="411.0" layoutY="77.0" text="Account" textFill="#0081c5">
                <font>
                   <Font name="Roboto" size="35.0" />
                </font>

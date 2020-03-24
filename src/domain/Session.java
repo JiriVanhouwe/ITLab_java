@@ -336,4 +336,8 @@ public class Session implements GuiSession{
 		
 		return String.format("%s - %s - %s", this.eventDate, this.startHour, this.title);
 	}
+
+	public void removeFeedback(Feedback selectedFeedback) {
+		feedbackList.remove(selectedFeedback);
+	}
 }

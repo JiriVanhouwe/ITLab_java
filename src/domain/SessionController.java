@@ -175,5 +175,12 @@ public class SessionController extends Controller {
 		return list.stream().filter(e -> e.getStateEnum().equals(State.CLOSED) || e.getStateEnum().equals(State.FINISHED) ).collect(Collectors.toList());
 	}
 
+	public void removeFeedbackFromSession(GuiFeedback selectedFeedback, GuiSession selectedSession) {
+		itLab.getEntityManager().getTransaction().begin();
+		((Session) selectedSession).removeFeedback((Feedback)selectedFeedback);
+		itLab.getEntityManager().getTransaction().commit();
+		
+	}
+
 
 }

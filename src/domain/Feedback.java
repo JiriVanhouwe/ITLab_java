@@ -56,4 +56,14 @@ public class Feedback implements GuiFeedback {
 	public String getContentText() {
 		return contentText;
 	}
+	
+	public int getId() {
+		return this.id;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return String.format("%d van %s", this.id, this.author.getFirstName());
+	}
 }
