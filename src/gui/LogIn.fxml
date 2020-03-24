@@ -49,7 +49,7 @@
             <Font name="Corbel" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="37.0" layoutY="86.0" prefHeight="27.0" prefWidth="324.0" text="Het belangrijkste lokaal van de hogeschool Gent" textFill="WHITE">
+      <Label layoutX="37.0" layoutY="86.0" prefHeight="27.0" prefWidth="324.0" text="Het belangrijkste lokaal van de HoGent" textFill="WHITE">
          <font>
             <Font name="Corbel Italic" size="14.0" />
          </font>
