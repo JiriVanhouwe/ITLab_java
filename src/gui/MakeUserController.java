@@ -87,22 +87,27 @@ public class MakeUserController extends AnchorPane {
 
 	@FXML
 	void clickSave(MouseEvent event) {
-		if (cmbUserType.getValue() == null || cmbUserStatus.getValue() == null)
-			lblMessage.setText("Selecteer een type en status van de gebruiker.");
+		if (userContoller.findEmailAddress(txfUserName.getText()) != null)
+			lblMessage.setText("Dit e-mailadres is al geregistreerd");
 		else {
-			if (passwordValidation()) {
-				try {
-					userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
-					userContoller.stringToUserType(cmbUserType.getValue()),
-					userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
 
-					lblMessage.setText("De gebruiker werd aangemaakt.");
+			if (cmbUserType.getValue() == null || cmbUserStatus.getValue() == null)
+				lblMessage.setText("Selecteer een type en status van de gebruiker.");
+			else {
+				if (passwordValidation()) {
+					try {
+						userContoller.createUser(txfFirstName.getText(), txfLastName.getText(), txfUserName.getText(),
+								userContoller.stringToUserType(cmbUserType.getValue()),
+								userContoller.stringToUserStatus(cmbUserStatus.getValue()), txfPassword.getText());
 
-				} catch (IllegalArgumentException e) {
-					lblMessage.setText(e.getMessage());
-				}
-			} else
-				lblMessage.setText("De wachtwoorden komen niet overeen.");
+						lblMessage.setText("De gebruiker werd aangemaakt.");
+
+					} catch (IllegalArgumentException e) {
+						lblMessage.setText(e.getMessage());
+					}
+				} else
+					lblMessage.setText("De wachtwoorden komen niet overeen.");
+			}
 		}
 	}
 

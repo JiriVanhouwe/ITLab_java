@@ -27,8 +27,7 @@ import domain.User;
 import domain.UserStatus;
 import domain.UserType;
 import exceptions.InformationRequiredException;
-
-public class SessionTest {
+ class SessionTest {
 
 	private SessionBuilder sb;
 	private User dummyUser;
