@@ -2,6 +2,7 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class SessionBuilder {
 	public Session getSession() throws InformationRequiredException {
 		requiredElements = new HashSet<>();
 		
-		if(session.getTitle() == null || session.getTitle().startsWith("New Entry"))
+		if(session.getTitle() == null || session.getTitle().startsWith("New Entry") || session.getTitle().isBlank())
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
 		if(session.getStartHour() == null || session.getDate() == null || session.getDate().isBefore(LocalDate.now()))
@@ -33,13 +34,17 @@ public class SessionBuilder {
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
 		
-			
+		
+		
 		return this.session;
 		
 	}
 	
 	public void createSession() {
 		session = new Session();
+		session.setFeedbackList( new ArrayList<>());
+		session.setRegisteredUsers( new ArrayList<>());
+		session.setAttendees(new ArrayList<>());
 	}
 	
 	public void buildTitle(String title) {

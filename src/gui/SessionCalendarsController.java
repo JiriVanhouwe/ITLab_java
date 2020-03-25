@@ -39,6 +39,9 @@ public class SessionCalendarsController extends AnchorPane {
 
     @FXML
     private ComboBox<Integer> cboSessionCalendars;
+    
+    @FXML
+    private Label lblMessage;
 
     
 	private SessionCalendarController sessionCalendarController;
@@ -85,17 +88,15 @@ public class SessionCalendarsController extends AnchorPane {
     @FXML
     void clickSave(MouseEvent event) {
     	int id = 0;
-    	
+		lblMessage.setText("");
     	try {
     		
         	id = cboSessionCalendars.getValue();
         	sessionCalendarController.editSessionCalendar(id, calStartDate.getValue(), calEndDate.getValue());
         	
     	} catch (NullPointerException e) {
-    		Alert a = new Alert(AlertType.ERROR);
-    		a.setTitle("Geen sessiekalender gekozen");
-    		a.setContentText("Kies een sessiekalender");
-    		a.showAndWait();
+    		lblMessage.setText("Er is geen sessiekalender geselecteerd");
+    		
     	}
     }
 	

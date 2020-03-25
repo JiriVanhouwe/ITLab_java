@@ -50,6 +50,9 @@ public class StatsController extends SplitPane {
 	
     @FXML
     private Button btnFeedback;
+    
+    @FXML
+    private Button btn_mailAtendees;
 	// tot hier voor geselecteerde session//
 
 	// de items voor een geselecteerde user//
@@ -95,6 +98,8 @@ public class StatsController extends SplitPane {
     @FXML
     private Label lblFillAbsent;
 	// tot hier voor geselecteerde user//
+    
+   
 
 	private SessionController sessionController;
 	private UserController userController;
@@ -159,11 +164,34 @@ public class StatsController extends SplitPane {
 		
 		lblAttendedUsers.setText(String.format("Aanwezigen: %d", attendUsers.size()));
 		lblRegistUsers.setText(String.format("Geregistreerden: %d", registUsers.size()));
+		
+		 if(attendUsers.size() < 1)  {
+			 btn_mailAtendees.setDisable(true);
+			 btn_mailAtendees.setVisible(false);
+		 }
+		 else {
+			 btn_mailAtendees.setDisable(false);
+			 btn_mailAtendees.setVisible(true);
+		 }
+			
 	}
 	
     @FXML
     void clickFeedback(MouseEvent event) {  	
 		Scene scene = new Scene(new FeedbackController(selectedSession,sessionController));	
+		Stage stage = new Stage();
+
+		stage.setTitle("ITLab");
+		stage.setScene(scene);
+		stage.setResizable(false);
+		//This makes sure the new stage stays on top and can't be sent to the background
+		stage.setAlwaysOnTop(true);
+		stage.showAndWait();
+    }
+    
+    @FXML
+    void clickMailTo(MouseEvent event) {
+    	Scene scene = new Scene(new MailToController(selectedSession));	
 		Stage stage = new Stage();
 
 		stage.setTitle("ITLab");
@@ -213,6 +241,7 @@ public class StatsController extends SplitPane {
 		lblType.setVisible(true);
 		lblSelectedUserAbsent.setVisible(true);
 		lblSelectedUserAttended.setVisible(true);
+	
 	}
 	
 	//hulpmethode: zet listviews en knop visible zodra een sessie geselecteerd wordt
@@ -222,6 +251,7 @@ public class StatsController extends SplitPane {
 		lvRegistered.setVisible(true);
 		lblRegistUsers.setVisible(true);
 		lblAttendedUsers.setVisible(true);
+		btn_mailAtendees.setVisible(true);
 	}
 
 }

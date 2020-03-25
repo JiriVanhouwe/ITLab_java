@@ -9,6 +9,7 @@ import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -30,6 +31,12 @@ public class MailController {
 	public MailController(String title, String message, List<User> users) { //als je meerdere mensen tegelijk wil sturen, hier geef je zelf de boodschap en titel op
 		prepareToEmail();
 		sendEmailToMultipleReceivers(title, message, users);
+	}
+
+	public MailController(String title, String message, String email) {
+		isValidEmailAddress(email);
+		prepareToEmail();
+		sendEmailToOneReceiverWithMailAdres(title, message, email);
 	}
 
 	private void prepareToEmail() {
@@ -103,4 +110,34 @@ public class MailController {
 
 		return password;
 	}
+	
+	private void sendEmailToOneReceiverWithMailAdres(String title, String message, String mailadres) {
+
+		try {
+			MimeMessage m = new MimeMessage(session);
+			m.setFrom(new InternetAddress(from));
+
+			m.addRecipient(Message.RecipientType.TO, new InternetAddress(mailadres));
+
+			m.setSubject(title);
+			m.setText(message);
+
+			Transport.send(m);
+		} catch (MessagingException m) {
+			m.printStackTrace();
+		}
+
+		System.out.println("Message verzenden is gelukt.");
+	}
+	
+	public static boolean isValidEmailAddress(String email) {
+		   boolean result = true;
+		   try {
+		      InternetAddress emailAddr = new InternetAddress(email);
+		      emailAddr.validate();
+		   } catch (AddressException ex) {
+		      throw new IllegalArgumentException("geef een geldig email adres");
+		   }
+		   return result;
+		}
 }

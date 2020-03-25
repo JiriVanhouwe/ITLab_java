@@ -170,7 +170,8 @@ public class UserController extends Controller {
 	}
 	
 	public int countRegisterdFromUser(String userid) {
-		javax.persistence.Query q = itLab.getEntityManager().createNativeQuery(" select count(*) from RegisterdUser where user_username = ?1 ");
+		javax.persistence.Query q = itLab.getEntityManager()
+			.createNativeQuery("select count(ru.user_username) from Session s join RegisterdUser ru on ru.session_id = s.ID where ru.user_username = ?1 and s.EVENTDATE < CONVERT(DATE, GETDATE())");
 		q.setParameter(1, userid);
 		return ((Number) q.getSingleResult()).intValue();
 	}

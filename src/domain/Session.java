@@ -105,25 +105,6 @@ public class Session implements GuiSession{
 	protected Session() {
 		//enum -> sessiestate
 	}
-	
-	public Session(String title, String description, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  Classroom classRoom, String nameGuest, List<Integer> media, String videoURL, State state) {
-		setTitle(title);
-		setDescription(description);
-		setDate(startDate.toLocalDate());
-		setStartHour(startDate.toLocalTime());
-		setEndHour(endDate.toLocalTime());
-		setClassroom(classRoom);
-		setMaxAttendee(maxAttendee);
-		setNameGuest(nameGuest);
-		setMedia(media);
-		setVideoURL(videoURL);
-		setStateEnum(state);
-
-		feedbackList = new ArrayList<>();
-		registeredUsers = new ArrayList<>();
-		attendees = new ArrayList<>();
-		
-	}
 
 	
 	

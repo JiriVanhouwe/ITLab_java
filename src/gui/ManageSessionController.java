@@ -201,7 +201,6 @@ public class ManageSessionController extends VBox {
 		
 		try {
 			sessionCalendarController.changeSessionCalendarByDate(this.start_date.getValue());
-			
 			id = sessionController.changeSession(entry.getId(), this.title_txt.getText(),
 					clasroom_dropdown.getValue(), entry.getStartAsLocalDateTime(), entry.getEndAsLocalDateTime(),
 					nrOfAttendeeSpinner.getValue(), this.description_txt.getText(), this.speaker_txt.getText(),
@@ -209,7 +208,9 @@ public class ManageSessionController extends VBox {
 		
 			this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 					entry.getEndTime());
-			this.entry.setTitle(this.title_txt.getText());
+			
+			if(!this.title_txt.getText().isBlank())
+				this.entry.setTitle(this.title_txt.getText());
 			this.entry.setId(id);
 			
 			this.close();

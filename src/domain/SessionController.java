@@ -58,7 +58,6 @@ public class SessionController extends Controller {
 	}
 
 	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {
-		
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
 			Session session = itLab.getCurrentSessioncalendar().giveSession(id);
@@ -102,6 +101,7 @@ public class SessionController extends Controller {
 		sb.buildVideoURL(videoURL);
 		sb.buildHost(itLab.getLoggedInUser());
 		sb.buildState(state);
+		
 		
 		Session session = sb.getSession();
 		
