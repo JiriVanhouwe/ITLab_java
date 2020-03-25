@@ -24,4 +24,5 @@ public interface GuiSession {
 	Classroom getClassroom();
 	State getStateEnum();
 	GuiUser getHost();
+	
 }

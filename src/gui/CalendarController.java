@@ -24,6 +24,7 @@ import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
+import domain.State;
 import domain.UserController;
 import domain.UserType;
 import exceptions.InformationRequiredException;
@@ -199,7 +200,15 @@ public class CalendarController extends HBox {
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
 			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
 			//er bestaat niet echt een event voor enkel verwijderen
-			
+			if(session.getStateEnum().equals(State.CLOSED) || session.getStateEnum().equals(State.FINISHED))
+				sessionController.removeSession(evt.getEntry().getId());
+			else {
+				Entry entry = new Entry();
+				entry.setId(Integer.toString(session.getSessionID()) + "#");
+				entry.setTitle(session.getTitle());
+        		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+        		_calendar1.addEntry(entry);
+			}
 		}
 	}
     

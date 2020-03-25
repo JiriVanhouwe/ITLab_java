@@ -430,7 +430,7 @@ public class ManageSessionController extends VBox {
 	}
 	
 	private void checkSessionState() {
-		 
+		
 		switch(clickedSession.getStateEnum()) {
 		case CLOSED:
 			this.reminderBtn.setDisable(true);
