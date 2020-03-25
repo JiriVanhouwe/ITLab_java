@@ -41,6 +41,8 @@ public class CalendarController extends HBox {
 	private CalendarView _calendarView;
 	private Calendar _calendar1;
 	
+	private boolean entryHasAlreadyBeenDragged = false;
+	
 	public CalendarController() {
     	FXMLLoader loader = new FXMLLoader(getClass().getResource("Calendar.fxml"));
     	loader.setController(this);
@@ -134,9 +136,20 @@ public class CalendarController extends HBox {
 		
     	//Firstly we check if the user that performed the action has permission
     	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
-    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost())) {
+    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost().getUserName())) {
     		//If the user doens't have permission we undo the event
-    		
+			
+			if(!this.entryHasAlreadyBeenDragged) {
+				entryHasAlreadyBeenDragged = true;
+				evt.getEntry().setInterval(evt.getOldInterval());
+				
+	    		Alert a = new Alert(AlertType.ERROR);
+	    		a.setContentText("U heeft geen toestemming om deze sessie te wijzigen");
+				a.showAndWait();
+			}else {
+				entryHasAlreadyBeenDragged = false;
+			}
+			
 			return;
     	}
     	
