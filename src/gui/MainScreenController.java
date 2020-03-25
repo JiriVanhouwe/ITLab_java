@@ -1,27 +1,13 @@
 package gui;
 
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
-
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.Calendar.Style;
-import com.calendarfx.model.CalendarSource;
-import com.calendarfx.model.Entry;
-import com.calendarfx.view.CalendarView;
 
 import domain.GuiUser;
-import domain.Session;
 import domain.SessionController;
-import domain.User;
 import domain.UserController;
 import domain.UserType;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,8 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
@@ -65,6 +51,12 @@ public class MainScreenController extends SplitPane {
 
     @FXML
     private Button btnStatistics;
+    
+    @FXML
+    private Button btnSwitchSize;
+
+    @FXML
+    private ImageView switchIcon;
 
     private UserController usercontroller;
     
@@ -192,6 +184,12 @@ public class MainScreenController extends SplitPane {
 		
 		stage.initStyle(StageStyle.UNDECORATED); 
 		stage.show();
+    }
+    
+
+    @FXML
+    void clickSwitchSize(MouseEvent event) {
+
     }
 
 }
