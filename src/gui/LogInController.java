@@ -134,6 +134,7 @@ public class LogInController extends AnchorPane {
 			stage.setScene(scene);
 			stage.setHeight(800);
 			stage.setWidth(1500);
+			stage.setResizable(false);
 			stage.show();
 			
 		} else {

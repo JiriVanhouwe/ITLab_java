@@ -147,6 +147,21 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
+            <Button fx:id="btnSwitchSize" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#clickSwitchSize" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Volledig scherm" textFill="WHITE">
+               <font>
+                  <Font name="Roboto" size="19.0" />
+               </font>
+               <graphic>
+                  <ImageView fx:id="switchIcon" fitHeight="24.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/expand-solid.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
             <Button fx:id="btnSignOut" alignment="BASELINE_LEFT" defaultButton="true" graphicTextGap="20.0" maxHeight="-Infinity" mnemonicParsing="false" onMouseClicked="#clickSignOut" prefHeight="47.0" prefWidth="213.0" style="-fx-border-radius: 40;" stylesheets="@style.css" text="Uitloggen" textFill="WHITE" VBox.vgrow="ALWAYS">
                <font>
                   <Font name="Roboto" size="19.0" />
