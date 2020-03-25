@@ -2,7 +2,6 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -33,34 +32,29 @@ public class SessionBuilder {
 
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
-	
-		
+			
 		return this.session;
 		
 	}
 	
 	public void createSession() {
 		session = new Session();
-		session.setFeedbackList( new ArrayList<>());
-		session.setRegisteredUsers( new ArrayList<>());
-		session.setAttendees(new ArrayList<>());
-		buildState(State.CLOSED);
 	}
 	
 	public void buildTitle(String title) {
 		if(!title.isBlank())
-			session.setTitle(title);
+			session.changeTitle(title);
 	}
 	
 	
 	public void buildClassroomAndMaxAtendeees(Classroom classroom ,int maxAttendee) {
 		if(classroom != null) {
-			session.setClassroom(classroom);
+			session.changeClassroom(classroom);
 		
 		if(maxAttendee > 0 && maxAttendee <= session.getClassroom().getMaxSeats()) 
-			session.setMaxAttendee(maxAttendee);
+			session.changeMaxAttendee(maxAttendee);
 		else 
-			session.setMaxAttendee(0);
+			session.changeMaxAttendee(0);
 		}
 	}
 	
@@ -69,9 +63,9 @@ public class SessionBuilder {
 		if(startDate != null && endDate !=null && startDate.isBefore(endDate) && startDate.isAfter(LocalDateTime.now().plusDays(1))) {
 			if(startDate.toLocalDate().equals(endDate.toLocalDate())) {
 				if(startDate.toLocalTime().isBefore(endDate.toLocalTime().minusMinutes(29).minusSeconds(59))) {
-					session.setDate(startDate.toLocalDate());
-					session.setStartHour(startDate.toLocalTime());
-					session.setEndHour(endDate.toLocalTime());
+					session.changeDate(startDate.toLocalDate());
+					session.changeStartHour(startDate.toLocalTime());
+					session.changeEndHour(endDate.toLocalTime());
 				}
 			}
 		}
@@ -80,23 +74,23 @@ public class SessionBuilder {
 	}
 	
 	public void buildGuestSpeaker(String guestSpeaker) {
-		session.setNameGuest(guestSpeaker);
+		session.changeNameGuest(guestSpeaker);
 	}
 	
 	public void buildDescription(String discription) {
-		session.setDescription(discription);
+		session.changeDescription(discription);
 	}
 	
 	public void buildMedia(List<Integer> medialist) {
-		session.setMedia(medialist);
+		session.changeMedia(medialist);
 	}
 	
 	public void buildVideoURL(String videoURL) {
-		session.setVideoURL(videoURL);
+		session.changeVideoURL(videoURL);
 	}
 	
 	public void buildHost(User host) {
-		session.setHost(host);
+		session.changeHost(host);
 	}
 	
 	public void buildState(State state) {

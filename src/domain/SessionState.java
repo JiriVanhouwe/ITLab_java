@@ -1,38 +1,67 @@
 package domain;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+abstract class SessionState{
 
-
-//@Entity
-//@Inheritance
-//@DiscriminatorColumn(name="State_Type")
-//@Table(name = "SessionState")
-public abstract class SessionState implements Serializable {
-
-	public SessionState() {
-		// TODO Auto-generated constructor stub
-	}
-	
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    protected int ID;
-	
-//	@OneToOne(mappedBy = "state")
 	protected Session session;
 	
-	//protected State stateEnum;
-
-	public abstract void addAttendee(User user);
+	public void changeTitle(String title) {
+		throw new UnsupportedOperationException();
+	}
 	
-	public abstract void registerAttendee(User user);
+	public void changeGuest(String guestname) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeDescription(String description) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeClassroom(Classroom classroom) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeEventDate(LocalDate date) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeStartHour(LocalTime time) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeEndHour(LocalTime time) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeMaxAttendee(int max) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeHost(User user) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeMedia(List<Integer> media) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeVideoURL(String url) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeRegisteredUser(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeAttendees(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeFeedback(List<Feedback> feedback) {
+		throw new UnsupportedOperationException();
+	}
+	
 }

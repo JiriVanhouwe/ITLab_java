@@ -1,27 +1,38 @@
 package domain;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import java.util.List;
 
-//@Entity
-//@DiscriminatorValue("OPEN")
-public class OpenState extends SessionState{
-
-	public OpenState() {
-		// TODO Auto-generated constructor stub
-	//	super.stateEnum = State.OPEN;
-	}
+class OpenState extends SessionState{
 	
-	
-	@Override
-	public void addAttendee(User user) {
-		//Als de state 'open' is mogen er geen attendees worden toegevoegd
-		throw new UnsupportedOperationException();
+	public OpenState(Session session) {
+		this.session = session;
 	}
 
 	@Override
-	public void registerAttendee(User user) {
-		this.session.registerAttendee(user);
+	public void changeMedia(List<Integer> media) {
+		session.setMedia(media);
 	}
+
+	@Override
+	public void changeVideoURL(String url) {
+		session.setVideoURL(url);
+	}
+
+	@Override
+	public void changeRegisteredUser(List<User> users) {
+		session.setRegisteredUsers(users);
+	}
+
+	@Override
+	public void changeAttendees(List<User> users) {
+		session.setAttendees(users);
+	}
+
+	@Override
+	public void changeFeedback(List<Feedback> feedback) {
+		session.setFeedbackList(feedback);
+	}
+
+
 
 }
