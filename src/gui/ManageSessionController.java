@@ -424,7 +424,7 @@ public class ManageSessionController extends VBox {
 				this.deleteBtn.setDisable(true);
 				this.errorTxt.setText("Deze sessie werd niet door u aangemaakt");
 				this.url_txt.setEditable(false);
-				
+				this.start_date.setDisable(true);
 			}
 		}
 	}
@@ -446,6 +446,7 @@ public class ManageSessionController extends VBox {
 			this.nrOfAttendeeSpinner.setDisable(true);
 			this.sessionStateToggle.setDisable(true);
 			this.deleteBtn.setDisable(true);
+			this.start_date.setDisable(true);
 			this.errorTxt.setText("sessie open beperkt voor aanpassen");
 			break;
 		
@@ -466,6 +467,7 @@ public class ManageSessionController extends VBox {
 			this.deleteBtn.setDisable(true);
 			this.errorTxt.setText("Deze sessie is afgelopen");
 			this.url_txt.setEditable(false);
+			this.start_date.setDisable(true);
 		break;
 		}
 		

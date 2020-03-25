@@ -24,6 +24,7 @@ import domain.RequiredElement;
 import domain.Session;
 import domain.SessionCalendarController;
 import domain.SessionController;
+import domain.State;
 import domain.UserController;
 import domain.UserType;
 import exceptions.InformationRequiredException;
@@ -139,7 +140,8 @@ public class CalendarController extends HBox {
 		}
 
     	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
-    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost().getUserName())) {
+    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost().getUserName())
+    					|| session.getStateEnum().equals(State.OPEN) || session.getStateEnum().equals(State.FINISHED)) {
     		//If the user doens't have permission we undo the event
 			
 			if(!this.entryHasAlreadyBeenDragged) {
@@ -147,7 +149,13 @@ public class CalendarController extends HBox {
 				evt.getEntry().setInterval(evt.getOldInterval());
 				
 	    		Alert a = new Alert(AlertType.ERROR);
-	    		a.setContentText("U heeft geen toestemming om deze sessie te wijzigen");
+	    		if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
+	        			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost().getUserName())) {
+	    			a.setContentText("U heeft geen toestemming om deze sessie te wijzigen");
+	    		}else if(session.getStateEnum().equals(State.OPEN) || session.getStateEnum().equals(State.FINISHED)) {
+	    			a.setContentText("Deze sessie is al afgelopen of staat open");
+	    		}
+	    		
 				a.showAndWait();
 			}else {
 				entryHasAlreadyBeenDragged = false;
