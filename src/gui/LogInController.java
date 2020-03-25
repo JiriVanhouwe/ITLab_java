@@ -109,8 +109,8 @@ public class LogInController extends AnchorPane {
                 sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
             generatedPassword = sb.toString();
-		}catch(NoSuchAlgorithmException e) {
-			throw new RuntimeException();
+		} catch(NoSuchAlgorithmException e) {
+		 	throw new RuntimeException();
 		}
 		
 		if (usercontroller.isUserPassComboValid(tfUser.getText(), generatedPassword)) {
@@ -130,9 +130,10 @@ public class LogInController extends AnchorPane {
 
 			stage.getIcons().add(new Image("/resources/ITLAB_logo_round.png"));
 			stage.setTitle("ITLab");
-			stage.setHeight(1080);
 			stage.setMaximized(true);
 			stage.setScene(scene);
+			stage.setHeight(800);
+			stage.setWidth(1500);
 			stage.show();
 			
 		} else {
