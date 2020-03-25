@@ -112,7 +112,7 @@ public class Session implements GuiSession{
 	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL, User host, State state) {
 		//conrtrole 
 		if(this.getStateEnum().equals(State.FINISHED))
-			throw new IllegalArgumentException("gesloten sessies kunnen niet meer aangepast worden");
+			throw new IllegalArgumentException("afgelopen sessies kunnen niet meer aangepast worden");
 		
 		if((startDate.isAfter(endDate) || startDate.isBefore(LocalDateTime.now().plusDays(1)))||
 				!(startDate.toLocalDate().equals(endDate.toLocalDate())) ||

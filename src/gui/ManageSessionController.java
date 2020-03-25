@@ -365,18 +365,21 @@ public class ManageSessionController extends VBox {
 	
 	private State giveClickedSessionState() {
 		//This methods returns the state the current session is in.It also checks if the session was in the past
+		
 		if(clickedSession == null) {
 			return State.CLOSED;
 		}
 		if(clickedSession.getDate().isBefore(LocalDate.now()) || (clickedSession.getEndHour().isBefore(LocalTime.now()) && clickedSession.getDate().equals(LocalDate.now()))) {
 			return State.FINISHED;
 		}
-			
+		if(clickedSession.getStateEnum().equals(State.CLOSED)) {	
 		if(sessionStateToggle.isSelected()) {
 			return State.OPEN;
 		}else {
 			return State.CLOSED;
 		}
+		}else 
+			return clickedSession.getStateEnum();
 	}
 	
 	private void instantiateStateToggle() {

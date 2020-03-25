@@ -157,6 +157,7 @@ public class CalendarController extends HBox {
     	}
     	
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
+			
 			try {
 				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), 
 						evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(),
@@ -198,18 +199,7 @@ public class CalendarController extends HBox {
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
 			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
 			//er bestaat niet echt een event voor enkel verwijderen
-			System.out.println("verwijderen die handel");
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-	    	alert.setTitle("Sessie verwijderen");
-	    	alert.setHeaderText("Deze sessie verwijderen");
-	    	alert.setContentText("Bent u zeker dat u deze sessie wilt verwijderen?");
-	    	
-	    	Optional<ButtonType> result = alert.showAndWait();
-	    	if (result.get() == ButtonType.OK){
-	    	    //The user confirmed to delete the session
-	    		evt.getEntry().removeFromCalendar();
-	    		sessionController.removeSession(session.getSessionID() + "");
-	    	}
+			
 		}
 	}
     
