@@ -135,16 +135,16 @@ public class Session implements GuiSession{
 	public void updateState() {
 		switch(stateEnum){
 		case CLOSED:
-			this.state = new ClosedState();
+			this.state = new ClosedState(this);
 			break;
 		case FINISHED:
-			this.state = new FinishedState();
+			this.state = new FinishedState(this);
 			break;
 		case OPEN:
-			this.state = new OpenState();
+			this.state = new OpenState(this);
 			break;
 		default:
-			this.state = new ClosedState();
+			this.state = new ClosedState(this);
 			break;
 		}
 	}
@@ -270,16 +270,16 @@ public class Session implements GuiSession{
 		this.stateEnum = state;
 		switch(state){
 			case CLOSED:
-				this.state = new ClosedState();
+				this.state = new ClosedState(this);
 				break;
 			case FINISHED:
-				this.state = new FinishedState();
+				this.state = new FinishedState(this);
 				break;
 			case OPEN:
-				this.state = new OpenState();
+				this.state = new OpenState(this);
 				break;
 			default:
-				this.state = new ClosedState();
+				this.state = new ClosedState(this);
 				break;
 		}
 	}
