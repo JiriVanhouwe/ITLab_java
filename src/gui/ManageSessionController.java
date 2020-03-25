@@ -217,7 +217,7 @@ public class ManageSessionController extends VBox {
 		
 		} catch (IllegalArgumentException e) {
 			errorTxt.setText(e.getMessage());
-			
+			//entry.setInterval(evt.getOldInterval());
 			//entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
 			//hier moeten de oude waarde terug opgehaald worden
 		}
