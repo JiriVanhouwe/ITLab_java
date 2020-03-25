@@ -138,6 +138,26 @@ public class CalendarController extends HBox {
 		if(session == null) {
 			return;
 		}
+		
+		//This event gets called when a session/entry is removed
+		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
+//			System.out.println("trigger");
+//			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
+//			//er bestaat niet echt een event voor enkel verwijderen
+//			if(session.getStateEnum().equals(State.CLOSED) || session.getStateEnum().equals(State.FINISHED))
+//				sessionController.removeSession(evt.getEntry().getId());
+//			else {
+////				Entry entry = new Entry();
+////				entry.setId(Integer.toString(session.getSessionID()) + "#");
+////				entry.setTitle(session.getTitle());
+////        		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+////        		_calendar1.addEntry(entry);
+//			}
+//			
+//			return;
+			Alert a = new Alert(AlertType.INFORMATION);
+			a.setContentText("Sessie die je verwijdert via deze knop zullen terugkomen wanneer u de applicatie herstart.");
+		}
 
     	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
     			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost().getUserName())
@@ -146,7 +166,8 @@ public class CalendarController extends HBox {
 			
 			if(!this.entryHasAlreadyBeenDragged) {
 				entryHasAlreadyBeenDragged = true;
-				evt.getEntry().setInterval(evt.getOldInterval());
+				if(evt.getOldInterval() != null)
+					evt.getEntry().setInterval(evt.getOldInterval());
 				
 	    		Alert a = new Alert(AlertType.ERROR);
 	    		if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
@@ -203,20 +224,7 @@ public class CalendarController extends HBox {
 				a.showAndWait();
 			}
 		}
-		//This event gets called when a session/entry is removed
-		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
-			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
-			//er bestaat niet echt een event voor enkel verwijderen
-			if(session.getStateEnum().equals(State.CLOSED) || session.getStateEnum().equals(State.FINISHED))
-				sessionController.removeSession(evt.getEntry().getId());
-			else {
-				Entry entry = new Entry();
-				entry.setId(Integer.toString(session.getSessionID()) + "#");
-				entry.setTitle(session.getTitle());
-        		entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
-        		_calendar1.addEntry(entry);
-			}
-		}
+
 	}
     
     private void calendarRangeChanged(LoadEvent evt) {

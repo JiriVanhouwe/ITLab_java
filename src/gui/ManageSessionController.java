@@ -430,48 +430,50 @@ public class ManageSessionController extends VBox {
 	}
 	
 	private void checkSessionState() {
+		if (clickedSession != null) {
+			
 		
-		switch(clickedSession.getStateEnum()) {
-		case CLOSED:
-			this.reminderBtn.setDisable(true);
+			switch(clickedSession.getStateEnum()) {
+			case CLOSED:
+				this.reminderBtn.setDisable(true);
+				break;
+			case OPEN:
+				this.title_txt.setEditable(false);
+				this.speaker_txt.setEditable(false);
+				this.clasroom_dropdown.setEditable(false);
+				this.clasroom_dropdown.setDisable(true);
+				this.description_txt.setEditable(false);
+				this.start_date.setEditable(false);
+				this.nrOfAttendeeSpinner.setEditable(false);
+				this.nrOfAttendeeSpinner.setDisable(true);
+				this.sessionStateToggle.setDisable(true);
+				this.deleteBtn.setDisable(true);
+				this.start_date.setDisable(true);
+				this.errorTxt.setText("sessie open beperkt voor aanpassen");
+				break;
+			
+			case FINISHED:
+				this.title_txt.setEditable(false);
+				this.speaker_txt.setEditable(false);
+				this.clasroom_dropdown.setEditable(false);
+				this.clasroom_dropdown.setDisable(true);
+				this.description_txt.setEditable(false);
+				this.start_date.setEditable(false);
+				this.image_btn.setDisable(true);
+				this.addimage_btn.setDisable(true);
+				this.savebtn.setDisable(true);
+				this.reminderBtn.setDisable(true);
+				this.nrOfAttendeeSpinner.setEditable(false);
+				this.nrOfAttendeeSpinner.setDisable(true);
+				this.sessionStateToggle.setDisable(true);
+				this.deleteBtn.setDisable(true);
+				this.errorTxt.setText("Deze sessie is afgelopen");
+				this.url_txt.setEditable(false);
+				this.start_date.setDisable(true);
 			break;
-		case OPEN:
-			this.title_txt.setEditable(false);
-			this.speaker_txt.setEditable(false);
-			this.clasroom_dropdown.setEditable(false);
-			this.clasroom_dropdown.setDisable(true);
-			this.description_txt.setEditable(false);
-			this.start_date.setEditable(false);
-			this.nrOfAttendeeSpinner.setEditable(false);
-			this.nrOfAttendeeSpinner.setDisable(true);
-			this.sessionStateToggle.setDisable(true);
-			this.deleteBtn.setDisable(true);
-			this.start_date.setDisable(true);
-			this.errorTxt.setText("sessie open beperkt voor aanpassen");
-			break;
+			}
 		
-		case FINISHED:
-			this.title_txt.setEditable(false);
-			this.speaker_txt.setEditable(false);
-			this.clasroom_dropdown.setEditable(false);
-			this.clasroom_dropdown.setDisable(true);
-			this.description_txt.setEditable(false);
-			this.start_date.setEditable(false);
-			this.image_btn.setDisable(true);
-			this.addimage_btn.setDisable(true);
-			this.savebtn.setDisable(true);
-			this.reminderBtn.setDisable(true);
-			this.nrOfAttendeeSpinner.setEditable(false);
-			this.nrOfAttendeeSpinner.setDisable(true);
-			this.sessionStateToggle.setDisable(true);
-			this.deleteBtn.setDisable(true);
-			this.errorTxt.setText("Deze sessie is afgelopen");
-			this.url_txt.setEditable(false);
-			this.start_date.setDisable(true);
-		break;
 		}
-		
-		
 		
 	}
 

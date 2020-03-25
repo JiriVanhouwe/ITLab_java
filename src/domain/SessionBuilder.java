@@ -39,6 +39,7 @@ public class SessionBuilder {
 	
 	public void createSession() {
 		session = new Session();
+		session.setStateEnum(State.CLOSED);
 	}
 	
 	public void buildTitle(String title) {
@@ -60,7 +61,7 @@ public class SessionBuilder {
 	
 	public void buildDates(LocalDateTime startDate, LocalDateTime endDate) {
 		
-		if(startDate != null && endDate !=null && startDate.isBefore(endDate) && startDate.isAfter(LocalDateTime.now().plusDays(1))) {
+		if(startDate != null && endDate !=null && startDate.isBefore(endDate) && startDate.isAfter(LocalDateTime.now().plusHours(24))) {
 			if(startDate.toLocalDate().equals(endDate.toLocalDate())) {
 				if(startDate.toLocalTime().isBefore(endDate.toLocalTime().minusMinutes(29).minusSeconds(59))) {
 					session.changeDate(startDate.toLocalDate());
