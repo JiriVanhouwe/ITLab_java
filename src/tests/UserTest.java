@@ -10,7 +10,7 @@ import domain.User;
 import domain.UserStatus;
 import domain.UserType;
 
-public class UserTest {
+ class UserTest {
 
 	@ParameterizedTest
 	@MethodSource("wrongParameters") //fout in constructor
