@@ -203,14 +203,13 @@ public class CalendarController extends HBox {
 	    	alert.setTitle("Sessie verwijderen");
 	    	alert.setHeaderText("Deze sessie verwijderen");
 	    	alert.setContentText("Bent u zeker dat u deze sessie wilt verwijderen?");
-
-//	    	Optional<ButtonType> result = alert.showAndWait();
-//	    	if (result.get() == ButtonType.OK){
-//	    	    //The user confirmed to delete the session
-//	    		evt.getEntry().removeFromCalendar();
-//	    		sessionController.removeSession(.getSessionID() + "");
-//	        	this.close();
-//	    	}
+	    	
+	    	Optional<ButtonType> result = alert.showAndWait();
+	    	if (result.get() == ButtonType.OK){
+	    	    //The user confirmed to delete the session
+	    		evt.getEntry().removeFromCalendar();
+	    		sessionController.removeSession(session.getSessionID() + "");
+	    	}
 		}
 	}
     
