@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.text.StyledEditorKit.ItalicAction;
-
 import exceptions.InformationRequiredException;
 import javafx.scene.image.Image;
 
