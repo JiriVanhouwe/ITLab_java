@@ -1,5 +1,7 @@
 package gui;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import domain.GuiUser;
@@ -189,7 +191,16 @@ public class MainScreenController extends SplitPane {
 
     @FXML
     void clickSwitchSize(MouseEvent event) {
+		Stage curStage = (Stage) btnSignOut.getScene().getWindow();
+		curStage.setMaximized((!curStage.isMaximized()));
+		if(switchIcon.getImage().getUrl().endsWith("expand-solid.png")) {
+			switchIcon.setImage(new Image("file:src\\resources\\compress-solid.png"));
+			btnSwitchSize.setText("Volledig scherm");
 
+		} else {
+			switchIcon.setImage(new Image("file:src\\resources\\expand-solid.png"));
+			btnSwitchSize.setText("Verklein scherm");
+		}
     }
 
 }

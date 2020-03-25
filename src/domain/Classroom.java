@@ -14,11 +14,14 @@ public class Classroom {
 	private String classid;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private Campus campus;
 	
+	@Column(nullable = false)
 	private int maxSeats;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
 	private ClassRoomCategory roomCategory;
 	
 	private Classroom() {
