@@ -40,16 +40,12 @@ public class MakeSessionCalendarController extends AnchorPane {
 		sessionCalendarController = new SessionCalendarController();
 	}
 
-	// Event Listener on JFXButton[#btnSave].onMouseClicked
 	@FXML
 	public void clickSave(MouseEvent event) {
 		int id = Integer.parseInt((Integer.toString(calStartDate.getValue().getYear()) + Integer.toString(calEndDate.getValue().getYear())));
 		
 		if (sessionCalendarController.doesSessionCalendarExist(id)) {
-//			Alert a = new Alert(AlertType.ERROR);
-//			a.setTitle("Sessiekalender aanmaken gefaald");
-//			a.setContentText("Er bestaat al een sessiekalender in het schooljaar " + id);
-//			a.showAndWait();
+
     		lblMessage.setText("Er bestaat al een sessiekalender in het schooljaar " + id);
 			
 		} else {

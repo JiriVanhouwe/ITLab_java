@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.controlsfx.control.PopOver;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
@@ -28,6 +31,7 @@ import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -131,21 +135,26 @@ public class CalendarController extends HBox {
 		if(session == null) {
 			return;
 		}
-		
-    	//Firstly we check if the user that performed the action has permission
-    	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
-    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost())) {
-    		//If the user doens't have permission we undo the event
-    		
-			return;
-    	}
+//		//in domain nu
+//    	//Firstly we check if the user that performed the action has permission
+//    	if(!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserType().equals(UserType.HEAD) &&
+//    			!ITLabSingleton.getITLabInstance().getLoggedInUser().getUserName().equals(session.getHost())) {
+//    		//If the user doens't have permission we undo the event
+//    		
+//			return;
+//    	}
     	
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_INTERVAL_CHANGED)) {
 			try {
 				sessionController.changeSession(session.getSessionID() + "#", session.getTitle(), session.getClassroom(), 
 						evt.getEntry().getStartAsLocalDateTime(), evt.getEntry().getEndAsLocalDateTime(), session.getMaxAttendee(),
 						session.getDescription(), session.getNameGuest(), session.getMedia(), session.getVideoURL(), session.getStateEnum());
-			} catch (InformationRequiredException e) {
+			} catch (IllegalArgumentException e) {
+				Alert a = new Alert(AlertType.ERROR);
+				a.setContentText(e.getMessage());
+				a.showAndWait();
+				evt.getEntry().setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+			}catch (InformationRequiredException e) {
 				
 				Alert a = new Alert(AlertType.ERROR);
 				String res = null;
@@ -177,6 +186,19 @@ public class CalendarController extends HBox {
 		if(evt.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
 			//TODO: Verder uitwerken, dit event wordt niet enkel aangeroepen bij het verwijderen, ook andere aanpassingen
 			//er bestaat niet echt een event voor enkel verwijderen
+			System.out.println("verwijderen die handel");
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+	    	alert.setTitle("Sessie verwijderen");
+	    	alert.setHeaderText("Deze sessie verwijderen");
+	    	alert.setContentText("Bent u zeker dat u deze sessie wilt verwijderen?");
+
+//	    	Optional<ButtonType> result = alert.showAndWait();
+//	    	if (result.get() == ButtonType.OK){
+//	    	    //The user confirmed to delete the session
+//	    		evt.getEntry().removeFromCalendar();
+//	    		sessionController.removeSession(.getSessionID() + "");
+//	        	this.close();
+//	    	}
 		}
 	}
     

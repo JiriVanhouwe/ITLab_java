@@ -110,6 +110,24 @@ public class Session implements GuiSession{
 	
 	// methoden
 	public void changeSession(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee,  String description, String nameGuest, List<Integer> media, String videoURL, User host, State state) {
+		//conrtrole 
+		if(this.getStateEnum().equals(State.FINISHED))
+			throw new IllegalArgumentException("gesloten sessies kunnen niet meer aangepast worden");
+		
+		if((startDate.isAfter(endDate) || startDate.isBefore(LocalDateTime.now().plusDays(1)))||
+				!(startDate.toLocalDate().equals(endDate.toLocalDate())) ||
+				(startDate.toLocalTime().isAfter(endDate.toLocalTime().minusMinutes(29).minusSeconds(59)))) 
+				throw new IllegalArgumentException("datums mogen niet in verleden liggen");
+			
+			if(title.isBlank())
+				throw new IllegalArgumentException("titel mag niet leeg zijn");
+		
+			if(classroom == null) 
+				throw new IllegalArgumentException("klaslokaal moet ingevuld zijn");
+			
+			if(maxAttendee <= 0 || maxAttendee > classroom.getMaxSeats()) 
+				throw new IllegalArgumentException("geen geldig aantal max aantal plaatsen ingeven");
+			
 		setTitle(title);
 		setDescription(description);
 		setDate(startDate.toLocalDate());

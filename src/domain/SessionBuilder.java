@@ -16,10 +16,10 @@ public class SessionBuilder {
 	public Session getSession() throws InformationRequiredException {
 		requiredElements = new HashSet<>();
 		
-		if(session.getTitle() == null || session.getTitle().startsWith("New Entry") || session.getTitle().isBlank())
+		if(session.getTitle() == null )
 			requiredElements.add(RequiredElement.TITLEREQUIRED);
 		
-		if(session.getStartHour() == null || session.getDate() == null || session.getDate().isBefore(LocalDate.now()))
+		if(session.getStartHour() == null || session.getDate() == null)
 			requiredElements.add(RequiredElement.STARTDATEREQUIRED);
 		
 		if(session.getDate() == null || session.getEndHour() == null)
@@ -33,8 +33,7 @@ public class SessionBuilder {
 
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
-		
-		
+	
 		
 		return this.session;
 		
@@ -45,6 +44,7 @@ public class SessionBuilder {
 		session.setFeedbackList( new ArrayList<>());
 		session.setRegisteredUsers( new ArrayList<>());
 		session.setAttendees(new ArrayList<>());
+		buildState(State.CLOSED);
 	}
 	
 	public void buildTitle(String title) {

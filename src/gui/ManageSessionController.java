@@ -195,7 +195,7 @@ public class ManageSessionController extends VBox {
 	}
 
 	@FXML
-	void pressedSaveBtn(ActionEvent event) {
+	void pressedSaveBtn(ActionEvent event)  {
 		
 		String id;
 		
@@ -209,13 +209,19 @@ public class ManageSessionController extends VBox {
 			this.entry.setInterval(this.start_date.getValue(), entry.getStartTime(), this.start_date.getValue(),
 					entry.getEndTime());
 			
-			if(!this.title_txt.getText().isBlank())
-				this.entry.setTitle(this.title_txt.getText());
+			
+			this.entry.setTitle(this.title_txt.getText());
 			this.entry.setId(id);
 			
 			this.close();
 		
-		} catch (InformationRequiredException e) {
+		} catch (IllegalArgumentException e) {
+			errorTxt.setText(e.getMessage());
+			
+			//entry.setInterval(session.getDate().atTime(session.getStartHour()), session.getDate().atTime(session.getEndHour()));
+			//hier moeten de oude waarde terug opgehaald worden
+		}
+		catch (InformationRequiredException e) {
 			//Loop over all the errors that are thrown and insert them into the error label
 			String error = "";
 			for(RequiredElement el: e.getInformationRequired()) {
@@ -243,6 +249,7 @@ public class ManageSessionController extends VBox {
 		} catch (NotFoundException e) {
 			errorTxt.setText("De sessie valt niet binnen het bereik van een sessiekalender");
 		}
+		
 	}
 
 	@FXML

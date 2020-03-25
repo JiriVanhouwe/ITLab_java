@@ -57,28 +57,27 @@ public class SessionController extends Controller {
 		itLab.removeSession(session);
 	}
 
-	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media, String videoURL, State state) throws InformationRequiredException {
+	public String changeSession(String sessionID, String title, Classroom classroom, LocalDateTime startDate,
+			LocalDateTime endDate, int maxAttendee, String description, String nameGuest, List<Integer> media,
+			String videoURL, State state) throws InformationRequiredException {
+		System.out.println("change session");
 		if (sessionID.endsWith("#")) {
 			int id = Integer.parseInt(sessionID.substring(0, sessionID.length() - 1));
 			Session session = itLab.getCurrentSessioncalendar().giveSession(id);
-			if(itLab.getLoggedInUser().equals(session.getHost()) || itLab.getLoggedInUser().getUserType().equals(UserType.HEAD))
-			itLab.getEntityManager().getTransaction().begin();
-			sb.setSession(session);
-			sb.buildTitle(title);
-			sb.buildClassroomAndMaxAtendeees(classroom, maxAttendee);
-			sb.buildDates(startDate, endDate);
-			sb.buildDescription(description);
-			sb.buildMedia(media);
-			sb.buildVideoURL(videoURL);
-			sb.buildState(state);
-			sb.buildGuestSpeaker(nameGuest);
-			sb.buildHost(itLab.getLoggedInUser());
-			itLab.getCurrentSessioncalendar().addSession(session);
-			itLab.getEntityManager().persist(session);
-			itLab.getEntityManager().getTransaction().commit();
-			return sessionID;
+			if (itLab.getLoggedInUser().getUserName().equals(session.getHost().getUserName())
+					|| itLab.getLoggedInUser().getUserType().equals(UserType.HEAD)) {
+				
+				session.changeSession(title, classroom, startDate, endDate, maxAttendee, description, nameGuest, media, videoURL, session.getHost(), state);
+				//itLab.getCurrentSessioncalendar().addSession(session);
+				itLab.getEntityManager().getTransaction().begin();
+				itLab.getEntityManager().persist(session);
+				itLab.getEntityManager().getTransaction().commit();
+				return sessionID;
+			} else
+				throw new IllegalArgumentException("geen bevoegdheden om deze sessie aan te passen");
 		} else {
-			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media, videoURL, state);
+			return this.createSession(title, startDate, endDate, classroom, maxAttendee, description, nameGuest, media,
+					videoURL, state);
 		}
 	}
 	

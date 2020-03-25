@@ -1,7 +1,6 @@
 open module ITLab {
 	exports tests;
 	exports domain;
-	exports persistence;
 	exports gui;
 	exports main;
 
