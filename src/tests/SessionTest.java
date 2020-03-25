@@ -1,7 +1,9 @@
 package tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -31,6 +33,7 @@ import exceptions.InformationRequiredException;
 
 	private SessionBuilder sb;
 	private User dummyUser;
+	private static LocalDateTime startTime = LocalDate.now().atTime(15, 50);
 	
 	@BeforeEach
 	public void before() {
@@ -56,10 +59,10 @@ import exceptions.InformationRequiredException;
 	
 
 	private static Stream<Arguments> newSessionValidParameters() {
-		return Stream.of(Arguments.of("A new session", "some text", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker"),
-						Arguments.of("A session about ...", "some text", LocalDateTime.now().plusDays(50), LocalDateTime.now().plusDays(50).plusMinutes(30), 20,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"), //Minimal duration for a session is 30 minutes
-						Arguments.of("S", "some text", LocalDateTime.now().plusDays(5), LocalDateTime.now().plusDays(5).plusHours(1), 30, new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"),
-						Arguments.of("Session", "some text", LocalDateTime.now().plusDays(1).plusMinutes(1), LocalDateTime.now().plusDays(1).plusHours(1), 40,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"));
+		return Stream.of(Arguments.of("A new session", "some text", startTime.plusDays(2), startTime.plusDays(2).plusHours(2) , 10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker"),
+						Arguments.of("A session about ...", "some text", startTime.plusDays(50), startTime.plusDays(50).plusMinutes(30), 20,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"), //Minimal duration for a session is 30 minutes
+						Arguments.of("S", "some text", startTime.plusDays(5), startTime.plusDays(5).plusHours(1), 30, new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"),
+						Arguments.of("Session", "some text", startTime.plusDays(2).plusMinutes(1), startTime.plusDays(2).plusHours(1), 40,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB),"guestspeaker"));
 	}
 	
 	@ParameterizedTest
@@ -81,23 +84,22 @@ import exceptions.InformationRequiredException;
 	}
 	
 	private static Stream<Arguments> newSessionInvalidParameters() {
-		//TODO: Cases toevoegen voor guestspeaker, bestaan geen DR over
 		return Stream.of(
-						Arguments.of("  ", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 30, "guestspeaker","uitleg over sessie"), //Invalid title
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 51, "guestspeaker","uitleg over sessie"), //Invalid maxAttendee (higer then maxseats)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusMinutes(29), 30, "guestspeaker","uitleg over sessie"), //Invalid enddate (duration too short)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).minusMinutes(10), 30, "guestspeaker","uitleg over sessie"), //Invalid enddate (negative duration)s
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30).plusHours(2), LocalDateTime.now().plusDays(30), 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (after enddate)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().minusHours(2), LocalDateTime.now(), 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (in the past)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusHours(12), LocalDateTime.now().plusHours(14), 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (less than 1 day in advance)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 0, "guestspeaker","uitleg over sessie"), //Invalid maxAttendee (zero)
-						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), -1, "guestspeaker","uitleg over sessie")); //Invalid maxAttendee (negative)
+						Arguments.of("  ", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime, startTime.plusDays(30).plusHours(2), 30, "guestspeaker","uitleg over sessie"), //Invalid title
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime, startTime.plusDays(30).plusHours(2), 51, "guestspeaker","uitleg over sessie"), //Invalid maxAttendee (higer then maxseats)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusDays(30), startTime.plusDays(30).plusMinutes(29), 30, "guestspeaker","uitleg over sessie"), //Invalid enddate (duration too short)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusDays(30), startTime.plusDays(30).minusMinutes(10), 30, "guestspeaker","uitleg over sessie"), //Invalid enddate (negative duration)s
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusDays(30).plusHours(2), startTime.plusDays(30), 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (after enddate)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.minusHours(2), startTime, 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (in the past)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusHours(12), startTime.plusHours(14), 30, "guestspeaker","uitleg over sessie"), //Invalid startdate (less than 1 day in advance)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusDays(30), startTime.plusDays(30).plusHours(2), 0, "guestspeaker","uitleg over sessie"), //Invalid maxAttendee (zero)
+						Arguments.of("A new session on an interesting topic", new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), startTime.plusDays(30), startTime.plusDays(30).plusHours(2), -1, "guestspeaker","uitleg over sessie")); //Invalid maxAttendee (negative)
 	}
 	
 	@ParameterizedTest
 	@MethodSource("newSessionInvalidParameters")
 	public void testChangesSession_ThrowsError(String title, Classroom classroom, LocalDateTime startDate, LocalDateTime endDate, int maxAttendee, String guestspeaker, String description) throws InformationRequiredException {
-		Session s = giveValidSession("A new session", "some text", LocalDateTime.now().plusDays(30), LocalDateTime.now().plusDays(30).plusHours(2), 10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker");
+		Session s = giveValidSession("A new session", "some text", startDate.plusDays(30), startDate.plusDays(30).plusHours(2), 10,new Classroom("testClassroom", Campus.GENT, 50, ClassRoomCategory.ITLAB), "guestspeaker");
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 			s.changeSession(title, classroom, startDate, endDate, maxAttendee, description, guestspeaker, s.getMedia(), s.getVideoURL(), s.getHost(), s.getStateEnum());
 		});
