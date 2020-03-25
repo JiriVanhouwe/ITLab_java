@@ -2,7 +2,6 @@ package domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,8 +33,6 @@ public class SessionBuilder {
 		if(!requiredElements.isEmpty())
 			throw new InformationRequiredException(requiredElements);
 		
-		
-		
 		return this.session;
 		
 	}
@@ -46,18 +43,18 @@ public class SessionBuilder {
 	
 	public void buildTitle(String title) {
 		if(!title.isBlank())
-			session.getSessionState().changeTitle(title);
+			session.changeTitle(title);
 	}
 	
 	
 	public void buildClassroomAndMaxAtendeees(Classroom classroom ,int maxAttendee) {
 		if(classroom != null) {
-			session.getSessionState().changeClassroom(classroom);
+			session.changeClassroom(classroom);
 		
 		if(maxAttendee > 0 && maxAttendee <= session.getClassroom().getMaxSeats()) 
-			session.getSessionState().changeMaxAttendee(maxAttendee);
+			session.changeMaxAttendee(maxAttendee);
 		else 
-			session.getSessionState().changeMaxAttendee(0);
+			session.changeMaxAttendee(0);
 		}
 	}
 	
@@ -66,9 +63,9 @@ public class SessionBuilder {
 		if(startDate != null && endDate !=null && startDate.isBefore(endDate) && startDate.isAfter(LocalDateTime.now().plusDays(1))) {
 			if(startDate.toLocalDate().equals(endDate.toLocalDate())) {
 				if(startDate.toLocalTime().isBefore(endDate.toLocalTime().minusMinutes(29).minusSeconds(59))) {
-					session.getSessionState().changeEventDate(startDate.toLocalDate());
-					session.getSessionState().changeStartHour(startDate.toLocalTime());
-					session.getSessionState().changeEndHour(endDate.toLocalTime());
+					session.changeDate(startDate.toLocalDate());
+					session.changeStartHour(startDate.toLocalTime());
+					session.changeEndHour(endDate.toLocalTime());
 				}
 			}
 		}
@@ -77,23 +74,23 @@ public class SessionBuilder {
 	}
 	
 	public void buildGuestSpeaker(String guestSpeaker) {
-		session.getSessionState().changeGuest(guestSpeaker);
+		session.changeNameGuest(guestSpeaker);
 	}
 	
 	public void buildDescription(String discription) {
-		session.getSessionState().changeDescription(discription);
+		session.changeDescription(discription);
 	}
 	
 	public void buildMedia(List<Integer> medialist) {
-		session.getSessionState().changeMedia(medialist);
+		session.changeMedia(medialist);
 	}
 	
 	public void buildVideoURL(String videoURL) {
-		session.getSessionState().changeVideoURL(videoURL);
+		session.changeVideoURL(videoURL);
 	}
 	
 	public void buildHost(User host) {
-		session.getSessionState().changeHost(host);
+		session.changeHost(host);
 	}
 	
 	public void buildState(State state) {

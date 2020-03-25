@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class ClosedState extends SessionState {
+class ClosedState extends SessionState {
 	
 	public ClosedState(Session session) {
 		this.session = session;

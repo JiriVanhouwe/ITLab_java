@@ -183,7 +183,7 @@ public class Session implements GuiSession{
 		return endHour;
 	}
 
-	public void setEndHour(LocalTime endHour) {
+	protected void setEndHour(LocalTime endHour) {
 			this.endHour = endHour;
 	}
 
@@ -191,7 +191,7 @@ public class Session implements GuiSession{
 		return startHour;
 	}
 
-	public void setStartHour(LocalTime startHour) {
+	protected void setStartHour(LocalTime startHour) {
 		this.startHour = startHour;
 	}
 
@@ -199,7 +199,7 @@ public class Session implements GuiSession{
 		return eventDate;
 	}
 
-	public void setDate(LocalDate date) {
+	protected void setDate(LocalDate date) {
 		this.eventDate = date;
 	}
 
@@ -288,7 +288,7 @@ public class Session implements GuiSession{
 		return nameGuest;
 	}
 	
-	public void setVideoURL(String videoURL) {
+	protected void setVideoURL(String videoURL) {
 		this.videoURL = videoURL;
 	}
 	
@@ -310,6 +310,62 @@ public class Session implements GuiSession{
 	
 	public StringProperty sessionEndHourProperty() {
 		return new SimpleStringProperty(endHour.toString());
+	}
+	
+	public void changeTitle(String title) {
+		this.getSessionState().changeTitle(title);
+	}
+	
+	public void changeDescription(String description) {
+		this.getSessionState().changeDescription(description);
+	}
+	
+	public void changeNameGuest(String nameguest) {
+		this.getSessionState().changeGuest(nameguest);
+	}
+	
+	public void changeHost(User host) {
+		this.getSessionState().changeHost(host);
+	}
+	
+	public void changeStartHour(LocalTime time) {
+		this.getSessionState().changeStartHour(time);
+	}
+	
+	public void changeEndHour(LocalTime time) {
+		this.getSessionState().changeEndHour(time);
+	}
+	
+	public void changeDate(LocalDate date) {
+		this.getSessionState().changeEventDate(date);
+	}
+	
+	public void changeClassroom(Classroom classroom) {
+		this.getSessionState().changeClassroom(classroom);
+	}
+	
+	public void changeVideoURL(String url) {
+		this.getSessionState().changeVideoURL(url);
+	}
+	
+	public void changeFeedbackList(List<Feedback> feedback) {
+		this.getSessionState().changeFeedback(feedback);
+	}
+	
+	public void changeAttendees(List<User> attendees) {
+		this.getSessionState().changeAttendees(attendees);
+	}
+	
+	public void changeRegisteredUsers(List<User> registeredUsers) {
+		this.getSessionState().changeRegisteredUser(registeredUsers);
+	}
+	
+	public void changeMedia(List<Integer> media) {
+		this.getSessionState().changeMedia(media);
+	}
+	
+	public void changeMaxAttendee(int maxAttendee) {
+		this.getSessionState().changeMaxAttendee(maxAttendee);
 	}
 	
 	@Override

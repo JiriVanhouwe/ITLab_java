@@ -4,23 +4,64 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public abstract class SessionState{
+abstract class SessionState{
 
 	protected Session session;
 	
-	public abstract void changeTitle(String title);
-	public abstract void changeGuest(String guestname);
-	public abstract void changeDescription(String description);
-	public abstract void changeClassroom(Classroom classroom);
-	public abstract void changeEventDate(LocalDate date);
-	public abstract void changeStartHour(LocalTime time);
-	public abstract void changeEndHour(LocalTime time);
-	public abstract void changeMaxAttendee(int max);
-	public abstract void changeHost(User user);
-	public abstract void changeMedia(List<Integer> media);
-	public abstract void changeVideoURL(String url);
-	public abstract void changeRegisteredUser(List<User> users);
-	public abstract void changeAttendees(List<User> users);
-	public abstract void changeFeedback(List<Feedback> feedback);
+	public void changeTitle(String title) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeGuest(String guestname) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeDescription(String description) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeClassroom(Classroom classroom) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeEventDate(LocalDate date) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeStartHour(LocalTime time) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeEndHour(LocalTime time) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeMaxAttendee(int max) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeHost(User user) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeMedia(List<Integer> media) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeVideoURL(String url) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeRegisteredUser(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeAttendees(List<User> users) {
+		throw new UnsupportedOperationException();
+	}
+	
+	public void changeFeedback(List<Feedback> feedback) {
+		throw new UnsupportedOperationException();
+	}
 	
 }
