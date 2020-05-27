@@ -93,7 +93,7 @@ public class SessionCalendarsController extends AnchorPane {
     		
         	id = cboSessionCalendars.getValue();
         	sessionCalendarController.editSessionCalendar(id, calStartDate.getValue(), calEndDate.getValue());
-        	
+        	lblMessage.setText("Sessiekalender is aangepast.");
     	} catch (NullPointerException e) {
     		lblMessage.setText("Er is geen sessiekalender geselecteerd");
     		

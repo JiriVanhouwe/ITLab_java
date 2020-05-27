@@ -78,7 +78,7 @@ public class FeedbackController extends AnchorPane{
 		else {
 			
 			for (GuiFeedback f : feedbackList) {
-				txaFeedback.appendText("Fedback met id:" + f.getId()+"\n" + "van "+f.getAuthor().getUserName() + "\n");
+				txaFeedback.appendText("Feedback met nummer: " + f.getId()+"\n" + "van "+f.getAuthor().getUserName() + "\n");
 				txaFeedback.appendText(f.getContentText() + "\n\n");
 			}
 			// choicebox vullen

@@ -52,6 +52,8 @@ public class MakeSessionCalendarController extends AnchorPane {
 			
 			try {
 				sessionCalendarController.createSessionCalendar(id, calStartDate.getValue(), calEndDate.getValue());
+				lblMessage.setText("Sessiekalender aangemaakt!");
+				
 			} catch (Exception e) {
 				lblMessage.setText(e.getMessage());
 			}

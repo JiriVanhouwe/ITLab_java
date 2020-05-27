@@ -16,6 +16,7 @@ import com.jfoenix.controls.JFXTextField;
 import domain.MailController;
 import domain.User;
 import domain.UserController;
+import domain.UserStatus;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -114,6 +115,11 @@ public class LogInController extends AnchorPane {
 		}
 		
 		if (usercontroller.isUserPassComboValid(tfUser.getText(), generatedPassword)) {
+			if(usercontroller.giveUser(tfUser.getText()).getUserStatus().equals(UserStatus.BLOCKED) 
+					|| usercontroller.giveUser(tfUser.getText()).getUserStatus().equals(UserStatus.NONACTIVE)) {
+				txt_error.setText("Dit account is geblokkeerd, stuur een mail \n naar hetitlab@gmail.com");
+				return;
+			}
 			//Sluit huidig scherm
 			Stage curStage = (Stage) tfUser.getScene().getWindow();
 			curStage.close();
